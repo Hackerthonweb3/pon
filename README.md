@@ -21,7 +21,7 @@ Try out the demo, which [is hosted live here!](https://web3card.vercel.app)
 
 Web3 Digital Business Card is a Dapp used by people in the web3 industry attending the conference to exchange contact information with people they meet in a more efficient and enjoyable way. Web3 Digital Business Card's profile can aggregate on- and off-chain data into a holistic identity that enables reliable networking and meaningful connections among users and organizations.
 
-<p align='center'>
+<p style="text-align: center;">
     <a href='https://youtu.be/isZ4Q'>
         <img src="https://user-images.githubusercontent.com/20131841/39-3f1768de2286.png" />
     </a>
@@ -88,7 +88,7 @@ Contracts were written with
 -   Why Route53?：This is because it is the easiest to register.
 -   Detail Implementation：
 
-<p align="center">
+<p style="text-align: center;">
     <img src="https://imagetforhackathon.s3.sa-east-1.amazonaws.co08-20+at+2.37.00+PM.png">
 </p>
 
@@ -108,7 +108,7 @@ Contracts were written with
 
 -   As the founder, I have attended over seven Web3 conferences around the world this year. There, I noticed the following problems The baffling dichotomy between Telegram and Twitter when exchanging contact information, and DM notes to remember who you have met. Taking selfies. Also, some of the people I met were not satisfied with the above means and were writing everything down in spreadsheets and note-taking apps. This was taken as proof of the challenge. Moreover, due to the lack of effective identity gating, one usually ends up getting not connected at all or waking up every day to an inbox flooded by random DMs and spam.
 
-<p align="center">
+<p style="text-align: center;">
     <img src="https://imagetforhacka022-08-17+at+7.56.55+PM.png" width="300">
 </p>
 
