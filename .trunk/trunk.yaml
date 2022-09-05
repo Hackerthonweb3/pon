@@ -1,0 +1,23 @@
+version: 0.1
+plugins:
+  sources:
+    - id: trunk
+      ref: v0.0.3
+      uri: https://github.com/trunk-io/plugins
+actions:
+    enabled:
+        - trunk-fmt-pre-commit
+        - trunk-check-upgrade
+        - trunk-check-pre-push
+        - trunk-cache-prune
+        - trunk-upgrade
+cli:
+    version: 0.17.0-beta
+lint:
+    enabled:
+        - actionlint@1.6.16
+        - git-diff-check@SYSTEM
+        - gitleaks@8.11.0
+        - eslint@8.22.0
+        - markdownlint@0.32.1
+        - prettier@2.7.1
