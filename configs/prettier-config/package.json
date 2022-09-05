@@ -1,0 +1,10 @@
+{
+    "name": "prettier-config",
+    "version": "0.0.0",
+    "main": "index.js",
+    "dependencies": {
+        "prettier-plugin-jsdoc": "0.3.38",
+        "prettier-plugin-solidity": "1.0.0-beta.24",
+        "prettier": "2.7.1"
+    }
+}
