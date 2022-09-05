@@ -1,0 +1,33 @@
+{
+    "name": "business-card",
+    "private": true,
+    "workspaces": ["configs/*", "packages/*"],
+    "scripts": {
+        "clean": "git clean -fXd $npm_package_cleanExcludePattern",
+        "lint": "turbo run lint",
+        "format": "prettier $npm_package_prettierOptions .",
+        "build": "turbo run build --filter=@pon/app",
+        "compile": "pnpm -F ./packages/hardhat compile",
+        "deploy": "pnpm -F ./packages/hardhat deploy",
+        "dev": "pnpm -F ./packages/app dev",
+        "export": "pnpm -F ./packages/app export",
+        "hardhat:node": "pnpm -F ./packages/hardhat node",
+        "start": "pnpm -F ./packages/app start",
+        "test": "pnpm -F ./packages/hardhat test"
+    },
+    "devDependencies": {
+        "@trunkio/launcher": "1.1.1",
+        "eslint-config-custom": "workspace:*",
+        "prettier-config": "workspace:*",
+        "turbo": "1.4.3"
+    },
+    "prettier": "prettier-config",
+    "eslintConfig": {
+        "root": true,
+        "extends": ["custom"],
+        "settings": { "next": { "rootDir": ["packages/app"] } }
+    },
+    "eslintIgnorePath": "configs/eslint-ignore/.eslintignore",
+    "cleanExcludePattern": "-e !.env* -e !.vercel -e !.turbo",
+    "prettierOptions": "-c -w --cache --ignore-path configs/prettier-config/.prettierignore"
+}
