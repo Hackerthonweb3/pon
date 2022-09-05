@@ -6,7 +6,7 @@
         "clean": "git clean -fXd $npm_package_cleanExcludePattern",
         "lint": "turbo run lint",
         "format": "prettier $npm_package_prettierOptions .",
-        "build": "turbo run build --filter=@pon/app",
+        "build": "turbo run build --filter=@business-card/app",
         "compile": "pnpm -F ./packages/hardhat compile",
         "deploy": "pnpm -F ./packages/hardhat deploy",
         "dev": "pnpm -F ./packages/app dev",
