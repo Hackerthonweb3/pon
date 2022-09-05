@@ -1,5 +1,5 @@
 {
-    "name": "business-card",
+    "name": "@business-card/monorepo",
     "private": true,
     "workspaces": ["configs/*", "packages/*"],
     "scripts": {
