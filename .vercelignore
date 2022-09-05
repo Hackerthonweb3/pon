@@ -1,0 +1,7 @@
+.changeset
+.env
+.github
+.husky
+CHANGELOG.md
+docker
+README.md
