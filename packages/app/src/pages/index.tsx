@@ -7,7 +7,6 @@ import Scan from '~/components/Scan'
 import NewUser from '~/components/NewUser'
 import { CustomConnect } from '~/components/CustomConnect'
 import CeramicSessionComponent from '~/components/CeramicSessionComponent'
-import LogoSvg from '../media/logo.svg'
 
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -39,17 +38,16 @@ const Home: NextPage = () => {
     const renderLanding = (
         <Box mt={40}>
             <Heading lineHeight={'90%'}>
-                <Image src={LogoSvg} alt='logo' />
+                <Text mt={4} color={'gray.400'} fontSize='18px' letterSpacing='2px'>
+                    Web3 Digital Business Card
+                </Text>
             </Heading>
             <VStack gap={5}>
-                <Text mt={4} color={'gray.400'} fontSize='18px' letterSpacing='2px'>
-                    Proof of Networking
-                </Text>
                 <Text color={'gray.300'} fontSize='22px'>
                     Hi Anon, log in with your wallet to create or view your profile
                 </Text>
                 <Text color={'blue.300'} fontSize='22px'>
-                    Recommended newtwork is Polygon
+                    Recommended network is Polygon
                 </Text>
                 <CustomConnect />
             </VStack>

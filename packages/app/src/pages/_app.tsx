@@ -8,7 +8,7 @@ import { theme, wagmiClient } from '~/lib'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '~/components/ErrorFallBack'
 
-function PonApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
     return (
         // TODO: better styling for errorboundary
         <ErrorBoundary
@@ -26,4 +26,4 @@ function PonApp({ Component, pageProps }: AppProps) {
     )
 }
 
-export default PonApp
+export default App
