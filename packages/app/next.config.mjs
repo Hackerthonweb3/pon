@@ -5,7 +5,7 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        domains: ['pon.infura-ipfs.io'],
+        domains: ['business-card.infura-ipfs.io'],
     },
 }
 
