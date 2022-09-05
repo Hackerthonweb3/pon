@@ -16,10 +16,10 @@
         "test": "pnpm -F ./packages/hardhat test"
     },
     "devDependencies": {
-        "@trunkio/launcher": "1.1.1",
+        "@trunkio/launcher": "1.2.1",
         "eslint-config-custom": "workspace:*",
         "prettier-config": "workspace:*",
-        "turbo": "1.4.3"
+        "turbo": "1.4.5"
     },
     "prettier": "prettier-config",
     "eslintConfig": {
