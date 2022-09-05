@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "nomicfoundation.hardhat-solidity",
+        "redhat.vscode-yaml"
+    ]
+}

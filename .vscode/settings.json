@@ -1,0 +1,74 @@
+{
+    // editor settings
+    "editor.codeActionsOnSave": {
+        "source.formatDocument": true,
+        "source.fixAll": true,
+        "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.tabSize": 4,
+    "files.eol": "\n",
+    "typescript.preferences.quoteStyle": "single",
+
+    // eslint settings
+    "eslint.codeActionsOnSave.mode": "all",
+    "eslint.enable": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.run": "onType",
+    "eslint.packageManager": "pnpm",
+    "eslint.workingDirectories": ["./packages/app"],
+
+    // disable emmet autocompletion
+    "emmet.excludeLanguages": ["typescript", "javascript"],
+
+    // required by prettier to correctly detect plugin with pnpm
+    "prettier.documentSelectors": ["**/*.sol"],
+    "prettier.ignorePath": "configs/prettier-config/.prettierignore",
+
+    // files to exclude from quick open
+    "files.exclude": {
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/CVS": true,
+        "**/Thumbs.db": true
+    },
+
+    // files to exclude from search
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/.next": true
+    },
+
+    // nest some config files https://github.com/antfu/vscode-file-nesting-config
+    "explorer.fileNesting.enabled": false,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "pnpm*, .*, svgo*, turbo*"
+    },
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": [".github/workflows/deploy.yml"]
+    },
+
+    // Configure editor settings to be overridden for [yaml] language.
+    "files.associations": {
+        "*.yaml": "yaml",
+        "*.yml": "yaml"
+    },
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.detectIndentation": false
+    }
+}
