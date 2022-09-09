@@ -1,5 +1,5 @@
 {
-    "name": "@business-card/contracts",
+    "name": "@business-card/sol",
     "version": "0.0.1",
     "scripts": {
         "fmt:sol": "prettier 'contracts/**/*.sol' -w",
@@ -38,7 +38,6 @@
         "hardhat-gas-reporter": "1.0.9",
         "nodemon": "2.0.19",
         "prettier": "2.7.1",
-        "prettier-plugin-solidity": "1.0.0-beta.24",
         "solhint": "3.3.7",
         "solhint-plugin-prettier": "0.0.5",
         "solidity-coverage": "0.7.21",
@@ -48,6 +47,7 @@
     },
     "dependencies": {
         "@openzeppelin/contracts": "4.7.3",
-        "@openzeppelin/contracts-upgradeable": "4.7.3"
+        "@openzeppelin/contracts-upgradeable": "4.7.3",
+        "erc4973": "0.4.0"
     }
 }
