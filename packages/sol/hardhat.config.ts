@@ -13,7 +13,7 @@ if (process.env.CMC_API_KEY === undefined) throw new Error('CMC_API_KEY is not s
 
 const config: HardhatUserConfig = {
     solidity: {
-        version: '0.8.7',
+        version: '0.8.8',
         settings: {
             optimizer: {
                 enabled: true,
