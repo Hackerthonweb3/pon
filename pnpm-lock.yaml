@@ -44,7 +44,7 @@ importers:
 
   packages/app:
     specifiers:
-      '@business-card/sol': workspace:0.0.1
+      '@business-card/sol': workspace:*
       '@chakra-ui/icons': 2.0.9
       '@chakra-ui/react': 2.3.1
       '@emotion/react': 11.10.4
