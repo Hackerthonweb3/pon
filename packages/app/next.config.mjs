@@ -7,6 +7,9 @@ const nextConfig = {
     images: {
         domains: ['business-card.infura-ipfs.io'],
     },
+    typescript: {
+        tsconfigPath: 'tsconfig.build.json',
+    },
 }
 
 export default nextConfig
