@@ -1,28 +1,29 @@
 {
     "name": "@business-card/sol",
     "version": "0.0.1",
+    "main": "dist/index.js",
     "scripts": {
+        "build": "tsc -p tsconfig.build.json",
+        "compile": "hardhat compile",
+        "coverage:watch": "nodemon -e ts,sol -w contracts -w test --exec pnpm coverage",
+        "coverage": "hardhat coverage",
+        "deploy": "hardhat run scripts/deploy.ts",
         "fmt:sol": "prettier 'contracts/**/*.sol' -w",
         "lint:sol": "solhint 'contracts/**/*.sol'",
         "node": "hardhat node",
         "postinstall": "pnpm compile",
-        "deploy": "hardhat run scripts/deploy.ts",
-        "compile": "hardhat compile",
-        "coverage": "hardhat coverage",
-        "coverage:watch": "nodemon -e ts,sol -w src -w test --exec yarn hh:coverage",
-        "test": "hardhat test",
-        "test:watch": "nodemon -e ts,sol -w src -w test --exec yarn hh:test",
-        "slither": "slither ./src"
+        "slither": "slither ./src",
+        "test:watch": "nodemon -e ts,sol -w contracts -w test --exec pnpm test",
+        "test": "hardhat test"
     },
     "devDependencies": {
-        "@ethersproject/abi": "5.7.0",
         "@ethersproject/bytes": "5.7.0",
-        "@ethersproject/providers": "5.7.0",
         "@nomicfoundation/hardhat-chai-matchers": "1.0.3",
         "@nomicfoundation/hardhat-network-helpers": "1.0.6",
         "@nomicfoundation/hardhat-toolbox": "1.0.2",
-        "@nomiclabs/hardhat-ethers": "2.1.1",
         "@nomiclabs/hardhat-etherscan": "3.1.0",
+        "@openzeppelin/contracts-upgradeable": "4.7.3",
+        "@openzeppelin/contracts": "4.7.3",
         "@openzeppelin/hardhat-upgrades": "1.20.0",
         "@typechain/ethers-v5": "10.1.0",
         "@typechain/hardhat": "6.1.2",
@@ -33,21 +34,22 @@
         "@typescript-eslint/parser": "5.36.2",
         "chai": "4.3.6",
         "dotenv": "16.0.2",
-        "ethers": "5.7.0",
-        "hardhat": "2.11.1",
+        "erc4973": "0.4.0",
         "hardhat-gas-reporter": "1.0.9",
         "nodemon": "2.0.19",
         "prettier": "2.7.1",
-        "solhint": "3.3.7",
         "solhint-plugin-prettier": "0.0.5",
+        "solhint": "3.3.7",
         "solidity-coverage": "0.7.21",
         "ts-node": "10.9.1",
         "typechain": "8.1.0",
         "typescript": "4.8.2"
     },
     "dependencies": {
-        "@openzeppelin/contracts": "4.7.3",
-        "@openzeppelin/contracts-upgradeable": "4.7.3",
-        "erc4973": "0.4.0"
+        "@ethersproject/abi": "5.7.0",
+        "@ethersproject/providers": "5.7.0",
+        "@nomiclabs/hardhat-ethers": "2.1.1",
+        "ethers": "5.7.0",
+        "hardhat": "2.11.1"
     }
 }
