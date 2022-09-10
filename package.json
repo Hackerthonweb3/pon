@@ -6,14 +6,16 @@
         "clean": "git clean -fXd $npm_package_cleanExcludePattern",
         "lint": "turbo run lint",
         "format": "prettier $npm_package_prettierOptions .",
-        "build": "turbo run build --filter=@business-card/app",
-        "compile": "pnpm -F ./packages/hardhat compile",
-        "deploy": "pnpm -F ./packages/hardhat deploy",
+        "build:app": "turbo run build --filter=@business-card/app",
+        "build:sol": "turbo run build --filter=@business-card/sol",
+        "compile": "pnpm -F ./packages/sol compile",
+        "deploy": "pnpm -F ./packages/sol deploy",
         "dev": "pnpm -F ./packages/app dev",
         "export": "pnpm -F ./packages/app export",
-        "hardhat:node": "pnpm -F ./packages/hardhat node",
+        "hardhat:node": "pnpm -F ./packages/sol node",
         "start": "pnpm -F ./packages/app start",
-        "test": "pnpm -F ./packages/hardhat test"
+        "test": "pnpm -F ./packages/sol test",
+        "test:watch": "pnpm -F ./packages/sol test:watch"
     },
     "devDependencies": {
         "@trunkio/launcher": "1.2.1",
