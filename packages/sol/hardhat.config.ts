@@ -13,7 +13,7 @@ if (process.env.CMC_API_KEY === undefined) throw new Error('CMC_API_KEY is not s
 
 const config: HardhatUserConfig = {
     solidity: {
-        version: '0.8.8',
+        version: '0.8.16',
         settings: {
             optimizer: {
                 enabled: true,
@@ -47,6 +47,9 @@ const config: HardhatUserConfig = {
     },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
+    },
+    typechain: {
+        outDir: 'src/types',
     },
 }
 
