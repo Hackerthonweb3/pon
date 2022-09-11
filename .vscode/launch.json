@@ -6,14 +6,14 @@
             "type": "node-terminal",
             "request": "launch",
             "command": "npm run dev",
-            "cwd": "${workspaceFolder}/packages/app"
+            "cwd": "${workspaceFolder}/apps/web"
         },
         {
             "name": "Next.js: debug client-side",
             "type": "msedge",
             "request": "launch",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}/packages/app"
+            "webRoot": "${workspaceFolder}/apps/web"
         },
         {
             "name": "Next.js: debug full stack",
@@ -24,7 +24,7 @@
                 "pattern": "started server on .+, url: (https?://.+)",
                 "uriFormat": "%s",
                 "action": "debugWithEdge",
-                "webRoot": "${workspaceFolder}/packages/app"
+                "webRoot": "${workspaceFolder}/apps/web"
             }
         }
     ]
