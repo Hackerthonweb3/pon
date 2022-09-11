@@ -19,7 +19,7 @@
     "eslint.lintTask.enable": true,
     "eslint.run": "onType",
     "eslint.packageManager": "pnpm",
-    "eslint.workingDirectories": ["./packages/app"],
+    "eslint.workingDirectories": ["./apps/web"],
 
     // disable emmet autocompletion
     "emmet.excludeLanguages": ["typescript", "javascript"],
