@@ -1,33 +1,34 @@
 {
     "name": "@business-card/monorepo",
     "private": true,
-    "workspaces": ["configs/*", "packages/*"],
+    "workspaces": ["apps/*", "configs/*", "libs/*"],
     "scripts": {
         "clean": "git clean -fXd $npm_package_cleanExcludePattern",
         "lint": "turbo run lint",
         "format": "prettier $npm_package_prettierOptions .",
-        "build:app": "turbo run build --filter=@business-card/app",
-        "build:sol": "turbo run build --filter=@business-card/sol",
-        "compile": "pnpm -F ./packages/sol compile",
-        "deploy": "pnpm -F ./packages/sol deploy",
-        "dev": "pnpm -F ./packages/app dev",
-        "export": "pnpm -F ./packages/app export",
-        "hardhat:node": "pnpm -F ./packages/sol node",
-        "start": "pnpm -F ./packages/app start",
-        "test": "pnpm -F ./packages/sol test",
-        "test:watch": "pnpm -F ./packages/sol test:watch"
+        "build:web": "turbo run build --filter=web",
+        "build:sol": "turbo run build --filter=sol",
+        "compile": "pnpm -F sol compile",
+        "deploy": "pnpm -F sol deploy",
+        "dev:mobile": "pnpm -F mobile dev",
+        "dev:web": "pnpm -F web dev",
+        "export": "pnpm -F web export",
+        "hardhat:node": "pnpm -F sol node",
+        "start": "pnpm -F web start",
+        "test": "pnpm -F sol test",
+        "test:watch": "pnpm -F sol test:watch"
     },
     "devDependencies": {
         "@trunkio/launcher": "1.2.1",
         "eslint-config-custom": "workspace:*",
         "prettier-config": "workspace:*",
-        "turbo": "1.4.5"
+        "turbo": "1.4.6"
     },
     "prettier": "prettier-config",
     "eslintConfig": {
         "root": true,
         "extends": ["custom"],
-        "settings": { "next": { "rootDir": ["packages/app"] } }
+        "settings": { "next": { "rootDir": ["apps/web"] } }
     },
     "eslintIgnorePath": "configs/eslint-ignore/.eslintignore",
     "cleanExcludePattern": "-e !.env* -e !.vercel -e !.turbo",
