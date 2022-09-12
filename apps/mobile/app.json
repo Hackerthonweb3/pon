@@ -1,14 +1,15 @@
 {
     "expo": {
+        "entryPoint": "./src/index.js",
         "name": "@business-card/mobile",
         "slug": "business-card-mobile-app",
         "version": "0.0.0",
         "orientation": "portrait",
-        "icon": "./assets/images/icon.png",
+        "icon": "./src/assets/images/icon.png",
         "scheme": "pon",
         "userInterfaceStyle": "automatic",
         "splash": {
-            "image": "./assets/images/splash.png",
+            "image": "./src/assets/images/splash.png",
             "resizeMode": "contain",
             "backgroundColor": "#ffffff"
         },
@@ -21,12 +22,12 @@
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "foregroundImage": "./src/assets/images/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
             }
         },
         "web": {
-            "favicon": "./assets/images/favicon.png"
+            "favicon": "./src/assets/images/favicon.png"
         }
     }
 }
