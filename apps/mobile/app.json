@@ -1,11 +1,11 @@
 {
     "expo": {
-        "name": "expo-pnpm",
-        "slug": "expo-pnpm",
-        "version": "1.0.0",
+        "name": "@business-card/mobile",
+        "slug": "business-card-mobile-app",
+        "version": "0.0.0",
         "orientation": "portrait",
         "icon": "./assets/images/icon.png",
-        "scheme": "myapp",
+        "scheme": "pon",
         "userInterfaceStyle": "automatic",
         "splash": {
             "image": "./assets/images/splash.png",

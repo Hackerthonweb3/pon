@@ -5,5 +5,12 @@ module.exports = {
         '@next/no-page-custom-font': 'off',
         'turbo/no-undeclared-env-vars': 'off',
         'react-hooks/exhaustive-deps': 'off',
+        'react/self-closing-comp': [
+            'error',
+            {
+                component: true,
+                html: true,
+            },
+        ],
     },
 }
