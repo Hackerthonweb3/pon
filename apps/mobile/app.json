@@ -18,13 +18,15 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "userInterfaceStyle": "automatic"
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./src/assets/images/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
-            }
+            },
+            "userInterfaceStyle": "automatic"
         },
         "web": {
             "favicon": "./src/assets/images/favicon.png"

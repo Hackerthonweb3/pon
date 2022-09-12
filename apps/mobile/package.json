@@ -32,15 +32,20 @@
         "react-native": "0.69.5",
         "react-native-safe-area-context": "4.3.1",
         "react-native-screens": "3.15.0",
+        "react-native-svg": "12.3.0",
         "react-native-web": "0.18.9"
     },
     "devDependencies": {
         "@babel/core": "7.19.0",
         "@babel/preset-env": "7.19.0",
+        "@svgr/core": "6.3.1",
+        "@svgr/plugin-svgo": "6.3.1",
         "@types/react": "18.0.19",
         "@types/react-native": "0.69.8",
         "jest": "27.5.1",
         "jest-expo": "46.0.1",
+        "path-dirname": "1.0.2",
+        "react-native-svg-transformer": "1.0.0",
         "react-test-renderer": "18.0.0",
         "tsconfig": "workspace:*",
         "typescript": "4.8.3"

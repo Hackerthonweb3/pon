@@ -2,7 +2,7 @@
  * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
  * https://reactnavigation.org/docs/getting-started
  */
-import { FontAwesome } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -13,10 +13,12 @@ import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import ModalScreen from '../screens/ModalScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
-import TabOneScreen from '../screens/TabOneScreen'
-import TabTwoScreen from '../screens/TabTwoScreen'
+import Profile from '../screens/Profile'
+import Contacts from '../screens/Contacts'
+import QRCode from '../screens/QRCode'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types'
 import LinkingConfiguration from './LinkingConfiguration'
+import QR from '../assets/images/qr.svg'
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
     return (
@@ -55,26 +57,35 @@ function BottomTabNavigator() {
 
     return (
         <BottomTab.Navigator
-            initialRouteName='TabOne'
+            initialRouteName='Contacts'
             screenOptions={{
-                tabBarActiveTintColor: Colors[colorScheme].tint,
+                headerTransparent: true,
+                headerTitle: '',
+                tabBarActiveTintColor: Colors[colorScheme].tabIconSelected,
+                tabBarInactiveTintColor: Colors[colorScheme].tabIconDefault,
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                    backgroundColor: Colors[colorScheme].background,
+                    borderTopWidth: 1,
+                    borderTopColor: '#363A45',
+                    height: 100,
+                },
             }}>
             <BottomTab.Screen
-                name='TabOne'
-                component={TabOneScreen}
-                options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-                    title: 'Tab One',
-                    tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+                name='Contacts'
+                component={Contacts}
+                options={({ navigation }: RootTabScreenProps<'Contacts'>) => ({
+                    tabBarIcon: ({ color }) => <TabBarIcon name='cards' color={color} />,
                     headerRight: () => (
                         <Pressable
                             onPress={() => navigation.navigate('Modal')}
                             style={({ pressed }) => ({
                                 opacity: pressed ? 0.5 : 1,
                             })}>
-                            <FontAwesome
-                                name='info-circle'
-                                size={25}
-                                color={Colors[colorScheme].text}
+                            <MaterialCommunityIcons
+                                name='cog'
+                                size={26}
+                                color={Colors[colorScheme].headerIcon}
                                 style={{ marginRight: 15 }}
                             />
                         </Pressable>
@@ -82,11 +93,19 @@ function BottomTabNavigator() {
                 })}
             />
             <BottomTab.Screen
-                name='TabTwo'
-                component={TabTwoScreen}
+                name='QRCode'
+                component={QRCode}
                 options={{
-                    title: 'Tab Two',
-                    tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+                    title: 'QR',
+                    tabBarIcon: ({ color }) => <QR height={28} color={color} />,
+                }}
+            />
+            <BottomTab.Screen
+                name='Profile'
+                component={Profile}
+                options={{
+                    title: 'Profile',
+                    tabBarIcon: ({ color }) => <TabBarIcon name='account-circle' color={color} />,
                 }}
             />
         </BottomTab.Navigator>
@@ -94,6 +113,6 @@ function BottomTabNavigator() {
 }
 
 /** You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/ */
-function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['name']; color: string }) {
-    return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />
+function TabBarIcon(props: { name: React.ComponentProps<typeof MaterialCommunityIcons>['name']; color: string }) {
+    return <MaterialCommunityIcons size={34} {...props} />
 }
