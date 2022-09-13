@@ -7,10 +7,10 @@ import {
     TouchableOpacity,
     Linking,
     Image,
+    Modal,
 } from 'react-native';
 import {
     Portal,
-    Modal
 } from "react-native-paper";
 import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
@@ -35,7 +35,8 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
     }, []);
   
     const handleBarCodeScanned = ({ type, data } : { type: any, data: any }) => {
-      setScanned(true);
+        setScanned(true);
+        showDialog()
       alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
   
@@ -47,7 +48,7 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
     }
 
     return (
-        <View>
+        <View style={styles.screen}>
             <View style={styles.container}>
                 <Text style={styles.headerText} category="h4">
                     Get Proof of Networking
@@ -61,26 +62,28 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
                 />
                 {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
             </View>
-            <View>
-                <Portal>
-                    <Modal visible={visible} onDismiss={hideDialog}>
+            <Modal visible={visible} onDismiss={hideDialog} style={{backgroundColor:'transparent'}}>
+                <View style={styles.modal}>
+                    <View style={styles.modalView}>
                         <Text style={{...styles.dialogText, marginBottom: 20}}>
-                            This is the digital signature of the certificate issued by Franck Muller. Scan the QR code to verify the signature:
+                            You have connected with Hidetaka!
                         </Text>
-                            {/* <View> */}
-                            <Image
-                                style={{ maxWidth: '100%', alignSelf: 'center' }}
-                                source={require("../assets/images/qr.svg")}
-                            />
+                        <Image
+                            style={{ maxWidth: '100%', alignSelf: 'center' }}
+                            source={require("../assets/images/qr.svg")}
+                        />
                         <Button title={'Done'} onPress={hideDialog}/>
-                    </Modal>
-                </Portal>
-            </View>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         alignItems: 'center',
@@ -108,9 +111,8 @@ const styles = StyleSheet.create({
       padding: 16
     },
     barCodeScanner: {
-        flex: 1,
+        flex: 5,
         alignSelf: 'center',
-        height: 100,
         width: '100%'
     },
     headerText: {
@@ -124,7 +126,19 @@ const styles = StyleSheet.create({
     dialogText: {
       color: 'white',
       alignSelf: 'center',
-      paddingHorizontal: 60,
+      padding: 10,
       fontSize: 15
+    },
+    modal: {
+        justifyContent: 'center',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0)',
+    },
+    modalView: {
+        alignSelf: 'center',
+        width: 300,
+        margin: 10,
+        padding: 10,
+        borderRadius: 20
     },
 })
