@@ -3,6 +3,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { Dispatch, SetStateAction } from 'react'
 
 declare global {
     namespace ReactNavigation {
@@ -31,3 +32,5 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
     BottomTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
 >
+
+export type Setter = Dispatch<SetStateAction<boolean>>

@@ -12,11 +12,18 @@ import {
 } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
-import { RootTabScreenProps } from '../types'
+import {
+	RootTabScreenProps,
+	Setter,
+} from '../types'
 import { useSdk } from '@business-card/sdk'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
+
+
+
 export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
+	
     const [hasPermission, setHasPermission] = useState(false);
     const [scanned, setScanned] = useState(false);
 	const [activityIndicatorIsVisible, setActivityIndicatorIsVisible] = useState(false)
@@ -29,7 +36,7 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
       setTimeout(() => setActivityIndicatorIsVisible(false), ms)
 	}
 	
-	const load = (ms: number, setter: (b: boolean) => Promise<void>) => {
+	const load = (ms: number, setter: Setter) => {
 		showActivityIndicator(ms);
    		setTimeout(() => setter(true), ms)
 	}
