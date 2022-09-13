@@ -42,8 +42,9 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>QRCode</Text>
-        <Text>{currentText}</Text>
+        <Text style={styles.headerText} category="h4">
+            Get Proof of Networking
+        </Text>
         <View style={styles.separator} lightColor='#eee' darkColor='rgba(255,255,255,0.1)' />
         <EditScreenInfo path='/screens/QRCode.tsx' />
         <BarCodeScanner
@@ -61,14 +62,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
     separator: {
-        marginVertical: 30,
+        marginVertical: 10,
         height: 1,
-        width: '80%',
     },
     centerText: {
       flex: 1,
@@ -92,5 +88,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: 100,
         width: '100%'
-    }
+    },
+    headerText: {
+      color: '#fff',
+      fontWeight: '600',
+      fontSize: 35,
+      marginTop: 40,
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+    },
 })
