@@ -5,8 +5,13 @@ import {
     StyleSheet,
     // Text,
     TouchableOpacity,
-    Linking
+    Linking,
+    Image,
 } from 'react-native';
+import {
+    Portal,
+    Modal
+} from "react-native-paper";
 import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
 import { RootTabScreenProps } from '../types'
@@ -16,6 +21,9 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
     const [hasPermission, setHasPermission] = useState(false);
     const [scanned, setScanned] = useState(false);
+    const [visible, setVisible] = React.useState(false);
+    const showDialog = () => setVisible(true);
+    const hideDialog = () => setVisible(false);
   
     useEffect(() => {
       const getBarCodeScannerPermissions = async () => {
@@ -38,22 +46,37 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
       return <Text>No access to camera</Text>;
     }
 
-    const currentText = useSdk()
-
     return (
-      <View style={styles.container}>
-        <Text style={styles.headerText} category="h4">
-            Get Proof of Networking
-        </Text>
-        <View style={styles.separator} lightColor='#eee' darkColor='rgba(255,255,255,0.1)' />
-        <EditScreenInfo path='/screens/QRCode.tsx' />
-        <BarCodeScanner
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={styles.barCodeScanner}
-        />
-        {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
-      </View>
+        <View>
+            <View style={styles.container}>
+                <Text style={styles.headerText} category="h4">
+                    Get Proof of Networking
+                </Text>
+                <View style={styles.separator} lightColor='#eee' darkColor='rgba(255,255,255,0.1)' />
+                <EditScreenInfo path='/screens/QRCode.tsx' />
+                <BarCodeScanner
+                    barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    style={styles.barCodeScanner}
+                />
+                {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+            </View>
+            <View>
+                <Portal>
+                    <Modal visible={visible} onDismiss={hideDialog}>
+                        <Text style={{...styles.dialogText, marginBottom: 20}}>
+                            This is the digital signature of the certificate issued by Franck Muller. Scan the QR code to verify the signature:
+                        </Text>
+                            {/* <View> */}
+                            <Image
+                                style={{ maxWidth: '100%', alignSelf: 'center' }}
+                                source={require("../assets/images/qr.svg")}
+                            />
+                        <Button title={'Done'} onPress={hideDialog}/>
+                    </Modal>
+                </Portal>
+            </View>
+        </View>
     );
 }
 
@@ -97,5 +120,11 @@ const styles = StyleSheet.create({
       marginTop: 40,
       paddingHorizontal: 20,
       paddingVertical: 10,
+    },
+    dialogText: {
+      color: 'white',
+      alignSelf: 'center',
+      paddingHorizontal: 60,
+      fontSize: 15
     },
 })
