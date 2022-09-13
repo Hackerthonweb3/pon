@@ -48,8 +48,9 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
         <View style={styles.separator} lightColor='#eee' darkColor='rgba(255,255,255,0.1)' />
         <EditScreenInfo path='/screens/QRCode.tsx' />
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={styles.barCodeScanner}
+            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={styles.barCodeScanner}
         />
         {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
       </View>
