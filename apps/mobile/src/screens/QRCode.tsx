@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+	ActivityIndicator,
     AppRegistry,
     Button,
     StyleSheet,
@@ -9,9 +10,6 @@ import {
     Image,
     Modal,
 } from 'react-native';
-import {
-    Portal,
-} from "react-native-paper";
 import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
 import { RootTabScreenProps } from '../types'
@@ -21,10 +19,30 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
     const [hasPermission, setHasPermission] = useState(false);
     const [scanned, setScanned] = useState(false);
-    const [visible, setVisible] = React.useState(false);
-    const showDialog = () => setVisible(true);
-    const hideDialog = () => setVisible(false);
+	const [activityIndicatorIsVisible, setActivityIndicatorIsVisible] = useState(false)
+    const [modalIsVisible, setModalVisible] = useState(false);
   
+	
+	
+    const showActivityIndicator = (ms: number) => {
+      setActivityIndicatorIsVisible(true)
+      setTimeout(() => setActivityIndicatorIsVisible(false), ms)
+	}
+	
+	const load = (ms: number, setter: (b: boolean) => Promise<void>) => {
+		showActivityIndicator(ms);
+   		setTimeout(() => setter(true), ms)
+	}
+  
+    const handleBarCodeScanned = ({ type, data } : { type: any, data: any }) => {
+		setScanned(true);
+		load(3000, setModalVisible)
+	}
+	
+    const hideDialog = () => setModalVisible(false);
+  
+	
+	
     useEffect(() => {
       const getBarCodeScannerPermissions = async () => {
         const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -34,19 +52,15 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
       getBarCodeScannerPermissions();
     }, []);
   
-    const handleBarCodeScanned = ({ type, data } : { type: any, data: any }) => {
-        setScanned(true);
-        showDialog()
-      alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    };
-  
+	
+	
     if (hasPermission === null) {
       return <Text>Requesting for camera permission</Text>;
     }
     if (hasPermission === false) {
       return <Text>No access to camera</Text>;
     }
-
+  
     return (
         <View style={styles.screen}>
             <View style={styles.container}>
@@ -62,17 +76,33 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
                 />
                 {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
             </View>
-            <Modal visible={visible} onDismiss={hideDialog} style={{backgroundColor:'transparent'}}>
+            <Modal
+                style={{ backgroundColor: 'transparent' }}
+                transparent={true}
+                visible={activityIndicatorIsVisible}>
+				<ActivityIndicator 
+					animating={activityIndicatorIsVisible}
+					color="#00ff00"
+					size={100}
+					style={{ flex: 1 }} />
+            </Modal>
+            <Modal
+                style={{ backgroundColor: 'transparent' }}
+                onDismiss={hideDialog}
+                transparent={true}
+                visible={modalIsVisible}>
                 <View style={styles.modal}>
                     <View style={styles.modalView}>
-                        <Text style={{...styles.dialogText, marginBottom: 20}}>
+                        <Text style={styles.modalText}>
                             You have connected with Hidetaka!
                         </Text>
-                        <Image
-                            style={{ maxWidth: '100%', alignSelf: 'center' }}
-                            source={require("../assets/images/qr.svg")}
-                        />
-                        <Button title={'Done'} onPress={hideDialog}/>
+                    	<View style={styles.avatarView}>
+							<Image
+								style={styles.avatar}
+								source={require("../assets/images/hidetaka.png")}
+							/>
+                    	</View>
+						<Button title={'Done'} onPress={hideDialog}/>
                     </View>
                 </View>
             </Modal>
@@ -107,7 +137,7 @@ const styles = StyleSheet.create({
       fontSize: 21,
       color: 'rgb(0,122,255)'
     },
-    buttonTouchable: {
+    button: {
       padding: 16
     },
     barCodeScanner: {
@@ -123,16 +153,11 @@ const styles = StyleSheet.create({
       paddingHorizontal: 20,
       paddingVertical: 10,
     },
-    dialogText: {
-      color: 'white',
-      alignSelf: 'center',
-      padding: 10,
-      fontSize: 15
-    },
-    modal: {
-        justifyContent: 'center',
-        height: '100%',
-        backgroundColor: 'rgba(0,0,0,0)',
+    modalText: {
+		color: 'white',
+		alignSelf: 'center',
+		fontSize: 14,
+		margin: 10
     },
     modalView: {
         alignSelf: 'center',
@@ -140,5 +165,19 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
         borderRadius: 20
+    },
+    modal: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0)',
+    },
+    avatarView: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+	avatar: {
+		margin: 10
     },
 })
