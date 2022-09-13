@@ -48,7 +48,7 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
         <EditScreenInfo path='/screens/QRCode.tsx' />
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
+          style={styles.barCodeScanner}
         />
         {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
       </View>
@@ -86,5 +86,11 @@ const styles = StyleSheet.create({
     },
     buttonTouchable: {
       padding: 16
+    },
+    barCodeScanner: {
+        flex: 1,
+        alignSelf: 'center',
+        height: 100,
+        width: '100%'
     }
 })
