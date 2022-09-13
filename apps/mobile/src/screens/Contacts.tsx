@@ -12,12 +12,12 @@ export default function Contacts({ navigation }: RootTabScreenProps<'Contacts'>)
         <View style={styles.container}>
             <Text style={styles.title}>Contacts</Text>
             <View style={styles.content}>
-                <SurpriseIcon transform={{ scale: 1.15, x: -4 }} />
+                <SurpriseIcon /* transform={{ scale: 1.15, x: -4 }} */ />
                 <Text style={styles.heading}>You have no one yet</Text>
                 <Text style={styles.text}>
                     Have your friends scan your QR code or share your links to make a list of contacts
                 </Text>
-                <ArrowDown height={115} transform={{ scale: 1.15, y: -2 }} />
+                <ArrowDown height={115} /* transform={{ scale: 1.15, y: -2 }} */ />
             </View>
         </View>
     )
