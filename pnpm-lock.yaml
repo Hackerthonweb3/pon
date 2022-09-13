@@ -29,6 +29,7 @@ importers:
       '@types/react-native': 0.69.8
       expo: 46.0.10
       expo-asset: 8.6.1
+      expo-barcode-scanner: 11.4.0
       expo-constants: 13.2.4
       expo-font: 10.2.0
       expo-linking: 3.2.2
@@ -60,6 +61,7 @@ importers:
       '@react-navigation/native-stack': 6.8.0_pfy7hol5aosvtbxtvmlwalnmva
       expo: 46.0.10_@babel+core@7.19.0
       expo-asset: 8.6.1_expo@46.0.10
+      expo-barcode-scanner: 11.4.0_expo@46.0.10
       expo-constants: 13.2.4_expo@46.0.10
       expo-font: 10.2.0_expo@46.0.10
       expo-linking: 3.2.2_expo@46.0.10
@@ -10211,6 +10213,18 @@ packages:
       - supports-color
     dev: false
 
+  /expo-barcode-scanner/11.4.0_expo@46.0.10:
+    resolution: {integrity: sha512-Q4BreQHY5U1aGF+rfqeGSzcdlayTKnSe/qTIfkXTmXFsL7bu3hMqdh5J/DL00Dfmc7C0IR8EiV75rqRrY4t0nA==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@expo/config-plugins': 5.0.1
+      expo: 46.0.10_@babel+core@7.19.0
+      expo-image-loader: 3.2.0_expo@46.0.10
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /expo-constants/13.2.4_expo@46.0.10:
     resolution: {integrity: sha512-Zobau8EuTk2GgafwkfGnWM6CmSLB7X8qnQXVuXe0nd3v92hfQUmRWGhJwH88uxXj3LrfqctM6PaJ8taG1vxfBw==}
     peerDependencies:
@@ -10252,6 +10266,14 @@ packages:
     dependencies:
       expo: 46.0.10_@babel+core@7.19.0
       fontfaceobserver: 2.3.0
+    dev: false
+
+  /expo-image-loader/3.2.0_expo@46.0.10:
+    resolution: {integrity: sha512-LU3Q2prn64/HxdToDmxgMIRXS1ZvD9Q3iCxRVTZn1fPQNNDciIQFE5okaa74Ogx20DFHs90r6WoUd7w9Af1OGQ==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      expo: 46.0.10_@babel+core@7.19.0
     dev: false
 
   /expo-keep-awake/10.2.0_expo@46.0.10:
