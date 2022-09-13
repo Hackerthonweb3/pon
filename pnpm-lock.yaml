@@ -41,6 +41,7 @@ importers:
       react: 18.0.0
       react-dom: 18.0.0
       react-native: 0.69.5
+      react-native-camera: 4.2.1
       react-native-permissions: 3.6.1
       react-native-qrcode-scanner: 1.5.5
       react-native-safe-area-context: 4.3.1
@@ -68,6 +69,7 @@ importers:
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       react-native: 0.69.5_jf6qxsqi3bifbzlsoqps25t6eu
+      react-native-camera: 4.2.1
       react-native-permissions: 3.6.1_ws5w265lwlgfx6ddpl3mdiooma
       react-native-qrcode-scanner: 1.5.5_avxagxaekw6kztwzgqqviymkbm
       react-native-safe-area-context: 4.3.1_ws5w265lwlgfx6ddpl3mdiooma

@@ -4,6 +4,8 @@ import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
 import { RootTabScreenProps } from '../types'
 import { useSdk } from '@business-card/sdk'
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
 
 export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
     const currentText = useSdk()
