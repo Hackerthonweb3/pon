@@ -27,7 +27,7 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
     const [hasPermission, setHasPermission] = useState(false);
     const [scanned, setScanned] = useState(false);
 	const [activityIndicatorIsVisible, setActivityIndicatorIsVisible] = useState(false)
-    const [modalIsVisible, setModalVisible] = useState(false);
+    const [messageModalIsVisible, setMessageModalVisible] = useState(false);
   
 	
 	
@@ -43,10 +43,10 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
   
     const handleBarCodeScanned = ({ type, data } : { type: any, data: any }) => {
 		setScanned(true);
-		load(3000, setModalVisible)
+		load(3000, setMessageModalVisible)
 	}
 	
-    const hideDialog = () => setModalVisible(false);
+    const hideDialog = () => setMessageModalVisible(false);
   
 	
 	
@@ -81,7 +81,6 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                     style={styles.barCodeScanner}
                 />
-                {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
             </View>
             <Modal
                 style={{ backgroundColor: 'transparent' }}
@@ -97,9 +96,9 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
                 style={{ backgroundColor: 'transparent' }}
                 onDismiss={hideDialog}
                 transparent={true}
-                visible={modalIsVisible}>
-                <View style={styles.modal}>
-                    <View style={styles.modalView}>
+                visible={messageModalIsVisible}>
+                <View style={styles.modalView}>
+                    <View style={styles.modalViewView}>
                         <Text style={styles.modalText}>
                             You have connected with Hidetaka!
                         </Text>
@@ -112,6 +111,14 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 						<Button title={'Done'} onPress={hideDialog}/>
                     </View>
                 </View>
+            </Modal>
+			<Modal
+                transparent={true}
+                visible={scanned}>
+				<View
+					style={styles.scanAgain}>
+					{scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+				</View>
             </Modal>
         </View>
     );
@@ -167,24 +174,34 @@ const styles = StyleSheet.create({
 		margin: 10
     },
     modalView: {
-        alignSelf: 'center',
-        width: 300,
-        margin: 10,
-        padding: 10,
-        borderRadius: 20
-    },
-    modal: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-around',
         height: '100%',
         backgroundColor: 'rgba(0,0,0,0)',
     },
+    modalViewView: {
+        alignSelf: 'center',
+        width: 300,
+        margin: 10,
+        padding: 10,
+        borderRadius: 20,
+        backgroundColor: 'rgba(0,0,0,0.75)',
+    },
     avatarView: {
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: 'transparent',
     },
 	avatar: {
 		margin: 10
-    },
+	},
+	scanAgain: {
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		height: '100%',
+		paddingBottom: 120,
+        backgroundColor: 'transparent',
+	}
 })
