@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     getStartedText: {
         fontSize: 13,
         lineHeight: 20,
-        textAlign: 'center',
+        alignItems: 'center',
     },
     title: {
         fontSize: 20,

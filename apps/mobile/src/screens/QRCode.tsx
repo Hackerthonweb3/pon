@@ -69,19 +69,28 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
     }
   
     return (
-        <View style={styles.screen}>
+		<View style={styles.screen}>
+			
+            <View style={styles.headerContainer}>
+				<Text style={styles.header} category="h4">
+					Get Proof of Networking
+				</Text>
+			</View>
+			
             <View style={styles.container}>
-                <Text style={styles.headerText} category="h4">
-                    Get Proof of Networking
-                </Text>
-                <View style={styles.separator} lightColor='#eee' darkColor='rgba(255,255,255,0.1)' />
-                <EditScreenInfo path='/screens/QRCode.tsx' />
+				<View style={styles.textContainer}>
+					<Text style={styles.title}>How to get a Proof of Networking</Text>
+					<Text style={styles.text} lightColor='rgba(0,0,0,0.8)' darkColor='rgba(255,255,255,0.8)'>
+						Scan the QR code in your new acquaintance's mobile app:{' '}
+					</Text>
+				</View>
                 <BarCodeScanner
                     barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                     style={styles.barCodeScanner}
                 />
-            </View>
+			</View>
+			
             <Modal
                 style={{ backgroundColor: 'transparent' }}
                 transparent={true}
@@ -91,7 +100,8 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 					color="#00ff00"
 					size={100}
 					style={{ flex: 1 }} />
-            </Modal>
+			</Modal>
+			
             <Modal
                 style={{ backgroundColor: 'transparent' }}
                 onDismiss={hideDialog}
@@ -111,7 +121,8 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 						<Button title={'Done'} onPress={hideDialog}/>
                     </View>
                 </View>
-            </Modal>
+			</Modal>
+			
 			<Modal
                 transparent={true}
                 visible={scanned}>
@@ -119,29 +130,17 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 					style={styles.scanAgain}>
 					{scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
 				</View>
-            </Modal>
+			</Modal>
+			
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
-    },
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    separator: {
-        marginVertical: 10,
-        height: 1,
-    },
-    centerText: {
-      flex: 1,
-      fontSize: 18,
-      padding: 32,
-      color: '#777'
+		flex: 1,
+        alignItems: 'stretch',
+		justifyContent: 'space-between',
     },
     textBold: {
       fontWeight: '500',
@@ -155,17 +154,49 @@ const styles = StyleSheet.create({
       padding: 16
     },
     barCodeScanner: {
-        flex: 5,
+        flex: 1,
         alignSelf: 'center',
         width: '100%'
     },
-    headerText: {
+	headerContainer: {
+		height: 100, 
+		alignItems: 'center',
+		justifyContent: 'center',
+        backgroundColor: '#251819',
+	},
+	header: {
       color: '#fff',
       fontWeight: '600',
-      fontSize: 35,
+      fontSize: 32,
       marginTop: 40,
       paddingHorizontal: 20,
       paddingVertical: 10,
+    },
+	container: {
+		flex: 1,
+        alignItems: 'center',
+		justifyContent: 'flex-start',
+		padding: 20,
+    },
+    textContainer: {
+		alignItems: 'flex-start',
+		textAlign: 'justify',
+		marginBottom: 20,
+		height: 100,
+		width: '100%',
+    },
+    title: {
+      	flex: 1,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    text: {
+      	flex: 1,
+		fontSize: 18,
+		lineHeight: 20,
+		alignItems: 'center',
+		color: '#ccc',
     },
     modalText: {
 		color: 'white',
@@ -186,7 +217,7 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
         borderRadius: 20,
-        backgroundColor: 'rgba(0,0,0,0.75)',
+        backgroundColor: 'rgba(0,0,0,0.66)',
     },
     avatarView: {
         alignItems: 'center',
@@ -203,5 +234,5 @@ const styles = StyleSheet.create({
 		height: '100%',
 		paddingBottom: 120,
         backgroundColor: 'transparent',
-	}
+	},
 })
