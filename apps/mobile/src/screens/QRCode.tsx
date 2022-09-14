@@ -125,10 +125,20 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 			
 			<Modal
                 transparent={true}
-                visible={scanned}>
-				<View
-					style={styles.scanAgain}>
-					{scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+				<View style={styles.controlsModalView}>
+					<View style={styles.mainControls}>
+						<TouchableOpacity
+							style={styles.controlBox}
+							onPress={() => setScannerOn(true)}>
+							<Text>Scan</Text>
+						</TouchableOpacity>
+						<View style={{ height: '100%', width: 2, backgroundColor: '#555' }}/>
+						<TouchableOpacity
+							style={styles.controlBox}
+							onPress={() => setScannerOn(false)}>
+							<Text>Show QR</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
 			</Modal>
 			
@@ -227,12 +237,26 @@ const styles = StyleSheet.create({
 	avatar: {
 		margin: 10
 	},
-	scanAgain: {
-		flexDirection: 'column',
+	controlsModalView: {
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0)',
+    },
+	mainControls: {
+		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'flex-end',
-		height: '100%',
-		paddingBottom: 120,
-        backgroundColor: 'transparent',
+		alignSelf: 'center',
+		justifyContent: 'space-around',
+		height: 120,
+		marginHorizontal: 30,
+		marginVertical: 140,
+		padding: 10,
+		backgroundColor: 'rgba(0,0,35,0.5)',
+		borderRadius: 30, 
 	},
+	controlBox: {
+		alignItems: 'center',
+		width: 100,
+    },
 })
