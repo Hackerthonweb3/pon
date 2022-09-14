@@ -25,7 +25,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 	
     const [hasPermission, setHasPermission] = useState(false);
-    const [scanned, setScanned] = useState(false);
+    const [scannerOn, setScannerOn] = useState(false);
 	const [activityIndicatorIsVisible, setActivityIndicatorIsVisible] = useState(false)
     const [messageModalIsVisible, setMessageModalVisible] = useState(false);
   
@@ -42,11 +42,13 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 	}
   
     const handleBarCodeScanned = ({ type, data } : { type: any, data: any }) => {
-		setScanned(true);
 		load(3000, setMessageModalVisible)
 	}
 	
-    const hideDialog = () => setMessageModalVisible(false);
+    const hideMessageModal = () => {
+		setMessageModalVisible(false)
+		setScannerOn(false)
+	};
   
 	
 	
@@ -86,7 +88,7 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 				</View>
                 <BarCodeScanner
                     barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    onBarCodeScanned={scannerOn && !messageModalIsVisible && !activityIndicatorIsVisible ? handleBarCodeScanned : undefined}
                     style={styles.barCodeScanner}
                 />
 			</View>
@@ -104,7 +106,7 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 			
             <Modal
                 style={{ backgroundColor: 'transparent' }}
-                onDismiss={hideDialog}
+                onDismiss={hideMessageModal}
                 transparent={true}
                 visible={messageModalIsVisible}>
                 <View style={styles.modalView}>
@@ -118,13 +120,14 @@ export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
 								source={require("../assets/images/hidetaka.png")}
 							/>
                     	</View>
-						<Button title={'Done'} onPress={hideDialog}/>
+						<Button title={'Done'} onPress={hideMessageModal}/>
                     </View>
                 </View>
 			</Modal>
 			
 			<Modal
                 transparent={true}
+				visible={!scannerOn}>
 				<View style={styles.controlsModalView}>
 					<View style={styles.mainControls}>
 						<TouchableOpacity
