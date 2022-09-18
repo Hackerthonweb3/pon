@@ -14,6 +14,7 @@ declare global {
 export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | undefined
     Modal: undefined
+    Create: any
     NotFound: undefined
 }
 
@@ -34,3 +35,16 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 >
 
 export type Setter = Dispatch<SetStateAction<boolean>>
+export enum EInputTypes {
+    Input,
+    Select,
+    Country,
+}
+
+export type TInputProps = {
+    name: string
+    label?: string
+    placeholder?: string
+    type?: EInputTypes
+    multi?: Boolean
+}

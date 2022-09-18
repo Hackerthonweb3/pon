@@ -27,9 +27,9 @@ export function Gallery(props: any) {
             <SubTitle>{title}</SubTitle>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <SpaceBetween>
-                    {mockGallery.map(item => {
+                    {mockGallery.map((item, index) => {
                         return (
-                            <ContainerFlex m='0px' pr='4px' {...sharedContanterStyle}>
+                            <ContainerFlex key={index} m='0px' pr='4px' {...sharedContanterStyle}>
                                 <Image style={styles.avatar} source={require('../assets/images/ape.png')} />
                             </ContainerFlex>
                         )
