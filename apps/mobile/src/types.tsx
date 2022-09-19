@@ -39,6 +39,7 @@ export enum EInputTypes {
     Input,
     Select,
     Country,
+    Checkbox,
 }
 
 export type TInputProps = {

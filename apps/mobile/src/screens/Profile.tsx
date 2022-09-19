@@ -16,7 +16,8 @@ export default function Profile() {
     const navigation = useNavigation()
 
     function handleEditLink() {
-        navigation.navigate('Contacts')
+        // TODO: fix navigation here
+        navigation.navigate('Create')
     }
 
     return (
@@ -24,7 +25,7 @@ export default function Profile() {
             <Layout lightColor='#eee' darkColor='rgba(255,255,255,0.1)'>
                 <ContainerFlex>
                     <SpaceEnd>
-                        <Button onPress={() => navigation.navigate('Contacts')} title='Edit' />
+                        <Button onPress={handleEditLink} title='Edit' />
                     </SpaceEnd>
                     <Avatar pfpCid={pfp} />
                     <ContainerFlex mt='15px' mb='10px' p='0px'>

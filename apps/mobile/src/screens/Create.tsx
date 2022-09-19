@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
-import { StyleSheet, ScrollView, Image, SafeAreaView, Button, TextInput, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, ScrollView, Image, Button, TextInput } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import CountryPicker from 'rn-country-dropdown-picker'
 import * as ImagePicker from 'expo-image-picker'
+import Checkbox from 'expo-checkbox'
 
-import { useSdk } from '@business-card/sdk'
-import { Layout, SpaceEnd, ContainerFlex, SpaceStart } from '../components/DesignSystem'
-import Dropdown from '../components/Dropdown'
-import { Avatar } from '../components/StyledAvatar'
-import { Text } from '../components/Themed'
-import { Title, SubTitle, Label } from '../components/StyledText'
+import { Layout, ContainerFlex, SpaceStart, SpaceBetween } from '../components/DesignSystem'
+import { SubTitle, Label } from '../components/StyledText'
 import { LinkButton } from '../components/StyledButtons'
 import { newUserInputs } from '../constants/configs'
-import { mockProfile } from '../constants/mock'
+import { View } from '../components/Themed'
 import { EInputTypes, TInputProps } from '../types'
 
 const styles = StyleSheet.create({
@@ -24,6 +21,10 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         fontSize: 14,
         padding: 8,
+    },
+    country: {
+        borderColor: 'gray',
+        borderRadius: 2,
     },
     textStyle: {
         padding: 10,
@@ -42,19 +43,26 @@ const styles = StyleSheet.create({
 })
 
 export default function Create({ navigation }: any) {
-    const currentText = useSdk()
-    const [profileImg, setProfileImg] = useState({} as any)
-    const [coverImg, setCoverImg] = useState({} as any)
-    const [isEdit, setIsEdit] = useState(false)
-    const [text, setText] = useState('')
-    const { name, description, pfp, twitter } = mockProfile
+    const [profileImg, setProfileImg] = useState('')
+    const [coverImg, setCoverImg] = useState('')
+    const [country, setCountry] = useState({} as any)
+    const [isDesigner, setDesigner] = useState(false)
+    const [isDev, setDev] = useState(false)
+    const [isFounder, setFounder] = useState(false)
+
     const {
         control,
         handleSubmit,
         formState: { errors, isValid },
     } = useForm({ mode: 'onBlur' })
 
-    const onSubmit = (data: any) => console.log(data)
+    const onSubmit = (data: any) => {
+        console.log(data)
+        console.log(country)
+        console.log(profileImg)
+        // TODO: create/update profile
+    }
+
     const getInput = getInputCurry(control)
 
     async function chooseFile(setResult: any) {
@@ -74,23 +82,55 @@ export default function Create({ navigation }: any) {
     }
 
     function getInputCurry(control: any) {
-        return function (
-            { name, label = '', placeholder = '', type = EInputTypes.Input, multi = false }: TInputProps,
-            onChange: any,
-            value: any,
-            onBlur: any,
-        ) {
+        return function ({ name, label = '', placeholder = '', type = EInputTypes.Input, multi = false }: TInputProps) {
             const inputsMap: any = {
                 [EInputTypes.Input]: (
-                    <TextInput
-                        style={styles.input}
-                        placeholder={placeholder}
-                        value={value}
-                        onBlur={onBlur}
-                        onChangeText={value => onChange(value)}
-                    />
+                    <>
+                        <Label>{label}</Label>
+                        <Controller
+                            control={control}
+                            name={name}
+                            render={({ field: { onChange, value, onBlur } }) => (
+                                <TextInput
+                                    multiline={Boolean(multi)}
+                                    numberOfLines={4}
+                                    style={styles.input}
+                                    placeholder={placeholder}
+                                    value={value}
+                                    onBlur={onBlur}
+                                    onChangeText={value => onChange(value)}
+                                />
+                            )}
+                        />
+                    </>
                 ),
-                [EInputTypes.Country]: <CountryPicker InputFieldStyle={styles.input} selectedItem={onChange} />,
+                [EInputTypes.Country]: (
+                    <>
+                        <Label>Country of origin</Label>
+                        <CountryPicker InputFieldStyle={styles.country} selectedItem={setCountry} />
+                    </>
+                ),
+                [EInputTypes.Checkbox]: (
+                    <>
+                        <Label>Skills</Label>
+                        <ContainerFlex ml='5px' mr='5px' mt='0' pt='0'>
+                            <SpaceBetween>
+                                <View>
+                                    <Label>Designer</Label>
+                                    <Checkbox value={isDesigner} onValueChange={setDesigner} />
+                                </View>
+                                <View>
+                                    <Label>Developer</Label>
+                                    <Checkbox value={isDev} onValueChange={setDev} />
+                                </View>
+                                <View>
+                                    <Label>Founder</Label>
+                                    <Checkbox value={isFounder} onValueChange={setFounder} />
+                                </View>
+                            </SpaceBetween>
+                        </ContainerFlex>
+                    </>
+                ),
             }
 
             return inputsMap[type]
@@ -98,31 +138,38 @@ export default function Create({ navigation }: any) {
     }
 
     return (
-        <ScrollView>
-            <Layout lightColor='#eee' darkColor='rgba(255,255,255,0.1)'>
+        <Layout lightColor='#eee' darkColor='rgba(255,255,255,0.1)'>
+            <ContainerFlex>
+                <SpaceBetween>
+                    <LinkButton title='X' onPress={() => navigation.navigate('Profile')} />
+                    <SubTitle style={{ paddingTop: 8 }}>Edit Info</SubTitle>
+                    <Button title='Save' onPress={handleSubmit(onSubmit)} />
+                </SpaceBetween>
+            </ContainerFlex>
+            <ScrollView>
                 <ContainerFlex>
                     <Image
-                        source={{ uri: profileImg || require('../assets/images/grey.png') }}
+                        source={profileImg ? { uri: profileImg } : require('../assets/images/grey.png')}
                         style={styles.imageStyle}
                     />
-                    <Button title='Profile Photo' onPress={() => chooseFile(setProfileImg)} />
-                    <Image source={{ uri: coverImg || require('../assets/images/grey.png') }} style={styles.cover} />
-                    <Button title='Cover Photo' onPress={() => chooseFile(setProfileImg)} />
+                    <SpaceStart>
+                        <Button title='Profile Photo' onPress={() => chooseFile(setProfileImg)} />
+                    </SpaceStart>
+                    <Image
+                        source={coverImg ? { uri: coverImg } : require('../assets/images/grey.png')}
+                        style={styles.cover}
+                    />
+                    <SpaceStart>
+                        <Button title='Cover Photo' onPress={() => chooseFile(setCoverImg)} />
+                    </SpaceStart>
                     {newUserInputs.map(input => (
                         <ContainerFlex mt='3px' mb='3px'>
-                            <Label>{input.label}</Label>
-                            <Controller
-                                control={control}
-                                name={input.name}
-                                render={({ field: { onChange, value, onBlur } }) =>
-                                    getInput({ ...input }, onChange, value, onBlur)
-                                }
-                            />
+                            {getInput({ ...input })}
                         </ContainerFlex>
                     ))}
                     <Button title='Submit' onPress={handleSubmit(onSubmit)} />
                 </ContainerFlex>
-            </Layout>
-        </ScrollView>
+            </ScrollView>
+        </Layout>
     )
 }

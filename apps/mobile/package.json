@@ -22,6 +22,7 @@
         "expo": "46.0.10",
         "expo-asset": "8.6.1",
         "expo-barcode-scanner": "11.4.0",
+        "expo-checkbox": "~2.2.0",
         "expo-constants": "13.2.4",
         "expo-font": "10.2.0",
         "expo-image-picker": "~13.3.1",

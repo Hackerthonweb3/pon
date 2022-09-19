@@ -38,8 +38,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 function RootNavigator() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name='Root' component={BottomTabNavigator} options={{ headerShown: false }} />
             <Stack.Screen name='Create' component={Create} />
+            <Stack.Screen name='Root' component={BottomTabNavigator} options={{ headerShown: false }} />
             <Stack.Screen name='NotFound' component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name='Modal' component={ModalScreen} options={{ headerShown: false }} />
@@ -136,7 +136,7 @@ function BottomTabNavigator() {
             />
             <BottomTab.Screen
                 name='Profile'
-                component={Create}
+                component={Profile}
                 options={{
                     title: 'Profile',
                     tabBarIcon: ({ color }) => <TabBarIcon name='account-circle' color={color} />,
