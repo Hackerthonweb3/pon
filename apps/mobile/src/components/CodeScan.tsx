@@ -45,6 +45,22 @@ export const CodeScan = () => {
     )
 }
 
+// <Modal
+//     style={{ backgroundColor: 'transparent' }}
+//     onDismiss={hideMessageModal}
+//     transparent={true}
+//     visible={messageModalIsVisible}>
+//     <View style={styles.modalView}>
+//         <View style={styles.modalViewView}>
+//             <Text style={styles.modalText}>You have connected with Hidetaka!</Text>
+//             <View style={styles.avatarView}>
+//                 <Image style={styles.avatar} source={require('../assets/images/hidetaka.png')} />
+//             </View>
+//             <Button title={'Done'} onPress={hideMessageModal} />
+//         </View>
+//     </View>
+// </Modal>
+
 // const ConfirmModal = () => {
 //     <Modal visible={visible} onDismiss={hideDialog} style={{ backgroundColor: 'transparent' }}>
 //     <View style={styles.modal}>
