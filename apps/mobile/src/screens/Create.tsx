@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { StyleSheet, ScrollView, Image, Button, TextInput } from 'react-native'
-import { useForm, Controller } from 'react-hook-form'
-import CountryPicker from 'rn-country-dropdown-picker'
-import * as ImagePicker from 'expo-image-picker'
-import Checkbox from 'expo-checkbox'
+// import { useForm, Controller } from 'react-hook-form'
+// import CountryPicker from 'rn-country-dropdown-picker'
+// import * as ImagePicker from 'expo-image-picker'
+// import Checkbox from 'expo-checkbox'
 
 import { Layout, ContainerFlex, SpaceStart, SpaceBetween } from '../components/DesignSystem'
-import { SubTitle, Label } from '../components/StyledText'
 import { LinkButton } from '../components/StyledButtons'
-import { newUserInputs } from '../constants/configs'
+import { SubTitle, Label } from '../components/StyledText'
 import { View } from '../components/Themed'
+import { newUserInputs } from '../constants/configs'
 import { EInputTypes, TInputProps } from '../types'
 
 const styles = StyleSheet.create({
@@ -50,11 +50,11 @@ export default function Create({ navigation }: any) {
     const [isDev, setDev] = useState(false)
     const [isFounder, setFounder] = useState(false)
 
-    const {
-        control,
-        handleSubmit,
-        formState: { errors, isValid },
-    } = useForm({ mode: 'onBlur' })
+    // const {
+    //     control,
+    //     handleSubmit,
+    //     formState: { errors, isValid },
+    // } = useForm({ mode: 'onBlur' })
 
     const onSubmit = (data: any) => {
         console.log(data)
@@ -63,23 +63,23 @@ export default function Create({ navigation }: any) {
         // TODO: create/update profile
     }
 
-    const getInput = getInputCurry(control)
+    // const getInput = getInputCurry(control)
 
-    async function chooseFile(setResult: any) {
-        try {
-            let result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.All,
-                allowsEditing: true,
-                aspect: [4, 3],
-                quality: 1,
-            })
-            if (!result.cancelled) {
-                setResult(result.uri)
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // async function chooseFile(setResult: any) {
+    //     try {
+    //         let result = await ImagePicker.launchImageLibraryAsync({
+    //             mediaTypes: ImagePicker.MediaTypeOptions.All,
+    //             allowsEditing: true,
+    //             aspect: [4, 3],
+    //             quality: 1,
+    //         })
+    //         if (!result.cancelled) {
+    //             setResult(result.uri)
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
     function getInputCurry(control: any) {
         return function ({ name, label = '', placeholder = '', type = EInputTypes.Input, multi = false }: TInputProps) {
@@ -87,7 +87,7 @@ export default function Create({ navigation }: any) {
                 [EInputTypes.Input]: (
                     <>
                         <Label>{label}</Label>
-                        <Controller
+                        {/* <Controller
                             control={control}
                             name={name}
                             render={({ field: { onChange, value, onBlur } }) => (
@@ -101,13 +101,13 @@ export default function Create({ navigation }: any) {
                                     onChangeText={value => onChange(value)}
                                 />
                             )}
-                        />
+                        /> */}
                     </>
                 ),
                 [EInputTypes.Country]: (
                     <>
                         <Label>Country of origin</Label>
-                        <CountryPicker InputFieldStyle={styles.country} selectedItem={setCountry} />
+                        {/* <CountryPicker InputFieldStyle={styles.country} selectedItem={setCountry} /> */}
                     </>
                 ),
                 [EInputTypes.Checkbox]: (
@@ -117,15 +117,15 @@ export default function Create({ navigation }: any) {
                             <SpaceBetween>
                                 <View>
                                     <Label>Designer</Label>
-                                    <Checkbox value={isDesigner} onValueChange={setDesigner} />
+                                    {/* <Checkbox value={isDesigner} onValueChange={setDesigner} /> */}
                                 </View>
                                 <View>
                                     <Label>Developer</Label>
-                                    <Checkbox value={isDev} onValueChange={setDev} />
+                                    {/* <Checkbox value={isDev} onValueChange={setDev} /> */}
                                 </View>
                                 <View>
                                     <Label>Founder</Label>
-                                    <Checkbox value={isFounder} onValueChange={setFounder} />
+                                    {/* <Checkbox value={isFounder} onValueChange={setFounder} /> */}
                                 </View>
                             </SpaceBetween>
                         </ContainerFlex>
@@ -143,7 +143,7 @@ export default function Create({ navigation }: any) {
                 <SpaceBetween>
                     <LinkButton title='X' onPress={() => navigation.navigate('Profile')} />
                     <SubTitle style={{ paddingTop: 8 }}>Edit Info</SubTitle>
-                    <Button title='Save' onPress={handleSubmit(onSubmit)} />
+                    {/* <Button title='Save' onPress={handleSubmit(onSubmit)} /> */}
                 </SpaceBetween>
             </ContainerFlex>
             <ScrollView>
@@ -153,21 +153,21 @@ export default function Create({ navigation }: any) {
                         style={styles.imageStyle}
                     />
                     <SpaceStart>
-                        <Button title='Profile Photo' onPress={() => chooseFile(setProfileImg)} />
+                        {/* <Button title='Profile Photo' onPress={() => chooseFile(setProfileImg)} /> */}
                     </SpaceStart>
                     <Image
                         source={coverImg ? { uri: coverImg } : require('../assets/images/grey.png')}
                         style={styles.cover}
                     />
                     <SpaceStart>
-                        <Button title='Cover Photo' onPress={() => chooseFile(setCoverImg)} />
+                        {/* <Button title='Cover Photo' onPress={() => chooseFile(setCoverImg)} /> */}
                     </SpaceStart>
                     {newUserInputs.map(input => (
                         <ContainerFlex mt='3px' mb='3px'>
-                            {getInput({ ...input })}
+                            {/* {getInput({ ...input })} */}
                         </ContainerFlex>
                     ))}
-                    <Button title='Submit' onPress={handleSubmit(onSubmit)} />
+                    {/* <Button title='Submit' onPress={handleSubmit(onSubmit)} /> */}
                 </ContainerFlex>
             </ScrollView>
         </Layout>
