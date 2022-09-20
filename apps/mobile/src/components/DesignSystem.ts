@@ -1,6 +1,6 @@
-import { Text, View as ThemedView } from './Themed'
 import styled from 'styled-components/native'
-import { View } from 'react-native'
+
+import { View as ThemedView } from './Themed'
 
 export const Layout = styled(ThemedView)`
     flex: 1;

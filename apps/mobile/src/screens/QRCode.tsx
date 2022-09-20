@@ -1,21 +1,19 @@
-import { View } from '../components/Themed'
-import { StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { StyleSheet } from 'react-native'
+
 import QRIcon from '../assets/images/qr.svg'
 import ScanIcon from '../assets/images/scan.svg'
-import { TabBar } from '../components/qrcode/TabBar'
+import { View } from '../components/Themed'
 import { CodeScan } from '../components/qrcode/Scan'
 import { Show } from '../components/qrcode/Show'
+import { TabBar } from '../components/qrcode/TabBar'
 
 const BottomTab = createBottomTabNavigator()
 
 export default function QRCode() {
     return (
         <View style={styles.screen}>
-            <BottomTab.Navigator
-                initialRouteName='QRcode'
-                tabBar={props => <TabBar {...props} />}
-                detachInactiveScreens={true}>
+            <BottomTab.Navigator initialRouteName='QRcode' tabBar={props => <TabBar {...props} />}>
                 <BottomTab.Screen
                     name='QRcode'
                     component={Show}

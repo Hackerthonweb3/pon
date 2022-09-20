@@ -47,5 +47,5 @@ export type TInputProps = {
     label?: string
     placeholder?: string
     type?: EInputTypes
-    multi?: Boolean
+    multi?: boolean
 }

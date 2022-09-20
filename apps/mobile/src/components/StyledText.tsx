@@ -1,5 +1,5 @@
-import { Text, TextProps } from './Themed'
 import { typeScale } from '../constants/TypeScale'
+import { Text, TextProps } from './Themed'
 
 export function MonoText(props: TextProps) {
     return <Text {...props} style={[props.style, { fontFamily: 'Inter' }]} />

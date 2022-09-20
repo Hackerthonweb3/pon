@@ -1,5 +1,5 @@
 import { Orbis } from '@orbisclub/orbis-sdk'
-import React, { createContext, ReactNode } from 'react'
+import { createContext, ReactNode } from 'react'
 
 const OrbisContext = createContext<Orbis | undefined>(undefined)
 
