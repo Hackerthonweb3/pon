@@ -26,3 +26,7 @@ export function SubTitle(props: TextProps) {
 export function Note(props: TextProps) {
     return <MonoText {...props} style={[props.style, { fontSize: typeScale.l }]} />
 }
+
+export function Label(props: TextProps) {
+    return <MonoText {...props} style={[props.style, { fontSize: typeScale.sm, fontWeight: '600', padding: 6 }]} />
+}

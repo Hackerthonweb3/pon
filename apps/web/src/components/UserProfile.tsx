@@ -172,6 +172,8 @@ export default function UserProfile({ isMyProfile, profile }: any) {
                                         })
                                     }
                                 />
+                                I will share what I have learned about Web3, digital nomad. All things for Web3. I will
+                                go to ETH Barcelona and ETH CC in Paris.
                                 <EditableField
                                     isEdit={isEdit}
                                     value={profileData?.twitter}

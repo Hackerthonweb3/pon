@@ -15,6 +15,7 @@ import ModalScreen from '../screens/ModalScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
 import Profile from '../screens/Profile'
 import Contacts from '../screens/Contacts'
+import Create from '../screens/Create'
 import QRCode from '../screens/QRCode'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types'
 import LinkingConfiguration from './LinkingConfiguration'
@@ -37,6 +38,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 function RootNavigator() {
     return (
         <Stack.Navigator>
+            <Stack.Screen name='Create' component={Create} />
             <Stack.Screen name='Root' component={BottomTabNavigator} options={{ headerShown: false }} />
             <Stack.Screen name='NotFound' component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Group screenOptions={{ presentation: 'modal' }}>

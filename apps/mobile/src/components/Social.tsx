@@ -31,13 +31,13 @@ export function Social(props: any) {
 
     return (
         <ContainerFlex {...sharedContanterStyle} m='0px' p='10px' br='12px'>
-            {socialsList.map((item: string) => {
+            {socialsList.map((item: string, index: any) => {
                 if (profile[item]) {
                     const imgSrc = socialImgs[item]
 
                     return (
                         <>
-                            <SpaceStart>
+                            <SpaceStart key={index}>
                                 <Image style={styles.avatar} source={imgSrc} />
                                 <Note>{profile[item]}</Note>
                             </SpaceStart>
