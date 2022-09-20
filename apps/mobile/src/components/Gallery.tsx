@@ -1,4 +1,5 @@
 import { Image, StyleSheet, ScrollView } from 'react-native'
+
 import { ContainerFlex, SpaceBetween } from './DesignSystem'
 import { SubTitle } from './StyledText'
 
@@ -25,7 +26,7 @@ export function Gallery(props: any) {
     return (
         <ContainerFlex {...sharedContanterStyle} mt='10px' mb='10px' p='10px' br='12px'>
             <SubTitle>{title}</SubTitle>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <SpaceBetween>
                     {mockGallery.map((item, index) => {
                         return (

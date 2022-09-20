@@ -1,9 +1,11 @@
-import { Text, View } from '../Themed'
-import { BarCodeScanner } from 'expo-barcode-scanner'
-import React, { useState, useEffect, useCallback } from 'react'
-import { Button, StyleSheet, Image, Modal } from 'react-native'
-import QRFrame from '../../assets/images/qr-frame.svg'
 import { useIsFocused as isFocused } from '@react-navigation/native'
+import { BarCodeScanner } from 'expo-barcode-scanner'
+import { useState, useEffect } from 'react'
+import { StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+import QRFrame from '../../assets/images/qr-frame.svg'
+import { Text, View } from '../Themed'
 
 export const CodeScan = () => {
     const [hasPermission, setHasPermission] = useState(false)
@@ -29,12 +31,20 @@ export const CodeScan = () => {
         alert(`Bar code with type ${type} and data ${data} has been scanned!`)
     }
 
-    // if (hasPermission === null) {
-    //     return <Text>Requesting for camera permission</Text>
-    // }
-    // if (hasPermission === false) {
-    //     return <Text>No access to camera</Text>
-    // }
+    if (hasPermission === null) {
+        return (
+            <SafeAreaView>
+                <Text>Requesting for camera permission</Text>
+            </SafeAreaView>
+        )
+    }
+    if (hasPermission === false) {
+        return (
+            <SafeAreaView>
+                <Text>No access to camera</Text>
+            </SafeAreaView>
+        )
+    }
 
     // to disable camera when not in use
     if (!isFocused()) return null

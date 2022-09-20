@@ -62,18 +62,10 @@
         "typescript": "4.8.3"
     },
     "eslintConfig": {
-        "extends": [
-            "universe/native",
-            "universe/shared/typescript-analysis",
-            "prettier"
-        ],
+        "extends": ["universe/native", "universe/shared/typescript-analysis", "prettier"],
         "overrides": [
             {
-                "files": [
-                    "*.ts",
-                    "*.tsx",
-                    "*.d.ts"
-                ],
+                "files": ["*.ts", "*.tsx", "*.d.ts"],
                 "parserOptions": {
                     "project": "./apps/mobile/tsconfig.json"
                 }

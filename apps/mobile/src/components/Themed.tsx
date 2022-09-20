@@ -25,7 +25,18 @@ type ThemeProps = {
 }
 
 export type TextProps = ThemeProps & DefaultText['props']
-export type ViewProps = ThemeProps & DefaultView['props']
+export type ViewProps = ThemeProps &
+    DefaultView['props'] & {
+        br?: string
+        m?: string
+        mb?: string
+        ml?: string
+        mr?: string
+        mt?: string
+        p?: string
+        pr?: string
+        pt?: string
+    }
 
 export function Text(props: TextProps & { category?: string }) {
     const { style, lightColor, darkColor, ...otherProps } = props
