@@ -37,8 +37,10 @@ importers:
       expo: 46.0.10
       expo-asset: 8.6.1
       expo-barcode-scanner: 11.4.0
+      expo-checkbox: 2.2.0
       expo-constants: 13.2.4
       expo-font: 10.2.0
+      expo-image-picker: 13.3.1
       expo-linking: 3.2.2
       expo-splash-screen: 0.16.2
       expo-status-bar: 1.4.0
@@ -47,12 +49,15 @@ importers:
       path-dirname: 1.0.2
       react: 18.0.0
       react-dom: 18.0.0
+      react-hook-form: 7.35.0
       react-native: 0.69.5
+      react-native-flags: 1.0.0
       react-native-safe-area-context: 4.3.1
       react-native-screens: 3.15.0
       react-native-svg: 12.3.0
       react-native-svg-transformer: 1.0.0
       react-test-renderer: 18.0.0
+      rn-country-dropdown-picker: 2.1.8
       styled-components: 5.3.5
       tsconfig: workspace:*
       typescript: 4.8.3
@@ -65,17 +70,22 @@ importers:
       expo: 46.0.10_@babel+core@7.19.0
       expo-asset: 8.6.1_expo@46.0.10
       expo-barcode-scanner: 11.4.0_expo@46.0.10
+      expo-checkbox: 2.2.0
       expo-constants: 13.2.4_expo@46.0.10
       expo-font: 10.2.0_expo@46.0.10
+      expo-image-picker: 13.3.1_expo@46.0.10
       expo-linking: 3.2.2_expo@46.0.10
       expo-splash-screen: 0.16.2_scx74wtxac2wxjbs6ttkh3cnc4
       expo-status-bar: 1.4.0
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
+      react-hook-form: 7.35.0_react@18.0.0
       react-native: 0.69.5_jf6qxsqi3bifbzlsoqps25t6eu
+      react-native-flags: 1.0.0
       react-native-safe-area-context: 4.3.1_ws5w265lwlgfx6ddpl3mdiooma
       react-native-screens: 3.15.0_ws5w265lwlgfx6ddpl3mdiooma
       react-native-svg: 12.3.0_ws5w265lwlgfx6ddpl3mdiooma
+      rn-country-dropdown-picker: 2.1.8_zpnidt7m3osuk7shl3s4oenomq
       styled-components: 5.3.5_twzut3cfsq3yt4edr3dzr6gksa
     devDependencies:
       '@babel/core': 7.19.0
@@ -11828,6 +11838,10 @@ packages:
       - supports-color
     dev: false
 
+  /expo-checkbox/2.2.0:
+    resolution: {integrity: sha512-vuLVnQS1UqzjKod/obfAC3XmozEDw1N338xKel1BqB/AclgpQVxCVhyPJRNsT3kScwrjNb4UXn3H0qJneTX/fg==}
+    dev: false
+
   /expo-constants/13.2.4_expo@46.0.10:
     resolution: {integrity: sha512-Zobau8EuTk2GgafwkfGnWM6CmSLB7X8qnQXVuXe0nd3v92hfQUmRWGhJwH88uxXj3LrfqctM6PaJ8taG1vxfBw==}
     peerDependencies:
@@ -11877,6 +11891,19 @@ packages:
       expo: '*'
     dependencies:
       expo: 46.0.10_@babel+core@7.19.0
+    dev: false
+
+  /expo-image-picker/13.3.1_expo@46.0.10:
+    resolution: {integrity: sha512-IY84uDu9uxetAup5yw0CIIujigl/lM3grwyfpeZFMKGmWHzmKamptjd/sG8K65xkb6tF9awmGMW0qglHQ9hakQ==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@expo/config-plugins': 5.0.1
+      expo: 46.0.10_@babel+core@7.19.0
+      expo-image-loader: 3.2.0_expo@46.0.10
+      uuid: 7.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /expo-keep-awake/10.2.0_expo@46.0.10:
@@ -17460,6 +17487,10 @@ packages:
       p-defer: 3.0.0
     dev: false
 
+  /react-native-flags/1.0.0:
+    resolution: {integrity: sha512-Lx0/2Rv4oN5M3YmgGZPnxsTOEud6pMGX3HWrvw8Yftp9Bl+ORxdG8xjF2Gmm68iKP8T7NnQoJ8iMirjj5+qrgQ==}
+    dev: false
+
   /react-native-gradle-plugin/0.0.7:
     resolution: {integrity: sha512-+4JpbIx42zGTONhBTIXSyfyHICHC29VTvhkkoUOJAh/XHPEixpuBduYgf6Y4y9wsN1ARlQhBBoptTvXvAFQf5g==}
 
@@ -18113,6 +18144,16 @@ packages:
     hasBin: true
     dependencies:
       bn.js: 5.2.1
+
+  /rn-country-dropdown-picker/2.1.8_zpnidt7m3osuk7shl3s4oenomq:
+    resolution: {integrity: sha512-TMZSCDP/c+qjAiZbwb8acGMeux6llJ2jAHDNR2lxnhOPxr9JUzBpp1V29arbXBInd0nVVwgjVoXPKNUJ6pl69g==}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+    dev: false
 
   /rpc-utils/0.6.2:
     resolution: {integrity: sha512-kzk1OflbBckfDBAo8JwsmtQSHzj+6hxRt5G+u8A8ZSmunBw1nhWvRkSq8j1+EvWBqBRLy1aiGLUW5644CZqQtA==}
@@ -20019,6 +20060,11 @@ packages:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
     deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     hasBin: true
+
+  /uuid/7.0.2:
+    resolution: {integrity: sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw==}
+    hasBin: true
+    dev: false
 
   /uuid/7.0.3:
     resolution: {integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==}
