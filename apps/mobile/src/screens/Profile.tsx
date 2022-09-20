@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { useState } from 'react'
+import { ScrollView } from 'react-native'
 
 import { Avatar } from '../components/StyledAvatar'
 import { Text } from '../components/Themed'
-import { Layout, SpaceEnd, ContainerFlex, SpaceStart } from '../components/DesignSystem'
+import { Layout, SpaceEnd, ContainerFlex } from '../components/DesignSystem'
 import { Title, SubTitle } from '../components/StyledText'
 import { LinkButton } from '../components/StyledButtons'
 import { Gallery } from '../components/Gallery'
 import { Social } from '../components/Social'
-import { RootTabScreenProps } from '../types'
-import { useSdk } from '@business-card/sdk'
 import { mockProfile } from '../constants/mock'
 
-export default function Profile({ navigation }: RootTabScreenProps<'Profile'>) {
-    const currentText = useSdk()
+export default function Profile() {
     const [isEdit, setIsEdit] = useState(false)
     const { name, description, pfp, twitter } = mockProfile
 
