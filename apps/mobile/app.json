@@ -1,6 +1,6 @@
 {
     "expo": {
-        "entryPoint": "./src/index.js",
+        "entryPoint": "./src/index.ts",
         "name": "@business-card/mobile",
         "slug": "business-card-mobile-app",
         "version": "0.0.0",

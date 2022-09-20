@@ -1,13 +1,11 @@
 import { StyleSheet } from 'react-native'
 
+import ArrowDown from '../assets/images/arrow-down.svg'
+import SurpriseIcon from '../assets/images/surprised.svg'
 import { Text, View } from '../components/Themed'
 import { RootTabScreenProps } from '../types'
-import { useSdk } from '@business-card/sdk'
-import SurpriseIcon from '../assets/images/surprised.svg'
-import ArrowDown from '../assets/images/arrow-down.svg'
 
 export default function Contacts({ navigation }: RootTabScreenProps<'Contacts'>) {
-    const currentText = useSdk()
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Contacts</Text>

@@ -1,4 +1,5 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
+
 import { Text } from '../Themed'
 
 export interface TabOptions {

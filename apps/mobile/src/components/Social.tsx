@@ -1,7 +1,8 @@
 import { Image, StyleSheet } from 'react-native'
+
 import { ContainerFlex, SpaceStart } from './DesignSystem'
-import { Note } from './StyledText'
 import { Divider } from './StyledDivider'
+import { Note } from './StyledText'
 
 // configs
 const socialImgs: any = {
@@ -26,25 +27,28 @@ const sharedContanterStyle = {
     darkColor: '#353844',
 }
 
+const SocialItem = (item: any, profile: any) => {
+    const hasProfileItem = profile[item]
+    if (!hasProfileItem) return null
+
+    return (
+        <>
+            <SpaceStart>
+                <Image style={styles.avatar} source={socialImgs[item]} />
+                <Note>{hasProfileItem}</Note>
+            </SpaceStart>
+            <Divider />
+        </>
+    )
+}
+
 export function Social(props: any) {
     const { profile } = props
 
     return (
         <ContainerFlex {...sharedContanterStyle} m='0px' p='10px' br='12px'>
             {socialsList.map((item: string, index: any) => {
-                if (profile[item]) {
-                    const imgSrc = socialImgs[item]
-
-                    return (
-                        <>
-                            <SpaceStart key={index}>
-                                <Image style={styles.avatar} source={imgSrc} />
-                                <Note>{profile[item]}</Note>
-                            </SpaceStart>
-                            <Divider />
-                        </>
-                    )
-                }
+                return <SocialItem item={item} profile={profile} key={index} />
             })}
         </ContainerFlex>
     )

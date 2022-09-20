@@ -1,22 +1,19 @@
-import { useState } from 'react'
-import { ScrollView, Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { ScrollView, Button } from 'react-native'
 
-import { Avatar } from '../components/StyledAvatar'
-import { Text } from '../components/Themed'
 import { Layout, SpaceEnd, ContainerFlex } from '../components/DesignSystem'
-import { Title, SubTitle } from '../components/StyledText'
 import { Gallery } from '../components/Gallery'
 import { Social } from '../components/Social'
+import { Avatar } from '../components/StyledAvatar'
+import { Title, SubTitle } from '../components/StyledText'
+import { Text } from '../components/Themed'
 import { mockProfile } from '../constants/mock'
 
 export default function Profile() {
-    const [isEdit, setIsEdit] = useState(false)
     const { name, description, pfp, twitter } = mockProfile
     const navigation = useNavigation()
 
     function handleEditLink() {
-        // TODO: fix navigation here
         navigation.navigate('Create')
     }
 
@@ -24,7 +21,7 @@ export default function Profile() {
         <ScrollView>
             <Layout lightColor='#eee' darkColor='rgba(255,255,255,0.1)'>
                 <ContainerFlex>
-                    <SpaceEnd>
+                    <SpaceEnd style={{ marginTop: 50 }}>
                         <Button onPress={handleEditLink} title='Edit' />
                     </SpaceEnd>
                     <Avatar pfpCid={pfp} />

@@ -1,9 +1,9 @@
-import React, { FC, ReactElement, useRef, useState } from 'react'
+import { FC, ReactElement, useRef, useState } from 'react'
 import { FlatList, StyleSheet, Text, TouchableOpacity, Modal, View } from 'react-native'
 
 interface Props {
     label: string
-    data: Array<{ label: string; value: string }>
+    data: { label: string; value: string }[]
     onSelect: (item: { label: string; value: string }) => void
 }
 
@@ -13,8 +13,9 @@ const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
     const [selected, setSelected] = useState(undefined as any)
     const [dropdownTop, setDropdownTop] = useState(0)
 
-    const toggleDropdown = (): void => {
-        visible ? setVisible(false) : openDropdown()
+    const toggleDropdown = () => {
+        if (visible) setVisible(false)
+        openDropdown()
     }
 
     const openDropdown = (): void => {

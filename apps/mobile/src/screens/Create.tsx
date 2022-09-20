@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
-import { StyleSheet, ScrollView, Image, Button, TextInput } from 'react-native'
-import { useForm, Controller } from 'react-hook-form'
-import CountryPicker from 'rn-country-dropdown-picker'
-import * as ImagePicker from 'expo-image-picker'
+import { useLinkTo } from '@react-navigation/native'
 import Checkbox from 'expo-checkbox'
+import * as ImagePicker from 'expo-image-picker'
+import { useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { StyleSheet, ScrollView, Image, Button, TextInput } from 'react-native'
+// import CountryPicker from 'rn-country-dropdown-picker'
 
 import { Layout, ContainerFlex, SpaceStart, SpaceBetween } from '../components/DesignSystem'
-import { SubTitle, Label } from '../components/StyledText'
 import { LinkButton } from '../components/StyledButtons'
-import { newUserInputs } from '../constants/configs'
+import { SubTitle, Label } from '../components/StyledText'
 import { View } from '../components/Themed'
+import { newUserInputs } from '../constants/configs'
 import { EInputTypes, TInputProps } from '../types'
 
 const styles = StyleSheet.create({
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
 })
 
 export default function Create({ navigation }: any) {
+    const linkTo = useLinkTo()
     const [profileImg, setProfileImg] = useState('')
     const [coverImg, setCoverImg] = useState('')
     const [country, setCountry] = useState({} as any)
@@ -53,7 +55,7 @@ export default function Create({ navigation }: any) {
     const {
         control,
         handleSubmit,
-        formState: { errors, isValid },
+        // formState: { errors, isValid },
     } = useForm({ mode: 'onBlur' })
 
     const onSubmit = (data: any) => {
@@ -67,7 +69,7 @@ export default function Create({ navigation }: any) {
 
     async function chooseFile(setResult: any) {
         try {
-            let result = await ImagePicker.launchImageLibraryAsync({
+            const result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.All,
                 allowsEditing: true,
                 aspect: [4, 3],
@@ -106,8 +108,9 @@ export default function Create({ navigation }: any) {
                 ),
                 [EInputTypes.Country]: (
                     <>
-                        <Label>Country of origin</Label>
-                        <CountryPicker InputFieldStyle={styles.country} selectedItem={setCountry} />
+                        <Label>Location</Label>
+                        {/* TODO: commented for now, it causes an error */}
+                        {/* <CountryPicker InputFieldStyle={styles.country} selectedItem={setCountry} /> */}
                     </>
                 ),
                 [EInputTypes.Checkbox]: (
@@ -141,7 +144,7 @@ export default function Create({ navigation }: any) {
         <Layout lightColor='#eee' darkColor='rgba(255,255,255,0.1)'>
             <ContainerFlex>
                 <SpaceBetween>
-                    <LinkButton title='X' onPress={() => navigation.navigate('Profile')} />
+                    <LinkButton title='X' onPress={() => linkTo('/profile')} />
                     <SubTitle style={{ paddingTop: 8 }}>Edit Info</SubTitle>
                     <Button title='Save' onPress={handleSubmit(onSubmit)} />
                 </SpaceBetween>
@@ -162,8 +165,8 @@ export default function Create({ navigation }: any) {
                     <SpaceStart>
                         <Button title='Cover Photo' onPress={() => chooseFile(setCoverImg)} />
                     </SpaceStart>
-                    {newUserInputs.map(input => (
-                        <ContainerFlex mt='3px' mb='3px'>
+                    {newUserInputs.map((input, index) => (
+                        <ContainerFlex mt='3px' mb='3px' key={index}>
                             {getInput({ ...input })}
                         </ContainerFlex>
                     ))}
