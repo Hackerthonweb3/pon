@@ -1,14 +1,17 @@
-import { Text, View } from './Themed'
+import { Text, View } from '../Themed'
 import { BarCodeScanner } from 'expo-barcode-scanner'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Button, StyleSheet, Image, Modal } from 'react-native'
-import QRFrame from '../assets/images/qr-frame.svg'
+import QRFrame from '../../assets/images/qr-frame.svg'
+import { useIsFocused as isFocused } from '@react-navigation/native'
 
 export const CodeScan = () => {
     const [hasPermission, setHasPermission] = useState(false)
     const [scanned, setScanned] = useState(false)
-    const [visible, setVisible] = React.useState(false)
+    const [visible, setVisible] = useState(false)
+
     const showDialog = () => setVisible(true)
+
     const hideDialog = () => setVisible(false)
 
     useEffect(() => {
@@ -26,12 +29,15 @@ export const CodeScan = () => {
         alert(`Bar code with type ${type} and data ${data} has been scanned!`)
     }
 
-    if (hasPermission === null) {
-        return <Text>Requesting for camera permission</Text>
-    }
-    if (hasPermission === false) {
-        return <Text>No access to camera</Text>
-    }
+    // if (hasPermission === null) {
+    //     return <Text>Requesting for camera permission</Text>
+    // }
+    // if (hasPermission === false) {
+    //     return <Text>No access to camera</Text>
+    // }
+
+    // to disable camera when not in use
+    if (!isFocused()) return null
 
     return (
         <BarCodeScanner
