@@ -1,35 +1,41 @@
+import { View } from '../components/Themed'
 import { StyleSheet } from 'react-native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import QRIcon from '../assets/images/qr.svg'
+import ScanIcon from '../assets/images/scan.svg'
+import { TabBar } from '../components/qrcode/TabBar'
+import { CodeScan } from '../components/qrcode/Scan'
+import { Show } from '../components/qrcode/Show'
 
-import EditScreenInfo from '../components/EditScreenInfo'
-import { Text, View } from '../components/Themed'
-import { RootTabScreenProps } from '../types'
-import { useSdk } from '@business-card/sdk'
+const BottomTab = createBottomTabNavigator()
 
-export default function QRCode({ navigation }: RootTabScreenProps<'QRCode'>) {
-    const currentText = useSdk()
+export default function QRCode() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>QRCode</Text>
-            <Text>{currentText}</Text>
-            <View style={styles.separator} lightColor='#eee' darkColor='rgba(255,255,255,0.1)' />
-            <EditScreenInfo path='/screens/QRCode.tsx' />
+        <View style={styles.screen}>
+            <BottomTab.Navigator
+                initialRouteName='QRcode'
+                tabBar={props => <TabBar {...props} />}
+                detachInactiveScreens={true}>
+                <BottomTab.Screen
+                    name='QRcode'
+                    component={Show}
+                    options={{ tabBarIcon: ({ color }) => <QRIcon color={color} width={38} height={38} /> }}
+                />
+                <BottomTab.Screen
+                    name='Scan'
+                    component={CodeScan}
+                    options={{
+                        tabBarIcon: ({ color }) => <ScanIcon color={color} width={38} height={38} />,
+                    }}
+                />
+            </BottomTab.Navigator>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
+    screen: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
+        backgroundColor: 'transparent',
     },
 })

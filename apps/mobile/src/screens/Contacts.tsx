@@ -12,12 +12,12 @@ export default function Contacts({ navigation }: RootTabScreenProps<'Contacts'>)
         <View style={styles.container}>
             <Text style={styles.title}>Contacts</Text>
             <View style={styles.content}>
-                <SurpriseIcon transform={{ scale: 1.15, x: -4 }} />
+                <SurpriseIcon width='110' height='110' />
                 <Text style={styles.heading}>You have no one yet</Text>
                 <Text style={styles.text}>
                     Have your friends scan your QR code or share your links to make a list of contacts
                 </Text>
-                <ArrowDown height={115} transform={{ scale: 1.15, y: -2 }} />
+                <ArrowDown height='105' width='22' />
             </View>
         </View>
     )
@@ -47,12 +47,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: '600',
         marginBottom: 10,
-        marginTop: 18,
     },
     text: {
         fontSize: 17,
         fontWeight: '400',
-        marginBottom: 10,
+        marginBottom: 20,
         textAlign: 'center',
         color: 'rgba(255, 255, 255, 0.7)',
         paddingLeft: 10,
