@@ -1,6 +1,10 @@
 const tintColorLight = '#2f95dc'
 const tintColorDark = '#fff'
 
+export const mainColors = {
+    links: '#00A9FF',
+}
+
 export default {
     light: {
         text: '#000',

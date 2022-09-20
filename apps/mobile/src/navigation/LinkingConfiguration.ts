@@ -12,6 +12,11 @@ const linking: LinkingOptions<RootStackParamList> = {
     prefixes: [Linking.createURL('/')],
     config: {
         screens: {
+            Create: {
+                screens: {
+                    Create: 'create',
+                },
+            },
             Root: {
                 screens: {
                     Contacts: {
