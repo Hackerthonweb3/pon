@@ -1,6 +1,5 @@
 {
     "expo": {
-        "entryPoint": "./src/index.ts",
         "name": "@business-card/mobile",
         "slug": "business-card-mobile-app",
         "version": "0.0.0",
@@ -27,17 +26,17 @@
         "assetBundlePatterns": ["**/*"],
         "ios": {
             "supportsTablet": true,
-            "userInterfaceStyle": "automatic",
             "infoPlist": {
                 "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."
-            }
+            },
+            "bundleIdentifier": "com.anonymous.businesscardmobileapp"
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./src/assets/images/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
             },
-            "userInterfaceStyle": "automatic"
+            "package": "com.anonymous.businesscardmobileapp"
         },
         "web": {
             "favicon": "./src/assets/images/favicon.png"
