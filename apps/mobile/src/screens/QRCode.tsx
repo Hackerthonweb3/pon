@@ -13,7 +13,9 @@ const BottomTab = createBottomTabNavigator()
 export default function QRCode() {
     return (
         <View style={styles.screen}>
-            <BottomTab.Navigator initialRouteName='QRcode' tabBar={props => <TabBar {...props} />}>
+			<BottomTab.Navigator
+				initialRouteName='QRcode'
+				tabBar={props => <TabBar {...props} />}>
                 <BottomTab.Screen
                     name='QR Code'
                     component={Show}
