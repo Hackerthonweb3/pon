@@ -166,7 +166,7 @@ async function encryptStringFromAPI(accessControlConditions, body) {
         }),
     }
     try {
-        let _data = await fetch('https://orbis-api-lit.herokuapp.com/lit-encrypt', requestOptions)
+        let _data = await fetch('https://seashell-app-y7cpi.ondigitalocean.app/lit-encrypt', requestOptions)
         console.log('data retrieved from API: ', _data)
         let _result = await _data.json()
         console.log('_result retrieved from API: ', _result)
@@ -203,7 +203,7 @@ export async function decryptStringFromAPI(encryptedContent) {
         }),
     }
     try {
-        let _data = await fetch('https://orbis-api-lit.herokuapp.com/lit-decrypt', requestOptions)
+        let _data = await fetch('https://seashell-app-y7cpi.ondigitalocean.app/lit-decrypt', requestOptions)
         let _result = await _data.json()
         return _result
     } catch (e) {

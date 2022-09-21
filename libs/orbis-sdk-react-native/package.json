@@ -1,7 +1,7 @@
 {
     "name": "@business-card/orbis-sdk-react-native",
     "private": "true",
-    "version": "0.1.48",
+    "version": "0.1.49",
     "type": "module",
     "main": "index.js",
     "dependencies": {
