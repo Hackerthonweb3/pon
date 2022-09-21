@@ -14,7 +14,6 @@ export const CodeScan = () => {
     const isFocused = useIsFocused()
 
     const showDialog = () => setVisible(true)
-
     const hideDialog = () => setVisible(false)
 
     useEffect(() => {
@@ -29,7 +28,6 @@ export const CodeScan = () => {
     const handleBarCodeScanned = ({ type, data }: { type: any; data: any }) => {
         setScanned(true)
         showDialog()
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`)
     }
 
     if (hasPermission === null) {
