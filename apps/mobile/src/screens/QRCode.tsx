@@ -15,15 +15,19 @@ export default function QRCode() {
         <View style={styles.screen}>
             <BottomTab.Navigator initialRouteName='QRcode' tabBar={props => <TabBar {...props} />}>
                 <BottomTab.Screen
-                    name='QRcode'
+                    name='QR Code'
                     component={Show}
-                    options={{ tabBarIcon: ({ color }) => <QRIcon color={color} width={38} height={38} /> }}
+					options={{
+						tabBarIcon: ({ color }) =>
+							<QRIcon color={color} width={38} height={38} />
+					}}
                 />
                 <BottomTab.Screen
                     name='Scan'
                     component={CodeScan}
                     options={{
-                        tabBarIcon: ({ color }) => <ScanIcon color={color} width={38} height={38} />,
+						tabBarIcon: ({ color }) =>
+							<ScanIcon color={color} width={38} height={38} />
                     }}
                 />
             </BottomTab.Navigator>
