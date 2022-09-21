@@ -2,11 +2,12 @@
     "name": "@business-card/mobile",
     "version": "0.0.0",
     "scripts": {
+        "android": "expo run:android",
         "dev": "expo start",
-        "android": "expo start --android",
-        "ios": "expo start --ios",
-        "web": "expo start --web",
-        "eject": "expo eject",
+        "expo:install": "expo install",
+        "expo:prebuild": "expo prebuild",
+        "ios": "expo run:ios",
+        "start": "expo start --dev-client",
         "test": "jest --watchAll"
     },
     "jest": {
