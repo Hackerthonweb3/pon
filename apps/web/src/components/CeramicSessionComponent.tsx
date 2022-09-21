@@ -44,7 +44,7 @@ const CeramicSessionComponent: NextPage = () => {
         return true
     }
 
-    return <div></div>
+    return <div>Pending</div>
 }
 
 export default CeramicSessionComponent
