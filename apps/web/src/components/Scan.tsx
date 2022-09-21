@@ -25,7 +25,7 @@ import QrSvg from '../media/qr.svg'
 
 import dynamic from 'next/dynamic'
 
-const QrReader: any = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
+// const QrReader: any = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
 
 export default function Scan({ profile }: any) {
     const { name, did } = profile
@@ -87,13 +87,13 @@ export default function Scan({ profile }: any) {
     function renderScan() {
         return (
             <>
-                <QrReader
+                {/* <QrReader
                     delay={300}
                     facingMode={'environment'}
                     onError={(error: any) => console.log(error)}
                     onScan={handleScan}
                     style={{ width: '100%' }}
-                />
+                /> */}
                 <FormControl id='did'>
                     <FormLabel>DiD for new contact</FormLabel>
                     <InputGroup borderColor='#E0E1E7'>
@@ -130,7 +130,9 @@ export default function Scan({ profile }: any) {
                         <Text>QRcode</Text>
                     </span>
                 </Button>
-                <div style={{ borderRight: '2.5px solid', color: '#191e2b', width: 'px', margin: '10px 0px' }}></div>
+                <div style={{ borderRight: '2.5px solid', color: '#191e2b', width: 'px', margin: '10px 0px' }}>
+                    Pending
+                </div>
                 <Button
                     onClick={() => handleChangeMode('scan')}
                     h={92}

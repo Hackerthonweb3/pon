@@ -17,9 +17,9 @@ function App({ Component, pageProps }: AppProps) {
             onReset={() => {}}>
             <ChakraProvider theme={theme}>
                 <WagmiConfig client={wagmiClient}>
-                    {/* <Layout> */}
-                    <Component {...pageProps} />
-                    {/* </Layout> */}
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
                 </WagmiConfig>
             </ChakraProvider>
         </ErrorBoundary>
