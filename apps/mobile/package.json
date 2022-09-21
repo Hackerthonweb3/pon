@@ -10,6 +10,7 @@
         "start": "expo start --dev-client"
     },
     "dependencies": {
+        "@business-card/orbis-sdk-react-native": "workspace:0.1.49",
         "@expo/vector-icons": "13.0.0",
         "@react-navigation/bottom-tabs": "6.4.0",
         "@react-navigation/native": "6.0.13",
@@ -21,8 +22,10 @@
         "expo-font": "10.2.0",
         "expo-image-picker": "13.3.1",
         "expo-linking": "3.2.2",
+        "expo-random": "12.3.0",
         "expo-splash-screen": "0.16.2",
         "expo-status-bar": "1.4.0",
+        "node-libs-expo": "0.0.3",
         "react": "18.0.0",
         "react-dom": "18.0.0",
         "react-hook-form": "7.36.0",
