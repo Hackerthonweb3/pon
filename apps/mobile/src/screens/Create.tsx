@@ -152,14 +152,14 @@ export default function Create({ navigation }: any) {
             <ScrollView>
                 <ContainerFlex>
                     <Image
-                        source={profileImg ? { uri: profileImg } : require('../assets/images/grey.png')}
+                        source={profileImg ? { uri: profileImg } : require('../assets/images/graphics/grey.png')}
                         style={styles.imageStyle}
                     />
                     <SpaceStart>
                         <Button title='Profile Photo' onPress={() => chooseFile(setProfileImg)} />
                     </SpaceStart>
                     <Image
-                        source={coverImg ? { uri: coverImg } : require('../assets/images/grey.png')}
+                        source={coverImg ? { uri: coverImg } : require('../assets/images/graphics/grey.png')}
                         style={styles.cover}
                     />
                     <SpaceStart>

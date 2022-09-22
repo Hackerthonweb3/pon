@@ -6,10 +6,10 @@ import { Note } from './StyledText'
 
 // configs
 const socialImgs: any = {
-    twitter: require('../assets/images/sns-twitter.png'),
-    telegram: require('../assets/images/telegram.png'),
-    discord: require('../assets/images/sns-discord.png'),
-    email: require('../assets/images/email.png'),
+    twitter: require('../assets/images/socials/sns-twitter.png'),
+    telegram: require('../assets/images/socials/telegram.png'),
+    discord: require('../assets/images/socials/sns-discord.png'),
+    email: require('../assets/images/socials/email.png'),
 }
 const socialsList = ['twitter', 'telegram', 'email', 'discord']
 

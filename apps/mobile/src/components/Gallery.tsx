@@ -4,9 +4,9 @@ import { ContainerFlex, SpaceBetween } from './DesignSystem'
 import { SubTitle } from './StyledText'
 
 const mockGallery = [
-    { pfpSrc: '../assets/images/ape.png' },
-    { pfpSrc: '../assets/images/ape.png' },
-    { pfpSrc: '../assets/images/ape.png' },
+    { pfpSrc: '../assets/images/mocks/ape.png' },
+    { pfpSrc: '../assets/images/mocks/ape.png' },
+    { pfpSrc: '../assets/images/mocks/ape.png' },
 ]
 
 const styles = StyleSheet.create({
@@ -31,7 +31,7 @@ export function Gallery(props: any) {
                     {mockGallery.map((item, index) => {
                         return (
                             <ContainerFlex key={index} m='0px' pr='4px' {...sharedContanterStyle}>
-                                <Image style={styles.avatar} source={require('../assets/images/ape.png')} />
+                                <Image style={styles.avatar} source={require('../assets/images/mocks/ape.png')} />
                             </ContainerFlex>
                         )
                     })}

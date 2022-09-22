@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { StyleSheet } from 'react-native'
 
-import QRIcon from '../assets/images/qr.svg'
-import ScanIcon from '../assets/images/scan.svg'
+import QRIcon from '../assets/images/svg-icons/qr.svg'
+import ScanIcon from '../assets/images/svg-icons/scan.svg'
 import { View } from '../components/Themed'
 import { CodeScan } from '../components/qrcode/Scan'
 import { Show } from '../components/qrcode/Show'

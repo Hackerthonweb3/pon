@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import QRFrame from '../../assets/images/qr-frame.svg'
+import QRFrame from '../../assets/images/graphics/qr-frame.svg'
 import { Text, View } from '../Themed'
 
 export const CodeScan = () => {
