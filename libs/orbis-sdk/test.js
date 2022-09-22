@@ -1,4 +1,4 @@
-import { Orbis } from './index.js';
+import { Orbis } from './index.js'
 
 /** Test Orbis class creation */
-let orbis = new Orbis();
+let orbis = new Orbis()
