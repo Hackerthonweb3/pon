@@ -68,12 +68,11 @@
     },
     "eslintConfig": {
         "extends": ["universe/native", "universe/shared/typescript-analysis", "prettier"],
+        "rules": { "prettier/prettier": 0 },
         "overrides": [
             {
                 "files": ["*.ts", "*.tsx", "*.d.ts"],
-                "parserOptions": {
-                    "project": "./apps/mobile/tsconfig.json"
-                }
+                "parserOptions": { "project": "./apps/mobile/tsconfig.json" }
             }
         ]
     },
