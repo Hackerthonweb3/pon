@@ -20,37 +20,7 @@ jobs:
               with:
                   access_token: ${{ github.token }}
 
-    lint-check:
-        runs-on: ubuntu-22.04
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-
-            - name: Install node
-              uses: actions/setup-node@v3
-              with:
-                  node-version: 16
-
-            - name: Install pnpm
-              uses: pnpm/action-setup@v2
-              with:
-                  version: 7
-                  run_install: false
-
-            - name: Setup pnpm cache
-              uses: actions/cache@v3
-              with:
-                  path: /home/runner/.pnpm-store/v3
-                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./pnpm-lock.yaml') }}
-                  restore-keys: ${{ runner.os }}-pnpm-store-
-
-            - name: Install dependencies
-              run: pnpm install --frozen-lockfile
-
-            - name: Trunk check
-              uses: trunk-io/trunk-action@v1
-
-    build:
+    lint-and-build:
         runs-on: ubuntu-22.04
         timeout-minutes: 5
         env:
@@ -81,6 +51,9 @@ jobs:
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
+
+            - name: Trunk check
+              uses: trunk-io/trunk-action@v1
 
             - name: Build
               run: pnpm build:web
