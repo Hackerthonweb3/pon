@@ -19,7 +19,7 @@
         "@supabase/supabase-js": "1.35.7",
         "buffer": "6.0.3",
         "caip": "1.1.0",
-        "did-session": "0.1.1",
+        "did-session": "0.1.4",
         "dids": "3.3.1",
         "ethereum-blockies-base64": "1.0.2",
         "key-did-provider-ed25519": "2.0.1",
