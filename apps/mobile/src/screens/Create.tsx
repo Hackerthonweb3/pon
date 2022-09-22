@@ -47,7 +47,7 @@ export default function Create({ navigation }: any) {
     const linkTo = useLinkTo()
     const [profileImg, setProfileImg] = useState('')
     const [coverImg, setCoverImg] = useState('')
-    const [country, setCountry] = useState({} as any)
+    const [country /*, setCountry*/] = useState({} as any)
     const [isDesigner, setDesigner] = useState(false)
     const [isDev, setDev] = useState(false)
     const [isFounder, setFounder] = useState(false)
