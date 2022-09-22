@@ -7,6 +7,7 @@ const { NativeModules } = require('react-native')
 const base64Decode = require('fast-base64-decode')
 var sha256 = require('js-sha256')
 import 'react-native-webcrypto'
+import 'fastestsmallesttextencoderdecoder'
 
 if (typeof BigInt === 'undefined') global.BigInt = require('big-integer')
 
