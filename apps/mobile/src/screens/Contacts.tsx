@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 
-import ArrowDown from '../assets/images/arrow-down.svg'
-import SurpriseIcon from '../assets/images/surprised.svg'
+import ArrowDown from '../assets/images/graphics/arrow-down.svg'
+import SurpriseIcon from '../assets/images/graphics/surprised.svg'
 import { Text, View } from '../components/Themed'
 import { RootTabScreenProps } from '../types'
 

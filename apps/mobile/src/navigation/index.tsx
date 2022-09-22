@@ -8,7 +8,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ColorSchemeName, Pressable } from 'react-native'
 
-import QRIcon from '../assets/images/qr.svg'
+import QRIcon from '../assets/images/svg-icons/qr.svg'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import Contacts from '../screens/Contacts'

@@ -1,0 +1,40 @@
+{
+    "name": "@orbisclub/orbis-sdk",
+    "version": "0.3.46",
+    "description": "Official package to implement quickly an Orbis powered decentralized social layer within your application.",
+    "author": "Baptiste Grève",
+    "license": "ISC",
+    "type": "module",
+    "main": "index.js",
+    "babel": { "presets": ["@babel/preset-react"] },
+    "eslintConfig": { "extends": "react-app" },
+    "stylelint": { "extends": ["stylelint-config-standard", "stylelint-config-prettier"] },
+    "dependencies": {
+        "@ceramicnetwork/blockchain-utils-linking": "2.0.12",
+        "@ceramicnetwork/http-client": "2.4.0",
+        "@ceramicnetwork/stream-tile": "2.4.4",
+        "@ethersproject/bytes": "5.7.0",
+        "@ethersproject/providers": "5.7.1",
+        "@ethersproject/strings": "5.7.0",
+        "@supabase/supabase-js": "1.35.7",
+        "buffer": "6.0.3",
+        "caip": "1.1.0",
+        "did-session": "0.1.4",
+        "dids": "3.3.1",
+        "ethereum-blockies-base64": "1.0.2",
+        "key-did-provider-ed25519": "2.0.1",
+        "key-did-resolver": "2.1.2",
+        "lit-js-sdk": "1.1.226"
+    },
+    "devDependencies": {
+        "@babel/core": "7.19.1",
+        "@babel/plugin-syntax-flow": "7.18.6",
+        "@babel/plugin-transform-react-jsx": "7.19.0",
+        "eslint": "8.23.1",
+        "eslint-config-react-app": "7.0.1",
+        "stylelint": "14.12.1",
+        "stylelint-config-prettier": "9.0.3",
+        "stylelint-config-standard": "28.0.0",
+        "typescript": "4.8.3"
+    }
+}

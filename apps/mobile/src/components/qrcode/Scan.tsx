@@ -4,17 +4,17 @@ import { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import QRFrame from '../../assets/images/qr-frame.svg'
+import QRFrame from '../../assets/images/graphics/qr-frame.svg'
 import { Text, View } from '../Themed'
 
 export const CodeScan = () => {
     const [hasPermission, setHasPermission] = useState(false)
     const [scanned, setScanned] = useState(false)
-    const [visible, setVisible] = useState(false)
+    const [, setVisible] = useState(false)
 
     const showDialog = () => setVisible(true)
 
-    const hideDialog = () => setVisible(false)
+    // const hideDialog = () => setVisible(false)
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {

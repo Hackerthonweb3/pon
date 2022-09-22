@@ -1,13 +1,14 @@
-global.Buffer = global.Buffer || require('buffer').Buffer
+/* global __DEV__ */
 import 'core-js/features/array/find'
 import 'core-js/features/array/includes'
 import 'core-js/features/number/is-nan'
 import 'react-native-url-polyfill/auto'
-import * as encoding from 'text-encoding'
+import 'react-native-webcrypto'
+import 'fastestsmallesttextencoderdecoder'
+global.Buffer = global.Buffer || require('buffer').Buffer
 const { NativeModules } = require('react-native')
 const base64Decode = require('fast-base64-decode')
 var sha256 = require('js-sha256')
-import 'react-native-webcrypto'
 
 if (typeof BigInt === 'undefined') global.BigInt = require('big-integer')
 

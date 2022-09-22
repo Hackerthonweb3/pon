@@ -1,4 +1,4 @@
-name: Build Pipeline
+name: CI pipeline
 
 on:
     push:
@@ -15,7 +15,7 @@ jobs:
     avoid-redundancy:
         runs-on: ubuntu-22.04
         steps:
-            - name: Cancel Previous Runs
+            - name: Cancel previous runs
               uses: styfle/cancel-workflow-action@0.10.0
               with:
                   access_token: ${{ github.token }}
@@ -26,33 +26,26 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Install Node
+            - name: Install node
               uses: actions/setup-node@v3
               with:
                   node-version: 16
 
             - name: Install pnpm
               uses: pnpm/action-setup@v2
-              id: pnpm-install
               with:
                   version: 7
                   run_install: false
 
-            - name: Get pnpm store directory
-              id: pnpm-cache
-              run: |
-                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
-
             - name: Setup pnpm cache
               uses: actions/cache@v3
               with:
-                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-                  restore-keys: |
-                      ${{ runner.os }}-pnpm-store-
+                  path: /home/runner/.pnpm-store/v3
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./pnpm-lock.yaml') }}
+                  restore-keys: ${{ runner.os }}-pnpm-store-
 
             - name: Install dependencies
-              run: pnpm install
+              run: pnpm install --frozen-lockfile
 
             - name: Trunk check
               uses: trunk-io/trunk-action@v1
@@ -67,7 +60,7 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Install Node
+            - name: Install node
               uses: actions/setup-node@v3
               with:
                   node-version: 16
@@ -79,21 +72,15 @@ jobs:
                   version: 7
                   run_install: false
 
-            - name: Get pnpm store directory
-              id: pnpm-cache
-              run: |
-                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
-
             - name: Setup pnpm cache
               uses: actions/cache@v3
               with:
-                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-                  restore-keys: |
-                      ${{ runner.os }}-pnpm-store-
+                  path: /home/runner/.pnpm-store/v3
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./pnpm-lock.yaml') }}
+                  restore-keys: ${{ runner.os }}-pnpm-store-
 
             - name: Install dependencies
-              run: pnpm install
+              run: pnpm install --frozen-lockfile
 
             - name: Build
               run: pnpm build:web

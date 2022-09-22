@@ -4,13 +4,13 @@
         "slug": "business-card-mobile-app",
         "version": "0.0.0",
         "orientation": "portrait",
-        "icon": "./src/assets/images/icon.png",
+        "icon": "./src/assets/images/platform-icons/icon.png",
         "scheme": "pon",
         "userInterfaceStyle": "automatic",
         "splash": {
-            "image": "./src/assets/images/splash.png",
+            "image": "./src/assets/images/splash/splash-temp.png",
             "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#2B2E38"
         },
         "plugins": [
             [
@@ -33,13 +33,13 @@
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./src/assets/images/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
+                "foregroundImage": "./src/assets/images/platform-icons/adaptive-icon.png",
+                "backgroundColor": "#2B2E38"
             },
             "package": "com.anonymous.businesscardmobileapp"
         },
         "web": {
-            "favicon": "./src/assets/images/favicon.png"
+            "favicon": "./src/assets/images/platform-icons/favicon.png"
         }
     }
 }

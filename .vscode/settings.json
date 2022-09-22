@@ -70,9 +70,5 @@
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
         "editor.detectIndentation": false
-    },
-    "editor.autoIndent": "none",
-    "workbench.tree.renderIndentGuides": "always",
-    "editor.insertSpaces": false,
-    "editor.detectIndentation": false
+    }
 }
