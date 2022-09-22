@@ -4,6 +4,8 @@
     "version": "0.1.49",
     "type": "module",
     "main": "index.js",
+    "babel": { "presets": ["@babel/preset-react"] },
+    "eslintConfig": { "extends": "react-app" },
     "dependencies": {
         "@ceramicnetwork/blockchain-utils-linking": "2.0.12",
         "@ceramicnetwork/http-client": "2.4.0",
