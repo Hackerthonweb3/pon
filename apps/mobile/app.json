@@ -10,7 +10,7 @@
         "splash": {
             "image": "./src/assets/images/splash/splash-temp.png",
             "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#2B2E38"
         },
         "plugins": [
             [
@@ -34,7 +34,7 @@
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./src/assets/images/platform-icons/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
+                "backgroundColor": "#2B2E38"
             },
             "package": "com.anonymous.businesscardmobileapp"
         },
