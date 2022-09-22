@@ -22,7 +22,7 @@
         "@trunkio/launcher": "1.2.1",
         "eslint-config-custom": "workspace:*",
         "prettier-config": "workspace:*",
-        "turbo": "1.4.6"
+        "turbo": "1.5.1"
     },
     "prettier": "prettier-config",
     "eslintConfig": {
