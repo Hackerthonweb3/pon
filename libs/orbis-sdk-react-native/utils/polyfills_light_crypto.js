@@ -3,7 +3,6 @@ import 'core-js/features/array/find'
 import 'core-js/features/array/includes'
 import 'core-js/features/number/is-nan'
 import 'react-native-url-polyfill/auto'
-import * as encoding from 'text-encoding'
 const { NativeModules } = require('react-native')
 const base64Decode = require('fast-base64-decode')
 var sha256 = require('js-sha256')
