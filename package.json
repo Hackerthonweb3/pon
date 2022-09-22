@@ -24,6 +24,7 @@
         "prettier-config": "workspace:*",
         "turbo": "1.5.1"
     },
+    "packageManager": "pnpm@7.12.1",
     "prettier": "prettier-config",
     "eslintConfig": {
         "root": true,
