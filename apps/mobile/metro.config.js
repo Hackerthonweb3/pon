@@ -1,5 +1,6 @@
 /*eslint-env node*/
 const { getDefaultConfig } = require('expo/metro-config')
+const exclusionList = require('metro-config/src/defaults/exclusionList')
 const path = require('path')
 
 // Find the workspace root, this can be replaced with `find-yarn-workspace-root`
@@ -27,6 +28,7 @@ config.resolver = {
     extraNodeModules: require('node-libs-expo'),
     assetExts: resolver.assetExts.filter(ext => ext !== 'svg'),
     sourceExts: [...resolver.sourceExts, 'svg', 'cjs', 'mjs'],
+    blacklistRE: exclusionList([/.vercel\/.*/]),
 }
 
 module.exports = config
