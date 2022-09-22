@@ -6,15 +6,7 @@
     "license": "ISC",
     "type": "module",
     "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "babel": {
-        "presets": ["@babel/preset-react"]
-    },
-    "eslintConfig": {
-        "extends": "react-app"
-    },
+    "stylelint": { "extends": ["stylelint-config-standard", "stylelint-config-prettier"] },
     "dependencies": {
         "@ceramicnetwork/blockchain-utils-linking": "2.0.12",
         "@ceramicnetwork/http-client": "2.4.0",
@@ -29,5 +21,10 @@
         "key-did-provider-ed25519": "2.0.1",
         "key-did-resolver": "2.1.2",
         "lit-js-sdk": "1.1.226"
+    },
+    "devDependencies": {
+        "stylelint": "14.12.1",
+        "stylelint-config-prettier": "9.0.3",
+        "stylelint-config-standard": "28.0.0",
     }
 }

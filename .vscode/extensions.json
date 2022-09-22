@@ -4,6 +4,7 @@
         "esbenp.prettier-vscode",
         "nomicfoundation.hardhat-solidity",
         "redhat.vscode-yaml",
-        "bycedric.vscode-expo"
+        "bycedric.vscode-expo",
+        "styled-components.vscode-styled-components"
     ]
 }
