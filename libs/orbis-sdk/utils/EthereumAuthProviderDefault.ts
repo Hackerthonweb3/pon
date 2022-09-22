@@ -1,4 +1,5 @@
-import { EthereumAuthProvider, SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
+import { EthereumAuthProvider /*, SolanaAuthProvider*/ } from '@ceramicnetwork/blockchain-utils-linking'
+import { AccountId } from 'caip'
 
 /** Replacing default EthereumAuthProvider class to force connection to an existing did if any. */
 let CHAIN_ID = 1

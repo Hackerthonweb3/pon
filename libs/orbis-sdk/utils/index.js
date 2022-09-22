@@ -1,25 +1,25 @@
 import { Buffer } from 'buffer'
 
 /** To generate dids from a Seed */
-import { DID } from 'dids'
-import { Ed25519Provider } from 'key-did-provider-ed25519'
-import { getResolver } from 'key-did-resolver'
+// import { DID } from 'dids'
+// import { Ed25519Provider } from 'key-did-provider-ed25519'
+// import { getResolver } from 'key-did-resolver'
 
 /**
  * Force index a stream. This shouldn't be necessary because our indexer picks up all new streams automatically but at
  * least we are 100% sure.
  */
 export async function forceIndex(stream_id) {
-    const requestOptions = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        },
-    }
-    let _result
+    // const requestOptions = {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': '*',
+    //     },
+    // }
+    // let _result
     try {
-        _result = await fetch('https://api.orbis.club/index-stream/mainnet/' + stream_id, requestOptions)
+        // _result = await fetch('https://api.orbis.club/index-stream/mainnet/' + stream_id, requestOptions)
         console.log('Indexed ' + stream_id + ' with success.')
         return
     } catch (e) {
@@ -58,7 +58,7 @@ export async function forceIndexDid(did) {
 
 /** Returns a JSON object with the address and network based on the did */
 export function getAddressFromDid(did) {
-    if (did && did.substring(0, 7) == 'did:pkh') {
+    if (did && did.substring(0, 7) === 'did:pkh') {
         /** Explode address to retrieve did */
         let addressParts = did.split(':')
         if (addressParts.length >= 4) {

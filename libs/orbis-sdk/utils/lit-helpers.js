@@ -1,15 +1,14 @@
 import LitJsSdk from 'lit-js-sdk'
-const { signAndSaveAuthMessage } = LitJsSdk
 import { toUtf8Bytes } from '@ethersproject/strings'
 import { hexlify } from '@ethersproject/bytes'
 import { blobToBase64, decodeb64, buf2hex, getAddressFromDid, sleep } from './index.js'
-import { Web3Provider, JsonRpcSigner, JsonRpcProvider } from '@ethersproject/providers'
+import { Web3Provider } from '@ethersproject/providers'
+// const { signAndSaveAuthMessage } = LitJsSdk
 
 /** Initialize lit */
 let lit
 let litReady = false
 export async function connectLitClient() {
-    let ready
     lit = new LitJsSdk.LitNodeClient({ alertWhenUnauthorized: false, debug: false })
     await lit.connect()
     console.log('Lit is ready now!')
@@ -23,14 +22,10 @@ export function getLit() {
 
 /** Temporary function to wait for Lit to be ready before decrypting conten */
 async function litIsReady() {
-    let ready
     console.log('Checking if Lit is ready...: ' + litReady)
 
-    if (litReady == false) {
+    if (litReady === false) {
         await sleep(1500)
-        ready = true
-    } else {
-        ready = true
     }
     console.log('Lit is ready!: ' + litReady)
 
@@ -83,12 +78,12 @@ export async function generateLitSignatureV2(provider, account) {
     console.log('Chain ID is: ', chainId)
 
     /** Step 2: Generate signature */
-    let res = await signAndSaveAuthMessage({
-        web3,
-        account,
-        chainId,
-        resources: null,
-    })
+    // let res = await signAndSaveAuthMessage({
+    //     web3,
+    //     account,
+    //     chainId,
+    //     resources: null,
+    // })
 
     return {
         status: 200,
@@ -99,7 +94,7 @@ export async function generateLitSignatureV2(provider, account) {
 /** Retrieve user's authsig from localStorage */
 function getAuthSig() {
     const authSig = JSON.parse(localStorage.getItem('lit-auth-signature'))
-    if (authSig && authSig != '') {
+    if (authSig && authSig !== '') {
         return authSig
     } else {
         console.log('User not authenticated to Lit Protocol for messages')
@@ -258,7 +253,7 @@ export function generateAccessControlConditionsForDMs(recipients) {
         /** Get ETH address from DiD */
         let { address, network } = getAddressFromDid(recipient)
 
-        if (network == 'eip155') {
+        if (network === 'eip155') {
             /** Push access control condition to array */
             _accessControlConditions.push({
                 contractAddress: '',
@@ -291,12 +286,12 @@ export function generateAccessControlConditionsForPosts(encryptionRules) {
 
     switch (encryptionRules.type) {
         case 'token-gated':
-            let chain = encryptionRules.chain
-            let contractType = encryptionRules.contractType // Can be only ERC20 or ERC721
-            let contractAddress = encryptionRules.contractAddress
-            let minTokenBalance = encryptionRules.minTokenBalance
+            // let chain = encryptionRules.chain
+            // let contractType = encryptionRules.contractType // Can be only ERC20 or ERC721
+            // let contractAddress = encryptionRules.contractAddress
+            // let minTokenBalance = encryptionRules.minTokenBalance
 
-            if (encryptionRules.contractType == 'ERC20' || encryptionRules.contractType == 'ERC721') {
+            if ((encryptionRules.contractType = 'ERC20' || encryptionRules.contractType === 'ERC721')) {
                 /** Adds an access control condition based on token gated content */
                 _accessControlConditions.push({
                     contractAddress: encryptionRules.contractAddress,
@@ -309,7 +304,7 @@ export function generateAccessControlConditionsForPosts(encryptionRules) {
                         value: encryptionRules.minTokenBalance,
                     },
                 })
-            } else if (encryptionRules.contractType == 'ERC1155') {
+            } else if (encryptionRules.contractType === 'ERC1155') {
                 _accessControlConditions.push({
                     contractAddress: encryptionRules.contractAddress,
                     standardContractType: encryptionRules.contractType,
@@ -324,6 +319,7 @@ export function generateAccessControlConditionsForPosts(encryptionRules) {
             }
 
             break
+        default: // do nothing
     }
 
     /** Return clean access control conditions */

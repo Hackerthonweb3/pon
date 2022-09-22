@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;600;700&display=swap');
+/* stylelint-disable selector-class-pattern */
+@import 'https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;600;700&display=swap';
 
 .chatBoxContainer {
     /** Background colors */
@@ -15,6 +16,13 @@
     /** Border */
     --color-border-main: #e7eaf2;
     --color-border-secondary: #d5dbea;
+
+    /** ChatBox module */
+    z-index: 100;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    font-family: Ubuntu, sans-serif;
 }
 
 /** Utilities */
@@ -22,33 +30,28 @@
     display: flex;
     flex-direction: row;
 }
+
 .flexColumn {
     display: flex;
     flex-direction: column;
 }
+
 .secondary {
     color: var(--color-secondary) !important;
 }
+
 .btnBlack {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: Ubuntu, sans-serif;
     color: #fff;
     background: #101016;
     padding: 5px 20px;
     border-radius: 100px;
     font-weight: 500;
-    border: 0px;
+    border: 0;
     cursor: pointer;
     align-items: center;
 }
 
-/** ChatBox module */
-.chatBoxContainer {
-    z-index: 100;
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    font-family: 'Ubuntu', sans-serif;
-}
 .chatBoxContainerCta {
     border: 1px solid var(--color-border-main);
     background: linear-gradient(130.8deg, #fca173 0%, #fb808d 111.4%);
@@ -61,9 +64,11 @@
     justify-content: center;
     cursor: pointer;
 }
+
 .chatBoxContainerCta:hover {
     background: #fb808d;
 }
+
 .chatBoxContainerExpanded {
     position: fixed;
     border: 1px solid var(--color-border-main);
@@ -77,19 +82,22 @@
     overflow: hidden;
     display: flex;
 }
+
 .chatBoxHead {
     padding-top: 10px;
     border-bottom: 1px solid var(--color-border-main);
     padding-bottom: 10px;
     background: var(--background-main);
 }
+
 .chatBoxHead p {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     font-size: 13px;
     text-align: center;
     width: 100%;
-    margin-top: 0px;
+    margin-top: 0;
 }
+
 .chatBoxMessagesContainer {
     padding: 10px;
     display: flex;
@@ -100,12 +108,30 @@
     max-height: 340px;
     overflow-y: scroll;
 }
+
 .chatBoxInputContainer {
     background: var(--background-main);
     padding: 10px;
     border-top: 1px solid var(--color-border-main);
     display: flex;
 }
+
+.pfpContainer {
+    display: flex;
+    align-items: center;
+}
+
+.pfpContainer img.pfp {
+    height: 25px;
+    width: 25px;
+    border-radius: 100px;
+}
+
+.chatBoxSubmit img {
+    display: flex;
+    height: 15px;
+}
+
 .chatBoxOneMessageContainer {
     display: flex;
     flex-direction: row;
@@ -113,12 +139,15 @@
     align-items: center;
     position: relative;
 }
+
 .chatBoxOneMessageContainer .pfpContainer {
     display: flex;
 }
+
 .chatBoxOneMessageContainer .pfpContainer img {
     border: 1px solid var(--color-border-secondary);
 }
+
 .chatBoxOneMessageContainerSender {
     display: flex;
     flex-direction: row;
@@ -127,26 +156,36 @@
     position: relative;
     align-self: flex-end;
 }
+
+.chatBoxContactReplyToInfo p {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
 .chatBoxOneSupportMessage {
     display: flex;
     padding: 7px 14px;
     background: #e2e6eb;
     border-radius: 25px;
 }
+
 .chatBoxOneSupportMessage p {
     margin: 0;
     font-size: 14px;
 }
+
 .chatBoxOneMessageContainerSender .chatBoxOneSupportMessage {
     background: #3ca5fc;
 }
+
 .chatBoxOneMessageContainerSender .chatBoxOneSupportMessage p {
     color: #fff;
 }
+
 .chatBoxOneMessageReplyLine {
     border-top: 2px solid var(--color-border-secondary);
     border-left: 2px solid var(--color-border-secondary);
-    border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0;
     width: 15px;
     height: 15px;
     display: flex;
@@ -154,66 +193,55 @@
     margin-left: 10px;
     margin-right: 2px;
 }
+
 .chatBoxOneMessageReply {
     background: transparent;
     margin-bottom: 5px;
     color: var(--color-secondary);
 }
-.pfpContainer {
-    display: flex;
-    align-items: center;
-}
-.pfpContainer img.pfp {
-    height: 25px;
-    width: 25px;
-    border-radius: 100px;
-}
+
 .chatBoxMessageBoxContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
+
 .chatBoxMessageBoxContainer .pfpContainer img {
     border: 1px solid var(--color-border-secondary);
     height: 29px;
     width: 29px;
 }
+
 .chatBoxSubmitContainer {
     align-items: center;
     justify-content: center;
     display: flex;
     margin-left: 4px;
 }
+
 .chatBoxSubmit {
     background: linear-gradient(130.8deg, #fca173 0%, #fb808d 111.4%);
     border-radius: 100px;
     padding: 9px;
     outline: none;
-    border: 0px;
+    border: 0;
     box-shadow: 0 0 8px rgb(0 0 0 / 30%);
     align-items: center;
     justify-content: center;
     display: flex;
     cursor: pointer;
 }
-.chatBoxSubmit img {
-    display: flex;
-    height: 15px;
-}
 
-.chatBoxContactReplyToInfo p {
-    margin: 0;
-    margin-bottom: 5px;
-}
 .chatBoxContactReplyToInfoLabel {
     color: var(--color-secondary);
     text-transform: uppercase;
     font-size: 10px;
     font-weight: 500;
 }
+
 /** Input */
 .chatBoxInput {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: Ubuntu, sans-serif;
     padding: 7px 14px;
     border-radius: 25px;
     background: #fff;
@@ -221,23 +249,29 @@
     outline: none;
     flex: 1;
 }
+
 .chatBoxInput:disabled {
     background: #f2f2f2;
     font-style: italic;
 }
+
 .chatBoxInput:focus {
     border: 1px solid #5b93c6;
 }
+
 .hoveredActions {
     position: absolute;
     bottom: -22px;
 }
+
 .chatBoxOneMessageContainer .hoveredActions {
     left: 30px;
 }
+
 .chatBoxOneMessageContainerSender .hoveredActions {
-    left: 0px;
+    left: 0;
 }
+
 .hoveredAction {
     padding: 5px;
     background: #fff;
@@ -250,18 +284,22 @@
     height: 30px;
     cursor: pointer;
 }
+
 .hoveredAction:hover {
     background: #f2f2f2;
 }
+
 .loadingSpinner {
     height: 15px;
     width: 15px;
     animation: spin 1s infinite linear;
 }
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(359deg);
     }

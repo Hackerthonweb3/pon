@@ -10,12 +10,12 @@ import { Ed25519Provider } from 'key-did-provider-ed25519'
 import { getResolver } from 'key-did-resolver'
 
 /** Lit Protocol */
-import LitJsSdk from 'lit-js-sdk'
+// import LitJsSdk from 'lit-js-sdk'
 import {
     connectLitClient,
-    generateLitSignature,
-    generateLitSignatureV2,
-    generateAccessControlConditionsForDMs,
+    // generateLitSignature,
+    // generateLitSignatureV2,
+    // generateAccessControlConditionsForDMs,
     encryptDM,
     encryptPost,
     decryptString,
@@ -23,41 +23,41 @@ import {
 
 /** Internal helpers */
 import { indexer } from './lib/indexer-db.js'
-import { forceIndex, forceIndexDid, sleep, randomSeed } from './utils/index.js'
+import { forceIndex, /*forceIndexDid,*/ sleep /*, randomSeed*/ } from './utils/index.js'
 
 /** Initiate the node URLs for the two networks */
 const MAINNET_NODE_URL = 'https://node1.orbis.club/'
-const TESTNET_NODE_URL = 'https://ceramic-clay.3boxlabs.com'
+// const TESTNET_NODE_URL = 'https://ceramic-clay.3boxlabs.com'
 
 /** Set schemas Commit IDs */
-const postSchemaStream = 'kjzl6cwe1jw1498inegtpji0iqf0htspb0qqswlofjy0hak1s3u2pf19qql7oak'
+// const postSchemaStream = 'kjzl6cwe1jw1498inegtpji0iqf0htspb0qqswlofjy0hak1s3u2pf19qql7oak'
 const postSchemaCommit = 'k3y52l7qbv1fry9okmevn9mo3p7urirw3yda6lju5qltvez2knv9v8qx1a52ukr28'
 
-const groupSchemaStream = 'kjzl6cwe1jw1487a0xluwl3ip6lcdcfn8ahgomsbf8x5rf65mktdjuouz8xopbf'
+// const groupSchemaStream = 'kjzl6cwe1jw1487a0xluwl3ip6lcdcfn8ahgomsbf8x5rf65mktdjuouz8xopbf'
 const groupSchemaCommit = 'k3y52l7qbv1fry2bramzfrq10z2vrywf96yk6n61d8ffsyzvs0k0wd68sanjjo16o'
 
-const channelSchemaStream = 'kjzl6cwe1jw148ehiqrzh9npfr4kk4kyqd4as259yqzcr3i1dnrnm30ck5q0t6f'
+// const channelSchemaStream = 'kjzl6cwe1jw148ehiqrzh9npfr4kk4kyqd4as259yqzcr3i1dnrnm30ck5q0t6f'
 const channelSchemaCommit = 'k3y52l7qbv1fry3r0laf0asokw0wi74l2zhaknj9iv3veoow9t50nx1ehbcp1rhmo'
 
-const profileSchemaStream = 'kjzl6cwe1jw145ak5a52cln1i6ztmece01w5qd03dib4lg8i3tt57sjauu14be8'
+// const profileSchemaStream = 'kjzl6cwe1jw145ak5a52cln1i6ztmece01w5qd03dib4lg8i3tt57sjauu14be8'
 const profileSchemaCommit = 'k3y52l7qbv1frxhn39k40plvupdqqna03kdgorggo0274ojggr7z93ex979jyp14w'
 
-const reactionSchemaStream = 'kjzl6cwe1jw146a2jirsoiku1eqsckmk8o7egba22jufwenwbb9fs096s340efk'
+// const reactionSchemaStream = 'kjzl6cwe1jw146a2jirsoiku1eqsckmk8o7egba22jufwenwbb9fs096s340efk'
 const reactionSchemaCommit = 'k3y52l7qbv1frxonm2thnyc45m0uhleofxo4ms07iq54h2g9xsg3475tc7q4iumm8'
 
-const followSchemaStream = 'kjzl6cwe1jw14av566q7ja9a2jy78uv5ih7pa683ozdulkpsc46qwsxfqzz3po5'
+// const followSchemaStream = 'kjzl6cwe1jw14av566q7ja9a2jy78uv5ih7pa683ozdulkpsc46qwsxfqzz3po5'
 const followSchemaCommit = 'k3y52l7qbv1fryl9grzudl4xzm5v7izhj7eersc9m9nmhlfbdi5rzd9przztmejnk'
 
-const groupMemberSchemaStream = 'kjzl6cwe1jw146jk7s8ls9bjql42yqn1j5d3z0meue1zkgxeq2drqr0nl43soi8'
+// const groupMemberSchemaStream = 'kjzl6cwe1jw146jk7s8ls9bjql42yqn1j5d3z0meue1zkgxeq2drqr0nl43soi8'
 const groupMemberSchemaCommit = 'k3y52l7qbv1frxqj3rct6wya4d25131fuw65890fdk3y4xkdkpcxxa84nq56zy9kw'
 
-const conversationSchemaStream = 'kjzl6cwe1jw149ibyxllm19uiqvaj4gj2f84lq3y3xzs0nqpo2ufw63ut3xwn7i'
+// const conversationSchemaStream = 'kjzl6cwe1jw149ibyxllm19uiqvaj4gj2f84lq3y3xzs0nqpo2ufw63ut3xwn7i'
 const conversationSchemaCommit = 'k3y52l7qbv1frybmd4exlop211b2ivzpjl89sqho2k1qf8otyj88h0rff301451c0'
 
-const messageSchemaStream = 'kjzl6cwe1jw14bcux0xa3ba15686iwkw78y4xda0djl58ufyq219e116ihujfh8'
+// const messageSchemaStream = 'kjzl6cwe1jw14bcux0xa3ba15686iwkw78y4xda0djl58ufyq219e116ihujfh8'
 const messageSchemaCommit = 'k3y52l7qbv1fryorfuuknrk7c4sa6efokzjmr1af6obadawhixagyrrcebix662gw'
 
-const notificationsReadSchemaStream = 'kjzl6cwe1jw14a4hg7d96srbp4tm2lox68ry6uv4m0m3pfsjztxx4pe6rliqquu'
+// const notificationsReadSchemaStream = 'kjzl6cwe1jw14a4hg7d96srbp4tm2lox68ry6uv4m0m3pfsjztxx4pe6rliqquu'
 const notificationsReadSchemaCommit = 'k3y52l7qbv1fryfzw38e9ccib6qakyi97weer4rhcskd6cwb26sx7lgkw491a6z9c'
 
 /** Definition of the Orbis class powering the Orbis SDK */
@@ -183,12 +183,12 @@ export class Orbis {
         this.ceramic.did = did
 
         /** Step 5 (optional): Initialize the connection to Lit */
-        if (lit == true) {
+        if (lit === true) {
             let _userAuthSig = localStorage.getItem('lit-auth-signature-' + address)
-            if (!_userAuthSig || _userAuthSig == '' || _userAuthSig == undefined) {
+            if (!_userAuthSig || _userAuthSig === '' || _userAuthSig === undefined) {
                 try {
                     /** Generate the signature for Lit */
-                    let resLitSig = await generateLitSignature(provider, address)
+                    // let resLitSig = await generateLitSignature(provider, address)
                 } catch (e) {
                     console.log('Error connecting to Lit network: ' + e)
                 }
@@ -202,10 +202,10 @@ export class Orbis {
         }
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        let _resDid = await forceIndexDid(this.session.id)
+        // let _resDid = await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
-        let { data, error, status } = await this.getProfile(this.session.id)
+        let { data /*, error, status*/ } = await this.getProfile(this.session.id)
 
         /** Check if user has configured Lit */
         let hasLit = false
@@ -271,10 +271,10 @@ export class Orbis {
         }
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        let _resDid = await forceIndexDid(this.session.id)
+        // let _resDid = await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
-        let { data, error, status } = await this.getProfile(this.session.id)
+        let { data /*, error, status*/ } = await this.getProfile(this.session.id)
 
         /** Check if user has configured Lit */
         let hasLit = false
@@ -325,16 +325,16 @@ export class Orbis {
                 alert('An ethereum provider is required to proceed with the connection to Lit Protocol.')
                 return {
                     status: 300,
-                    error: e,
+                    error: 'e',
                     result: 'An ethereum provider is required to proceed with the connection to Lit Protocol.',
                 }
             }
         }
 
         /** Step 1: Enable Ethereum provider (can be browser wallets or WalletConnect for now) */
-        let addresses
+        // let addresses
         try {
-            addresses = await provider.enable()
+            // addresses = await provider.enable()
         } catch (e) {
             return {
                 status: 300,
@@ -346,7 +346,7 @@ export class Orbis {
         /** Step 2: Initialize the connection to Lit */
         try {
             /** Generate the signature for Lit */
-            let resLitSig = await generateLitSignatureV2(provider, address)
+            // let resLitSig = await generateLitSignatureV2(provider, address)
 
             /** Return success state */
             return {
@@ -420,10 +420,10 @@ export class Orbis {
         console.log('Connected to Ceramic using: ' + this.session.id)
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        let _resDid = await forceIndexDid(this.session.id)
+        // let _resDid = await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
-        let { data, error, status } = await this.getProfile(this.session.id)
+        let { data /*, error, status*/ } = await this.getProfile(this.session.id)
 
         let details
         if (data) {
@@ -524,7 +524,7 @@ export class Orbis {
     /** Connected users can share a new post following our schemas */
     async createPost(content, encryptionRules = null) {
         /** Make sure post isn't empty */
-        if (!content || !content.body || content.body == '' || content.body == undefined) {
+        if (!content || !content.body || content.body === '' || content.body === undefined) {
             return {
                 status: 300,
                 result: "You can't share an empty post.",
@@ -561,7 +561,7 @@ export class Orbis {
     /** Connected users can edit their post */
     async editPost(stream_id, content, encryptionRules = null) {
         /** Make sure post isn't empty */
-        if (!content || !content.body || content.body == '' || content.body == undefined) {
+        if (!content || !content.body || content.body === '' || content.body === undefined) {
             return {
                 status: 300,
                 result: "You can't share an empty post.",
@@ -607,7 +607,7 @@ export class Orbis {
     /** Connected users can react to an existing post */
     async react(post_id, type) {
         /** Require post_id */
-        if (!post_id || post_id == undefined) {
+        if (!post_id || post_id === undefined) {
             return {
                 status: 300,
                 result: '`post_id` is required when reacting to a post.',
@@ -615,7 +615,7 @@ export class Orbis {
         }
 
         /** Require post_id */
-        if (!type || type == undefined) {
+        if (!type || type === undefined) {
             return {
                 status: 300,
                 result: '`type` is required when reacting to a post.',
@@ -641,7 +641,7 @@ export class Orbis {
         /** If group creation was successful we also create the first channel */
         if (result.doc) {
             /** Automatically join group created */
-            let joinRes = await this.setGroupMember(result.doc, true)
+            // let joinRes = await this.setGroupMember(result.doc, true)
 
             /**
              * Let channel_content = { group_id: result.doc, name: "general", type: "feed" };
@@ -664,7 +664,7 @@ export class Orbis {
 
     /** Users can create a channel in a group */
     async createChannel(group_id, content) {
-        if (!group_id || group_id == undefined) {
+        if (!group_id || group_id === undefined) {
             return {
                 status: 300,
                 result: '`group_id` is required when creating a channel.',
@@ -756,10 +756,10 @@ export class Orbis {
     /** Create a new conversation */
     async createConversation(content) {
         /** Make sure recipients field isn't empty */
-        if (!content || !content.recipients || content.recipients.length == 0) {
+        if (!content || !content.recipients || content.recipients.length === 0) {
             return {
                 status: 300,
-                error: e,
+                error: 'e',
                 result: "You can't create a conversations without recipients.",
             }
         }
@@ -779,7 +779,7 @@ export class Orbis {
     /** Send a direct message in a conversation */
     async sendMessage(content) {
         /** Require `message` */
-        if (!content || !content.body || content.body == undefined || content.body == '') {
+        if (!content || !content.body || content.body === undefined || content.body === '') {
             return {
                 status: 300,
                 result: '`message` is required when sending a new message.',
@@ -790,8 +790,8 @@ export class Orbis {
         if (
             !content ||
             !content.conversation_id ||
-            content.conversation_id == undefined ||
-            content.conversation_id == ''
+            content.conversation_id === undefined ||
+            content.conversation_id === ''
         ) {
             return {
                 status: 300,
@@ -1269,25 +1269,25 @@ export class Orbis {
 
         /** Missing type in options */
         if (!options || !options.type) {
-            return { data: null, error: 'Query missing type.', status }
+            return { data: null, error: 'Query missing type.' /*, status*/ }
         }
 
         /** Missing type in options */
         if (!this.session || !this.session.id) {
-            return { data: null, error: 'User must be connected to retrieve notifications.', status }
+            return { data: null, error: 'User must be connected to retrieve notifications.' /*, status*/ }
         }
 
         /** Query with options details */
         switch (options.type) {
             case 'social':
-                query = orbis.api.rpc('orbis_f_notifications', {
+                query = this.api.rpc('orbis_f_notifications', {
                     user_did: this.session && this.session ? this.session.id : 'none',
                     notif_type: 'social',
                 })
                 break
 
             case 'social_in_context':
-                query = orbis.api.rpc('orbis_f_notifications_context', {
+                query = this.api.rpc('orbis_f_notifications_context', {
                     user_did: this.session && this.session ? this.session.id : 'none',
                     notif_type: 'social',
                     context_id: options.context,
@@ -1295,7 +1295,7 @@ export class Orbis {
                 break
 
             case 'messages':
-                query = orbis.api.rpc('orbis_f_notifications', {
+                query = this.api.rpc('orbis_f_notifications', {
                     user_did: this.session && this.session ? this.session.id : 'none',
                     notif_type: 'messages',
                 })

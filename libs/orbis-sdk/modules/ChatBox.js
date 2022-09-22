@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './ChatBox.module.css'
 import { Orbis } from '../index.js'
 import { getAddressFromDid } from '../utils'
+import makeBlockie from 'ethereum-blockies-base64'
 
 /** Initialize the Orbis class object */
 let _orbis = new Orbis()
@@ -46,7 +47,7 @@ function ChatBoxContent({ orbis, context }) {
             let res = await orbis.isConnected()
 
             /** If SDK returns user details we save it in state */
-            if (res && res.status == 200) {
+            if (res && res.status === 200) {
                 setUser(res.details)
             }
         }
@@ -54,20 +55,20 @@ function ChatBoxContent({ orbis, context }) {
         /** Load messages */
         async function getSupportChannelMessages() {
             setLoading(true)
-            let { data, error } = await orbis.getPosts({ context: context })
+            let { data /*, error*/ } = await orbis.getPosts({ context: context })
             setLoading(false)
             setMessages(data)
         }
-    }, [expanded])
+    }, [context, expanded, orbis])
 
     return (
         <div className={styles.chatBoxContainer}>
             {/** CTA to open the contact module */}
             <div className={styles.chatBoxContainerCta} onClick={() => setExpanded(!expanded)}>
                 {expanded ? (
-                    <img src='/img/icons/question-close.png' height='27' />
+                    <img src='/img/icons/question-close.png' alt='' height='27' />
                 ) : (
-                    <img src='/img/icons/question-message.png' height='27' />
+                    <img src='/img/icons/question-message.png' alt='' height='27' />
                 )}
             </div>
 
@@ -78,7 +79,7 @@ function ChatBoxContent({ orbis, context }) {
                         <p>Ask your questions to the Cerscan community.</p>
                         <p style={{ marginTop: 5 }}>
                             <a href='https://orbis.club' target='_blank' rel='noreferrer'>
-                                <img src='/img/powered-by-orbis.png' height='16' />
+                                <img src='/img/powered-by-orbis.png' alt='' height='16' />
                             </a>
                         </p>
                     </div>
@@ -86,7 +87,11 @@ function ChatBoxContent({ orbis, context }) {
                     <div className={styles.chatBoxMessagesContainer}>
                         {loading && (
                             <p className={styles.secondary} style={{ width: '100%', textAlign: 'center' }}>
-                                <img src='/img/icons/question-spinner-black.png' className={styles.loadingSpinner} />
+                                <img
+                                    src='/img/icons/question-spinner-black.png'
+                                    alt=''
+                                    className={styles.loadingSpinner}
+                                />
                             </p>
                         )}
                         <Messages user={user} messages={messages} reply={reply} replyTo={replyTo} />
@@ -133,12 +138,12 @@ function Message({ user, message, reply, replyTo }) {
         <div
             ref={hoverRef}
             className={
-                user && message.creator == user.did
+                user && message.creator === user.did
                     ? styles.chatBoxOneMessageContainerSender
                     : styles.chatBoxOneMessageContainer
             }>
             {/** Left side PfP */}
-            {(!user || user == null || (user && message.creator != user.did)) && (
+            {(!user || user == null || (user && message.creator !== user.did)) && (
                 <div style={{ marginRight: 3 }}>
                     <PfP did={message.creator} details={message.creator_details} displayBadge={false} />
                 </div>
@@ -164,7 +169,7 @@ function Message({ user, message, reply, replyTo }) {
             </div>
 
             {/** Right-side PfP */}
-            {user && message.creator == user.did && (
+            {user && message.creator === user.did && (
                 <div style={{ marginLeft: 3 }}>
                     <PfP did={message.creator} details={message.creator_details} displayBadge={false} />
                 </div>
@@ -174,16 +179,16 @@ function Message({ user, message, reply, replyTo }) {
             {isHovered && (
                 <div className={styles.hoveredActions}>
                     <div className={styles.hoveredAction} onClick={() => reply(message)}>
-                        <img src='/img/icons/question-replyto.png' height='15' />
+                        <img src='/img/icons/question-replyto.png' alt='' height='15' />
                     </div>
                 </div>
             )}
 
             {/** Show if the message is being replied to */}
-            {replyTo && replyTo == message.stream_id && (
+            {replyTo && replyTo === message.stream_id && (
                 <div className={styles.hoveredActions}>
                     <div className={styles.hoveredAction} onClick={() => reply(null)}>
-                        <img src='/img/icons/question-replyto-active.png' height='15' />
+                        <img src='/img/icons/question-replyto-active.png' alt='' height='15' />
                     </div>
                 </div>
             )}
@@ -209,7 +214,7 @@ function MessageBox({ user, orbis, context, messages, setMessages, replyTo, repl
     /** Send message to Cerscan support channel */
     async function sendMessage() {
         /** Make sure message isn't empty. */
-        if (!message || message == '') {
+        if (!message || message === '') {
             alert("You can't share an empty message.")
             return
         }
@@ -281,11 +286,11 @@ function MessageBox({ user, orbis, context, messages, setMessages, replyTo, repl
                 <div className={styles.chatBoxSubmitContainer}>
                     {sending ? (
                         <button className={styles.chatBoxSubmit}>
-                            <img src='/img/icons/question-spinner.png' className={styles.loadingSpinner} />
+                            <img src='/img/icons/question-spinner.png' alt='' className={styles.loadingSpinner} />
                         </button>
                     ) : (
                         <button className={styles.chatBoxSubmit} onClick={() => sendMessage()}>
-                            <img src='/img/icons/question-send.png' />
+                            <img src='/img/icons/question-send.png' alt='' />
                         </button>
                     )}
                 </div>
@@ -318,7 +323,7 @@ export function ConnectButton({ orbis, user, setUser }) {
     if (loading) {
         return (
             <div className={styles.btnBlack}>
-                <img src='/img/icons/question-spinner.png' height='18' className={styles.loadingSpinner} />
+                <img src='/img/icons/question-spinner.png' height='18' alt='' className={styles.loadingSpinner} />
             </div>
         )
     }
@@ -342,11 +347,17 @@ export function PfP({ did, details }) {
 
     const PfpImg = () => {
         if (details && details.profile && details.profile.pfp) {
-            return <img src={details.profile?.pfp} className={styles.pfp} />
+            return <img src={details.profile?.pfp} alt='' className={styles.pfp} />
         } else if (address) {
-            return <img src={makeBlockie(address)} className={styles.pfp} />
+            return <img src={makeBlockie(address)} alt='' className={styles.pfp} />
         } else {
-            return <img src='https://arweave.net/zNxzwq2U7nNZnEosK49drVmOom4nFv89nOlSlbsnczg' className={styles.pfp} />
+            return (
+                <img
+                    src='https://arweave.net/zNxzwq2U7nNZnEosK49drVmOom4nFv89nOlSlbsnczg'
+                    alt=''
+                    className={styles.pfp}
+                />
+            )
         }
     }
 
@@ -392,7 +403,7 @@ export function useHover() {
                 }
             }
         },
-        [ref.current], // Recall only if ref changes
+        [ref], // Recall only if ref changes
     )
 
     return [ref, value]
