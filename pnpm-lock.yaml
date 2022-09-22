@@ -17,6 +17,7 @@ importers:
   apps/mobile:
     specifiers:
       '@babel/core': 7.19.1
+      '@babel/plugin-proposal-export-namespace-from': 7.18.9
       '@babel/preset-env': 7.19.1
       '@business-card/orbis-sdk-react-native': workspace:0.1.49
       '@expo/vector-icons': 13.0.0
@@ -92,6 +93,7 @@ importers:
       styled-components: 5.3.5_twzut3cfsq3yt4edr3dzr6gksa
     devDependencies:
       '@babel/core': 7.19.1
+      '@babel/plugin-proposal-export-namespace-from': 7.18.9_@babel+core@7.19.1
       '@babel/preset-env': 7.19.1_@babel+core@7.19.1
       '@svgr/core': 6.3.1
       '@svgr/plugin-svgo': 6.3.1_@svgr+core@6.3.1
