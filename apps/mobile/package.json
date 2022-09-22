@@ -12,6 +12,8 @@
     },
     "dependencies": {
         "@business-card/orbis-sdk-react-native": "workspace:*",
+        "@expo-google-fonts/inter": "0.2.2",
+        "@expo-google-fonts/vt323": "0.2.2",
         "@expo/vector-icons": "13.0.0",
         "@react-navigation/bottom-tabs": "6.4.0",
         "@react-navigation/native": "6.0.13",
