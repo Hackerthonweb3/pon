@@ -70,5 +70,8 @@
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
         "editor.detectIndentation": false
+    },
+    "[svg]": {
+        "editor.defaultFormatter": "jock.svg"
     }
 }
