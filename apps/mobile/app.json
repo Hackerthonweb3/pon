@@ -8,7 +8,7 @@
         "scheme": "pon",
         "userInterfaceStyle": "automatic",
         "splash": {
-            "image": "./src/assets/images/splash/splash-temp.png",
+            "image": "./src/assets/images/splash/splash-screen.png",
             "resizeMode": "contain",
             "backgroundColor": "#2B2E38"
         },
