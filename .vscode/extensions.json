@@ -5,6 +5,7 @@
         "nomicfoundation.hardhat-solidity",
         "redhat.vscode-yaml",
         "bycedric.vscode-expo",
-        "styled-components.vscode-styled-components"
+        "styled-components.vscode-styled-components",
+        "jock.svg"
     ]
 }

@@ -23,6 +23,7 @@ importers:
       '@expo-google-fonts/inter': 0.2.2
       '@expo-google-fonts/vt323': 0.2.2
       '@expo/vector-icons': 13.0.0
+      '@react-native-async-storage/async-storage': 1.17.10
       '@react-navigation/bottom-tabs': 6.4.0
       '@react-navigation/native': 6.0.13
       '@react-navigation/native-stack': 6.9.0
@@ -73,6 +74,7 @@ importers:
       '@expo-google-fonts/inter': 0.2.2
       '@expo-google-fonts/vt323': 0.2.2
       '@expo/vector-icons': 13.0.0
+      '@react-native-async-storage/async-storage': 1.17.10_react-native@0.69.5
       '@react-navigation/bottom-tabs': 6.4.0_c54phjnuodlt27o4h5akrwisru
       '@react-navigation/native': 6.0.13_ws5w265lwlgfx6ddpl3mdiooma
       '@react-navigation/native-stack': 6.9.0_c54phjnuodlt27o4h5akrwisru
@@ -12108,7 +12110,7 @@ packages:
     engines: {node: '>=16.0.0', npm: '>=7.0.0'}
     dependencies:
       err-code: 3.0.1
-      protobufjs: 7.1.1
+      protobufjs: 7.1.2
     dev: false
 
   /ipfs-utils/9.0.7:
@@ -15286,8 +15288,8 @@ packages:
     resolution: {integrity: sha512-IJUkICM5dP5znhCckHSv30Q4b5/JA5enCtkRHYaOVOAocnH/1BQEYTC5NMfT3AVl/iXKdr3aqQbQn9DxyWknwA==}
     dev: false
 
-  /protobufjs/7.1.1:
-    resolution: {integrity: sha512-d0nMQqS/aT3lfV8bKi9Gbg73vPd2LcDdTDOu6RE/M+h9DY8g1EmDzk3ADPccthEWfTBjkR2oxNdx9Gs8YubT+g==}
+  /protobufjs/7.1.2:
+    resolution: {integrity: sha512-4ZPTPkXCdel3+L81yw3dG6+Kq3umdWKh7Dc7GW/CpNk4SX3hK58iPCWeCyhVTDrbkNeKrYNZ7EojM5WDaEWTLQ==}
     engines: {node: '>=12.0.0'}
     requiresBuild: true
     dependencies:
@@ -16211,7 +16213,7 @@ packages:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
-      glob: 7.2.3
+      glob: 7.2.0
 
   /rimraf/3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
