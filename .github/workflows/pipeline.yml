@@ -20,40 +20,45 @@ jobs:
               with:
                   access_token: ${{ github.token }}
 
-    lint-and-build:
+    lint:
         runs-on: ubuntu-22.04
-        timeout-minutes: 5
-        env:
-            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-            TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-
-            - name: Install node
-              uses: actions/setup-node@v3
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v2
+            - uses: actions/setup-node@v3
               with:
                   node-version: 16
+                  cache: 'pnpm'
+            - run: pnpm install --frozen-lockfile
+            - uses: trunk-io/trunk-action@v1
 
-            - name: Install pnpm
-              uses: pnpm/action-setup@v2
-              id: pnpm-install
+    check-web-changed:
+        runs-on: ubuntu-22.04
+        outputs:
+            web_changed: ${{ steps.check-web-changed.outputs.web_changed }}
+        steps:
+            - uses: actions/checkout@v3
               with:
-                  version: 7
-                  run_install: false
+                  fetch-depth: 2
+            - shell: pwsh
+              id: check-web-changed
+              run: |
+                  $diff = git diff --name-only HEAD^ HEAD
+                  $SourceDiff = $diff | Where-Object { $_ -match '^apps/web' }
+                  $HasDiff = $SourceDiff.Length -gt 0
+                  Write-Host "::set-output name=web_changed::$HasDiff"
 
-            - name: Setup pnpm cache
-              uses: actions/cache@v3
+    build-web:
+        runs-on: ubuntu-22.04
+        needs: [check-web-changed]
+        if: needs.check-web-changed.outputs.web_changed == 'true'
+        steps:
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v2
+            - uses: actions/setup-node@v3
               with:
-                  path: /home/runner/.pnpm-store/v3
-                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./pnpm-lock.yaml') }}
-                  restore-keys: ${{ runner.os }}-pnpm-store-
-
-            - name: Install dependencies
-              run: pnpm install --frozen-lockfile
-
-            - name: Trunk check
-              uses: trunk-io/trunk-action@v1
-
-            - name: Build
-              run: pnpm build:web
+                  node-version: 16
+                  cache: 'pnpm'
+            - run: |
+                  pnpm install --frozen-lockfile
+                  pnpm build:web
