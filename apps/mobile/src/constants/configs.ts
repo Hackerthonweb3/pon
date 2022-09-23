@@ -1,4 +1,5 @@
 import { EInputTypes } from '../types'
+import { colors } from './colors'
 
 export const newUserInputs = [
     { name: 'name', label: 'Write username', placeholder: 'Enter your username here' },
@@ -13,3 +14,8 @@ export const newUserInputs = [
     { name: 'twitter', label: 'Twitter', placeholder: '' },
     { name: 'discord', label: 'Discord', placeholder: '' },
 ]
+
+export const defaultScreenOptions = {
+    contentStyle: { backgroundColor: colors.background },
+    headerShown: false,
+}

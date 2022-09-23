@@ -1,8 +1,6 @@
 import styled from 'styled-components/native'
 
-import { View as ThemedView } from './Themed'
-
-export const Layout = styled(ThemedView)`
+export const Layout = styled.View`
     flex: 1;
 `
 
@@ -27,16 +25,30 @@ export const SpaceStart = styled.View`
     flex-direction: row;
     justify-content: flex-start;
 `
-export const ContainerFlex = styled(ThemedView)`
+
+interface ContainerFlexProps {
+    br: any
+    p: any
+    pt: any
+    pb: any
+    pl: any
+    pr: any
+    m: any
+    mt: any
+    mb: any
+    ml: any
+    mr: any
+}
+export const ContainerFlex = styled.View<ContainerFlexProps>`
     display: flex;
-    border-radius: ${(props: any) => (props.br ? props.br : '0px')};
-    padding-top: ${(props: any) => (props.p ? props.p : props.pt ? props.pt : '10px')};
-    padding-bottom: ${(props: any) => (props.p ? props.p : props.pb ? props.pb : '10px')};
-    padding-left: ${(props: any) => (props.p ? props.p : props.pl ? props.pl : '10px')};
-    padding-right: ${(props: any) => (props.p ? props.p : props.pr ? props.pr : '10px')};
-    margin-top: ${(props: any) => (props.m ? props.m : props.mt ? props.mt : '20px')};
-    margin-bottom: ${(props: any) => (props.m ? props.m : props.mb ? props.mb : '0px')};
-    margin-left: ${(props: any) => (props.m ? props.m : props.ml ? props.ml : '0px')};
-    margin-right: ${(props: any) => (props.m ? props.m : props.mr ? props.mr : '0px')};
     justify-content: space-between;
+    border-radius: ${({ br }) => br ?? '0px'};
+    margin-bottom: ${({ m, mb }) => m ?? mb ?? '0'};
+    margin-left: ${({ m, ml }) => m ?? ml ?? '0'};
+    margin-right: ${({ m, mr }) => m ?? mr ?? '0'};
+    margin-top: ${({ m, mt }) => m ?? mt ?? '20px'};
+    padding-bottom: ${({ p, pb }) => p ?? pb ?? '10px'};
+    padding-left: ${({ p, pl }) => p ?? pl ?? '10px'};
+    padding-right: ${({ p, pr }) => p ?? pr ?? '10px'};
+    padding-top: ${({ p, pt }) => p ?? pt ?? '10px'};
 `

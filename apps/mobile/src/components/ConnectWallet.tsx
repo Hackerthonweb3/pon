@@ -1,29 +1,28 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import styled from 'styled-components/native'
+
+import { useOnboarding } from '../hooks/useOnboarding'
+import { Button } from './shared/Button'
+import { CenteredContainer } from './shared/CenteredContainer'
 
 export default function ConnectWallet() {
-    const clearOnboarding = async () => {
-        try {
-            await AsyncStorage.removeItem('@viewedOnboarding')
-        } catch (error) {
-            console.log('Error @clearOnboarding', error)
-        }
+    const { navigate } = useNavigation()
+    const { setViewedOnboarding } = useOnboarding()
+
+    const handleResetOnboarding = async () => {
+        await setViewedOnboarding(false)
+        navigate('Onboarding', { goToStart: true })
     }
 
     return (
-        <View style={styles.container}>
-            <Text>ConnectWallet</Text>
-            <TouchableOpacity onPress={clearOnboarding}>
-                <Text>Reset Onboarding</Text>
-            </TouchableOpacity>
-        </View>
+        <CenteredContainer>
+            <Title>Connect Wallet</Title>
+            <Button onPress={handleResetOnboarding} label='Reset Onboarding' />
+        </CenteredContainer>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-})
+const Title = styled.Text`
+    font-family: 'VT323';
+    font-size: '28rem';
+`

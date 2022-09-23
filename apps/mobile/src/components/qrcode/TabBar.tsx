@@ -1,14 +1,11 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import { useState } from 'react'
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet, View } from 'react-native'
 
-import Colors from '../../constants/Colors'
-import useColorScheme from '../../hooks/useColorScheme'
-import { View } from '../Themed'
+import { colors } from '../../constants'
 import { Tab, TabOptions } from './Tab'
 
 export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
-    const colorScheme = useColorScheme()
     const { routes } = state
     const [selected, setSelected] = useState('Scan')
 
@@ -20,7 +17,7 @@ export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) =>
     }
 
     const renderColor = (currentTab: any) => {
-        return currentTab === selected ? Colors[colorScheme].tabIconSelected : Colors[colorScheme].tabIconDefault
+        return currentTab === selected ? colors.tabIconSelected : colors.tabIconDefault
     }
 
     return (

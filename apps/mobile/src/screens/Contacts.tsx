@@ -1,11 +1,10 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 import ArrowDown from '../assets/images/graphics/arrow-down.svg'
 import SurpriseIcon from '../assets/images/graphics/surprised.svg'
-import { Text, View } from '../components/Themed'
-import { RootTabScreenProps } from '../types'
+import { MainBottomBarScreenProps } from '../types'
 
-export default function Contacts({ navigation }: RootTabScreenProps<'Contacts'>) {
+export const Contacts = ({ navigation }: MainBottomBarScreenProps<'Contacts'>) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Contacts</Text>

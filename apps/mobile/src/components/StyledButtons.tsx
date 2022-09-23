@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
 
-import { mainColors } from '../constants/Colors'
+import { colors } from '../constants'
 
 export const LinkButton = styled.Button`
-    backgroundcolor: 'rgba(52, 52, 52, 0.8)';
-    color: ${mainColors.links};
+    background-color: 'rgba(52, 52, 52, 0.8)';
+    color: ${colors.links};
     font-size: 20px;
 `
