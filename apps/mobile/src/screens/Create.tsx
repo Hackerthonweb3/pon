@@ -3,13 +3,12 @@ import Checkbox from 'expo-checkbox'
 import * as ImagePicker from 'expo-image-picker'
 import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { StyleSheet, ScrollView, Image, Button, TextInput } from 'react-native'
+import { Button, Image, ScrollView, StyleSheet, TextInput, View } from 'react-native'
 // import CountryPicker from 'rn-country-dropdown-picker'
 
 import { Layout, ContainerFlex, SpaceStart, SpaceBetween } from '../components/DesignSystem'
 import { LinkButton } from '../components/StyledButtons'
 import { SubTitle, Label } from '../components/StyledText'
-import { View } from '../components/Themed'
 import { newUserInputs } from '../constants/configs'
 import { EInputTypes, TInputProps } from '../types'
 
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     },
 })
 
-export default function Create({ navigation }: any) {
+export const Create = ({ navigation }: any) => {
     const linkTo = useLinkTo()
     const [profileImg, setProfileImg] = useState('')
     const [coverImg, setCoverImg] = useState('')

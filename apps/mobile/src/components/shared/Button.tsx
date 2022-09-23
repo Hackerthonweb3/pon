@@ -1,11 +1,15 @@
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native'
+import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import styled from 'styled-components/native'
 
 import ButtonDecoration from '../../assets/images/graphics/button-decoration.svg'
 
-export const Button = ({ label, style }: { label: string; style?: StyleProp<ViewStyle> }) => {
+type ButtonProps = TouchableOpacityProps & { label: string }
+
+export const Button = (props: ButtonProps) => {
+    const { label, style, ...otherProps } = props
+
     return (
-        <TouchableOpacity style={[style, { alignItems: 'center' }]}>
+        <TouchableOpacity style={[{ alignItems: 'center' }, style]} {...otherProps}>
             <ButtonDecoration width={390} height={70} />
             <ButtonLabel>{label}</ButtonLabel>
         </TouchableOpacity>

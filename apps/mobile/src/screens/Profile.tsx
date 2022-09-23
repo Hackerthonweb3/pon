@@ -1,15 +1,14 @@
 import { useNavigation } from '@react-navigation/native'
-import { ScrollView, Button } from 'react-native'
+import { Button, ScrollView, Text } from 'react-native'
 
 import { Layout, SpaceEnd, ContainerFlex } from '../components/DesignSystem'
 import { Gallery } from '../components/Gallery'
 import { Social } from '../components/Social'
 import { Avatar } from '../components/StyledAvatar'
 import { Title, SubTitle } from '../components/StyledText'
-import { Text } from '../components/Themed'
 import { mockProfile } from '../constants/mock'
 
-export default function Profile() {
+export const Profile = () => {
     const { name, description, pfp, twitter } = mockProfile
     const navigation = useNavigation()
 

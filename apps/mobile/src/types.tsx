@@ -1,5 +1,3 @@
-/** Learn more about using TypeScript with React Navigation: https://reactnavigation.org/docs/typescript/ */
-
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
@@ -7,31 +5,34 @@ import { Dispatch, SetStateAction } from 'react'
 
 declare global {
     namespace ReactNavigation {
-        interface RootParamList extends RootStackParamList {}
+        interface RootParamList extends MainNavigationScreens {}
     }
 }
 
-export type RootStackParamList = {
-    Root: NavigatorScreenParams<RootTabParamList> | undefined
+export type MainNavigationScreens = {
+    ConnectWallet: undefined
+    Create: undefined
+    Loading: undefined
+    MainBottomBar: NavigatorScreenParams<MainBottomBarScreens> | undefined
     Modal: undefined
-    Create: any
     NotFound: undefined
+    Onboarding: { goToStart?: boolean } | undefined
 }
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-    RootStackParamList,
+export type MainNavigationScreenProps<Screen extends keyof MainNavigationScreens> = NativeStackScreenProps<
+    MainNavigationScreens,
     Screen
 >
 
-export type RootTabParamList = {
+export type MainBottomBarScreens = {
     Contacts: undefined
     Profile: undefined
     QRCode: undefined
 }
 
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-    BottomTabScreenProps<RootTabParamList, Screen>,
-    NativeStackScreenProps<RootStackParamList>
+export type MainBottomBarScreenProps<Screen extends keyof MainBottomBarScreens> = CompositeScreenProps<
+    BottomTabScreenProps<MainBottomBarScreens, Screen>,
+    NativeStackScreenProps<MainNavigationScreens>
 >
 
 export type Setter = Dispatch<SetStateAction<boolean>>
