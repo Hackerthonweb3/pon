@@ -1,45 +1,64 @@
 {
-    "expo": {
-        "name": "@business-card/mobile",
-        "slug": "business-card-mobile-app",
-        "version": "0.0.0",
-        "orientation": "portrait",
-        "icon": "./src/assets/images/platform-icons/icon.png",
-        "scheme": "pon",
-        "userInterfaceStyle": "automatic",
-        "splash": {
-            "image": "./src/assets/images/splash/splash-screen.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#2B2E38"
-        },
-        "plugins": [
-            [
-                "expo-image-picker",
-                {
-                    "photosPermission": "The app accesses your photos to let you share them with your friends."
-                }
-            ]
-        ],
-        "updates": {
-            "fallbackToCacheTimeout": 0
-        },
-        "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "supportsTablet": true,
-            "infoPlist": {
-                "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."
-            },
-            "bundleIdentifier": "com.anonymous.businesscardmobileapp"
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./src/assets/images/platform-icons/adaptive-icon.png",
-                "backgroundColor": "#2B2E38"
-            },
-            "package": "com.anonymous.businesscardmobileapp"
-        },
-        "web": {
-            "favicon": "./src/assets/images/platform-icons/favicon.png"
+  "expo": {
+    "name": "Web3 Digital Business Card",
+    "slug": "web3-digital-business-card",
+    "owner": "ottox",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/platform/icon.png",
+    "scheme": "pon",
+    "jsEngine": "hermes",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "src/assets/platform/splash.png",
+      "backgroundColor": "#2B2E38"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Pick photos from your library to add in your profile."
         }
+      ],
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "The app uses the camera to scan QR codes."
+        }
+      ]
+    ],
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "src/assets/platform/adaptive-icon.png",
+        "backgroundColor": "#2B2E38"
+      },
+      "package": "com.anonymous.businesscardmobileapp",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA"
+      ]
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.businesscardmobileapp",
+      "infoPlist": {
+        "NSCameraUsageDescription": "The app uses the camera to scan QR codes.",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
+      }
+    },
+    "web": {
+      "favicon": "src/assets/platform/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bd665597-d484-4857-b830-e4bb12f827ad"
+      }
     }
+  }
 }

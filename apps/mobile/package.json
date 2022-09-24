@@ -4,11 +4,14 @@
     "scripts": {
         "android": "expo run:android",
         "dev": "expo start",
+        "expo:build:preview": "eas build --profile preview --platform ios",
+        "expo:build:production": "eas build --profile production --platform ios",
         "expo:install": "expo install",
         "expo:optimize": "expo-optimize",
         "ios": "expo run:ios",
         "lint:css": "stylelint './**/*'",
-        "start": "expo start --dev-client"
+        "start": "expo start --dev-client",
+        "submit:ios": "eas submit --platform ios"
     },
     "dependencies": {
         "@business-card/orbis-sdk-react-native": "workspace:*",
@@ -30,6 +33,7 @@
         "expo-random": "12.3.0",
         "expo-splash-screen": "0.16.2",
         "expo-status-bar": "1.4.0",
+        "expo-system-ui": "1.3.0",
         "node-libs-expo": "0.0.3",
         "react": "18.0.0",
         "react-dom": "18.0.0",
@@ -60,6 +64,7 @@
         "eslint-config-prettier": "8.5.0",
         "eslint-config-universe": "11.1.0",
         "expo-optimize": "0.2.19",
+        "expo-updates": "0.14.5",
         "prettier": "2.7.1",
         "sharp-cli": "^2.1.0",
         "stylelint": "14.12.1",

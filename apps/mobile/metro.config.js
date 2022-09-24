@@ -18,6 +18,8 @@ config.resolver.nodeModulesPath = [
     path.resolve(workspaceRoot, 'node_modules'),
 ]
 
+config.resolver.disableHierarchicalLookup = true
+
 // Allow using SVG images
 config.transformer = {
     ...transformer,
