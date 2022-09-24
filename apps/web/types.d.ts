@@ -18,6 +18,9 @@ declare module '@orbisclub/orbis-sdk' {
         ): Promise<OrbisResponse>
     }
 
+    type OrbisResponse = any
+    type Message = any
+
     export interface Conversation {
         recipients: string[]
         name?: string
