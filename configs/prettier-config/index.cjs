@@ -1,3 +1,4 @@
+// @ts-check
 module.exports = {
     arrowParens: 'avoid',
     printWidth: 120,
@@ -17,5 +18,12 @@ module.exports = {
         { files: '*.json', options: { parser: 'json' } },
         { files: '*.yaml', options: { parser: 'yaml' } },
         { files: '*.sol', options: { parser: 'solidity-parse' } },
+        {
+            files: 'app.json',
+            options: {
+                tabWidth: 2,
+                parser: 'json',
+            },
+        },
     ],
 }
