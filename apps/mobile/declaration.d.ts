@@ -1,3 +1,5 @@
+// import { ethers } from 'ethers'
+
 declare module '*.svg' {
     import { SvgProps } from 'react-native-svg'
     const content: React.FC<SvgProps>
@@ -6,7 +8,7 @@ declare module '*.svg' {
 
 declare module '@business-card/orbis-sdk-react-native' {
     export class Orbis {
-        connect(provider: ethers.Provider, lit?: boolean): Promise<OrbisResponse>
+        connect(provider: ethers['Provider'], lit?: boolean): Promise<OrbisResponse>
         logout(): Promise<OrbisResponse>
         getDids(address: string): Promise<OrbisResponse>
         getMessages(conversation_id: string): Promise<OrbisResponse>
@@ -14,7 +16,7 @@ declare module '@business-card/orbis-sdk-react-native' {
         updateProfile(profile: Profile): Promise<OrbisResponse>
         getConversations(options: { did: string; context?: string }): Promise<OrbisResponse>
         sendMessage(content: { conversation_id: string; body: string }): Promise<OrbisResponse>
-        createConversation(content: Conversation)
+        createConversation(content: Conversation): any
         decryptMessage(content: PrivateMessage): Promise<Message>
         createTileDocument(
             content: Conversation | PrivateMessage,
@@ -23,6 +25,9 @@ declare module '@business-card/orbis-sdk-react-native' {
             family?: string,
         ): Promise<OrbisResponse>
     }
+
+    type OrbisResponse = any
+    type Message = any
 
     export interface Conversation {
         recipients: string[]
