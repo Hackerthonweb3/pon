@@ -7,7 +7,7 @@
         "compile": "hardhat compile",
         "coverage:watch": "nodemon -e ts,sol -w contracts -w test --exec pnpm coverage",
         "coverage": "hardhat coverage",
-        "deploy": "hardhat run scripts/deploy.ts",
+        "deploy": "hardhat run scripts/10-deploy-sb-v1.ts --network hardhat",
         "fmt:sol": "prettier 'contracts/**/*.sol' -w",
         "lint:sol": "solhint 'contracts/**/*.sol'",
         "node": "hardhat node",

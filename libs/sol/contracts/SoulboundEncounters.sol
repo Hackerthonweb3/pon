@@ -33,7 +33,7 @@ contract SoulboundEncounters is
     mapping(uint256 => string) private _tokenURIs;
     mapping(address => uint256) private _balances;
 
-    // @custom:oz-upgrades-unsafe-allow constructor
+    /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
