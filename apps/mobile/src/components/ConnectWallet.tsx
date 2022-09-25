@@ -1,13 +1,11 @@
-import { useNavigation } from '@react-navigation/native'
+// import { useNavigation } from '@react-navigation/native'
 import { useWalletConnect } from '@walletconnect/react-native-dapp'
 import { useEffect, useRef } from 'react'
 import { Animated } from 'react-native'
 import styled from 'styled-components/native'
-import { useAccount, useConnect, useDisconnect, useProvider } from 'wagmi'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 import Indicator from '../assets/images/graphics/indicator.svg'
-import { useOnboarding } from '../hooks/useOnboarding'
+// import { useOnboarding } from '../hooks/useOnboarding'
 import { Button } from './shared/Button'
 import { CenteredContainer } from './shared/CenteredContainer'
 
@@ -19,10 +17,6 @@ export default function ConnectWallet() {
     connector.options = {
         qrcode: true,
     }
-
-    const { connect, data } = useConnect({
-        connector,
-    })
     // const { address } = useAccount()
 
     // useEffect(() => {
@@ -37,7 +31,7 @@ export default function ConnectWallet() {
         console.log('connect wallet', connector)
         try {
             // await handle()
-            connect()
+            await connector.connect()
             // console.log(context.connector?.uri)
             // console.log(address)
         } catch (error) {
@@ -45,13 +39,13 @@ export default function ConnectWallet() {
         }
     }
 
-    const { navigate } = useNavigation()
-    const { setViewedOnboarding } = useOnboarding()
+    // const { navigate } = useNavigation()
+    // const { setViewedOnboarding } = useOnboarding()
 
-    const handle = async () => {
-        await setViewedOnboarding(false)
-        // navigate('MainBottomBar')
-    }
+    // const handle = async () => {
+    //     await setViewedOnboarding(false)
+    //     navigate('MainBottomBar')
+    // }
 
     return (
         <CenteredContainer>

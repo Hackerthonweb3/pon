@@ -53,5 +53,16 @@
         "@nomiclabs/hardhat-ethers": "2.1.1",
         "ethers": "5.7.1",
         "hardhat": "2.11.2"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": ["*.ts", "*.tsx", "*.d.ts"],
+                "extends": ["custom"],
+                "plugins": ["@typescript-eslint"],
+                "parser": "@typescript-eslint/parser",
+                "parserOptions": { "project": "./libs/sol/tsconfig.eslint.json" }
+            }
+        ]
     }
 }

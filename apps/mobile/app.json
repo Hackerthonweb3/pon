@@ -11,9 +11,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "src/assets/platform/splash.png",
@@ -39,10 +37,7 @@
         "backgroundColor": "#2B2E38"
       },
       "package": "com.anonymous.businesscardmobileapp",
-      "permissions": [
-        "android.permission.RECORD_AUDIO",
-        "android.permission.CAMERA"
-      ]
+      "permissions": ["android.permission.RECORD_AUDIO", "android.permission.CAMERA"]
     },
     "ios": {
       "supportsTablet": true,
