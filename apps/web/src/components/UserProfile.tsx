@@ -9,27 +9,9 @@ import { useOrbis } from '~/hooks'
 import { ipfsClient } from '~/lib'
 import { EditableField } from './Profile/EditableField'
 import { FileUploader } from './FileUploader'
-import NftGallery from './NftGallery'
 import List from './List'
 import ImageMask from './ImageMask'
 import ProfileIcon from '../media/avatar.svg'
-import ProfileOneIcon from '../media/p1.png'
-import ProfileTwoIcon from '../media/p2.png'
-
-const mockNfts = [
-    {
-        id: '1',
-        icon: ProfileOneIcon,
-    },
-    {
-        id: '2',
-        icon: ProfileTwoIcon,
-    },
-    {
-        id: '1',
-        icon: ProfileOneIcon,
-    },
-]
 
 export default function UserProfile({ isMyProfile, profile }: any) {
     const [isEdit, setIsEdit] = useState(false)
@@ -90,7 +72,6 @@ export default function UserProfile({ isMyProfile, profile }: any) {
     const renderNote = !isMyProfile && (
         <>
             <Flex justifyContent='space-between' px={2}>
-                <Text fontWeight={400}>{mockNfts.length} Your Note</Text>
                 <Text cursor='pointer' fontWeight={400} color='blue.400' onClick={showAll}>
                     Edit
                 </Text>
@@ -98,7 +79,6 @@ export default function UserProfile({ isMyProfile, profile }: any) {
             <Flex>Met at EthCC Hack and ETHBarcelona</Flex>
         </>
     )
-    const renderContacts = mockNfts.length && isMyProfile && <NftGallery data={mockNfts} />
 
     const profileImage = pfpCid ? (
         <ImageMask imageCid={pfpCid} />
@@ -190,7 +170,7 @@ export default function UserProfile({ isMyProfile, profile }: any) {
                     <List />
                 )}
             </Box>
-            {renderContacts}
+            {/* {renderContacts} */}
             {renderNote}
             <Box>Prefered contact method</Box>
         </>
