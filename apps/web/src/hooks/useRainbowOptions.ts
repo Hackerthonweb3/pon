@@ -6,7 +6,7 @@ type Blurs = 'large' | 'small' | 'none'
 
 export const useRainbowOptions = () => {
     const themeOptions = { overlayBlur: 'large' as Blurs }
-    const theme = useColorModeValue(lightTheme(themeOptions), darkTheme(themeOptions))
+    const theme = useColorModeValue(darkTheme(themeOptions))
 
     const rainbowOptions = {
         appName: 'Web3 Patreon',

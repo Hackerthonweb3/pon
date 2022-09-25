@@ -18,7 +18,7 @@ export const Profile = () => {
 
     return (
         <ScrollView>
-            <Layout lightColor='#eee' darkColor='rgba(255,255,255,0.1)'>
+            <Layout>
                 <ContainerFlex>
                     <SpaceEnd style={{ marginTop: 50 }}>
                         <Button onPress={handleEditLink} title='Edit' />

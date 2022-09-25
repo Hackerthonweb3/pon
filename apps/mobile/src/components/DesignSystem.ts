@@ -1,6 +1,9 @@
 import styled from 'styled-components/native'
+import { colors } from '../constants/colors'
 
 export const Layout = styled.View`
+    background-color: ${colors.background};
+    font-family: VT323;
     flex: 1;
 `
 
