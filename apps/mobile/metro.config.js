@@ -18,6 +18,8 @@ config.resolver.nodeModulesPath = [
     path.resolve(workspaceRoot, 'node_modules'),
 ]
 
+config.resolver.disableHierarchicalLookup = true
+
 // Allow using SVG images
 config.transformer = {
     ...transformer,
@@ -25,7 +27,7 @@ config.transformer = {
 }
 config.resolver = {
     ...resolver,
-    extraNodeModules: require('node-libs-expo'),
+    extraNodeModules: { ...require('node-libs-expo'), ...require('expo-crypto-polyfills') },
     assetExts: resolver.assetExts.filter(ext => ext !== 'svg'),
     sourceExts: [...resolver.sourceExts, 'svg', 'cjs', 'mjs'],
     blacklistRE: exclusionList([/.vercel\/.*/]),

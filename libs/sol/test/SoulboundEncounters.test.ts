@@ -10,7 +10,7 @@ import {
     OwnableUpgradeable__factory,
     SoulboundEncounters__factory,
     UUPSUpgradeable__factory,
-} from '../src'
+} from '../src/types'
 
 const getInterfaceID = (contractInterface: Interface) => {
     let interfaceID: BigNumber = ethers.constants.Zero

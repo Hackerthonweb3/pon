@@ -11,6 +11,7 @@
     "editor.tabSize": 4,
     "files.eol": "\n",
     "typescript.preferences.quoteStyle": "single",
+    "js/ts.implicitProjectConfig.checkJs": true,
 
     // eslint settings
     "eslint.codeActionsOnSave.mode": "all",

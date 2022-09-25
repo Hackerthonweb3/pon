@@ -46,5 +46,8 @@ cache
 typechain
 libs/sol/src/types
 
+# openzeppelin deployments
+libs/sol/.openzeppelin/unknown-*.json
+
 # expo
 .expo
