@@ -1,38 +1,150 @@
-# 🤝 **Web3 Digital Business Card : EthOnline 2022**
+<!-- markdownlint-configure-file {
+  "MD041": false
+} -->
+<div align="center">
+
+# 🤝 **PoN - Web3 Business Card - : EthOnline 2022**
 
 [![GitHub deployments](https://img.shields.io/github/deployments/Hackerthonweb3/business-card/production?label=deployment&logo=vercel&style=flat-square&color=00a550&logoColor=00a550)](https://web3card.vercel.app)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Hackerthonweb3/business-card/Build%20Pipeline?logo=github&style=flat-square&color=00a550&logoColor=00a550)](https://github.com/Hackerthonweb3/business-card/actions/workflows/pipeline.yml)
 
-Digital business cards to help people connect easier while attending web3 conferences and events. The end goal is to create a reputation ecosystem to replace web2 platforms like LinkedIn.
+<img src="./.github/assets/screenshot1.png" align="center"
+     alt="PoN logo" width=800>
 
-## **Problem:**
+<hr />
 
-It is hard to remember and keep track of everyone we meet at events and re-connect later.
+<img src="./.github/assets/logo.png" align="right"
+     alt="PoN logo" width=200 />
 
-## **Current Alternatives:**
+</div>
 
--   Documenting everything in memo apps or spreadsheets
--   Sending friend request on various social networks
+## Table of contents 📌
+
+-   [🤝 **PoN - Web3 Business Card - : EthOnline 2022**](#-pon---web3-business-card----ethonline-2022)
+    -   [Table of contents 📌](#table-of-contents-)
+    -   [🚀 **Statement**](#-statement)
+    -   [🎬 **Pitch & Live Demo (Video)**](#-pitch--live-demo-video)
+    -   [💬 **Problem**](#-problem)
+    -   [💬 **Current Alternatives**](#-current-alternatives)
+    -   [💡 **Solution**](#-solution)
+    -   [💻 **How we made it**](#-how-we-made-it)
+        -   [Technological Implementation](#technological-implementation)
+            -   [Tech Stack](#tech-stack)
+            -   [Easy web3 profile creation and instantly sharing information](#easy-web3-profile-creation-and-instantly-sharing-information)
+            -   [Verifiable connections](#verifiable-connections)
+        -   [Technical details](#technical-details)
+    -   [✨ **Potential of the app usecase**](#-potential-of-the-app-usecase)
+    -   [📓 **Appendix**](#-appendix)
+        -   [Our Product Roadmap](#our-product-roadmap)
+            -   [Launch Officially on Mobile App like iOS and Android](#launch-officially-on-mobile-app-like-ios-and-android)
+        -   [Team Members](#team-members)
+        -   [Resources](#resources)
+
+<hr />
+
+## 🚀 **Statement**
+
+**We are eager to continue the project after the hackathon in order to actually launch it in the world.**
+
+## 🎬 **Pitch & Live Demo (Video)**
+
+PoN are digital business cards to help people connect easier while attending web3 conferences and events. The end goal is to create a reputation ecosystem to replace web2 platforms like LinkedIn.
+
+<p align='center'>
+    <a href='https://www.youtube.com/watch?v=cTG88Kcmj1A'>
+        <img src="https://cf-templates-abh8ozzw2ksd-ap-northeast-1.s3.ap-northeast-1.amazonaws.com/Screen+Shot+2022-09-25+at+12.02.16+PM.png">
+    </a>
+</p>
+
+## 💬 **Problem**
+
+-   It is hard to remember and keep track of everyone we meet at events and re-connect later.
+
+## 💬 **Current Alternatives**
+
+-   Documenting everything in memo apps or spreadsheets.
+-   Sending friend request on various social networks.
 -   Little to no interaction with the web3 ecosystem.
 
-## **Solution:**
+## 💡 **Solution**
 
-Digital business cards to help people connect easier while attending web3 conferences and events.
+**Digital business cards to help people connect easier while attending web3 conferences and events.**
 
-## Features（Originality）
+1. **Easy web3 profile creation**
+    - Create your own profile, with no fees.
+2. **Share your info Instantly.**
+    - Share anything about yourself with one simple link.
+3. **Manage your contacts seamlessly**
+    - Set permissions, search by profile, and even send direct messages.
+4. **Verifiable connections**
+    - Ability to prove / verify connections you have with others.
 
-### 1.**Easy web3 profile creation**
+## 💻 **How we made it**
 
-Create your own profile, with no fees.
+### Technological Implementation
 
-### 2. Share your info Instantly
+#### Tech Stack
 
-Share anything about yourself with one simple link.
+-   Front-End: Nextjs, React, Typescript, Rainbowkit/Wagmi,
+-   Mobile: ReactNative, WalletConnect
+-   Data: Ceramic, Lit Protocol with Orbis-SDK, IPFS
+-   Blockchain: We prepared deployment on Polygon, Optimism, Oasis, Aurora, Cronos. SKALE will be supported soon.
 
-### 3. Manage your contacts seamlessly
+#### Easy web3 profile creation and instantly sharing information
 
-Set permissions, search by profile, and even send direct messages.
+-   **Ceramic**： We are mixing these on-chain solutions with off-chain portable data by using Ceramic and Lit protocols, to achieve a superior UX combined with React to easily onboard every kind of use in any platform.
+-   **IPFS/Filecoin**： To upload metadata about the encounter, upload media data, dapp deployed to IPFS.
+-   **ENS**： Optional subdomains or just integration with avatar, twitter fields, create profile in eth page and redirect to web2 eth.link.
 
-### 4. Verifiable connections
+#### Verifiable connections
 
-Ability to prove / verify connections you have with others.
+-   **Polygon**：The Souldbound minting contract deployed and consumed with cheap fees.
+
+-   **Optimism**：The Souldbound minting contract deployed to this network to experience high scalabality.
+    .
+
+-   **Cronos**：To deploy SBTs to the blockchain to prove that a user has met a person.
+
+-   **SKALE (Planned)**：To deploy SBTs to the blockchain to prove that a user has met a person because of true data ownership.
+
+-   **Oasis**：To deploy SBTs to the blockchain to prove that a user has met a person because of zero gas and speed.
+
+-   **Aurora**：To deploy SBTs to the blockchain to prove that a user has met a person.
+
+-   **The Graph (Planned)**：Subgraph to query all SBTs, interacting with other sponsors subgraphs. This makes PoN a multi-chain application and the subgraph really helps us to do that with good UI/UX experience for not only users, but also developers in our team.
+
+### Technical details
+
+-   The Soulbound tokens and their characteristics: non transferable but burnable to avoid spam.
+-   The Etherum standards we based the product on: ERC712 for signature verifications, ERC4973 for SBTs and contracts upgradeable with UUPS.
+-   The signatures are stored off-chain and encrypted with Threshold cryptography thanks to Lit protocol, any sensitive data is encrypted that way as well.
+-   Part of the data relevant to encounter goes onchain when a user decides to mint the SBT to proof the encounter.
+-   We built universal apps for web (nextjs) and mobile (ios, android).
+
+## ✨ **Potential of the app usecase**
+
+We are studying mechanisms to use the reputation for example, to get undecollateralized loans.
+
+## 📓 **Appendix**
+
+### Our Product Roadmap
+
+#### Launch Officially on Mobile App like iOS and Android
+
+How is this product creative and unique:
+
+-   To make Web3 social products a product market fit for consumers, it is necessary to achieve a better UX, and a mobile experience is essential to this. There are only few projects in the industry that are able to combine data portability and mobile.
+
+### Team Members
+
+-   Otto | Full stack Software Engineer | In blockchain space since 2013, full stack+solidity developer.
+-   Ryndon | Product Manager | Youtuber at TJFREE | Free Software Advocate | Entrepreneur.
+-   Jonathan Cruz | UX/UI Design |
+-   Asiya | Full stack Software Engineer | Staff SWE at PANW I #AI MS Georgia Tech | Learning #wingfoil , #web3 | @siggraph_irc committee Chair | @developer_dao #1076.
+-   Carlos | Full stack Software Engineer |
+
+### Resources
+
+-   [Twitter](https://twitter.com/Web3PoN)
+-   [Demo1: Mobile use](https://www.youtube.com/watch?v=cTG88Kcmj1A)
+-   [Demo2: Web app use](https://www.youtube.com/watch?v=tH_4JWuMJB4)
