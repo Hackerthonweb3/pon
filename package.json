@@ -9,7 +9,7 @@
         "build:web": "turbo run build --filter=web",
         "build:sol": "turbo run build --filter=sol",
         "compile": "pnpm -F sol compile",
-        "deploy": "pnpm -F sol deploy",
+        "deploy:local": "pnpm -F sol deploy:local",
         "dev:mobile": "pnpm -F mobile dev",
         "dev:web": "pnpm -F web dev",
         "export": "pnpm -F web export",

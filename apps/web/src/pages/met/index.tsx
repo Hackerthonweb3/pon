@@ -54,5 +54,5 @@ export default function QRHolder() {
     // return () => clearInterval(timer.current)
     // }, [timestamp, orbis])
 
-    return <div>QR</div>
+    return <div>Please go to QR code first</div>
 }

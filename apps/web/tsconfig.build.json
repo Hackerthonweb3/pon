@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "baseUrl": "src"
-        // "paths": { "@business-card/*": ["../../../libs/*/src"] }
     },
     "extends": "tsconfig/nextjs.json",
     "include": ["next-env.d.ts", "src", "types.d.ts"],

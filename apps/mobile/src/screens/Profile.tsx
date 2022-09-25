@@ -30,7 +30,7 @@ export const Profile = () => {
                         <Text>{description}</Text>
                     </ContainerFlex>
                     <Gallery title='NFT Gallery' />
-                    <Gallery title='POAP Gallery' />
+                    <Gallery title='PoN SBT Gallery' />
                     <Social profile={mockProfile} />
                 </ContainerFlex>
             </Layout>

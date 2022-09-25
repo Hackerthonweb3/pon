@@ -28,10 +28,6 @@ export default function Contacts() {
 
     const handleChange = (event: any) => setSearchVal(event.target.value)
 
-    function handleScanRedirect() {
-        router.push({ pathname: '/scan' })
-    }
-
     const data = searchVal
         ? mockContacts.filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase()))
         : mockContacts
@@ -55,9 +51,6 @@ export default function Contacts() {
                 <Input value={searchVal} variant='filled' onChange={handleChange} placeholder='Search by Name' />
             </Box>
             <div>{renderContacts}</div>
-            <Button onClick={handleScanRedirect} h={42} p='10px' backgroundColor={'#ffffff3d'}>
-                <Image src={ScanSvg} alt='scan' />
-            </Button>
         </Stack>
     )
 }

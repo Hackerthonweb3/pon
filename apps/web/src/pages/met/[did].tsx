@@ -1,9 +1,10 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { indexer } from '@orbisclub/orbis-sdk/lib/indexer-db'
-import { Button, Heading, Text, VStack } from '@chakra-ui/react'
+import { Button, Heading, Text, useDisclosure, VStack } from '@chakra-ui/react'
 import { useSignMessage, useSignTypedData } from 'wagmi'
 import { useCallback, useEffect, useState } from 'react'
 import { useOrbis } from '~/hooks'
+import AccountModal from '~/components/AccountModal'
 
 // TODO: move this to modal as in figma designs
 // TODO: sanity checks, if the profile is not a business-card profile prompt to register
@@ -32,6 +33,7 @@ export default function Add({ didProfile }: InferGetStaticPropsType<typeof getSt
     const [timestamp] = useState<number>(Date.now())
     const [message, setMessage] = useState<ProofMessage>()
     const [signature, setSignature] = useState<string>()
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const { signTypedData } = useSignTypedData({
         domain: {
             name: 'Web3 Business Card',
@@ -55,8 +57,10 @@ export default function Add({ didProfile }: InferGetStaticPropsType<typeof getSt
             ],
         },
         value: message,
-        onSuccess: async signature => {
-            setSignature(signature)
+        onSuccess: async generatedSignature => {
+            setSignature(generatedSignature)
+            console.log('the signature', generatedSignature)
+            onOpen()
             if (message) {
                 const content = {
                     recipients: [message?.met.did, message?.you.did],
@@ -101,12 +105,12 @@ export default function Add({ didProfile }: InferGetStaticPropsType<typeof getSt
             announcement: 'You are about to add a contact, please check the details:',
             event: 'EthOnline 2022',
             you: {
-                name: 'Alice',
+                name: 'Purple tail fox',
                 address: '0x3452912b8d1D5E8bDf18C421c1d60b5A716368d0',
                 did: 'did:pkh:eip155:80001:0x3452912b8d1D5E8bDf18C421c1d60b5A716368d0',
             },
             met: {
-                name: 'Bob',
+                name: 'asha',
                 address: '0xe13f6360ecd6df96290d5581fac6ab57b9c5fa56',
                 did: 'did:pkh:eip155:80001:0xe13f6360ecd6df96290d5581fac6ab57b9c5fa56',
             },
@@ -138,6 +142,7 @@ export default function Add({ didProfile }: InferGetStaticPropsType<typeof getSt
                 Please sign the message in your wallet to confirm that you have met {didProfile.data.username}
             </Text>
             <Button onClick={signEncounter}>I am ready to sign</Button>
+            <AccountModal isOpen={isOpen} onClose={onClose} signature={signature} />
         </VStack>
     )
 }

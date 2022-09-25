@@ -3,20 +3,8 @@ import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import QRCode from 'react-qr-code'
-import {
-    useDisclosure,
-    Heading,
-    Text,
-    VStack,
-    FormControl,
-    FormLabel,
-    Input,
-    InputGroup,
-    Button,
-    Flex,
-    Box,
-} from '@chakra-ui/react'
-import AccountModal from '~/components/AccountModal'
+import { Text, VStack, FormControl, FormLabel, Input, InputGroup, Button, Flex, Box } from '@chakra-ui/react'
+
 import ImageMask from '~/components/ImageMask'
 
 import AvatarSvg from '../media/avatar.svg'
@@ -33,16 +21,14 @@ export default function Scan({ profile }: any) {
     const { register } = useForm()
     const [activeView, setActiveView] = useState('qr')
     const [newDid, setDid] = useState('')
-    const { isOpen, onOpen, onClose } = useDisclosure()
 
     function isQr() {
         return activeView === 'qr'
     }
 
+    const exampleDid = 'did:pkh:eip155:137:0xe73d88e147e12ca4cdde9062db67f06ffd43c5e8'
     useEffect(() => {
-        // 'did:pkh:eip155:137:0xe73d88e147e12ca4cdde9062db67f06ffd43c5e8'
         if (newDid) {
-            //onOpen() // TODO: move po logic to modal
             router.push({ pathname: '/met/[did]', query: { did: newDid } }, '/met')
         }
         return () => {
@@ -142,7 +128,17 @@ export default function Scan({ profile }: any) {
                     </span>
                 </Button>
             </Flex>
-            <AccountModal isOpen={isOpen} onClose={onClose} />
+            <Button
+                onClick={() => handleScan(exampleDid)}
+                h={92}
+                p='10px'
+                w='50%'
+                backgroundColor={isQr() ? '#232934' : '#ffffff3d'}>
+                <span>
+                    <Image src={ScanSvg} alt='scan' />
+                    <Text>Simulate QR Scan</Text>
+                </span>
+            </Button>
         </VStack>
     )
 }

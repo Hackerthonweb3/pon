@@ -60,39 +60,6 @@ export const CodeScan = () => {
     )
 }
 
-// <Modal
-//     style={{ backgroundColor: 'transparent' }}
-//     onDismiss={hideMessageModal}
-//     transparent={true}
-//     visible={messageModalIsVisible}>
-//     <View style={styles.modalView}>
-//         <View style={styles.modalViewView}>
-//             <Text style={styles.modalText}>You have connected with Hidetaka!</Text>
-//             <View style={styles.avatarView}>
-//                 <Image style={styles.avatar} source={require('../assets/images/hidetaka.png')} />
-//             </View>
-//             <Button title={'Done'} onPress={hideMessageModal} />
-//         </View>
-//     </View>
-// </Modal>
-
-// const ConfirmModal = () => {
-//     <Modal visible={visible} onDismiss={hideDialog} style={{ backgroundColor: 'transparent' }}>
-//     <View style={styles.modal}>
-//         <View style={styles.modalView}>
-//             <Text style={{ ...styles.dialogText, marginBottom: 20 }}>
-//                 You have connected with Hidetaka!
-//             </Text>
-//             <Image
-//                 style={{ maxWidth: '100%', alignSelf: 'center' }}
-//                 source={require('../assets/images/qr.svg')}
-//             />
-//             <Button title={'Done'} onPress={hideDialog} />
-//         </View>
-//     </View>
-// </Modal>
-// }
-
 const styles = StyleSheet.create({
     screen: {
         flex: 1,

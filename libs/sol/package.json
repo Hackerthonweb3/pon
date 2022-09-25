@@ -1,13 +1,14 @@
 {
     "name": "@business-card/sol",
     "version": "0.0.1",
-    "main": "dist/index.js",
+    "main": "src/index.ts",
     "scripts": {
         "build": "tsc -p tsconfig.build.json",
         "compile": "hardhat compile",
         "coverage:watch": "nodemon -e ts,sol -w contracts -w test --exec pnpm coverage",
         "coverage": "hardhat coverage",
-        "deploy": "hardhat run scripts/10-deploy-sb-v1.ts --network hardhat",
+        "deploy:local": "hardhat run scripts/10-deploy-sb-v1.ts --network hardhat",
+        "deploy:network": "hardhat run scripts/10-deploy-sb-v1.ts --network",
         "fmt:sol": "prettier 'contracts/**/*.sol' -w",
         "lint:sol": "solhint 'contracts/**/*.sol'",
         "node": "hardhat node",

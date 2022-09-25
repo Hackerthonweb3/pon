@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Box, Text, Flex, Button, FormControl } from '@chakra-ui/react'
 
 import { useOrbis } from '~/hooks'
@@ -16,9 +15,6 @@ import ImageMask from './ImageMask'
 import ProfileIcon from '../media/avatar.svg'
 import ProfileOneIcon from '../media/p1.png'
 import ProfileTwoIcon from '../media/p2.png'
-
-// change to contact data
-const mockCProfile = [{ title: 'hidetaka.eth', icon: ProfileIcon, text: '@deepdiver_web3' }]
 
 const mockNfts = [
     {
@@ -46,6 +42,11 @@ export default function UserProfile({ isMyProfile, profile }: any) {
 
     const router = useRouter()
 
+    useEffect(() => {
+        setProfileData(profile)
+        setPfpCid(profile?.pfp)
+    }, [])
+
     function showAll() {
         router.push('/contacts')
     }
@@ -60,11 +61,6 @@ export default function UserProfile({ isMyProfile, profile }: any) {
             setMessage('')
         }, 5000)
     }
-
-    useEffect(() => {
-        setProfileData(profile)
-        setPfpCid(profile?.pfp)
-    }, [profile])
 
     async function onSubmit(fileVals: any) {
         const newData = { ...profileData }
@@ -117,6 +113,8 @@ export default function UserProfile({ isMyProfile, profile }: any) {
             PFP
         </FileUploader>
     )
+
+    if (!profile) return null
 
     return (
         <>
@@ -189,7 +187,7 @@ export default function UserProfile({ isMyProfile, profile }: any) {
                         <Text color='red.500'>{updateMsg}</Text>
                     </>
                 ) : (
-                    <List data={mockCProfile} />
+                    <List />
                 )}
             </Box>
             {renderContacts}

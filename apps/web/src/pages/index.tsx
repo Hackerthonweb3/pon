@@ -1,74 +1,45 @@
-import { useEffect } from 'react'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { Box, Heading, Container, Text, Stack, VStack, Spinner } from '@chakra-ui/react'
-import { useOrbis, useSafeConnected } from '~/hooks'
-import Scan from '~/components/Scan'
-import NewUser from '~/components/NewUser'
+import { Box, Heading, Text, VStack, Spinner } from '@chakra-ui/react'
+import { useOrbis } from '~/hooks'
 import { CustomConnect } from '~/components/CustomConnect'
-import CeramicSessionComponent from '~/components/CeramicSessionComponent'
 
 import type { NextPage } from 'next'
-import Head from 'next/head'
+import { useAccount } from 'wagmi'
 
 const Home: NextPage = () => {
-    const isConnected = useSafeConnected()
-    const { profile, orbis, loadingDid, loadingProfile } = useOrbis()
-    const router = useRouter()
+    const { orbis, loadingDid, loadingProfile } = useOrbis()
     const isLoading = loadingDid || loadingProfile
-
-    if (!orbis) {
-        throw new Error('useOrbis must be used within a OrbisProvider')
-    }
-
-    useEffect(() => {
-        if (!isLoading && orbis) {
-            if (isConnected && profile?.name) {
-                router.push('/contacts')
-            }
-
-            if (isConnected && !profile?.name) {
-                router.push('/create')
-            }
-        }
-    }, [isConnected, profile, loadingDid, loadingProfile])
+    const { isConnected } = useAccount()
 
     const renderLanding = (
-        <Box mt={40}>
+        <VStack>
             <Heading lineHeight={'90%'}>
-                <Text mt={4} color={'gray.400'} fontSize='18px' letterSpacing='2px'>
+                <Text mb={50} color={'gray.400'} fontSize='48px' letterSpacing='2px'>
                     Web3 Digital Business Card
                 </Text>
             </Heading>
-            <VStack gap={5}>
-                <Text color={'gray.300'} fontSize='22px'>
-                    Hi Anon, log in with your wallet to create or view your profile
-                </Text>
-                <Text color={'blue.300'} fontSize='22px'>
+            <VStack mt={50} gap={50}>
+                {!isConnected && (
+                    <Text color={'gray.300'} fontSize='22px'>
+                        Hi Anon, log in with your wallet to create or view your profile
+                    </Text>
+                )}
+                <CustomConnect />
+                <Text color={'blue.300'} fontSize='18px'>
                     Recommended network is Polygon
                 </Text>
-                <CustomConnect />
             </VStack>
-        </Box>
+        </VStack>
     )
 
     return (
-        <>
-            <Head>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-            </Head>
-            <Container maxW={'3xl'}>
-                <Stack as={Box} textAlign={'center'} spacing={{ base: 8, md: 14 }} py={{ base: 10, md: 5 }}>
-                    {!isConnected && renderLanding}
-                    {isConnected && (!orbis || isLoading) && (
-                        <Box>
-                            <Spinner />
-                        </Box>
-                    )}
-                    <CeramicSessionComponent />
-                </Stack>
-            </Container>
-        </>
+        <VStack h='container.sm' justify={'center'}>
+            {!isLoading && renderLanding}
+            {(!orbis || isLoading) && (
+                <Box>
+                    <Spinner />
+                </Box>
+            )}
+        </VStack>
     )
 }
 
