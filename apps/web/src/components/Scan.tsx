@@ -130,9 +130,6 @@ export default function Scan({ profile }: any) {
                         <Text>QRcode</Text>
                     </span>
                 </Button>
-                <div style={{ borderRight: '2.5px solid', color: '#191e2b', width: 'px', margin: '10px 0px' }}>
-                    Pending
-                </div>
                 <Button
                     onClick={() => handleChangeMode('scan')}
                     h={92}

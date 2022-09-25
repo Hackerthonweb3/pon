@@ -10,31 +10,28 @@ import CeramicSessionComponent from '~/components/CeramicSessionComponent'
 
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Button2 } from '@business-card/sdk'
 
 const Home: NextPage = () => {
-    // const isConnected = useSafeConnected()
-    // const { profile, orbis, loadingDid, loadingProfile } = useOrbis()
+    const isConnected = useSafeConnected()
+    const { profile, orbis, loadingDid, loadingProfile } = useOrbis()
     const router = useRouter()
-    // const isLoading = loadingDid || loadingProfile
+    const isLoading = loadingDid || loadingProfile
 
-    // if (!orbis) {
-    //     throw new Error('useOrbis must be used within a OrbisProvider')
-    // }
+    if (!orbis) {
+        throw new Error('useOrbis must be used within a OrbisProvider')
+    }
 
-    // useEffect(() => {
-    // if (!isLoading && orbis) {
-    // if (isConnected && profile?.name) {
-    // router.push('/contacts')
-    // }
+    useEffect(() => {
+        if (!isLoading && orbis) {
+            if (isConnected && profile?.name) {
+                router.push('/contacts')
+            }
 
-    // if (isConnected && !profile?.name) {
-    // router.push('/create')
-    // }
-    // }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [isConnected, profile, loadingDid, loadingProfile])
+            if (isConnected && !profile?.name) {
+                router.push('/create')
+            }
+        }
+    }, [isConnected, profile, loadingDid, loadingProfile])
 
     const renderLanding = (
         <Box mt={40}>
@@ -62,14 +59,13 @@ const Home: NextPage = () => {
             </Head>
             <Container maxW={'3xl'}>
                 <Stack as={Box} textAlign={'center'} spacing={{ base: 8, md: 14 }} py={{ base: 10, md: 5 }}>
-                    <Button2 />
-                    {/* {!isConnected && renderLanding} */}
-                    {/* {isConnected && (!orbis || isLoading) && ( */}
-                    {/* <Box> */}
-                    {/* <Spinner /> */}
-                    {/* </Box> */}
-                    {/* )} */}
-                    {/* <CeramicSessionComponent /> */}
+                    {!isConnected && renderLanding}
+                    {isConnected && (!orbis || isLoading) && (
+                        <Box>
+                            <Spinner />
+                        </Box>
+                    )}
+                    <CeramicSessionComponent />
                 </Stack>
             </Container>
         </>
