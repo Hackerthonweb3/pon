@@ -24,5 +24,16 @@
         "tsconfig": "workspace:*",
         "typescript": "4.8.3",
         "wagmi": "0.6.7"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": ["*.ts", "*.tsx", "*.d.ts"],
+                "extends": ["custom"],
+                "plugins": ["@typescript-eslint"],
+                "parser": "@typescript-eslint/parser",
+                "parserOptions": { "project": "./libs/sdk/tsconfig.eslint.json" }
+            }
+        ]
     }
 }

@@ -3,37 +3,15 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Box, Text, Flex, Button, FormControl } from '@chakra-ui/react'
 
 import { useOrbis } from '~/hooks'
 import { ipfsClient } from '~/lib'
 import { EditableField } from './Profile/EditableField'
 import { FileUploader } from './FileUploader'
-import NftGallery from './NftGallery'
 import List from './List'
 import ImageMask from './ImageMask'
 import ProfileIcon from '../media/avatar.svg'
-import ProfileOneIcon from '../media/p1.png'
-import ProfileTwoIcon from '../media/p2.png'
-
-// change to contact data
-const mockCProfile = [{ title: 'hidetaka.eth', icon: ProfileIcon, text: '@deepdiver_web3' }]
-
-const mockNfts = [
-    {
-        id: '1',
-        icon: ProfileOneIcon,
-    },
-    {
-        id: '2',
-        icon: ProfileTwoIcon,
-    },
-    {
-        id: '1',
-        icon: ProfileOneIcon,
-    },
-]
 
 export default function UserProfile({ isMyProfile, profile }: any) {
     const [isEdit, setIsEdit] = useState(false)
@@ -45,6 +23,11 @@ export default function UserProfile({ isMyProfile, profile }: any) {
     const [error, setError] = useState(null as any)
 
     const router = useRouter()
+
+    useEffect(() => {
+        setProfileData(profile)
+        setPfpCid(profile?.pfp)
+    }, [])
 
     function showAll() {
         router.push('/contacts')
@@ -60,11 +43,6 @@ export default function UserProfile({ isMyProfile, profile }: any) {
             setMessage('')
         }, 5000)
     }
-
-    useEffect(() => {
-        setProfileData(profile)
-        setPfpCid(profile?.pfp)
-    }, [profile])
 
     async function onSubmit(fileVals: any) {
         const newData = { ...profileData }
@@ -94,7 +72,6 @@ export default function UserProfile({ isMyProfile, profile }: any) {
     const renderNote = !isMyProfile && (
         <>
             <Flex justifyContent='space-between' px={2}>
-                <Text fontWeight={400}>{mockNfts.length} Your Note</Text>
                 <Text cursor='pointer' fontWeight={400} color='blue.400' onClick={showAll}>
                     Edit
                 </Text>
@@ -102,7 +79,6 @@ export default function UserProfile({ isMyProfile, profile }: any) {
             <Flex>Met at EthCC Hack and ETHBarcelona</Flex>
         </>
     )
-    const renderContacts = mockNfts.length && isMyProfile && <NftGallery data={mockNfts} />
 
     const profileImage = pfpCid ? (
         <ImageMask imageCid={pfpCid} />
@@ -117,6 +93,8 @@ export default function UserProfile({ isMyProfile, profile }: any) {
             PFP
         </FileUploader>
     )
+
+    if (!profile) return null
 
     return (
         <>
@@ -189,10 +167,10 @@ export default function UserProfile({ isMyProfile, profile }: any) {
                         <Text color='red.500'>{updateMsg}</Text>
                     </>
                 ) : (
-                    <List data={mockCProfile} />
+                    <List />
                 )}
             </Box>
-            {renderContacts}
+            {/* {renderContacts} */}
             {renderNote}
             <Box>Prefered contact method</Box>
         </>

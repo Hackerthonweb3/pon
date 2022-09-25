@@ -7,6 +7,7 @@ import { WagmiConfig } from 'wagmi'
 import { theme, wagmiClient } from '~/lib'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '~/components/ErrorFallBack'
+import { OrbisProvider } from '~/contexts'
 
 function App({ Component, pageProps }: AppProps) {
     return (
@@ -17,9 +18,11 @@ function App({ Component, pageProps }: AppProps) {
             onReset={() => {}}>
             <ChakraProvider theme={theme}>
                 <WagmiConfig client={wagmiClient}>
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
+                    <OrbisProvider>
+                        <Layout>
+                            <Component {...pageProps} />
+                        </Layout>
+                    </OrbisProvider>
                 </WagmiConfig>
             </ChakraProvider>
         </ErrorBoundary>

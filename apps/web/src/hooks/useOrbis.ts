@@ -30,13 +30,10 @@ export const useOrbis = () => {
 
     const { address, connector } = useAccount()
     const { chain } = useNetwork()
-    console.log({ address })
     const [profile, setProfile] = useState<Profile>()
     const [dids, setDids] = useState<OrbisDid[]>()
-    console.log({ profile })
     useEffect(() => {
         const getDids = async () => {
-            const provider = await connector?.getProvider()
             if (address) {
                 setLoadingDid(true)
                 const dids = await orbis.getDids(address)

@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@business-card/sdk": "workspace:*",
+        "@business-card/sol": "workspace:*",
         "@chakra-ui/icons": "2.0.10",
         "@chakra-ui/react": "2.3.4",
         "@chakra-ui/styled-system": "2.3.3",
