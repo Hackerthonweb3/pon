@@ -36,10 +36,32 @@ const config: HardhatUserConfig = {
         },
         polygon: {
             url: ' https://polygon-rpc.com',
+            chainId: 137,
             accounts,
         },
         mumbai: {
             url: 'https://rpc-mumbai.maticvigil.com',
+            chainId: 80_001,
+            accounts,
+        },
+        optimism: {
+            url: 'https://mainnet.optimism.io',
+            chainId: 10,
+            accounts,
+        },
+        aurora: {
+            url: 'https://mainnet.aurora.dev',
+            chainId: 1_313_161_554,
+            accounts,
+        },
+        cronos: {
+            url: 'https://evm.cronos.org',
+            chainId: 25,
+            accounts,
+        },
+        oasis: {
+            url: 'https://emerald.oasis.dev',
+            chainId: 42_262,
             accounts,
         },
     },
