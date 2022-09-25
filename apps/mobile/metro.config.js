@@ -27,7 +27,7 @@ config.transformer = {
 }
 config.resolver = {
     ...resolver,
-    extraNodeModules: require('node-libs-expo'),
+    extraNodeModules: { ...require('node-libs-expo'), ...require('expo-crypto-polyfills') },
     assetExts: resolver.assetExts.filter(ext => ext !== 'svg'),
     sourceExts: [...resolver.sourceExts, 'svg', 'cjs', 'mjs'],
     blacklistRE: exclusionList([/.vercel\/.*/]),
