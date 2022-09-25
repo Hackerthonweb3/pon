@@ -168,7 +168,7 @@ importers:
       '@babel/core': 7.19.1
       '@babel/preset-env': 7.19.1
       '@business-card/sdk': workspace:*
-      '@business-card/sol': workspace:0.0.1
+      '@business-card/sol': workspace:*
       '@chakra-ui/icons': 2.0.10
       '@chakra-ui/react': 2.3.4
       '@chakra-ui/styled-system': 2.3.3
