@@ -10,7 +10,7 @@ export const Button = (props: ButtonProps) => {
 
     return (
         <TouchableOpacity style={[{ alignItems: 'center' }, style]} {...otherProps}>
-            <ButtonDecoration width={width || 390} height={70} />
+            <ButtonDecoration width={width ?? 390} height={70} />
             <ButtonLabel>{label}</ButtonLabel>
         </TouchableOpacity>
     )

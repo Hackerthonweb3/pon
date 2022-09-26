@@ -4,9 +4,7 @@ import { Pressable } from 'react-native'
 
 import QRIcon from '../../assets/images/svg-icons/qr.svg'
 import { colors } from '../../constants/colors'
-
 import { Contacts, Profile, QRCode } from '../../screens'
-
 import { MainBottomBarScreens, MainBottomBarScreenProps } from '../../types'
 
 const BottomBar = createBottomTabNavigator<MainBottomBarScreens>()
