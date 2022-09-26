@@ -1,8 +1,7 @@
 import { Image, StyleSheet, ScrollView } from 'react-native'
 
-import { ContainerFlex, SpaceBetween } from './DesignSystem'
-import { SubTitle } from './StyledText'
 import { colors } from '../constants/colors'
+import { ContainerFlex, SpaceBetween } from './DesignSystem'
 
 const styles = StyleSheet.create({
     avatar: {

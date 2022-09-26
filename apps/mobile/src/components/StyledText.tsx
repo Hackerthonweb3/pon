@@ -1,14 +1,16 @@
 import styled from 'styled-components/native'
-import { colors } from '../constants/colors'
 
 import { typeScale } from '../constants/TypeScale'
+import { colors } from '../constants/colors'
 
 export const MonoText = styled.Text`
     font-family: 'Inter';
 `
+
 export const VtText = styled.Text`
     font-family: 'VT323';
 `
+
 export const Title = styled(VtText)`
     color: ${colors.textMain};
     font-size: ${typeScale.title}px;

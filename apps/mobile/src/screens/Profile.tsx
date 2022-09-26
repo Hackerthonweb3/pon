@@ -1,29 +1,19 @@
-import { background, color, requiredChakraThemeKeys } from '@chakra-ui/react'
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
-import {
-    ScrollView,
-    Text,
-    Image,
-    View,
-    StyleSheet,
-    Switch,
-    TouchableOpacity,
-    Button as ButtonNative,
-} from 'react-native'
-import { Button } from '../components/shared/Button'
+import { ScrollView, Text, Image, View, StyleSheet, Switch, TouchableOpacity } from 'react-native'
 
-import { Layout, SpaceEnd, ContainerFlex, Flex, SpaceBetween } from '../components/DesignSystem'
+import { Layout, Flex } from '../components/DesignSystem'
 import { Title, SubTitle, Note, NoteMono } from '../components/StyledText'
 import { InfoContainer } from '../components/InfoContainer'
 import { Gallery } from '../components/Gallery'
 import { Social } from '../components/Social'
 import { Avatar } from '../components/StyledAvatar'
+import { Button } from '../components/shared/Button'
 import { CenteredContainer } from '../components/shared/CenteredContainer'
 import { colors } from '../constants/colors'
 import { mockProfile } from '../constants/mock'
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
     backgroundContainer: {
         position: 'absolute',
         top: 0,
@@ -86,8 +76,7 @@ enum EGallery {
 }
 
 export const Profile = () => {
-    const { name, description, pfp, twitter, cover, location, occupation, organization, whatCan, wantMeet } =
-        mockProfile
+    const { name, description, pfp, location, occupation, organization, whatCan, wantMeet } = mockProfile
 
     const [selectedGalleryTab, setSelectedGalleryTab] = useState(EGallery.NFTS)
     const [isPreferedContact, setIsPreferedContact] = useState(false)
@@ -104,12 +93,6 @@ export const Profile = () => {
         navigation.navigate('Create')
     }
 
-    const renderInfo = (title: string, text: string) => (
-        <View style={styles.fullInfo}>
-            <SubTitle>{title}</SubTitle>
-            <Note>{text}</Note>
-        </View>
-    )
     const renderGalleryButton = (galleryName: EGallery) => (
         <TouchableOpacity
             onPress={() => setSelectedGalleryTab(galleryName)}
@@ -130,11 +113,11 @@ export const Profile = () => {
     const renderFullInfo = isFullView && (
         <>
             <Button label='Edit Profile' width={280} style={{ width: 260 }} onPress={handleEditLink} />
-            {renderInfo('Location', location)}
-            {renderInfo('Job Title', occupation)}
-            {renderInfo('Organization', organization)}
-            {renderInfo('Skills', whatCan)}
-            {renderInfo('Interested in meeting', wantMeet)}
+            <InfoContainer title='Location' text={location} />
+            <InfoContainer title='Job Title' text={occupation} />
+            <InfoContainer title='Organization' text={organization} />
+            <InfoContainer title='Skills' text={whatCan} />
+            <InfoContainer title='Interested in meeting' text={wantMeet} />
         </>
     )
 

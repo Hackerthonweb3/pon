@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
-import { color } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 
 import ArrowDown from '../assets/images/graphics/arrow-down.svg'
 import SurpriseIcon from '../assets/images/graphics/surprised.svg'

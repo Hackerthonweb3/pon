@@ -1,4 +1,5 @@
 import { View } from 'react-native'
+
 import { SubTitle, Note } from '../components/StyledText'
 
 export const InfoContainer = ({ title, text }: { title: string; text: string }) => (
