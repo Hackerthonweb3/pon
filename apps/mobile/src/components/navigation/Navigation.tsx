@@ -20,9 +20,9 @@ export const Navigation = () => {
         <NavigationContainer linking={LinkingConfiguration}>
             <Stack.Navigator>
                 <Stack.Group screenOptions={defaultScreenOptions}>
-                    {/* {isLoading && <Stack.Screen name='Loading' component={Loading} />}
+                    {isLoading && <Stack.Screen name='Loading' component={Loading} />}
                     {isOnboarding && <Stack.Screen name='Onboarding' component={Onboarding} />}
-                    <Stack.Screen name='ConnectWallet' component={ConnectWallet} /> */}
+                    <Stack.Screen name='ConnectWallet' component={ConnectWallet} />
                     <Stack.Screen name='MainBottomBar' component={MainBottomBar} />
                 </Stack.Group>
 

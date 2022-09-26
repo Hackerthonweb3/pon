@@ -3,14 +3,14 @@ import styled from 'styled-components/native'
 
 import ButtonDecoration from '../../assets/images/graphics/button-decoration.svg'
 
-type ButtonProps = TouchableOpacityProps & { label: string }
+type ButtonProps = TouchableOpacityProps & { label: string; width?: number | string }
 
 export const Button = (props: ButtonProps) => {
-    const { label, style, ...otherProps } = props
+    const { label, style, width, ...otherProps } = props
 
     return (
         <TouchableOpacity style={[{ alignItems: 'center' }, style]} {...otherProps}>
-            <ButtonDecoration width={390} height={70} />
+            <ButtonDecoration width={width || 390} height={70} />
             <ButtonLabel>{label}</ButtonLabel>
         </TouchableOpacity>
     )

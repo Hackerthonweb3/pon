@@ -22,10 +22,6 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
 })
-const sharedContanterStyle = {
-    lightColor: '#ecf3f6',
-    darkColor: '#353844',
-}
 
 const SocialItem = (item: any, profile: any) => {
     const hasProfileItem = profile[item]
@@ -44,9 +40,11 @@ const SocialItem = (item: any, profile: any) => {
 
 export function Social(props: any) {
     const { profile } = props
+    console.log('profile')
+    console.log(profile)
 
     return (
-        <ContainerFlex {...sharedContanterStyle} m='0px' p='10px' br='12px'>
+        <ContainerFlex m='0px' p='10px' br='12px'>
             {socialsList.map((item: string, index: any) => {
                 return <SocialItem item={item} profile={profile} key={index} />
             })}
