@@ -23,6 +23,7 @@ importers:
       '@ethersproject/shims': 5.7.0
       '@expo-google-fonts/inter': 0.2.2
       '@expo-google-fonts/vt323': 0.2.2
+      '@expo/ngrok': ^4.1.0
       '@expo/vector-icons': 13.0.0
       '@react-native-async-storage/async-storage': 1.17.10
       '@react-navigation/bottom-tabs': 6.4.0
@@ -54,6 +55,7 @@ importers:
       expo-checkbox: 2.2.0
       expo-crypto: 11.0.0
       expo-crypto-polyfills: 1.1.0
+      expo-dev-client: 1.2.1
       expo-font: 10.2.0
       expo-image-picker: 13.3.1
       expo-linking: 3.2.2
@@ -141,6 +143,7 @@ importers:
       '@babel/core': 7.19.1
       '@babel/plugin-proposal-export-namespace-from': 7.18.9_@babel+core@7.19.1
       '@babel/preset-env': 7.19.1_@babel+core@7.19.1
+      '@expo/ngrok': 4.1.0
       '@svgr/core': 6.3.1
       '@svgr/plugin-svgo': 6.3.1_@svgr+core@6.3.1
       '@types/react': 18.0.20
@@ -153,6 +156,7 @@ importers:
       eslint: 8.23.1
       eslint-config-prettier: 8.5.0_eslint@8.23.1
       eslint-config-universe: 11.1.0_prdxvwpqz7ols7qpi4wzmubrfu
+      expo-dev-client: 1.2.1_expo@46.0.13
       expo-optimize: 0.2.19
       expo-updates: 0.14.5_expo@46.0.13
       prettier: 2.7.1
@@ -4148,6 +4152,121 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
+  /@expo/ngrok-bin-darwin-arm64/2.3.40:
+    resolution: {integrity: sha512-Zij81v/bIsVBvgXgYS71xbi/3lqKfVEfr7rId8BsHO3Ec1nQcp/I+729W3KX9PUHzWlXCLxOKZ3uF4jL/TcNbg==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-darwin-x64/2.3.40:
+    resolution: {integrity: sha512-nqGLfxIjZBoT79VDk5mqaHQKCWkunSi486zGLeB8Ye8Qar1yo4STFwks+DqTbnGD5ItArQz2LzKRVE4YXuJFuw==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-freebsd-ia32/2.3.40:
+    resolution: {integrity: sha512-Ji3jZaOuIZO+ege23kZZAAEPUYkF+6mCpghb16b28Is1QHOSl2L4foDnAcWyzSEiBihMicxWltaQyaaxA0fdgw==}
+    cpu: [ia32]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-freebsd-x64/2.3.40:
+    resolution: {integrity: sha512-mVnzKGQmOyXimZx6udoiyo3ZTYLZnPShlTySaDP0tqQ0vYz4ZscgvaYpMmDSPrsP/YG2owmKgzmOE2V+ycD8qA==}
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-linux-arm/2.3.40:
+    resolution: {integrity: sha512-Je1QBd7x0hbZa4T3gZbVgD0cSzstpJ7Mu0+dM2lOB+vm3bd603yHtD0RlLdqARJFhPTE1M2zLd68gCEeZ5fRgQ==}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-linux-arm64/2.3.40:
+    resolution: {integrity: sha512-S6kbnRqsVXHo/bWNxc0jfq33aQQRsGWjb6e7SvZ2DgXsPFLn27cfK0eHD96uCssARDVhzPsc+VU/B3d8C1DT5A==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-linux-ia32/2.3.40:
+    resolution: {integrity: sha512-gPY5zv5Fu+TkCm5iZolXQbu7e5hc7fTllIKn/zJQxxZs/WCvSxyB5ip6vQcHiavu/kjr0HtNciPX/guXvWENkg==}
+    cpu: [ia32]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-linux-x64/2.3.40:
+    resolution: {integrity: sha512-yOuwpOmMe6RGnk9ninlM7Zg1EiF81ptFOcFmT61PDOA4gK8/ttZKTMkDQiq0DZdcXUyE0HCr83EglJZTnHIzPA==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-sunos-x64/2.3.40:
+    resolution: {integrity: sha512-0itEIQ7KsxRbF9nJk6tt0Ey+9TDC5H7krOsy3t7DPx01EvtaiEdMyhmE1XWjBtwr8+BaY9CpEhUWkx4iCcE4cw==}
+    cpu: [x64]
+    os: [sunos]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-win32-ia32/2.3.40:
+    resolution: {integrity: sha512-RAunwOAskfU0R5mYlxxB+bihLJ4nLRx5/x+q5nIq1muYmaqLvGtkQQHZKzgHJANJ7ZIbzfJY57IN2UICpibgIQ==}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin-win32-x64/2.3.40:
+    resolution: {integrity: sha512-a8xtUxX/Ftp2ho+/+VR5GCg0ttP9MNzYj58TVjfiKMkl4mVrbFVIzEinRzmy7PhiOWxqGQSCOdzEfa6C2G4nEA==}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@expo/ngrok-bin/2.3.40:
+    resolution: {integrity: sha512-40GK1CY1QLPDHSQS7Fd36CJeZgMwtbeezkgp4tzfExVRVtWw30jOBCsM7TBB9IqEmmX7C/XwG47scMQHCnMw8A==}
+    hasBin: true
+    optionalDependencies:
+      '@expo/ngrok-bin-darwin-arm64': 2.3.40
+      '@expo/ngrok-bin-darwin-x64': 2.3.40
+      '@expo/ngrok-bin-freebsd-ia32': 2.3.40
+      '@expo/ngrok-bin-freebsd-x64': 2.3.40
+      '@expo/ngrok-bin-linux-arm': 2.3.40
+      '@expo/ngrok-bin-linux-arm64': 2.3.40
+      '@expo/ngrok-bin-linux-ia32': 2.3.40
+      '@expo/ngrok-bin-linux-x64': 2.3.40
+      '@expo/ngrok-bin-sunos-x64': 2.3.40
+      '@expo/ngrok-bin-win32-ia32': 2.3.40
+      '@expo/ngrok-bin-win32-x64': 2.3.40
+    dev: true
+
+  /@expo/ngrok/4.1.0:
+    resolution: {integrity: sha512-PrtWxBt/SnOF1jZkf7oWznhEPFrmYKKeJPLVRKnEBd/y4eUYfoiNIXOzflIzhdrMubjWVI+pFuPJ6nkjVL95/Q==}
+    engines: {node: '>=10.19.0'}
+    dependencies:
+      '@expo/ngrok-bin': 2.3.40
+      got: 11.8.5
+      uuid: 3.4.0
+      yaml: 1.10.2
+    dev: true
+
   /@expo/osascript/2.0.33:
     resolution: {integrity: sha512-FQinlwHrTlJbntp8a7NAlCKedVXe06Va/0DSLXRO8lZVtgbEMrYYSUZWQNcOlNtc58c2elNph6z9dMOYwSo3JQ==}
     engines: {node: '>=12'}
@@ -6100,7 +6219,7 @@ packages:
   /@types/bn.js/4.11.6:
     resolution: {integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==}
     dependencies:
-      '@types/node': 18.7.15
+      '@types/node': 18.7.23
 
   /@types/bn.js/5.1.1:
     resolution: {integrity: sha512-qNrYbZqMx0uJAfKnKclPh+dTwK33KfLHYqtyODwd5HnXOjnkhc4qgn3BrK6RWyGZm5+sIFE7Q7Vz6QQtJB7w7g==}
@@ -6112,7 +6231,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 18.7.15
+      '@types/node': 18.7.23
       '@types/responselike': 1.0.0
     dev: true
 
@@ -6135,7 +6254,7 @@ packages:
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 18.7.23
 
   /@types/debug/4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
@@ -6195,7 +6314,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 18.7.15
+      '@types/node': 18.7.23
     dev: true
 
   /@types/lodash.mergewith/4.6.6:
@@ -6267,7 +6386,7 @@ packages:
   /@types/pbkdf2/3.1.0:
     resolution: {integrity: sha512-Cf63Rv7jCQ0LaL8tNXmEyqTHuIJxRdlS5vMh1mj5voN4+QFhVZnlZruezqpWYDiJ8UTzhP0VmeLXCmBk66YrMQ==}
     dependencies:
-      '@types/node': 18.7.15
+      '@types/node': 18.7.23
 
   /@types/phoenix/1.5.4:
     resolution: {integrity: sha512-L5eZmzw89eXBKkiqVBcJfU1QGx9y+wurRIEgt0cuLH0hwNtVUxtx+6cu0R2STwWj468sjXyBYPYDtGclUd1kjQ==}
@@ -6318,7 +6437,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 18.7.15
+      '@types/node': 18.7.23
     dev: true
 
   /@types/scheduler/0.16.2:
@@ -6327,7 +6446,7 @@ packages:
   /@types/secp256k1/4.0.3:
     resolution: {integrity: sha512-Da66lEIFeIz9ltsdMZcpQvmrmmoqrfju8pm1BH8WbYjZSwUgCwXLb9C+9XYogwBITnbsSaMdVPb2ekf7TV+03w==}
     dependencies:
-      '@types/node': 18.7.15
+      '@types/node': 18.7.23
 
   /@types/styled-components-react-native/5.1.3:
     resolution: {integrity: sha512-IXaogtizUkHJNzSxihG4KK3Z+jaHFp4XyHYIh/I7SUHCc1DsBxToQpE33JITPkgP6DzfgeDn9JkGBGhDIy+GIQ==}
@@ -6352,7 +6471,7 @@ packages:
   /@types/ws/7.4.7:
     resolution: {integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==}
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 18.7.23
 
   /@types/yargs-parser/21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -7584,7 +7703,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
     transitivePeerDependencies:
       - debug
 
@@ -11005,6 +11124,57 @@ packages:
       expo: 46.0.13_@babel+core@7.19.1
     dev: false
 
+  /expo-dev-client/1.2.1_expo@46.0.13:
+    resolution: {integrity: sha512-LKFfReJbUDF3r3cSjt4PLmykKsfMonT1kdCc1Cepz82/btMzL/RASnRYjk7eGd+fcq06lethEQ+w2MLo/70hDQ==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@expo/config-plugins': 5.0.1
+      expo: 46.0.13_@babel+core@7.19.1
+      expo-dev-launcher: 1.2.1_expo@46.0.13
+      expo-dev-menu: 1.2.1_expo@46.0.13
+      expo-dev-menu-interface: 0.7.2_expo@46.0.13
+      expo-manifests: 0.3.1
+      expo-updates-interface: 0.7.0_expo@46.0.13
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /expo-dev-launcher/1.2.1_expo@46.0.13:
+    resolution: {integrity: sha512-q1BBnC69mTlbpHpiaezoHJ5rQgkvdvl6NH9rNSrg0tUfNRMNLDhjHwQWSpDGGIww7rVJ354ysjQp8E35OKOEJw==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@expo/config-plugins': 5.0.1
+      expo: 46.0.13_@babel+core@7.19.1
+      expo-dev-menu: 1.2.1_expo@46.0.13
+      resolve-from: 5.0.0
+      semver: 7.3.7
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /expo-dev-menu-interface/0.7.2_expo@46.0.13:
+    resolution: {integrity: sha512-Ym0IFsgBj9bdInjRcxv6xfczdTCKfPKUAsLZ1sD5twpOs7oBViMnTC0+KTGkkYHG4EapWbu9yApPmbV3N10Zcg==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      expo: 46.0.13_@babel+core@7.19.1
+    dev: true
+
+  /expo-dev-menu/1.2.1_expo@46.0.13:
+    resolution: {integrity: sha512-QurTAJitgIIXQKsZCEW+aY4y3RZFFR0ygP17p1odeoiCwsxKnoIkksKGOL46sdcLzONiVGZBu6z58Mg2JymfIQ==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@expo/config-plugins': 5.0.1
+      expo: 46.0.13_@babel+core@7.19.1
+      expo-dev-menu-interface: 0.7.2_expo@46.0.13
+      semver: 7.3.7
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /expo-eas-client/0.3.0:
     resolution: {integrity: sha512-dBD00lJ629ayh5abbmgn6I1Z5NOaWM1iea2ODLd/EF1ZcS1P3yiPm6blpvL/tD+uewL8gxxmla/Ac+SiDdYAYA==}
     dev: true
@@ -11611,6 +11781,15 @@ packages:
     dependencies:
       tslib: 2.4.0
     dev: false
+
+  /follow-redirects/1.15.2:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
 
   /follow-redirects/1.15.2_debug@4.3.4:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
@@ -17087,7 +17266,7 @@ packages:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
 
   /rimraf/3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
