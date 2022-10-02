@@ -13,11 +13,10 @@ import { OrbisProvider } from '~/contexts'
 import { useRainbowOptions } from '~/hooks/useRainbowOptions'
 
 function App({ Component, pageProps, ...appProps }: AppProps) {
+    const rainbowOptions = useRainbowOptions()
     const getContent = () => {
         // we not using same layout for the landing page
         if (appProps.router.pathname === '/') {
-            const rainbowOptions = useRainbowOptions()
-
             return (
                 <RainbowKitProvider {...rainbowOptions}>
                     <Component {...pageProps} />
