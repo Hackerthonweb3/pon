@@ -6,7 +6,7 @@ type Blurs = 'large' | 'small' | 'none'
 
 export const useRainbowOptions = () => {
     const themeOptions = { overlayBlur: 'large' as Blurs }
-    const theme = useColorModeValue(lightTheme(themeOptions), darkTheme(themeOptions))
+    const theme: any = useColorModeValue(lightTheme(themeOptions), darkTheme(themeOptions))
 
     const rainbowOptions = {
         appName: 'PoN Web3 Digital Business Card',

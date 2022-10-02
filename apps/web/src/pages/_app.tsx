@@ -19,9 +19,9 @@ function App({ Component, pageProps }: AppProps) {
             <ChakraProvider theme={theme}>
                 <WagmiConfig client={wagmiClient}>
                     <OrbisProvider>
-                        <Layout>
-                            <Component {...pageProps} />
-                        </Layout>
+                        {/* <Layout> */}
+                        <Component {...pageProps} />
+                        {/* </Layout> */}
                     </OrbisProvider>
                 </WagmiConfig>
             </ChakraProvider>
