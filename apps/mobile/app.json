@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Web3 Digital Business Card",
+    "name": "PoN Web3 Digital Business Card",
     "slug": "web3-digital-business-card",
     "owner": "ottox",
     "version": "0.0.0",
@@ -36,12 +36,12 @@
         "foregroundImage": "src/assets/platform/adaptive-icon.png",
         "backgroundColor": "#2B2E38"
       },
-      "package": "com.anonymous.businesscardmobileapp",
+      "package": "ninja.pon.mobile",
       "permissions": ["android.permission.RECORD_AUDIO", "android.permission.CAMERA"]
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.businesscardmobileapp",
+      "bundleIdentifier": "ninja.pon.mobile",
       "infoPlist": {
         "NSCameraUsageDescription": "The app uses the camera to scan QR codes.",
         "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
