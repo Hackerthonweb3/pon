@@ -37,8 +37,8 @@
         "react-error-boundary": "3.1.4",
         "react-hook-form": "7.36.0",
         "react-qr-code": "2.0.8",
-        "styled-breakpoints": "11.1.1",
         "styled-components": "5.3.5",
+        "swiper": "8.4.2",
         "undici": "5.10.0",
         "wagmi": "0.6.7",
         "yup": "0.32.11"

@@ -9,7 +9,18 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '~/components/ErrorFallBack'
 import { OrbisProvider } from '~/contexts'
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps, ...appProps }: AppProps) {
+    const getContent = () => {
+        // we not using same layout for the landing page
+        if (appProps.router.pathname === '/') return <Component {...pageProps} />
+
+        return (
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+        )
+    }
+
     return (
         // TODO: better styling for errorboundary
         <ErrorBoundary
@@ -18,11 +29,7 @@ function App({ Component, pageProps }: AppProps) {
             onReset={() => {}}>
             <ChakraProvider theme={theme}>
                 <WagmiConfig client={wagmiClient}>
-                    <OrbisProvider>
-                        {/* <Layout> */}
-                        <Component {...pageProps} />
-                        {/* </Layout> */}
-                    </OrbisProvider>
+                    <OrbisProvider>{getContent()}</OrbisProvider>
                 </WagmiConfig>
             </ChakraProvider>
         </ErrorBoundary>

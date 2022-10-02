@@ -1,11 +1,11 @@
 import Image from 'next/image'
-import { Text, Flex, Grid, GridItem, Button } from '@chakra-ui/react'
+import { Text, Flex, Grid, GridItem, Button, Box } from '@chakra-ui/react'
 import { useAccount } from 'wagmi'
 import styled from 'styled-components'
 
 import { useOrbis } from '~/hooks'
 import { CustomConnect } from '~/components/CustomConnect'
-
+import Onboarding from '~/components/Onboarding/Onboarding'
 import bgImg from '../media/images/landing_bg.jpg'
 import promoSvg from '../media/svg/landing_promo.svg'
 import buttonCreateSvg from '../media/svg/create_button.svg'
@@ -51,10 +51,10 @@ const Home: NextPage = () => {
                 <GridItem colSpan={4} rowSpan={1}>
                     <Flex justifyContent='flex-end'>
                         <Button {...navButtonStyle}>Create Profile</Button>
-                        <Button {...navButtonStyle} color='black' background='white'>
+                        {/* <Button {...navButtonStyle} color='black' background='white'>
                             Connect Wallet
-                        </Button>
-                        {/* <CustomConnect /> */}
+                        </Button> */}
+                        <CustomConnect />
                     </Flex>
                 </GridItem>
                 <GridItem colSpan={3} rowSpan={1}>
@@ -91,9 +91,15 @@ const Home: NextPage = () => {
     )
 
     return (
-        <StyledBg>
-            <div>{renderLanding}</div>
-        </StyledBg>
+        <>
+            <Onboarding />
+            <Box display={{ base: 'none', md: 'block', lg: 'block' }}>
+                <StyledBg>{renderLanding}</StyledBg>
+            </Box>
+            <Box display={{ base: 'block', md: 'none', lg: 'none' }}>
+                <Onboarding />
+            </Box>
+        </>
     )
 }
 
