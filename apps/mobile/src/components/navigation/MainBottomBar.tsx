@@ -1,6 +1,6 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Pressable } from 'react-native'
+import { Pressable, processColor } from 'react-native'
 
 import QRIcon from '../../assets/images/svg-icons/qr.svg'
 import { colors } from '../../constants/colors'
@@ -16,11 +16,10 @@ export const MainBottomBar = () => {
             screenOptions={{
                 headerTransparent: true,
                 headerTitle: '',
-                //tabBarActiveTintColor: Colors[colorScheme].tabIconSelected,
-                //tabBarInactiveTintColor: Colors[colorScheme].tabIconDefault,
+                tabBarActiveTintColor: colors.tabIconSelected,
+                tabBarInactiveTintColor: colors.tabIconDefault,
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                    //  backgroundColor: Colors[colorScheme].background,
                     borderTopWidth: 1,
                     borderTopColor: '#363A45',
                     backgroundColor: colors.background,
@@ -41,7 +40,7 @@ export const MainBottomBar = () => {
                             <MaterialCommunityIcons
                                 name='cog'
                                 size={26}
-                                // color={Colors[colorScheme].headerIcon}
+                                color={colors.tabIconDefault}
                                 style={{ marginRight: 15 }}
                             />
                         </Pressable>
@@ -53,10 +52,10 @@ export const MainBottomBar = () => {
                 component={QRCode}
                 options={({ navigation }: MainBottomBarScreenProps<'QRCode'>) => ({
                     title: 'QR',
-                    tabBarIcon: ({ color }) => <QRIcon height={28} color={color} />,
+                    tabBarIcon: ({ color }) => <QRIcon height={28} color={processColor(color) as any} />,
                     tabBarStyle: { display: 'none' },
                     headerBackgroundContainerStyle: {
-                        // backgroundColor: Colors[colorScheme].background,
+                        backgroundColor: colors.background,
                     },
                     headerLeft: () => (
                         <Pressable
@@ -67,7 +66,7 @@ export const MainBottomBar = () => {
                             <MaterialCommunityIcons
                                 name='close'
                                 size={26}
-                                // color={Colors[colorScheme].headerIcon}
+                                color={colors.tabIconDefault}
                                 style={{ marginLeft: 15 }}
                             />
                         </Pressable>
@@ -81,7 +80,7 @@ export const MainBottomBar = () => {
                             <Ionicons
                                 name='ios-share-outline'
                                 size={26}
-                                // color={Colors[colorScheme].headerIcon}
+                                color={colors.tabIconDefault}
                                 style={{ marginRight: 15 }}
                             />
                         </Pressable>
