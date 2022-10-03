@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { ContainerFlex, SpaceBetween } from './DesignSystem'
-import { SubTitle } from './StyledText'
 import greenApePng from '../media/mock/ape_green.png'
 import blueApePng from '../media/mock/ape_green.png'
 
