@@ -65,14 +65,14 @@ const mockNftGallery = [
     { pfpSrc: require('../assets/images/mocks/ape3.png') },
     { pfpSrc: require('../assets/images/mocks/ape.png') },
 ]
-const mockPoapGallery = [
-    { pfpSrc: require('../assets/images/mocks/poap.png') },
-    { pfpSrc: require('../assets/images/mocks/poap.png') },
+const mockSbtGallery = [
+    { pfpSrc: require('../assets/images/mocks/sbt.png') },
+    { pfpSrc: require('../assets/images/mocks/sbt.png') },
 ]
 
 enum EGallery {
     NFTS = 'NFTs',
-    POAPS = 'POAPs',
+    SBTS = 'SBTs',
 }
 
 export const Profile = () => {
@@ -159,10 +159,10 @@ export const Profile = () => {
                 <View style={{ paddingHorizontal: 10 }}>
                     <Flex style={{ backgroundColor: colors.overlay, width: '100%' }}>
                         {renderGalleryButton(EGallery.NFTS)}
-                        {renderGalleryButton(EGallery.POAPS)}
+                        {renderGalleryButton(EGallery.SBTS)}
                     </Flex>
                     {selectedGalleryTab === EGallery.NFTS && <Gallery data={mockNftGallery} />}
-                    {selectedGalleryTab === EGallery.POAPS && <Gallery data={mockPoapGallery} />}
+                    {selectedGalleryTab === EGallery.SBTS && <Gallery data={mockSbtGallery} />}
                 </View>
             </ScrollView>
         </Layout>
