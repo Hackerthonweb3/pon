@@ -1,4 +1,4 @@
-import { useIsFocused as isFocused } from '@react-navigation/native'
+import { useIsFocused } from '@react-navigation/native'
 import { BarCodeScanner } from 'expo-barcode-scanner'
 import { useState, useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
@@ -10,6 +10,7 @@ export const CodeScan = () => {
     const [hasPermission, setHasPermission] = useState(false)
     const [scanned, setScanned] = useState(false)
     const [, setVisible] = useState(false)
+    const isFocused = useIsFocused()
 
     const showDialog = () => setVisible(true)
 
@@ -46,7 +47,7 @@ export const CodeScan = () => {
     }
 
     // to disable camera when not in use
-    if (!isFocused()) return null
+    if (!isFocused) return null
 
     return (
         <BarCodeScanner
