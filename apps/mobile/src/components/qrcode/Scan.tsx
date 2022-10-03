@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 21,
-        color: 'rgb(0, 0,122,255)',
+        color: '#00007a',
     },
     buttonTouchable: {
         padding: 16,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     modal: {
         justifyContent: 'center',
         height: '100%',
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: '#000',
     },
     modalView: {
         alignSelf: 'center',

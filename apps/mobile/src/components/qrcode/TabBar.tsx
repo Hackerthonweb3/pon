@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         height: 100,
-        backgroundColor: 'rgba(0, 0, 0, 0.28)',
+        backgroundColor: '#00000047',
         justifyContent: 'space-between',
         borderRadius: 14,
     },
@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: 1,
         height: 60,
-        backgroundColor: 'rgba(255, 255, 255, 0.12)',
+        backgroundColor: '#ffffff1e',
     },
 })

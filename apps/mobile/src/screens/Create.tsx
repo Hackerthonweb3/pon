@@ -140,7 +140,7 @@ export const Create = ({ navigation }: any) => {
     }
 
     return (
-        <Layout lightColor='#eee' darkColor='rgba(255,255,255,0.1)'>
+        <Layout lightColor='#eee' darkColor='#ffffff19'>
             <ContainerFlex>
                 <SpaceBetween>
                     <LinkButton title='X' onPress={() => linkTo('/profile')} />
