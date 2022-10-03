@@ -21,20 +21,20 @@ export const Title = styled(VtText)`
 export const SubTitle = styled(VtText)`
     font-size: ${typeScale.subtitle}px;
     color: ${colors.textMain};
-    margin-bottom: 10;
+    margin-bottom: 10px;
     font-weight: 600;
 `
 
 export const Note = styled(VtText)`
     color: ${colors.textSecondary};
     font-size: ${typeScale.md}px;
-    font-family: 'VT323',
+    font-family: 'VT323';
     text-align: center;
 `
 export const NoteMono = styled(MonoText)`
     color: ${colors.textSecondary};
     font-size: ${typeScale.md}px;
-    font-family: 'VT323',
+    font-family: 'VT323';
     text-align: center;
 `
 export const Label = styled(VtText)`
