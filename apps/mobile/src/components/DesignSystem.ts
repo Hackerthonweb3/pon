@@ -2,9 +2,9 @@ import styled from 'styled-components/native'
 
 import { colors } from '../constants/colors'
 
-export const Layout = styled.View`
+export const Layout = styled.SafeAreaView`
     background-color: ${colors.background};
-    font-family: VT323;
+    font-family: 'VT323';
     flex: 1;
 `
 
