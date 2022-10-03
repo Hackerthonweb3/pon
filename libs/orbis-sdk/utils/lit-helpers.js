@@ -10,7 +10,7 @@ let lit
 let litReady = false
 export async function connectLitClient() {
     lit = new LitJsSdk.LitNodeClient({ alertWhenUnauthorized: false, debug: false })
-    await lit.connect()
+    await lit['connect']()
     console.log('Lit is ready now!')
     litReady = true
 }
@@ -93,7 +93,8 @@ export async function generateLitSignatureV2(provider, account) {
 
 /** Retrieve user's authsig from localStorage */
 function getAuthSig() {
-    const authSig = JSON.parse(localStorage.getItem('lit-auth-signature'))
+    const item = localStorage.getItem('lit-auth-signature')
+    const authSig = item && JSON.parse(item)
     if (authSig && authSig !== '') {
         return authSig
     } else {
@@ -217,39 +218,43 @@ export async function encryptString(accessControlConditions, body) {
     let authSig = getAuthSig()
 
     /** Step 2: Encrypt message */
-    const { encryptedString, symmetricKey } = await LitJsSdk.encryptString(body)
+    const encryptionResult = await LitJsSdk.encryptString(body)
+    if (encryptionResult) {
+        const { encryptedString, symmetricKey } = encryptionResult
 
-    /** We convert the encrypted string to base64 to make it work with Ceramic */
-    let base64EncryptedString = await blobToBase64(encryptedString)
+        /** We convert the encrypted string to base64 to make it work with Ceramic */
+        let base64EncryptedString = await blobToBase64(encryptedString)
 
-    /** Step 4: Save encrypted content to lit nodes */
-    let encryptedSymmetricKey
-    try {
-        encryptedSymmetricKey = await lit.saveEncryptionKey({
-            accessControlConditions: accessControlConditions,
-            symmetricKey: symmetricKey,
-            authSig: authSig,
-            chain: 'ethereum',
-        })
-    } catch (e) {
-        console.log('Error encrypting string with Lit: ', e)
-        throw new Error('Error encrypting string with Lit: ' + e)
-    }
+        /** Step 4: Save encrypted content to lit nodes */
+        let encryptedSymmetricKey
+        try {
+            encryptedSymmetricKey = await lit.saveEncryptionKey({
+                accessControlConditions: accessControlConditions,
+                symmetricKey: symmetricKey,
+                authSig: authSig,
+                chain: 'ethereum',
+            })
+        } catch (e) {
+            console.log('Error encrypting string with Lit: ', e)
+            throw new Error('Error encrypting string with Lit: ' + e)
+        }
 
-    /** Step 5: Return encrypted content which will be stored on Ceramic (and needed to decrypt the content) */
-    return {
-        accessControlConditions: JSON.stringify(accessControlConditions),
-        encryptedSymmetricKey: buf2hex(encryptedSymmetricKey),
-        encryptedString: base64EncryptedString,
+        /** Step 5: Return encrypted content which will be stored on Ceramic (and needed to decrypt the content) */
+        return {
+            accessControlConditions: JSON.stringify(accessControlConditions),
+            encryptedSymmetricKey: buf2hex(encryptedSymmetricKey),
+            encryptedString: base64EncryptedString,
+        }
     }
 }
 
 /** This function will take an array of recipients and turn it into a clean access control conditions array */
 export function generateAccessControlConditionsForDMs(recipients) {
+    let _cleanRecipients = cleanRecipients(recipients)
     let _accessControlConditions = []
 
     /** Loop through each recipient */
-    recipients.forEach((recipient, i) => {
+    _cleanRecipients.forEach((recipient, i) => {
         /** Get ETH address from DiD */
         let { address, network } = getAddressFromDid(recipient)
 
@@ -268,7 +273,7 @@ export function generateAccessControlConditionsForDMs(recipients) {
             })
 
             /** Push `or` operator if recipient isn't the last one of the list */
-            if (i < recipients.length - 1) {
+            if (i < _cleanRecipients.length - 1) {
                 _accessControlConditions.push({ operator: 'or' })
             }
         } else {
@@ -324,4 +329,22 @@ export function generateAccessControlConditionsForPosts(encryptionRules) {
 
     /** Return clean access control conditions */
     return _accessControlConditions
+}
+
+/** Clean the list of recipients to keep only the did pkh */
+function cleanRecipients(recipients) {
+    /** Instantiate new array */
+    let _cleanRecipients = []
+
+    /** Loop through all recipients */
+    recipients.forEach((recipient /*, i*/) => {
+        /** Get ETH address from DiD */
+        let { address /*, network*/ } = getAddressFromDid(recipient)
+        if (address) {
+            _cleanRecipients.push(recipient)
+        }
+    })
+
+    /** Return recipients list without did:key */
+    return _cleanRecipients
 }

@@ -99,8 +99,11 @@ export function getAddressFromDid(did) {
 export function blobToBase64(blob) {
     return new Promise((resolve, _) => {
         const reader = new FileReader()
-        reader.onloadend = () => resolve(reader.result.replace('data:application/octet-stream;base64,', ''))
-        reader.readAsDataURL(blob)
+        const result = reader.result
+        if (typeof result === 'string') {
+            reader.onloadend = () => resolve(result.replace('data:application/octet-stream;base64,', ''))
+            reader.readAsDataURL(blob)
+        }
     })
 }
 
@@ -118,4 +121,13 @@ export function buf2hex(buffer) {
 /** Wait for x ms in an async function */
 export const sleep = milliseconds => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+/** To sort an array based on a specific key */
+export function sortByKey(array, key) {
+    return array.sort(function (a, b) {
+        var x = a[key]
+        var y = b[key]
+        return x > y ? -1 : x < y ? 1 : 0
+    })
 }
