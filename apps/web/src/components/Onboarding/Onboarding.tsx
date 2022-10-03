@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { Flex } from '@chakra-ui/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper'
@@ -8,6 +7,7 @@ import styled from 'styled-components'
 
 import { useOnboarding } from '../../hooks/useOnboarding'
 import { ActionButton } from '../ActionButton'
+import { CustomConnect } from '../CustomConnect'
 import { CallToActionLabel } from './CallToActionLabel'
 import { Disclaimer } from './Disclaimer'
 import { Slide } from './Slide'
@@ -68,8 +68,8 @@ export default function Onboarding() {
             {/* change to connect button */}
             {activeSlide === 2 && (
                 <>
-                    <Image src={buttonConnectSvg} alt='' />
                     <Flex flexDirection='column' justifyContent='center'>
+                        <CustomConnect />
                         <CallToActionLabel>Get started</CallToActionLabel>
                         <Disclaimer />
                     </Flex>

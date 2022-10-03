@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import { Text, Flex, Grid, GridItem, Button, Box } from '@chakra-ui/react'
 import { useAccount } from 'wagmi'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 import styled from 'styled-components'
 
-import { useOrbis } from '~/hooks'
-import { CustomConnect } from '~/components/CustomConnect'
 import Onboarding from '~/components/Onboarding/Onboarding'
 import bgImg from '../media/images/landing_bg.jpg'
 import promoSvg from '../media/svg/landing_promo.svg'
@@ -36,8 +35,6 @@ const navButtonStyle = {
 }
 
 const Home: NextPage = () => {
-    const { orbis, loadingDid, loadingProfile } = useOrbis()
-    const isLoading = loadingDid || loadingProfile
     const { isConnected } = useAccount()
 
     const renderLanding = (
@@ -49,12 +46,9 @@ const Home: NextPage = () => {
                 templateRows='repeat(16, 1fr)'
                 paddingTop='18px'>
                 <GridItem colSpan={4} rowSpan={1}>
-                    <Flex justifyContent='flex-end'>
+                    <Flex justifyContent='flex-end' pr={10}>
                         <Button {...navButtonStyle}>Create Profile</Button>
-                        {/* <Button {...navButtonStyle} color='black' background='white'>
-                            Connect Wallet
-                        </Button> */}
-                        <CustomConnect />
+                        <ConnectButton />
                     </Flex>
                 </GridItem>
                 <GridItem colSpan={3} rowSpan={1}>
@@ -64,6 +58,7 @@ const Home: NextPage = () => {
                 </GridItem>
                 <GridItem colSpan={3} rowSpan={1}>
                     <Flex justifyContent='center' paddingRight={{ md: '130px' }}>
+                        {/* TODO: update to custom connect button  */}
                         <Image src={buttonCreateSvg} alt='create' />
                     </Flex>
                 </GridItem>
@@ -92,7 +87,6 @@ const Home: NextPage = () => {
 
     return (
         <>
-            <Onboarding />
             <Box display={{ base: 'none', md: 'block', lg: 'block' }}>
                 <StyledBg>{renderLanding}</StyledBg>
             </Box>

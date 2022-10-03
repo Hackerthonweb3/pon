@@ -209,8 +209,6 @@ importers:
       react-hook-form: 7.36.0
       react-native: 0.69.6
       react-qr-code: 2.0.8
-      react-transition-group: 4.4.5
-      styled-breakpoints: 11.1.1
       styled-components: 5.3.5
       swiper: 8.4.2
       tsconfig: workspace:*
@@ -246,8 +244,6 @@ importers:
       react-error-boundary: 3.1.4_react@18.0.0
       react-hook-form: 7.36.0_react@18.0.0
       react-qr-code: 2.0.8_react@18.0.0
-      react-transition-group: 4.4.5_zpnidt7m3osuk7shl3s4oenomq
-      styled-breakpoints: 11.1.1_ovgevon3esj7mxortobdi66ncm
       styled-components: 5.3.5_zpnidt7m3osuk7shl3s4oenomq
       swiper: 8.4.2
       undici: 5.10.0
@@ -8224,7 +8220,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
     transitivePeerDependencies:
       - debug
 
@@ -10236,13 +10232,6 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
-
-  /dom-helpers/5.2.1:
-    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
-    dependencies:
-      '@babel/runtime': 7.19.0
-      csstype: 3.1.1
-    dev: false
 
   /dom-serializer/1.4.1:
     resolution: {integrity: sha512-VHwB3KfrcOOkelEG2ZOfxqLZdfkil8PtJi4P8N2MMXucZq2yLp75ClViUlOVwyoHEDjYU433Aq+5zWP61+RGag==}
@@ -12461,7 +12450,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /follow-redirects/1.15.2_debug@4.3.4:
+  /follow-redirects/1.15.2:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -12469,8 +12458,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-    dependencies:
-      debug: 4.3.4
 
   /fontfaceobserver/2.3.0:
     resolution: {integrity: sha512-6FPvD/IVyT4ZlNe7Wcn5Fb/4ChigpucKYSvD6a+0iMoLn2inpo711eyIcKjmDtE5XNcgAkSH9uN/nfAeZzHEfg==}
@@ -17697,20 +17684,6 @@ packages:
       react: 18.0.0
       tslib: 2.4.0
 
-  /react-transition-group/4.4.5_zpnidt7m3osuk7shl3s4oenomq:
-    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
-    peerDependencies:
-      react: '>=16.6.0'
-      react-dom: '>=16.6.0'
-    dependencies:
-      '@babel/runtime': 7.19.0
-      dom-helpers: 5.2.1
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
-      react: 18.0.0
-      react-dom: 18.0.0_react@18.0.0
-    dev: false
-
   /react/18.0.0:
     resolution: {integrity: sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A==}
     engines: {node: '>=0.10.0'}
@@ -18662,7 +18635,7 @@ packages:
     dependencies:
       command-exists: 1.2.9
       commander: 3.0.2
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
       fs-extra: 0.30.0
       js-sha3: 0.8.0
       memorystream: 0.3.1
@@ -19096,25 +19069,6 @@ packages:
     dependencies:
       hey-listen: 1.0.8
       tslib: 2.4.0
-    dev: false
-
-  /styled-breakpoints/11.1.1_ovgevon3esj7mxortobdi66ncm:
-    resolution: {integrity: sha512-KUpoMNPoNji5zyB/AyrY+KO/eHj87smfGMOgrAM8cH/fN2wtEW9tnwzPlQimxMyma0Y849XUnChbJBk2zws9Ig==}
-    peerDependencies:
-      '@emotion/react': ^11.0.0
-      react: ^18.x.x
-      styled-components: ^5.0.0
-    peerDependenciesMeta:
-      '@emotion/react':
-        optional: true
-      react:
-        optional: true
-      styled-components:
-        optional: true
-    dependencies:
-      '@emotion/react': 11.10.4_ytsf3xmizandgp4fjdsqz6psoi
-      react: 18.0.0
-      styled-components: 5.3.5_zpnidt7m3osuk7shl3s4oenomq
     dev: false
 
   /styled-components/5.3.5_twzut3cfsq3yt4edr3dzr6gksa:
