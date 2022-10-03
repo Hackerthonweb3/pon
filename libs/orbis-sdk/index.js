@@ -2,7 +2,8 @@
 import { CeramicClient } from '@ceramicnetwork/http-client'
 import { TileDocument } from '@ceramicnetwork/stream-tile'
 import { DIDSession } from 'did-session'
-import { EthereumAuthProvider, SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
+import { SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
+import { EthereumWebAuth, getAccountId } from '@didtools/pkh-ethereum'
 
 /** To generate dids from a Seed */
 import { DID } from 'dids'
@@ -23,7 +24,8 @@ import {
 
 /** Internal helpers */
 import { indexer } from './lib/indexer-db.js'
-import { forceIndex, /*forceIndexDid,*/ sleep /*, randomSeed*/ } from './utils/index.js'
+import { forceIndex, /*forceIndexDid,*/ sleep /*, randomSeed*/, sortByKey } from './utils/index.js'
+import { SOLANA_MAINNET_CHAIN_REF } from '@ceramicnetwork/blockchain-utils-linking/lib/solana.js'
 
 /** Initiate the node URLs for the two networks */
 const MAINNET_NODE_URL = 'https://node1.orbis.club/'
@@ -101,11 +103,11 @@ export class Orbis {
     async connect(provider, lit = true) {
         /** If provider isn't passed we use window.ethereum */
         if (!provider) {
-            if (window.ethereum) {
+            if (window['ethereum']) {
                 console.log(
                     'Orbis SDK: You need to pass the provider as an argument in the `connect()` function. We will be using window.ethereum by default.',
                 )
-                provider = window.ethereum
+                provider = window['ethereum']
             } else {
                 alert('An ethereum provider is required to proceed with the connection to Ceramic.')
                 return false
@@ -125,25 +127,29 @@ export class Orbis {
         }
 
         /** Step 2: Check if user already has an active account on Orbis */
-        let authProvider
+        let authMethod
+        let defaultChain = '1'
         let address = addresses[0].toLowerCase()
-        /*let {data: existingDids, error: errorDids}  = await getDids(address);
-		if(errorDids) {
-			console.log("Error retrieving existing dids: ", errorDids);
-		}
-		if(existingDids && existingDids.length > 0) {
-			let _didArr = existingDids[0].did.split(":");
-			let default_network = _didArr[2];
-			if(default_network == "eip155") {
-				let default_chain = _didArr[3];
-				console.log("Default chain to use: ", default_chain);
-			}
-		} else {
-		}*/
+        let accountId = await getAccountId(provider, address)
 
-        /** Step 2: Create an authProvider object using the address connected */
+        /** Check if the user trying to connect already has an existing did on Orbis */
+        let { data: existingDids /*, error: errorDids*/ } = await this.getDids(address)
+        if (existingDids && existingDids.length > 0) {
+            let sortedDids = sortByKey(existingDids, 'count_followers')
+            let _didArr = sortedDids[0].did.split(':')
+            let defaultNetwork = _didArr[2]
+            if (defaultNetwork === 'eip155') {
+                defaultChain = _didArr[3]
+            }
+        }
+
+        /** Update the default accountId used to connect */
+        console.log('Default chain to use: ', defaultChain)
+        accountId.chainId.reference = defaultChain.toString()
+
+        /** Step 2: Create an authMethod object using the address connected */
         try {
-            authProvider = new EthereumAuthProvider(provider, address)
+            authMethod = await EthereumWebAuth.getAuthMethod(provider, accountId)
         } catch (e) {
             return {
                 status: 300,
@@ -155,12 +161,12 @@ export class Orbis {
         /** Step 3: Create a new session for this did */
         let did
         try {
-            /** Expire session in 30 days by default */
-            const oneMonth = 60 * 60 * 24 * 31
+            /** Expire session in 90 days by default */
+            const threeMonths = 60 * 60 * 24 * 90
 
-            this.session = await DIDSession.authorize(authProvider, {
+            this.session = await DIDSession.authorize(authMethod, {
                 resources: [`ceramic://*`],
-                expiresInSecs: oneMonth,
+                expiresInSecs: threeMonths,
             })
             did = this.session.did
         } catch (e) {
@@ -250,7 +256,7 @@ export class Orbis {
 
         /** Connect to Ceramic using the session previously stored */
         try {
-            this.session = await DIDSession.fromSession(sessionString, null)
+            this.session = await DIDSession.fromSession(sessionString)
             console.log('Reconnected to Ceramic automatically.')
         } catch (e) {
             console.log('Error reconnecting to Ceramic automatically: ' + e)
@@ -316,11 +322,11 @@ export class Orbis {
 
         /** If provider isn't passed we use window.ethereum */
         if (!provider) {
-            if (window.ethereum) {
+            if (window['ethereum']) {
                 console.log(
                     'Orbis SDK: You need to pass the provider as an argument in the `connect()` function. We will be using window.ethereum by default.',
                 )
-                provider = window.ethereum
+                provider = window['ethereum']
             } else {
                 alert('An ethereum provider is required to proceed with the connection to Lit Protocol.')
                 return {
@@ -369,7 +375,7 @@ export class Orbis {
     async testConnectSolana() {
         let provider
         if ('phantom' in window) {
-            provider = window.phantom?.solana
+            provider = window['phantom']?.solana
         } else {
             console.log("Solana Provider: There isn't any Phantom wallet in this browser.")
         }
@@ -381,7 +387,7 @@ export class Orbis {
         /** Step 2: Create an authProvider object using the address connected */
         let authProvider
         try {
-            authProvider = new SolanaAuthProvider(provider, address)
+            authProvider = new SolanaAuthProvider(provider, address, SOLANA_MAINNET_CHAIN_REF)
         } catch (e) {
             return {
                 status: 300,
@@ -522,7 +528,7 @@ export class Orbis {
     }
 
     /** Connected users can share a new post following our schemas */
-    async createPost(content, encryptionRules = null) {
+    async createPost(content, encryptionRules) {
         /** Make sure post isn't empty */
         if (!content || !content.body || content.body === '' || content.body === undefined) {
             return {
@@ -902,12 +908,12 @@ export class Orbis {
             )
 
             /** Force index document */
-            forceIndex(doc.id.toString())
+            forceIndex(doc['id'].toString())
 
             /** Return JSON with doc object */
             res = {
                 status: 200,
-                doc: doc.id.toString(),
+                doc: doc['id'].toString(),
                 result: 'Success creating TileDocument.',
             }
         } catch (e) {
@@ -981,12 +987,12 @@ export class Orbis {
 
             /** Force index document after a 500ms delay */
             await sleep(500)
-            forceIndex(doc.id.toString())
+            forceIndex(doc['id'].toString())
 
             /** Return JSON with doc object */
             res = {
                 status: 200,
-                doc: doc.id.toString(),
+                doc: doc['id'].toString(),
                 result: 'Success creating or updating deterministic TileDocument.',
             }
         } catch (e) {
@@ -1127,6 +1133,7 @@ export class Orbis {
             .select('type')
             .eq('post_id', post_id)
             .eq('creator', did)
+            .single()
 
         /** Return results */
         return { data, error, status }
@@ -1303,8 +1310,11 @@ export class Orbis {
             default:
         }
 
-        let { data, error, status } = await query
-        return { data, error, status }
+        const queryResult = await query
+        if (queryResult) {
+            let { data, error, status } = queryResult
+            return { data, error, status }
+        }
     }
 
     /** Get conversationv2 details */
