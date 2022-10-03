@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister'
 import { noopStorage } from '@wagmi/core'
 import WalletConnectProvider from '@walletconnect/react-native-dapp'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { configureChains, createClient, createStorage, defaultChains, WagmiConfig } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
@@ -46,7 +47,9 @@ export default function App() {
             <WagmiConfig client={wagmiClient}>
                 <WalletConnectProvider redirectUrl='pon://' storageOptions={{ asyncStorage: AsyncStorage as any }}>
                     <OnboardingProvider>
-                        <Navigation />
+                        <SafeAreaProvider>
+                            <Navigation />
+                        </SafeAreaProvider>
                     </OnboardingProvider>
                 </WalletConnectProvider>
             </WagmiConfig>

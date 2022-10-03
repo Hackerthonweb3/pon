@@ -1,11 +1,16 @@
 import styled from 'styled-components/native'
 
-export const Layout = styled.View`
+import { colors } from '../constants/colors'
+
+export const Layout = styled.SafeAreaView`
+    background-color: ${colors.background};
+    font-family: 'VT323';
     flex: 1;
 `
 
 export const Flex = styled.View`
     display: flex;
+    flex-direction: row;
 `
 
 export const SpaceBetween = styled.View`
@@ -28,6 +33,7 @@ export const SpaceStart = styled.View`
 
 interface ContainerFlexProps {
     br: any
+    justify: any
     p: any
     pt: any
     pb: any
@@ -41,7 +47,7 @@ interface ContainerFlexProps {
 }
 export const ContainerFlex = styled.View<ContainerFlexProps>`
     display: flex;
-    justify-content: space-between;
+    justify-content: ${({ justify }) => justify ?? 'space-between'};
     border-radius: ${({ br }) => br ?? '0px'};
     margin-bottom: ${({ m, mb }) => m ?? mb ?? '0'};
     margin-left: ${({ m, ml }) => m ?? ml ?? '0'};

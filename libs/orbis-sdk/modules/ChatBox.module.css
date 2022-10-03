@@ -58,7 +58,7 @@
     border-radius: 100px;
     width: 55px;
     height: 55px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+    box-shadow: 0 0 10px #000031ce;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,7 +77,7 @@
     right: 20px;
     bottom: 90px;
     width: 320px;
-    box-shadow: 0 0 20px rgb(0 0 0 / 30%);
+    box-shadow: 0 0 20px #00001de2;
     flex-direction: column;
     overflow: hidden;
     display: flex;
@@ -225,7 +225,7 @@
     padding: 9px;
     outline: none;
     border: 0;
-    box-shadow: 0 0 8px rgb(0 0 0 / 30%);
+    box-shadow: 0 0 8px #00001de2;
     align-items: center;
     justify-content: center;
     display: flex;

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { processColor, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 export interface TabOptions {
     color: any
@@ -12,7 +12,7 @@ export interface TabOptions {
 export const Tab = ({ color, tab, onPress, icon }: TabOptions) => {
     return (
         <TouchableOpacity style={styles.tabContainer} onPress={onPress}>
-            {icon({ color })}
+            {icon({ color: processColor(color) as any })}
             <Text style={{ ...styles.tabText, color }}>{tab.name}</Text>
         </TouchableOpacity>
     )

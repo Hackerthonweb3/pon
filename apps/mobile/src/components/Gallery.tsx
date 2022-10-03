@@ -1,37 +1,26 @@
 import { Image, StyleSheet, ScrollView } from 'react-native'
 
+import { colors } from '../constants/colors'
 import { ContainerFlex, SpaceBetween } from './DesignSystem'
-import { SubTitle } from './StyledText'
-
-const mockGallery = [
-    { pfpSrc: '../assets/images/mocks/ape.png' },
-    { pfpSrc: '../assets/images/mocks/ape.png' },
-    { pfpSrc: '../assets/images/mocks/ape.png' },
-]
 
 const styles = StyleSheet.create({
     avatar: {
-        width: 108,
-        height: 108,
+        width: 118,
+        height: 118,
     },
 })
-const sharedContanterStyle = {
-    lightColor: '#ecf3f6',
-    darkColor: '#353844',
-}
 
 export function Gallery(props: any) {
-    const { title } = props
+    const { data } = props
 
     return (
-        <ContainerFlex {...sharedContanterStyle} mt='10px' mb='10px' p='10px' br='12px'>
-            <SubTitle>{title}</SubTitle>
+        <ContainerFlex style={{ backgroundColor: colors.overlay }} mt='0px' mb='10px' p='10px'>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <SpaceBetween>
-                    {mockGallery.map((item, index) => {
+                    {data.map((item: any, index: any) => {
                         return (
-                            <ContainerFlex key={index} m='0px' pr='4px' {...sharedContanterStyle}>
-                                <Image style={styles.avatar} source={require('../assets/images/mocks/ape.png')} />
+                            <ContainerFlex key={index} m='0px' pr='4px'>
+                                <Image style={styles.avatar} source={item.pfpSrc} />
                             </ContainerFlex>
                         )
                     })}
