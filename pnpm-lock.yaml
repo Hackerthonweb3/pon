@@ -30,10 +30,10 @@ importers:
       '@react-navigation/native-stack': 6.9.0
       '@svgr/core': 6.3.1
       '@svgr/plugin-svgo': 6.3.1
-      '@tanstack/query-async-storage-persister': 4.9.0
-      '@tanstack/query-core': 4.9.0
-      '@tanstack/react-query': 4.9.0
-      '@tanstack/react-query-persist-client': 4.9.0
+      '@tanstack/query-async-storage-persister': 4.10.1
+      '@tanstack/query-core': 4.10.1
+      '@tanstack/react-query': 4.10.1
+      '@tanstack/react-query-persist-client': 4.10.1
       '@types/react': 18.0.20
       '@types/react-native': 0.70.3
       '@types/styled-components-react-native': 5.1.3
@@ -100,10 +100,10 @@ importers:
       '@react-navigation/bottom-tabs': 6.4.0_hg7duugoxzqbcxx766hj52kwii
       '@react-navigation/native': 6.0.13_gtltrjvtlgj7ga36qzsxajwqwe
       '@react-navigation/native-stack': 6.9.0_hg7duugoxzqbcxx766hj52kwii
-      '@tanstack/query-async-storage-persister': 4.9.0_@tanstack+query-core@4.9.0
-      '@tanstack/query-core': 4.9.0
-      '@tanstack/react-query': 4.9.0_ki35jgcnwl4lyirfggmrf2if4y
-      '@tanstack/react-query-persist-client': 4.9.0_t7lgstoulskjpvw5hr4ezzkjiu
+      '@tanstack/query-async-storage-persister': 4.10.1_5m6hlxhwveykuzxbi7ay57p4rm
+      '@tanstack/query-core': 4.10.1
+      '@tanstack/react-query': 4.10.1_ki35jgcnwl4lyirfggmrf2if4y
+      '@tanstack/react-query-persist-client': 4.10.1_kqqzbawr6hvxmoipssj6szfjb4
       '@walletconnect/react-native-dapp': 1.8.0_gtltrjvtlgj7ga36qzsxajwqwe
       '@walletconnect/web3-provider': 1.8.0_@babel+core@7.19.1
       base-64: 1.0.0
@@ -137,7 +137,7 @@ importers:
       react-native-webview: 11.23.0_gtltrjvtlgj7ga36qzsxajwqwe
       rn-country-dropdown-picker: 2.1.8_zpnidt7m3osuk7shl3s4oenomq
       styled-components: 5.3.5_twzut3cfsq3yt4edr3dzr6gksa
-      wagmi: 0.6.7_skrpqnjdeosbehkr6ovpyli54e
+      wagmi: 0.6.7_4tvs3tvcwkl56evxfuybhpfxo4
     devDependencies:
       '@babel/core': 7.19.1
       '@babel/plugin-proposal-export-namespace-from': 7.18.9_@babel+core@7.19.1
@@ -186,8 +186,8 @@ importers:
       '@hookform/resolvers': 2.9.8
       '@orbisclub/orbis-sdk': workspace:*
       '@rainbow-me/rainbowkit': 0.6.1
-      '@tanstack/query-core': 4.9.0
-      '@tanstack/react-query': 4.9.0
+      '@tanstack/query-core': 4.10.1
+      '@tanstack/react-query': 4.10.1
       '@types/node': 18.7.18
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
@@ -202,6 +202,7 @@ importers:
       ipfs-http-client: 58.0.1
       next: 12.3.1
       next-transpile-modules: 9.0.0
+      qr-code-styling: 1.6.0-rc.1
       react: 18.0.0
       react-dom: 18.0.0
       react-error-boundary: 3.1.4
@@ -228,20 +229,21 @@ importers:
       '@hookform/resolvers': 2.9.8_react-hook-form@7.36.0
       '@orbisclub/orbis-sdk': link:../../libs/orbis-sdk
       '@rainbow-me/rainbowkit': 0.6.1_kvlsyavr4xa7mnjmgtuqotav5u
-      '@tanstack/query-core': 4.9.0
-      '@tanstack/react-query': 4.9.0_ki35jgcnwl4lyirfggmrf2if4y
+      '@tanstack/query-core': 4.10.1
+      '@tanstack/react-query': 4.10.1_ki35jgcnwl4lyirfggmrf2if4y
       '@web3auth/web3auth-wagmi-connector': 1.0.0_rodemj4ekydzwg2tvdq74o5fpi
       ethers: 5.7.1
       framer-motion: 7.3.6_zpnidt7m3osuk7shl3s4oenomq
       ipfs-http-client: 58.0.1_undici@5.10.0
       next: 12.3.1_nrum4enqdu7xfykl5p5yhahyge
+      qr-code-styling: 1.6.0-rc.1
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       react-error-boundary: 3.1.4_react@18.0.0
       react-hook-form: 7.36.0_react@18.0.0
       react-qr-code: 2.0.8_react@18.0.0
       undici: 5.10.0
-      wagmi: 0.6.7_skrpqnjdeosbehkr6ovpyli54e
+      wagmi: 0.6.7_4tvs3tvcwkl56evxfuybhpfxo4
       yup: 0.32.11
     devDependencies:
       '@babel/core': 7.19.1
@@ -403,7 +405,7 @@ importers:
       '@ethersproject/providers': 5.7.1
       '@orbisclub/orbis-sdk': workspace:*
       '@rainbow-me/rainbowkit': 0.6.1
-      '@tanstack/query-core': 4.9.0
+      '@tanstack/query-core': 4.10.1
       '@types/node': 18.7.18
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
@@ -424,7 +426,7 @@ importers:
       '@ethersproject/providers': 5.7.1
       '@orbisclub/orbis-sdk': link:../orbis-sdk
       '@rainbow-me/rainbowkit': 0.6.1_kvlsyavr4xa7mnjmgtuqotav5u
-      '@tanstack/query-core': 4.9.0
+      '@tanstack/query-core': 4.10.1
       '@types/node': 18.7.18
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
@@ -436,7 +438,7 @@ importers:
       react-native: 0.69.6_lx6v52nf6lj3r6bs5j5fbvoknq
       tsconfig: link:../../configs/tsconfig
       typescript: 4.8.3
-      wagmi: 0.6.7_skrpqnjdeosbehkr6ovpyli54e
+      wagmi: 0.6.7_4tvs3tvcwkl56evxfuybhpfxo4
 
   libs/sol:
     specifiers:
@@ -3227,7 +3229,7 @@ packages:
       eth-rpc-errors: 4.0.2
       json-rpc-engine: 6.1.0
       keccak: 3.0.2
-      preact: 10.11.0
+      preact: 10.11.1
       qs: 6.11.0
       rxjs: 6.6.7
       sha.js: 2.4.11
@@ -4196,7 +4198,7 @@ packages:
       getenv: 1.0.0
       glob: 7.1.6
       resolve-from: 5.0.0
-      semver: 7.3.7
+      semver: 7.3.8
       slash: 3.0.0
       xcode: 3.0.1
       xml2js: 0.4.23
@@ -4218,7 +4220,7 @@ packages:
       getenv: 1.0.0
       glob: 7.1.6
       resolve-from: 5.0.0
-      semver: 7.3.7
+      semver: 7.3.8
       slash: 3.0.0
       xcode: 3.0.1
       xml2js: 0.4.23
@@ -4521,7 +4523,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.8.1
+      '@types/node': 18.8.2
       '@types/yargs': 15.0.14
       chalk: 4.1.2
 
@@ -4531,7 +4533,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.8.1
+      '@types/node': 18.8.2
       '@types/yargs': 16.0.4
       chalk: 4.1.2
 
@@ -5295,7 +5297,7 @@ packages:
     resolution: {integrity: sha512-8KG5RD0GVP4ydEzRn/I4BNDuxDtqVbOdm8675T49OIG/NGhaK0pjPX7ZcDlvKYbA+ulvVK3ztfcF4uBdOxuJbQ==}
     dependencies:
       '@gar/promisify': 1.1.3
-      semver: 7.3.7
+      semver: 7.3.8
 
   /@npmcli/move-file/1.1.2:
     resolution: {integrity: sha512-1SUf/Cg2GzGDyaf15aR9St9TWlb+XvbZXWpDx8YKs7MLzMH/BCeopv+y9vzrzgkfykCGuWOlSu3mZhj2+FQcrg==}
@@ -5327,7 +5329,7 @@ packages:
     dependencies:
       '@nomiclabs/hardhat-ethers': 2.1.1_liuail6phkx7un26teqxcf6yx4
       '@nomiclabs/hardhat-etherscan': 3.1.0_hardhat@2.11.2
-      '@openzeppelin/upgrades-core': 1.20.0
+      '@openzeppelin/upgrades-core': 1.20.1
       chalk: 4.1.2
       debug: 4.3.4
       ethers: 5.7.1
@@ -5337,8 +5339,8 @@ packages:
       - supports-color
     dev: true
 
-  /@openzeppelin/upgrades-core/1.20.0:
-    resolution: {integrity: sha512-SYHguWgiVB5vqvIr8JrB+Dr6+Nbn1MnC+8NJJu42B7GwINM8u3IISAceGFD25g/jfWOAMxZwFqtkeoUCwITY0w==}
+  /@openzeppelin/upgrades-core/1.20.1:
+    resolution: {integrity: sha512-GXvqLkMNY1dGj9BAIXiqYjdj/qgpoeTed+pH2OL4UOqMlxIh8yIYdkLE9wOWiUVVr0rhUGqaoaJ9NeFLlVzBQQ==}
     dependencies:
       cbor: 8.1.0
       chalk: 4.1.2
@@ -5419,7 +5421,7 @@ packages:
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       react-remove-scroll: 2.5.4_uakpbjaoshts62krddkfbl3qoa
-      wagmi: 0.6.7_skrpqnjdeosbehkr6ovpyli54e
+      wagmi: 0.6.7_4tvs3tvcwkl56evxfuybhpfxo4
     transitivePeerDependencies:
       - '@types/react'
 
@@ -6219,43 +6221,43 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@tanstack/query-async-storage-persister/4.9.0_@tanstack+query-core@4.9.0:
-    resolution: {integrity: sha512-r0Uv2IG2Ct5Ytf4GMNPG4KLwNttfAJR2KSX6r4VyXddjFveLALTEbEVOpsqjbyXud4lrYK1Npi2kwW3LCBJf5w==}
+  /@tanstack/query-async-storage-persister/4.10.1_5m6hlxhwveykuzxbi7ay57p4rm:
+    resolution: {integrity: sha512-4X1AtckgQmljePwPGLVfZXXjC5t4RCHkD/MZtdDWvFdCugVkqvKIEJmpd1lVQkzOujLn7trOiyD+PXtigl0ocg==}
     dependencies:
-      '@tanstack/query-persist-client-core': 4.9.0_@tanstack+query-core@4.9.0
+      '@tanstack/query-persist-client-core': 4.10.1_5m6hlxhwveykuzxbi7ay57p4rm
     transitivePeerDependencies:
       - '@tanstack/query-core'
     dev: false
 
-  /@tanstack/query-core/4.9.0:
-    resolution: {integrity: sha512-Vl0jAWJR3A1md0PoPMoEd6+H1dlRB5NqXDBNF+MZEgjQsR0Nly2kJgJj0Zh6eRDndnn7VlspxTWoOpt+dwDdAA==}
+  /@tanstack/query-core/4.10.1:
+    resolution: {integrity: sha512-UZRYzjgQSfYhQ+cJX0CspAbzutf8p93gR1xFjQuH3OYcb/7t3WnHkdb/qC9mbqrfWXN/JAbBTJlTU/XQHc5HbA==}
 
-  /@tanstack/query-persist-client-core/4.9.0_@tanstack+query-core@4.9.0:
-    resolution: {integrity: sha512-xa23aHa9vbJ0F0og2SAuAoVW291jGA0CIPyN6rXh4KDzaW7/6jvG81ug6m/G/tF3ZuiZTcMaOMR7bMiY+uLQ0A==}
+  /@tanstack/query-persist-client-core/4.10.1_5m6hlxhwveykuzxbi7ay57p4rm:
+    resolution: {integrity: sha512-WVU3Iz396SS1Kc/DJxLrtNMxobV/5u5ej96zXZFZ6y25Z4S0NXvqvXx/DC/hfPXkOkq7l6O6AQ9O4zmvRdEsfA==}
     peerDependencies:
-      '@tanstack/query-core': 4.9.0
+      '@tanstack/query-core': 4.10.1
     dependencies:
-      '@tanstack/query-core': 4.9.0
+      '@tanstack/query-core': 4.10.1
 
-  /@tanstack/query-sync-storage-persister/4.9.0_@tanstack+query-core@4.9.0:
-    resolution: {integrity: sha512-AQQOGeo1WwvXHT/ceapo9lGn53ncV1kicgatGAfE0z2vz7du5956eeWhfFsxeB5fRbD2nj3mM5SrKIMdZa5Vgw==}
+  /@tanstack/query-sync-storage-persister/4.10.1_5m6hlxhwveykuzxbi7ay57p4rm:
+    resolution: {integrity: sha512-Qe5fnnP+wUf2FEIk9EOXD6uOZ49Mo6tNykPXuyMkx4aq6KYkxUb8SS3AgIcjJKb0VPlMixdrJqpM0YHig7Ho5g==}
     dependencies:
-      '@tanstack/query-persist-client-core': 4.9.0_@tanstack+query-core@4.9.0
+      '@tanstack/query-persist-client-core': 4.10.1_5m6hlxhwveykuzxbi7ay57p4rm
     transitivePeerDependencies:
       - '@tanstack/query-core'
 
-  /@tanstack/react-query-persist-client/4.9.0_t7lgstoulskjpvw5hr4ezzkjiu:
-    resolution: {integrity: sha512-LmSAiQFw0ldZ4iBoiV+ls650ajkfPpaX8cgVhuG+r60t0TFSCMN3r5muKLbdGpMdhvtNk0gloH9Vbaf6YP+Rdw==}
+  /@tanstack/react-query-persist-client/4.10.1_kqqzbawr6hvxmoipssj6szfjb4:
+    resolution: {integrity: sha512-YZRwtTmesSsCQ7/XSV3LjPfHf1idq7TKHOeZSQdGUlWwrc4OAiFmvjDuRo4Nt5AQOK2glIgnsacgHp9ORvxaQw==}
     peerDependencies:
-      '@tanstack/react-query': 4.9.0
+      '@tanstack/react-query': 4.10.1
     dependencies:
-      '@tanstack/query-persist-client-core': 4.9.0_@tanstack+query-core@4.9.0
-      '@tanstack/react-query': 4.9.0_ki35jgcnwl4lyirfggmrf2if4y
+      '@tanstack/query-persist-client-core': 4.10.1_5m6hlxhwveykuzxbi7ay57p4rm
+      '@tanstack/react-query': 4.10.1_ki35jgcnwl4lyirfggmrf2if4y
     transitivePeerDependencies:
       - '@tanstack/query-core'
 
-  /@tanstack/react-query/4.9.0_ki35jgcnwl4lyirfggmrf2if4y:
-    resolution: {integrity: sha512-M4utYjk9BRDUYbbprSsa0eExdC9NjqQ0deuHXYxQkT8l8BIVyw6yv02LQUGBdOnn/6w5xXFyQRG2slo+JhqeBg==}
+  /@tanstack/react-query/4.10.1_ki35jgcnwl4lyirfggmrf2if4y:
+    resolution: {integrity: sha512-6GaLYAsAu/4aX6HR4krpOej9qbKWXe0X0eccikpv5hAw4CoAAPG29Pydql1nTl9cYF2zd21unVm4yApklFY0AA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -6266,7 +6268,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.9.0
+      '@tanstack/query-core': 4.10.1
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       react-native: 0.69.6_lx6v52nf6lj3r6bs5j5fbvoknq
@@ -6571,7 +6573,7 @@ packages:
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
-      '@types/node': 18.8.1
+      '@types/node': 18.8.2
 
   /@types/hoist-non-react-statics/3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
@@ -6667,8 +6669,8 @@ packages:
   /@types/node/18.7.18:
     resolution: {integrity: sha512-m+6nTEOadJZuTPkKR/SYK3A2d7FZrgElol9UP1Kae90VVU4a6mxnPuLiIW1m4Cq4gZ/nWb9GrdVXJCoCazDAbg==}
 
-  /@types/node/18.8.1:
-    resolution: {integrity: sha512-vuYaNuEIbOYLTLUAJh50ezEbvxrD43iby+lpUA2aa148Nh5kX/AVO/9m1Ahmbux2iU5uxJTNF9g2Y+31uml7RQ==}
+  /@types/node/18.8.2:
+    resolution: {integrity: sha512-cRMwIgdDN43GO4xMWAfJAecYn8wV4JbsOGHNfNUIDiuYkUYAR5ec4Rj7IO2SAhFPEfpPtLtUTbbny/TCT7aDwA==}
 
   /@types/node/8.10.66:
     resolution: {integrity: sha512-tktOkFUA4kXx2hhhrB8bIFb5TbwzS4uOhKEmwiD+NoiL0qtP2OQ9mFldbgD4dV1djrlBYP6eBuQZiWjuHUpqFw==}
@@ -6807,7 +6809,7 @@ packages:
       functional-red-black-tree: 1.0.1
       ignore: 5.2.0
       regexpp: 3.2.0
-      semver: 7.3.7
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.8.3
       typescript: 4.8.3
     transitivePeerDependencies:
@@ -6833,7 +6835,7 @@ packages:
       eslint: 8.23.1
       ignore: 5.2.0
       regexpp: 3.2.0
-      semver: 7.3.7
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.8.3
       typescript: 4.8.3
     transitivePeerDependencies:
@@ -6859,7 +6861,7 @@ packages:
       eslint: 8.23.1
       ignore: 5.2.0
       regexpp: 3.2.0
-      semver: 7.3.7
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.8.3
       typescript: 4.8.3
     transitivePeerDependencies:
@@ -7049,7 +7051,7 @@ packages:
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.3.7
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.8.3
       typescript: 4.8.3
     transitivePeerDependencies:
@@ -7070,7 +7072,7 @@ packages:
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.3.7
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.8.3
       typescript: 4.8.3
     transitivePeerDependencies:
@@ -7091,7 +7093,7 @@ packages:
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.3.7
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.8.3
       typescript: 4.8.3
     transitivePeerDependencies:
@@ -8749,7 +8751,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001414
+      caniuse-lite: 1.0.30001415
       electron-to-chromium: 1.4.271
       node-releases: 2.0.6
       update-browserslist-db: 1.0.9_browserslist@4.21.4
@@ -8975,8 +8977,8 @@ packages:
   /camelize/1.0.0:
     resolution: {integrity: sha512-W2lPwkBkMZwFlPCXhIlYgxu+7gC/NUlCtdK652DAJ1JdgV0sTrvuPFshNPrFa1TY2JOkLhgdeEBplB4ezEa+xg==}
 
-  /caniuse-lite/1.0.30001414:
-    resolution: {integrity: sha512-t55jfSaWjCdocnFdKQoO+d2ct9C59UZg4dY3OnUlSZ447r8pUtIKdp0hpAzrGFultmTC+Us+KpKi4GZl/LXlFg==}
+  /caniuse-lite/1.0.30001415:
+    resolution: {integrity: sha512-ER+PfgCJUe8BqunLGWd/1EY4g8AzQcsDAVzdtMGKVtQEmKAwaFfU6vb7EAVIqTMYsqxBorYZi2+22Iouj/y7GQ==}
 
   /canonicalize/1.0.8:
     resolution: {integrity: sha512-0CNTVCLZggSh7bc5VkX5WWPWO+cyZbNd07IHIsSXLia/eAq+r836hgk+8BKoEh7949Mda87VUOitx5OddVj64A==}
@@ -11797,7 +11799,7 @@ packages:
       expo: 46.0.13_@babel+core@7.19.1
       expo-dev-menu: 1.2.1_expo@46.0.13
       resolve-from: 5.0.0
-      semver: 7.3.7
+      semver: 7.3.8
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -11818,7 +11820,7 @@ packages:
       '@expo/config-plugins': 5.0.1
       expo: 46.0.13_@babel+core@7.19.1
       expo-dev-menu-interface: 0.7.2_expo@46.0.13
-      semver: 7.3.7
+      semver: 7.3.8
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -14054,7 +14056,7 @@ packages:
     dependencies:
       '@jest/types': 27.5.1
       '@types/graceful-fs': 4.1.5
-      '@types/node': 18.8.1
+      '@types/node': 18.8.2
       anymatch: 3.1.2
       fb-watchman: 2.0.2
       graceful-fs: 4.2.10
@@ -14075,7 +14077,7 @@ packages:
     resolution: {integrity: sha512-jZCyo6iIxO1aqUxpuBlwTDMkzOAJS4a3eYz3YzgxxVQFwLeSA7Jfq5cbqCY+JLvTDrWirgusI/0KwxKMgrdf7w==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
-      '@types/node': 18.8.1
+      '@types/node': 18.8.2
       graceful-fs: 4.2.10
 
   /jest-util/27.5.1:
@@ -14083,7 +14085,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@jest/types': 27.5.1
-      '@types/node': 18.8.1
+      '@types/node': 18.8.2
       chalk: 4.1.2
       ci-info: 3.4.0
       graceful-fs: 4.2.10
@@ -14104,7 +14106,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 18.8.1
+      '@types/node': 18.8.2
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -15979,7 +15981,7 @@ packages:
     dependencies:
       '@next/env': 12.3.1
       '@swc/helpers': 0.4.11
-      caniuse-lite: 1.0.30001414
+      caniuse-lite: 1.0.30001415
       postcss: 8.4.14
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
@@ -16015,7 +16017,7 @@ packages:
     resolution: {integrity: sha512-p+0xx5ruIQ+8X57CRIMxbTZRT7tU0Tjn2C/aAK68AEMrbGsCo6IjnDdPNhEyyjWCT4bRtzomXchYd3sSgk3BJQ==}
     engines: {node: '>=10'}
     dependencies:
-      semver: 7.3.7
+      semver: 7.3.8
 
   /node-addon-api/2.0.2:
     resolution: {integrity: sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==}
@@ -16168,7 +16170,7 @@ packages:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.10.0
-      semver: 7.3.7
+      semver: 7.3.8
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -16850,8 +16852,8 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /preact/10.11.0:
-    resolution: {integrity: sha512-Fk6+vB2kb6mSJfDgODq0YDhMfl0HNtK5+Uc9QqECO4nlyPAQwCI+BKyWO//idA7ikV7o+0Fm6LQmNuQi1wXI1w==}
+  /preact/10.11.1:
+    resolution: {integrity: sha512-1Wz5PCRm6Fg+6BTXWJHhX4wRK9MZbZBHuwBqfZlOdVm2NqPe8/rjYpufvYCwJSGb9layyzB2jTTXfpCTynLqFQ==}
 
   /preact/10.4.1:
     resolution: {integrity: sha512-WKrRpCSwL2t3tpOOGhf2WfTpcmbpxaWtDbdJdKdjd0aEiTkvOmS4NBkG6kzlaAHI9AkQ3iVqbFWM3Ei7mZ4o1Q==}
@@ -16934,7 +16936,7 @@ packages:
       emoji-regex: 10.2.1
       escape-string-regexp: 4.0.0
       prettier: 2.7.1
-      semver: 7.3.7
+      semver: 7.3.8
       solidity-comments-extractor: 0.0.7
       string-width: 4.2.3
 
@@ -17102,8 +17104,18 @@ packages:
     resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
     engines: {node: '>=6'}
 
+  /qr-code-styling/1.6.0-rc.1:
+    resolution: {integrity: sha512-ModRIiW6oUnsP18QzrRYZSc/CFKFKIdj7pUs57AEVH20ajlglRpN3HukjHk0UbNMTlKGuaYl7Gt6/O5Gg2NU2Q==}
+    dependencies:
+      qrcode-generator: 1.4.4
+    dev: false
+
   /qr.js/0.0.0:
     resolution: {integrity: sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==}
+    dev: false
+
+  /qrcode-generator/1.4.4:
+    resolution: {integrity: sha512-HM7yY8O2ilqhmULxGMpcHSF1EhJJ9yBj8gvDEuZ6M+KGJ0YY2hKpnXvRD+hZPLrDVck3ExIGhmPtSdcjC+guuw==}
     dev: false
 
   /qrcode-terminal/0.11.0:
@@ -18288,8 +18300,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  /semver/7.3.7:
-    resolution: {integrity: sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==}
+  /semver/7.3.8:
+    resolution: {integrity: sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -18431,7 +18443,7 @@ packages:
       detect-libc: 2.0.1
       node-addon-api: 5.0.0
       prebuild-install: 7.1.1
-      semver: 7.3.7
+      semver: 7.3.8
       simple-get: 4.0.1
       tar-fs: 2.1.1
       tunnel-agent: 0.6.0
@@ -18693,7 +18705,7 @@ packages:
       pify: 4.0.1
       recursive-readdir: 2.2.2
       sc-istanbul: 0.4.6
-      semver: 7.3.7
+      semver: 7.3.8
       shelljs: 0.8.5
       web3-utils: 1.8.0
     transitivePeerDependencies:
@@ -20289,16 +20301,16 @@ packages:
     resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
     dev: false
 
-  /wagmi/0.6.7_skrpqnjdeosbehkr6ovpyli54e:
+  /wagmi/0.6.7_4tvs3tvcwkl56evxfuybhpfxo4:
     resolution: {integrity: sha512-cKGZxLctMnODXLycCCcH0Q6yc3ed580odxH6CB/V9b7UUotwHqImPfg0outzE7TJpQ6YDD83RJNPf2Ez7U4o7w==}
     peerDependencies:
       ethers: '>=5.5.1'
       react: '>=17.0.0'
     dependencies:
       '@coinbase/wallet-sdk': 3.5.3_qsosctabrw36u2vziyanjbnojm
-      '@tanstack/query-sync-storage-persister': 4.9.0_@tanstack+query-core@4.9.0
-      '@tanstack/react-query': 4.9.0_ki35jgcnwl4lyirfggmrf2if4y
-      '@tanstack/react-query-persist-client': 4.9.0_t7lgstoulskjpvw5hr4ezzkjiu
+      '@tanstack/query-sync-storage-persister': 4.10.1_5m6hlxhwveykuzxbi7ay57p4rm
+      '@tanstack/react-query': 4.10.1_ki35jgcnwl4lyirfggmrf2if4y
+      '@tanstack/react-query-persist-client': 4.10.1_kqqzbawr6hvxmoipssj6szfjb4
       '@wagmi/core': 0.5.7_xa6mpadpw54h3phs2qnohm4doi
       '@walletconnect/ethereum-provider': 1.8.0
       ethers: 5.7.1
