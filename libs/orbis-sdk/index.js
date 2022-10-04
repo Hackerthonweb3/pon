@@ -1,8 +1,11 @@
 /** Ceramic */
 import { CeramicClient } from '@ceramicnetwork/http-client'
 import { TileDocument } from '@ceramicnetwork/stream-tile'
+import { createDIDKey, createDIDCacao, DIDSession } from 'did-session'
 // import { SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
 import { /*EthereumWebAuth,*/ getAccountId } from '@didtools/pkh-ethereum'
+import { Cacao, SiweMessage } from '@didtools/cacao'
+import { randomString } from '@stablelib/random'
 
 /** To generate dids from a Seed */
 import { DID } from 'dids'
@@ -169,9 +172,60 @@ export class Orbis {
             /** Expire session in 90 days by default */
             const threeMonths = 60 * 60 * 24 * 90
 
-            this.session = await DIDSession.authorize(authMethod, {
-                resources: [`ceramic://*`],
-                expiresInSecs: threeMonths,
+            function encodeRpcMessage(method, params) {
+                return {
+                    jsonrpc: '2.0',
+                    id: 1,
+                    method,
+                    params,
+                }
+            }
+
+            async function createCACAO(opts, ethProvider, account) {
+                const now = new Date()
+                const oneDayLater = new Date(now.getTime() + 24 * 60 * 60 * 1000)
+                const siweMessage = new SiweMessage({
+                    domain: opts.domain,
+                    address: account.address,
+                    statement: opts.statement ?? 'Give this application access to some of your data on Ceramic',
+                    uri: opts.uri,
+                    version: '1',
+                    nonce: opts.nonce ?? randomString(10),
+                    issuedAt: now.toISOString(),
+                    expirationTime: opts.expirationTime ?? oneDayLater.toISOString(),
+                    chainId: account.chainId.reference,
+                    resources: opts.resources,
+                })
+                const request = encodeRpcMessage('personal_sign', [siweMessage.signMessage(), account.address])
+                const signature = await new Promise((resolve, reject) =>
+                    ethProvider.sendAsync(request, (error, response) => {
+                        if (error) reject(error)
+                        resolve(response.result)
+                    }),
+                )
+                siweMessage.signature = signature
+                return Cacao.fromSiweMessage(siweMessage)
+            }
+
+            const authorize = async () => {
+                const keySeed = randomSeed()
+                const didKey = await createDIDKey(keySeed)
+                const cacao = await createCACAO(
+                    {
+                        resources: [`ceramic://*`],
+                        expiresInSecs: threeMonths,
+                        domain: 'PoN',
+                    },
+                    provider,
+                    accountId,
+                )
+
+                const did = await createDIDCacao(didKey, cacao)
+                return new DIDSession({ cacao, keySeed, did })
+            }
+
+            this.session = await authorize()
+
             // this.session = await DIDSession.authorize(authMethod, {
             //     resources: [`ceramic://*`],
             //     expiresInSecs: threeMonths,
