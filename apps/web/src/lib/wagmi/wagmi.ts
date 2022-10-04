@@ -21,7 +21,7 @@ export const { chains, provider, webSocketProvider } = configureChains(
 )
 
 export const { connectors } = getDefaultWallets({
-    appName: 'Web3 Digital Business Card',
+    appName: 'PoN Web3 Digital Business Card',
     chains,
 })
 
