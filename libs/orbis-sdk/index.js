@@ -1,9 +1,8 @@
 /** Ceramic */
 import { CeramicClient } from '@ceramicnetwork/http-client'
 import { TileDocument } from '@ceramicnetwork/stream-tile'
-import { DIDSession } from 'did-session'
-import { SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
-import { EthereumWebAuth, getAccountId } from '@didtools/pkh-ethereum'
+// import { SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
+import { /*EthereumWebAuth,*/ getAccountId } from '@didtools/pkh-ethereum'
 
 /** To generate dids from a Seed */
 import { DID } from 'dids'
@@ -25,6 +24,8 @@ import {
 /** Internal helpers */
 import { indexer } from './lib/indexer-db.js'
 import { forceIndex, forceIndexDid, randomSeed, sleep /*, randomSeed*/, sortByKey } from './utils/index.js'
+// import { SOLANA_MAINNET_CHAIN_REF } from '@ceramicnetwork/blockchain-utils-linking/lib/solana'
+// const SOLANA_MAINNET_CHAIN_REF = '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
 
 /** Initiate the node URLs for the two networks */
 const MAINNET_NODE_URL = 'https://node1.orbis.club/'
@@ -126,7 +127,7 @@ export class Orbis {
         }
 
         /** Step 2: Check if user already has an active account on Orbis */
-        let authMethod
+        // let authMethod
         let defaultChain = '1'
         let address = addresses[0].toLowerCase()
         let accountId = await getAccountId(provider, address)
@@ -146,16 +147,17 @@ export class Orbis {
         console.log('Default chain to use: ', defaultChain)
         accountId.chainId.reference = defaultChain.toString()
 
-        /** Step 2: Create an authMethod object using the address connected */
-        try {
-            authMethod = await EthereumWebAuth.getAuthMethod(provider, accountId)
-        } catch (e) {
-            return {
-                status: 300,
-                error: e,
-                result: 'Error creating Ethereum provider object for Ceramic.',
-            }
-        }
+        // /** Step 2: Create an authMethod object using the address connected */
+        // try {
+        //     authMethod = await EthereumWebAuth.getAuthMethod(provider, accountId)
+        // } catch (e) {
+        //     alert('error connecting authmethod for ceramic from orbis')
+        //     return {
+        //         status: 300,
+        //         error: e,
+        //         result: 'Error creating Ethereum provider object for Ceramic.',
+        //     }
+        // }
 
         /** Step 3: Create a new session for this did */
         let did
@@ -166,7 +168,10 @@ export class Orbis {
             this.session = await DIDSession.authorize(authMethod, {
                 resources: [`ceramic://*`],
                 expiresInSecs: threeMonths,
-            })
+            // this.session = await DIDSession.authorize(authMethod, {
+            //     resources: [`ceramic://*`],
+            //     expiresInSecs: threeMonths,
+            // })
             did = this.session.did
         } catch (e) {
             return {
@@ -384,9 +389,9 @@ export class Orbis {
         console.log('Solana Provider: Found: ' + address)
 
         /** Step 2: Create an authProvider object using the address connected */
-        let authProvider
+        // let authProvider
         try {
-            authProvider = new SolanaAuthProvider(provider, address, SOLANA_MAINNET_CHAIN_REF)
+            // authProvider = new SolanaAuthProvider(provider, address, SOLANA_MAINNET_CHAIN_REF)
         } catch (e) {
             return {
                 status: 300,
@@ -399,13 +404,12 @@ export class Orbis {
         let did
         try {
             /** Expire session in 30 days by default */
-            const oneMonth = 60 * 60 * 24 * 31
-
-            this.session = await DIDSession.authorize(authProvider, {
-                resources: [`ceramic://*`],
-                expiresInSecs: oneMonth,
-            })
-            did = this.session.did
+            // const oneMonth = 60 * 60 * 24 * 31
+            // this.session = await DIDSession.authorize(authProvider, {
+            //     resources: [`ceramic://*`],
+            //     expiresInSecs: oneMonth,
+            // })
+            // did = this.session.did
         } catch (e) {
             return {
                 status: 300,
