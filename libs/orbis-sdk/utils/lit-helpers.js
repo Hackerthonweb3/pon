@@ -56,7 +56,6 @@ export async function generateLitSignature(provider, account) {
         signedMessage = await new Promise((resolve, reject) =>
             provider.sendAsync(request, (error, response) => {
                 if (error) reject(error)
-                console.log('lit signed response', response)
                 resolve(response)
             }),
         )

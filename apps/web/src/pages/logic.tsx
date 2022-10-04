@@ -1,75 +1,79 @@
 import { useContext, useEffect, useState } from 'react'
-// import { useAccount } from 'wagmi'
 import { CustomConnect } from '~/components/CustomConnect'
-import { useOrbis } from '~/hooks'
-import { useCeramicSession } from '~/hooks/useCeramicSession'
 
-import { useAccount, useConnect, useDisconnect, useProvider } from 'wagmi'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { Button } from '@chakra-ui/react'
 import { OrbisContext } from '~/contexts'
 
 export default function App() {
-    const connectedProvider = useProvider()
-    const { connector: activeConnector, isConnected } = useAccount({
-        async onConnect({ address, connector, isReconnected }) {
-            console.log('connected by rainbow')
-            const provider = await connector?.getProvider()
-            console.log('the provider', provider)
-            console.log('lets connect orbis')
-            // const orbisConnected = await orbis?.connect(provider)
-            // console.log('orbis connected?', orbisConnected)
-            // if (orbisConnected.status === 200) {
-            //     setIsOrbisConnected(true)
-            // }
-        },
-        async onDisconnect() {
-            await orbis?.logout()
-            console.log('orbis disconnected by rainbow')
-            setIsOrbisConnected(false)
-        },
-    })
-    const orbis = useContext(OrbisContext)
     const [isOrbisConnected, setIsOrbisConnected] = useState(false)
     const [isCeramicConnected, setIsCeramicConnected] = useState(false)
     const [isLitConnected, setIsLitConnected] = useState(false)
+    const [did, setDid] = useState<string>()
+
+    const { connector: activeConnector, isConnected } = useAccount({
+        async onConnect({ address, connector, isReconnected }) {
+            console.log('connected by rainbow kit')
+            // connect orbis if needed
+            // const provider = await connector?.getProvider()
+        },
+        async onDisconnect() {
+            console.log('orbis disconnected by rainbow kit')
+            await orbis?.logout()
+            setIsOrbisConnected(false)
+            setDid(undefined)
+        },
+    })
+    const orbis = useContext(OrbisContext)
+
     const { connect, connectors, error, isLoading, pendingConnector } = useConnect({
         async onSuccess(data, variables, context) {
-            console.log('succesfully connected', { data, variables, context })
-            const provider = await data.connector?.getProvider()
-            console.log('the provider', provider)
-            console.log('lets connect orbis')
-            // const orbisConnected = await orbis?.connect((data.provider as any)['provider'])
-            // console.log('orbis connected?', orbisConnected)
-            // if (orbisConnected.status === 200) {
-            //     setIsOrbisConnected(true)
-            // }
+            console.log('succesfully connected by useConnect', { data, variables, context })
+            // connect orbis here if needed
+            // const provider = await data.connector?.getProvider()
         },
     })
 
     const connectOrbis = async () => {
-        const theProvider = await activeConnector?.getProvider()
-        // alert(theProvider)
-        // console.log('the provider', theProvider.send, theProvider.sendAsync, theProvider.request)
-        const result = await orbis?.connect(theProvider)
+        const connectedProvider = await activeConnector?.getProvider()
+        const result = await orbis?.connect(connectedProvider)
         if (result.status === 200) {
             setIsOrbisConnected(true)
+            if (isCeramicConnected) {
+                setDid(result.did)
+                console.log('did saved to state', result.did)
+            }
         }
     }
 
     const { disconnect } = useDisconnect({
         async onSuccess() {
             await orbis?.logout()
-            console.log('orbis disconnected')
+            console.log('orbis disconnected by useConnect')
             setIsOrbisConnected(false)
         },
     })
 
+    const checkProfile = async () => {
+        if (did) {
+            console.log('checking profile for did', did)
+            let { data, error } = await orbis?.getProfile(did)
+            if (error) return console.log('error fetching profile', error)
+            console.log('profile fetched:', data)
+        } else {
+            console.log('profile not found, redirect to creation')
+        }
+    }
+
     useEffect(() => {
         setIsCeramicConnected(Boolean(localStorage.getItem('ceramic-session')))
         setIsLitConnected(Boolean(localStorage.getItem('lit-auth-signature')))
+
+        if (isOrbisConnected) {
+            checkProfile()
+        }
     }, [isOrbisConnected])
 
-    // console.log('connectors', connectors)
     return (
         <>
             <CustomConnect />
