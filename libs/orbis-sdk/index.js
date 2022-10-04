@@ -14,8 +14,8 @@ import { getResolver } from 'key-did-resolver'
 // import LitJsSdk from 'lit-js-sdk'
 import {
     connectLitClient,
-    // generateLitSignature,
-    // generateLitSignatureV2,
+    generateLitSignature,
+    generateLitSignatureV2,
     // generateAccessControlConditionsForDMs,
     encryptDM,
     encryptPost,
@@ -24,8 +24,7 @@ import {
 
 /** Internal helpers */
 import { indexer } from './lib/indexer-db.js'
-import { forceIndex, /*forceIndexDid,*/ sleep /*, randomSeed*/, sortByKey } from './utils/index.js'
-import { SOLANA_MAINNET_CHAIN_REF } from '@ceramicnetwork/blockchain-utils-linking/lib/solana.js'
+import { forceIndex, forceIndexDid, randomSeed, sleep /*, randomSeed*/, sortByKey } from './utils/index.js'
 
 /** Initiate the node URLs for the two networks */
 const MAINNET_NODE_URL = 'https://node1.orbis.club/'
@@ -194,7 +193,7 @@ export class Orbis {
             if (!_userAuthSig || _userAuthSig === '' || _userAuthSig === undefined) {
                 try {
                     /** Generate the signature for Lit */
-                    // let resLitSig = await generateLitSignature(provider, address)
+                    await generateLitSignature(provider, address)
                 } catch (e) {
                     console.log('Error connecting to Lit network: ' + e)
                 }
@@ -208,7 +207,7 @@ export class Orbis {
         }
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        // let _resDid = await forceIndexDid(this.session.id)
+        await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
         let { data /*, error, status*/ } = await this.getProfile(this.session.id)
@@ -277,7 +276,7 @@ export class Orbis {
         }
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        // let _resDid = await forceIndexDid(this.session.id)
+        await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
         let { data /*, error, status*/ } = await this.getProfile(this.session.id)
@@ -340,7 +339,7 @@ export class Orbis {
         /** Step 1: Enable Ethereum provider (can be browser wallets or WalletConnect for now) */
         // let addresses
         try {
-            // addresses = await provider.enable()
+                await provider.enable()
         } catch (e) {
             return {
                 status: 300,
@@ -352,7 +351,7 @@ export class Orbis {
         /** Step 2: Initialize the connection to Lit */
         try {
             /** Generate the signature for Lit */
-            // let resLitSig = await generateLitSignatureV2(provider, address)
+            await generateLitSignatureV2(provider, address)
 
             /** Return success state */
             return {
@@ -426,7 +425,7 @@ export class Orbis {
         console.log('Connected to Ceramic using: ' + this.session.id)
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        // let _resDid = await forceIndexDid(this.session.id)
+        await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
         let { data /*, error, status*/ } = await this.getProfile(this.session.id)
@@ -647,7 +646,7 @@ export class Orbis {
         /** If group creation was successful we also create the first channel */
         if (result.doc) {
             /** Automatically join group created */
-            // let joinRes = await this.setGroupMember(result.doc, true)
+            await this.setGroupMember(result.doc, true)
 
             /**
              * Let channel_content = { group_id: result.doc, name: "general", type: "feed" };
