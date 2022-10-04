@@ -117,7 +117,11 @@ export class Orbis {
         /** Step 1: Enable Ethereum provider (can be browser wallets or WalletConnect for now) */
         let addresses
         try {
-            addresses = await provider.enable()
+            if (provider.connected) {
+                addresses = provider.accounts
+            } else {
+                addresses = await provider.enable()
+            }
         } catch (e) {
             return {
                 status: 300,
@@ -344,7 +348,9 @@ export class Orbis {
         /** Step 1: Enable Ethereum provider (can be browser wallets or WalletConnect for now) */
         // let addresses
         try {
+            if (!provider.connected) {
                 await provider.enable()
+            }
         } catch (e) {
             return {
                 status: 300,
