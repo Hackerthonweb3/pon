@@ -2,7 +2,7 @@
 
 import transpile from 'next-transpile-modules'
 
-const withTM = transpile(['@business-card/sdk', '@business-card/sol'])
+const withTM = transpile(['@business-card/sdk', '@business-card/sol', '@orbisclub/orbis-sdk'])
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withTM({
