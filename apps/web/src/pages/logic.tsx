@@ -4,8 +4,11 @@ import { CustomConnect } from '~/components/CustomConnect'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { Button } from '@chakra-ui/react'
 import { OrbisContext } from '~/contexts'
+import { useRouter } from 'next/router'
 
 export default function App() {
+    const orbis = useContext(OrbisContext)
+
     const [isOrbisConnected, setIsOrbisConnected] = useState(false)
     const [isCeramicConnected, setIsCeramicConnected] = useState(false)
     const [isLitConnected, setIsLitConnected] = useState(false)
@@ -14,6 +17,13 @@ export default function App() {
     const { connector: activeConnector, isConnected } = useAccount({
         async onConnect({ address, connector, isReconnected }) {
             console.log('connected by rainbow kit')
+            const result = await orbis?.isConnected()
+            if (result.status === 200) {
+                console.log('orbis is reconnected')
+                setDid(result.did)
+            } else {
+                console.log('oops orbis not connected')
+            }
             // connect orbis if needed
             // const provider = await connector?.getProvider()
         },
@@ -24,7 +34,6 @@ export default function App() {
             setDid(undefined)
         },
     })
-    const orbis = useContext(OrbisContext)
 
     const { connect, connectors, error, isLoading, pendingConnector } = useConnect({
         async onSuccess(data, variables, context) {
@@ -48,18 +57,28 @@ export default function App() {
 
     const { disconnect } = useDisconnect({
         async onSuccess() {
-            await orbis?.logout()
-            console.log('orbis disconnected by useConnect')
-            setIsOrbisConnected(false)
+            const result = await orbis?.logout()
+            if (result.status === 200) {
+                console.log('orbis disconnected by useConnect')
+                setIsOrbisConnected(false)
+            } else {
+                console.log('error on orbis logout', result)
+            }
         },
     })
 
     const checkProfile = async () => {
-        if (did) {
+        // trigger reconnection to get did
+        const result = await orbis?.isConnected()
+        if (result.status === 200) {
+            setDid(result.did)
+        }
+        if (result.did) {
             console.log('checking profile for did', did)
-            let { data, error } = await orbis?.getProfile(did)
+            let { data, error } = await orbis?.getProfile(result.did)
             if (error) return console.log('error fetching profile', error)
             console.log('profile fetched:', data)
+            // TODO: set profile here
         } else {
             console.log('profile not found, redirect to creation')
         }
@@ -70,12 +89,29 @@ export default function App() {
         setIsLitConnected(Boolean(localStorage.getItem('lit-auth-signature')))
 
         if (isOrbisConnected) {
+            console.log('checking profile after orbis connected')
             checkProfile()
         }
     }, [isOrbisConnected])
 
+    useEffect(() => {
+        const checkOrbis = async () => {
+            const result = await orbis?.isConnected()
+            if (result.status === 200) {
+                setDid(result.did)
+            }
+        }
+        checkOrbis()
+    }, [])
+
+    const { push } = useRouter()
+
     return (
         <>
+            <Button onClick={() => push('logic-qr')}>Go to Logic</Button>
+            <br />
+            {did}
+            <br />
             <CustomConnect />
             {isConnected ? <div>Connected to {activeConnector?.name}</div> : <div>Disconnected</div>}
             <br />
