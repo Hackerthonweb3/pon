@@ -2,14 +2,35 @@ import '@fontsource/vt323/400.css'
 
 import { ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
-import { Layout } from '~/components/Layout'
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { WagmiConfig } from 'wagmi'
-import { theme, wagmiClient } from '~/lib'
 import { ErrorBoundary } from 'react-error-boundary'
+
+import { Layout } from '~/components/Layout'
+import { theme, wagmiClient } from '~/lib'
 import { ErrorFallback } from '~/components/ErrorFallBack'
 import { OrbisProvider } from '~/contexts'
+import { useRainbowOptions } from '~/hooks/useRainbowOptions'
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps, ...appProps }: AppProps) {
+    const rainbowOptions = useRainbowOptions()
+    const getContent = () => {
+        // we not using same layout for the landing page
+        if (appProps.router.pathname === '/') {
+            return (
+                <RainbowKitProvider {...rainbowOptions}>
+                    <Component {...pageProps} />
+                </RainbowKitProvider>
+            )
+        }
+
+        return (
+            <Layout {...pageProps}>
+                <Component {...pageProps} />
+            </Layout>
+        )
+    }
+
     return (
         // TODO: better styling for errorboundary
         <ErrorBoundary
@@ -18,11 +39,7 @@ function App({ Component, pageProps }: AppProps) {
             onReset={() => {}}>
             <ChakraProvider theme={theme}>
                 <WagmiConfig client={wagmiClient}>
-                    <OrbisProvider>
-                        <Layout>
-                            <Component {...pageProps} />
-                        </Layout>
-                    </OrbisProvider>
+                    <OrbisProvider>{getContent()}</OrbisProvider>
                 </WagmiConfig>
             </ChakraProvider>
         </ErrorBoundary>
