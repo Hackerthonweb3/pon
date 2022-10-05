@@ -1,9 +1,11 @@
 /** Ceramic */
 import { CeramicClient } from '@ceramicnetwork/http-client'
 import { TileDocument } from '@ceramicnetwork/stream-tile'
-import { DIDSession } from 'did-session'
-import { SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
-import { EthereumWebAuth, getAccountId } from '@didtools/pkh-ethereum'
+import { createDIDKey, createDIDCacao, DIDSession } from 'did-session'
+// import { SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
+import { /*EthereumWebAuth,*/ getAccountId } from '@didtools/pkh-ethereum'
+import { Cacao, SiweMessage } from '@didtools/cacao'
+import { randomString } from '@stablelib/random'
 
 /** To generate dids from a Seed */
 import { DID } from 'dids'
@@ -14,8 +16,8 @@ import { getResolver } from 'key-did-resolver'
 // import LitJsSdk from 'lit-js-sdk'
 import {
     connectLitClient,
-    // generateLitSignature,
-    // generateLitSignatureV2,
+    generateLitSignature,
+    generateLitSignatureV2,
     // generateAccessControlConditionsForDMs,
     encryptDM,
     encryptPost,
@@ -24,8 +26,9 @@ import {
 
 /** Internal helpers */
 import { indexer } from './lib/indexer-db.js'
-import { forceIndex, /*forceIndexDid,*/ sleep /*, randomSeed*/, sortByKey } from './utils/index.js'
-import { SOLANA_MAINNET_CHAIN_REF } from '@ceramicnetwork/blockchain-utils-linking/lib/solana.js'
+import { forceIndex, forceIndexDid, randomSeed, sleep /*, randomSeed*/, sortByKey } from './utils/index.js'
+// import { SOLANA_MAINNET_CHAIN_REF } from '@ceramicnetwork/blockchain-utils-linking/lib/solana'
+// const SOLANA_MAINNET_CHAIN_REF = '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
 
 /** Initiate the node URLs for the two networks */
 const MAINNET_NODE_URL = 'https://node1.orbis.club/'
@@ -117,7 +120,11 @@ export class Orbis {
         /** Step 1: Enable Ethereum provider (can be browser wallets or WalletConnect for now) */
         let addresses
         try {
-            addresses = await provider.enable()
+            if (provider.connected) {
+                addresses = provider.accounts
+            } else {
+                addresses = await provider.enable()
+            }
         } catch (e) {
             return {
                 status: 300,
@@ -127,7 +134,7 @@ export class Orbis {
         }
 
         /** Step 2: Check if user already has an active account on Orbis */
-        let authMethod
+        // let authMethod
         let defaultChain = '1'
         let address = addresses[0].toLowerCase()
         let accountId = await getAccountId(provider, address)
@@ -147,16 +154,17 @@ export class Orbis {
         console.log('Default chain to use: ', defaultChain)
         accountId.chainId.reference = defaultChain.toString()
 
-        /** Step 2: Create an authMethod object using the address connected */
-        try {
-            authMethod = await EthereumWebAuth.getAuthMethod(provider, accountId)
-        } catch (e) {
-            return {
-                status: 300,
-                error: e,
-                result: 'Error creating Ethereum provider object for Ceramic.',
-            }
-        }
+        // /** Step 2: Create an authMethod object using the address connected */
+        // try {
+        //     authMethod = await EthereumWebAuth.getAuthMethod(provider, accountId)
+        // } catch (e) {
+        //     alert('error connecting authmethod for ceramic from orbis')
+        //     return {
+        //         status: 300,
+        //         error: e,
+        //         result: 'Error creating Ethereum provider object for Ceramic.',
+        //     }
+        // }
 
         /** Step 3: Create a new session for this did */
         let did
@@ -164,10 +172,64 @@ export class Orbis {
             /** Expire session in 90 days by default */
             const threeMonths = 60 * 60 * 24 * 90
 
-            this.session = await DIDSession.authorize(authMethod, {
-                resources: [`ceramic://*`],
-                expiresInSecs: threeMonths,
-            })
+            function encodeRpcMessage(method, params) {
+                return {
+                    jsonrpc: '2.0',
+                    id: 1,
+                    method,
+                    params,
+                }
+            }
+
+            async function createCACAO(opts, ethProvider, account) {
+                const now = new Date()
+                const oneDayLater = new Date(now.getTime() + 24 * 60 * 60 * 1000)
+                const siweMessage = new SiweMessage({
+                    domain: opts.domain,
+                    address: account.address,
+                    statement: opts.statement ?? 'Give this application access to some of your data on Ceramic',
+                    uri: opts.uri,
+                    version: '1',
+                    nonce: opts.nonce ?? randomString(10),
+                    issuedAt: now.toISOString(),
+                    expirationTime: opts.expirationTime ?? oneDayLater.toISOString(),
+                    chainId: account.chainId.reference,
+                    resources: opts.resources,
+                })
+                const request = encodeRpcMessage('personal_sign', [siweMessage.signMessage(), account.address])
+                const signature = await new Promise((resolve, reject) =>
+                    ethProvider.sendAsync(request, (error, response) => {
+                        if (error) reject(error)
+                        resolve(response.result)
+                    }),
+                )
+                siweMessage.signature = signature
+                return Cacao.fromSiweMessage(siweMessage)
+            }
+
+            const authorize = async () => {
+                const keySeed = randomSeed()
+                const didKey = await createDIDKey(keySeed)
+                const cacao = await createCACAO(
+                    {
+                        resources: [`ceramic://*`],
+                        expiresInSecs: threeMonths,
+                        domain: 'PoN',
+                    },
+                    provider,
+                    accountId,
+                )
+
+                const did = await createDIDCacao(didKey, cacao)
+                return new DIDSession({ cacao, keySeed, did })
+            }
+
+            this.session = await authorize()
+
+            // this.session = await DIDSession.authorize(authMethod, {
+            //     resources: [`ceramic://*`],
+            //     expiresInSecs: threeMonths,
+            // })
             did = this.session.did
         } catch (e) {
             return {
@@ -194,7 +256,7 @@ export class Orbis {
             if (!_userAuthSig || _userAuthSig === '' || _userAuthSig === undefined) {
                 try {
                     /** Generate the signature for Lit */
-                    // let resLitSig = await generateLitSignature(provider, address)
+                    await generateLitSignature(provider, address)
                 } catch (e) {
                     console.log('Error connecting to Lit network: ' + e)
                 }
@@ -208,7 +270,7 @@ export class Orbis {
         }
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        // let _resDid = await forceIndexDid(this.session.id)
+        await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
         let { data /*, error, status*/ } = await this.getProfile(this.session.id)
@@ -277,7 +339,7 @@ export class Orbis {
         }
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        // let _resDid = await forceIndexDid(this.session.id)
+        await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
         let { data /*, error, status*/ } = await this.getProfile(this.session.id)
@@ -340,7 +402,9 @@ export class Orbis {
         /** Step 1: Enable Ethereum provider (can be browser wallets or WalletConnect for now) */
         // let addresses
         try {
-            // addresses = await provider.enable()
+            if (!provider.connected) {
+                await provider.enable()
+            }
         } catch (e) {
             return {
                 status: 300,
@@ -352,7 +416,7 @@ export class Orbis {
         /** Step 2: Initialize the connection to Lit */
         try {
             /** Generate the signature for Lit */
-            // let resLitSig = await generateLitSignatureV2(provider, address)
+            await generateLitSignatureV2(provider, address)
 
             /** Return success state */
             return {
@@ -385,9 +449,9 @@ export class Orbis {
         console.log('Solana Provider: Found: ' + address)
 
         /** Step 2: Create an authProvider object using the address connected */
-        let authProvider
+        // let authProvider
         try {
-            authProvider = new SolanaAuthProvider(provider, address, SOLANA_MAINNET_CHAIN_REF)
+            // authProvider = new SolanaAuthProvider(provider, address, SOLANA_MAINNET_CHAIN_REF)
         } catch (e) {
             return {
                 status: 300,
@@ -400,13 +464,12 @@ export class Orbis {
         let did
         try {
             /** Expire session in 30 days by default */
-            const oneMonth = 60 * 60 * 24 * 31
-
-            this.session = await DIDSession.authorize(authProvider, {
-                resources: [`ceramic://*`],
-                expiresInSecs: oneMonth,
-            })
-            did = this.session.did
+            // const oneMonth = 60 * 60 * 24 * 31
+            // this.session = await DIDSession.authorize(authProvider, {
+            //     resources: [`ceramic://*`],
+            //     expiresInSecs: oneMonth,
+            // })
+            // did = this.session.did
         } catch (e) {
             return {
                 status: 300,
@@ -426,7 +489,7 @@ export class Orbis {
         console.log('Connected to Ceramic using: ' + this.session.id)
 
         /** Step 6: Force index did to retrieve blockchain details automatically */
-        // let _resDid = await forceIndexDid(this.session.id)
+        await forceIndexDid(this.session.id)
 
         /** Step 7: Get user profile details */
         let { data /*, error, status*/ } = await this.getProfile(this.session.id)
@@ -647,7 +710,7 @@ export class Orbis {
         /** If group creation was successful we also create the first channel */
         if (result.doc) {
             /** Automatically join group created */
-            // let joinRes = await this.setGroupMember(result.doc, true)
+            await this.setGroupMember(result.doc, true)
 
             /**
              * Let channel_content = { group_id: result.doc, name: "general", type: "feed" };

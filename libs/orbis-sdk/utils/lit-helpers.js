@@ -38,13 +38,27 @@ export async function generateLitSignature(provider, account) {
 
     /** Initiate the signature data */
     const now = new Date().toISOString()
-    const AUTH_SIGNATURE_BODY = 'I am creating an account to use the private features of Orbis at {{timestamp}}'
+    const AUTH_SIGNATURE_BODY = 'I am connecting to Lit Protocol to use the private features of PoN at {{timestamp}}'
     const body = AUTH_SIGNATURE_BODY.replace('{{timestamp}}', now)
     const bodyBytes = toUtf8Bytes(body)
 
     /** Proceed to signing the message */
     try {
-        signedMessage = await provider.send('personal_sign', [hexlify(bodyBytes), account])
+        function encodeRpcMessage(method, params) {
+            return {
+                jsonrpc: '2.0',
+                id: 1,
+                method,
+                params,
+            }
+        }
+        const request = encodeRpcMessage('personal_sign', [hexlify(bodyBytes), account])
+        signedMessage = await new Promise((resolve, reject) =>
+            provider.sendAsync(request, (error, response) => {
+                if (error) reject(error)
+                resolve(response)
+            }),
+        )
 
         /** Save signature for authentication */
         let sig = JSON.stringify({

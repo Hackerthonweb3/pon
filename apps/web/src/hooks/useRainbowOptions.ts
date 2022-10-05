@@ -9,7 +9,7 @@ export const useRainbowOptions = () => {
     const theme = useColorModeValue(lightTheme(themeOptions), darkTheme(themeOptions))
 
     const rainbowOptions = {
-        appName: 'Web3 Patreon',
+        appName: 'PoN Web3 Digital Business Card',
         chains,
         theme,
     }

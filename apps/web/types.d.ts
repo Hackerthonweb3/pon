@@ -1,15 +1,24 @@
 declare module '@orbisclub/orbis-sdk' {
     export class Orbis {
+        // utils
         connect(provider: ethers.Provider, lit?: boolean): Promise<OrbisResponse>
+        // connectLit()
+        isConnected(): Promise<OrbisResponse>
         logout(): Promise<OrbisResponse>
+
+        // write
+        createConversation(content: Conversation)
+        sendMessage(content: { conversation_id: string; body: string }): Promise<OrbisResponse>
+        updateProfile(profile: Profile): Promise<OrbisResponse>
+
+        // get
+        getConversations(options: { did: string; context?: string }): Promise<OrbisResponse>
         getDids(address: string): Promise<OrbisResponse>
         getMessages(conversation_id: string): Promise<OrbisResponse>
-        isConnected(): Promise<OrbisResponse>
-        updateProfile(profile: Profile): Promise<OrbisResponse>
-        getConversations(options: { did: string; context?: string }): Promise<OrbisResponse>
-        sendMessage(content: { conversation_id: string; body: string }): Promise<OrbisResponse>
-        createConversation(content: Conversation)
+        getProfile(did: string): Promise<OrbisResponse>
         decryptMessage(content: PrivateMessage): Promise<Message>
+
+        // internal
         createTileDocument(
             content: Conversation | PrivateMessage,
             tags: string[],
