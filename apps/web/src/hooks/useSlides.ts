@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
-
-import { SlideItemData } from '../components/onboarding/slide-data'
+import { Animated, FlatList } from 'react-native'
+import { SlideItemData } from '~/components/Onboarding/slide-data'
 
 export const useSlides = (slides: SlideItemData[]) => {
     const [currentIndex, setCurrentIndex] = useState(0)
