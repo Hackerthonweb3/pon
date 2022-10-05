@@ -11,8 +11,7 @@ export default function Gallery(props: any) {
 
     return (
         <ContainerFlex mt='10px' mb='10px' p='10px' br='12px'>
-            <SubTitle>{title}</SubTitle>
-            <div style={{ width: '250px', overflowX: 'scroll' }}>
+            <div style={{ background: 'rgb(53, 56, 68)' }}>
                 <SpaceBetween>
                     {mockGallery.map((item, index) => {
                         return (

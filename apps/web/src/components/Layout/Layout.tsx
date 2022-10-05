@@ -33,8 +33,8 @@ export const Layout = ({ children }: PropsWithChildren) => {
                 <NavBar />
             </SlideFade>
             <Fade in={animationB}>
-                <Flex w='full' h='full' p={20}>
-                    <Box flex='1'>{children}</Box>
+                <Flex w='full' h='full' justifyContent='center' py={20}>
+                    {children}
                 </Flex>
             </Fade>
         </RainbowKitProvider>

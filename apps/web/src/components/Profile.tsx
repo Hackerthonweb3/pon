@@ -20,6 +20,7 @@ const styles = {
     },
     overlay: {
         top: -55,
+        alignItems: 'center',
     },
     backdrop: {
         flex: 1,
@@ -84,6 +85,7 @@ export default function Profile() {
         <div
             onClick={() => setSelectedGalleryTab(galleryName)}
             style={{
+                borderRadius: '10px 10px 0px',
                 width: '50%',
             }}>
             <NoteMono
@@ -98,8 +100,8 @@ export default function Profile() {
         </div>
     )
     const renderFullInfo = isFullView && (
-        <>
-            <Button width={280} style={{ width: 260 }} onClick={handleEditLink}>
+        <Flex flexDirection='column' alignItems='center'>
+            <Button mb='10px' width={280} style={{ width: 260 }} onClick={handleEditLink}>
                 Edit Profile
             </Button>
             <InfoContainer title='Location' text={location} />
@@ -107,27 +109,23 @@ export default function Profile() {
             <InfoContainer title='Organization' text={organization} />
             <InfoContainer title='Skills' text={whatCan} />
             <InfoContainer title='Interested in meeting' text={wantMeet} />
-        </>
+        </Flex>
     )
-    console.log(pfp)
+
     return (
         <Box width={{ base: '100%', md: '50%', lg: '50%' }}>
             <Layout>
                 <CenteredContainer style={{ padding: '0 20px' }}>
-                    <div style={styles.backgroundContainer}>
-                        <Image src={coverSvg} alt='' width='50%' height='20%' />
-                    </div>
-                    <div style={styles.overlay}>
+                    <Image src={coverSvg} alt='' width='900px' />
+                    <Flex flexDirection='column' justifyContent='center' alignItems='center'>
                         <ImageMask imageCid={pfp} />
                         <div style={{ right: -175, top: -65 }} onClick={() => setIsFullView(!isFullView)}>
                             <Text style={{ color: colors.textAction, fontWeight: '600' }}>{fullProfileTitle}</Text>
                         </div>
-                    </div>
-                    <CenteredContainer style={styles.info}>
                         <Title>{name}</Title>
                         <SubTitle>{address}</SubTitle>
                         <Note style={styles.description}>{description}</Note>
-                    </CenteredContainer>
+                    </Flex>
                     {renderFullInfo}
                     <Flex style={styles.switch}>
                         <Text style={styles.actionText}>Preferred contact method</Text>

@@ -5,6 +5,8 @@ export const Layout = styled.div`
     background-color: ${colors.background};
     font-family: 'VT323';
     flex: 1;
+    justify-center: center;
+    width: 100%;
 `
 
 export const Flex = styled.div`
