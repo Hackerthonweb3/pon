@@ -5,6 +5,11 @@ export const mockProfile = {
     twitter: '@anon_fury',
     discord: '#1234',
     email: 'email@email.com',
+    location: 'NY',
+    occupation: 'UX Designer',
+    organization: 'Freelancer',
+    whatCan: 'Whatever',
+    wantMeet: 'Anybody',
 }
 
 export const mockContacts = [
