@@ -1,0 +1,12 @@
+{
+    "customSyntax": "@stylelint/postcss-css-in-js",
+    "extends": ["stylelint-config-recommended"],
+    "plugins": ["stylelint-react-native"],
+    "rules": {
+        "color-no-invalid-hex": true,
+        "font-weight-notation": "numeric",
+        "function-disallowed-list": ["linear-gradient"],
+        "react-native/css-property-no-unknown": true,
+        "selector-type-no-unknown": [true, { "ignore": ["default-namespace"] }]
+    }
+}
