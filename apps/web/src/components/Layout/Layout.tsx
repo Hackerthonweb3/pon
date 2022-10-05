@@ -8,14 +8,14 @@ import { useRainbowOptions } from '~/hooks/useRainbowOptions'
 
 import { useAnimation } from '~/hooks/useAnimation'
 import { useSafeMounted } from '~/hooks'
-import { useAccount } from 'wagmi'
-import { useCeramicSession } from '~/hooks/useCeramicSession'
+// import { useAccount } from 'wagmi'
+// import { useCeramicSession } from '~/hooks/useCeramicSession'
 
 export const Layout = ({ children }: PropsWithChildren) => {
     const isMounted = useSafeMounted()
     const animationA = useAnimation(600)
     const animationB = useAnimation(200)
-    useAccount(useCeramicSession())
+    // useAccount(useCeramicSession())
 
     // Don't move rainbow! We use RainbowKitProvider here to be able to access ChakraUI's theme!!!
     const rainbowOptions = useRainbowOptions()
