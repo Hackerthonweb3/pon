@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
-import { Text, Button, Flex } from '@chakra-ui/react'
+import { Text, Button, Flex, Box } from '@chakra-ui/react'
 import { Layout, SpaceEnd, ContainerFlex, CenteredContainer } from './DesignSystem'
 import Gallery from './Gallery'
 // import { Social } from './Social'
@@ -9,13 +9,14 @@ import InfoContainer from './InfoContainer'
 import { Title, SubTitle, Note, NoteMono } from './StyledText'
 import { colors } from '../constants/colors'
 import { mockProfile } from '../constants/mock'
+import coverSvg from '../media/mock/cover1.png'
 
 const styles = {
     backgroundContainer: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
+        top: ' 0',
+        left: '0',
+        right: '0',
     },
     overlay: {
         top: -55,
@@ -57,22 +58,12 @@ const styles = {
     },
 }
 
-const mockNftGallery = [
-    { pfpSrc: require('../assets/images/mocks/ape.png') },
-    { pfpSrc: require('../assets/images/mocks/ape3.png') },
-    { pfpSrc: require('../assets/images/mocks/ape.png') },
-]
-const mockSbtGallery = [
-    { pfpSrc: require('../assets/images/mocks/sbt.png') },
-    { pfpSrc: require('../assets/images/mocks/sbt.png') },
-]
-
 enum EGallery {
     NFTS = 'NFTs',
     SBTS = 'SBTs',
 }
 
-export const Profile = () => {
+export default function Profile() {
     const { name, description, pfp, location, occupation, organization, whatCan, wantMeet } = mockProfile
 
     const [selectedGalleryTab, setSelectedGalleryTab] = useState(EGallery.NFTS)
@@ -118,14 +109,14 @@ export const Profile = () => {
             <InfoContainer title='Interested in meeting' text={wantMeet} />
         </>
     )
-
+    console.log(pfp)
     return (
-        <Layout>
-            <div>
+        <Box width={{ base: '100%', md: '50%', lg: '50%' }}>
+            <Layout>
                 <CenteredContainer style={{ padding: '0 20px' }}>
-                    {/* <div style={styles.backgroundContainer}>
-                        <Image src={'../media/mocks/cover1.png' alt='' style={styles.backdrop} />
-                    </div> */}
+                    <div style={styles.backgroundContainer}>
+                        <Image src={coverSvg} alt='' width='50%' height='20%' />
+                    </div>
                     <div style={styles.overlay}>
                         <ImageMask imageCid={pfp} />
                         <div style={{ right: -175, top: -65 }} onClick={() => setIsFullView(!isFullView)}>
@@ -140,11 +131,6 @@ export const Profile = () => {
                     {renderFullInfo}
                     <Flex style={styles.switch}>
                         <Text style={styles.actionText}>Preferred contact method</Text>
-                        {/* <Switch
-                            trackColor={{ false: '#ffff', true: colors.textAction }}
-                            onValueChange={toggleSwitch}
-                            value={isPreferedContact}
-                        /> */}
                     </Flex>
                     {/* <Social profile={mockProfile} /> */}
                 </CenteredContainer>
@@ -154,10 +140,10 @@ export const Profile = () => {
                         {renderGalleryButton(EGallery.NFTS)}
                         {renderGalleryButton(EGallery.SBTS)}
                     </Flex>
-                    {selectedGalleryTab === EGallery.NFTS && <Gallery data={mockNftGallery} />}
-                    {selectedGalleryTab === EGallery.SBTS && <Gallery data={mockSbtGallery} />}
+                    {selectedGalleryTab === EGallery.NFTS && <Gallery title='NFT Gallery' />}
+                    {selectedGalleryTab === EGallery.SBTS && <Gallery title='POAPs' />}
                 </div>
-            </div>
-        </Layout>
+            </Layout>
+        </Box>
     )
 }

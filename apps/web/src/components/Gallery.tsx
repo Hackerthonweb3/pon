@@ -12,12 +12,12 @@ export default function Gallery(props: any) {
     return (
         <ContainerFlex mt='10px' mb='10px' p='10px' br='12px'>
             <SubTitle>{title}</SubTitle>
-            <div style={{ width: '150px', overflowX: 'scroll' }}>
+            <div style={{ width: '250px', overflowX: 'scroll' }}>
                 <SpaceBetween>
                     {mockGallery.map((item, index) => {
                         return (
                             <ContainerFlex key={index} m='0px' pr='4px'>
-                                <Image src={item.pfpSrc} alt='gallery' width={108} height={108} />
+                                <Image src={item.pfpSrc} alt='gallery' width={208} height={208} />
                             </ContainerFlex>
                         )
                     })}
