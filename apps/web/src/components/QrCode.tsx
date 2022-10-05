@@ -20,7 +20,7 @@ const qrCode = new QRCodeStyling({
 })
 
 export default function QrCode() {
-    const { orbis } = useContext(OrbisContext)
+    const orbis = useContext(OrbisContext)
 
     useEffect(() => {
         const checkOrbis = async () => {
