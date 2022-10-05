@@ -1,0 +1,73 @@
+{
+    "name": "@business-card/mobilew",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "expo start",
+        "dev-client": "expo start --dev-client",
+        "expo:build:preview": "eas build --profile preview",
+        "expo:build:production": "eas build --profile production",
+        "expo:install": "expo install",
+        "expo:optimize": "expo-optimize",
+        "lint:css": "stylelint './**/*tsx'",
+        "submit": "eas submit"
+    },
+    "dependencies": {
+        "expo": "46.0.13",
+        "expo-modules-autolinking": "0.10.3",
+        "expo-splash-screen": "0.16.2",
+        "expo-status-bar": "1.4.0",
+        "expo-system-ui": "1.3.0",
+        "react": "18.0.0",
+        "react-dom": "18.0.0",
+        "react-native": "0.69.6",
+        "react-native-safe-area-context": "4.3.1",
+        "react-native-webview": "11.23.0"
+    },
+    "devDependencies": {
+        "@babel/core": "7.19.1",
+        "@babel/preset-env": "7.19.1",
+        "@stylelint/postcss-css-in-js": "0.38.0",
+        "@types/react": "18.0.20",
+        "@types/react-native": "0.70.3",
+        "@typescript-eslint/eslint-plugin": "5.38.0",
+        "@typescript-eslint/parser": "5.38.0",
+        "eslint": "8.23.1",
+        "eslint-config-prettier": "8.5.0",
+        "eslint-config-universe": "11.1.0",
+        "expo-dev-client": "1.2.1",
+        "expo-optimize": "0.2.19",
+        "expo-updates": "0.14.5",
+        "postcss": "8.4.17",
+        "postcss-syntax": "0.36.2",
+        "prettier": "2.7.1",
+        "sharp-cli": "^2.1.0",
+        "stylelint": "14.12.1",
+        "stylelint-config-recommended": "9.0.0",
+        "stylelint-react-native": "2.4.0",
+        "tsconfig": "workspace:*",
+        "typescript": "4.8.3"
+    },
+    "eslintConfig": {
+        "extends": [
+            "universe/native",
+            "universe/shared/typescript-analysis",
+            "prettier"
+        ],
+        "rules": {
+            "prettier/prettier": 0
+        },
+        "overrides": [
+            {
+                "files": [
+                    "*.ts",
+                    "*.tsx",
+                    "*.d.ts"
+                ],
+                "parserOptions": {
+                    "project": "./apps/mobile-webview/tsconfig.json"
+                }
+            }
+        ]
+    },
+    "private": true
+}

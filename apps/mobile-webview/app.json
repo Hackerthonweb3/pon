@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "PoN Web3 Business Card",
+    "slug": "web3-digital-business-card-w",
+    "owner": "ottox",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "pon",
+    "jsEngine": "hermes",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#2B2E38"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#2B2E38"
+      },
+      "package": "ninja.pon.mobilew",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE"
+      ]
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "ninja.pon.mobilew",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Pick photos from your library to add in your profile",
+        "NSPhotoLibraryUsageDescription": "Use the camera to scan QR codes."
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6b19e868-16c6-469f-98a9-a6c50a76ac4e"
+      }
+    }
+  }
+}
