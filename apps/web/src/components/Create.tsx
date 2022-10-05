@@ -138,11 +138,11 @@ export const Create = ({ navigation }: any) => {
             </ContainerFlex>
             <div>
                 <ContainerFlex>
-                    <Image src={profileImg || ''} style={styles.imageStyle} />
+                    <Image alt='profile photo' src={profileImg || ''} style={styles.imageStyle} />
                     <SpaceStart>
                         <Button title='Profile Photo' onClick={() => chooseFile(setProfileImg)} />
                     </SpaceStart>
-                    <Image src={coverImg || ''} style={styles.cover} />
+                    <Image alt='cover image' src={coverImg || ''} style={styles.cover} />
                     <SpaceStart>
                         <Button title='Cover Photo' onClick={() => chooseFile(setCoverImg)} />
                     </SpaceStart>
