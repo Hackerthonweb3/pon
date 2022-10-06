@@ -6,8 +6,8 @@ import { SlideItemData } from './slide-data'
 export const Slide = ({ item }: { item: SlideItemData }) => {
     return (
         <Flex justifyContent='center' flexDirection='column' textAlign='center'>
-            <Image priority src={item.image} alt='slide' width='400px' height='400px' />
-            <Box p='10px 60px'>
+            <Image priority src={item.image} alt='slide' />
+            <Box p='0 5%'>
                 <Title>{item.title}</Title>
                 <Description>{item.description}</Description>
             </Box>
@@ -18,7 +18,7 @@ export const Slide = ({ item }: { item: SlideItemData }) => {
 const Title = styled.div`
     color: #ffffff;
     font-family: 'VT323';
-    font-size: 44px;
+    font-size: 32px;
     text-align: center;
     white-space: pre-wrap;
     margin-top: 30px;
@@ -28,7 +28,7 @@ const Title = styled.div`
 
 const Description = styled.div`
     font-family: 'VT323';
-    font-size: 25px;
+    font-size: 18px;
     text-align: center;
     color: #ffffffb3;
     line-height: normal;

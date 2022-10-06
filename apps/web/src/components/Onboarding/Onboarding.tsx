@@ -23,8 +23,8 @@ const StyledSwipper = styled(Swiper)`
     height: 75%;
     .swiper-pagination-bullet {
         /* padding-right: 20px; */
-        height: 12px;
-        width: 12px;
+        height: 9px;
+        width: 9px;
         position: relative;
         background-color: #d9d9d9;
         opacity: 1;
@@ -55,7 +55,7 @@ export default function Onboarding() {
     }
 
     return (
-        <Flex pt='60px' h='full' wrap='wrap' alignContent='flex-start'>
+        <Flex p='10% 5%' h='full' wrap='wrap' alignContent='flex-start'>
             <StyledSwipper
                 grabCursor={true}
                 onSlideChange={e => setActiveSlide(e.activeIndex)}
