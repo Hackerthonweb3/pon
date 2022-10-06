@@ -81,46 +81,47 @@ export default function Onboarding() {
     }
 
     return (
-        <Flex p='20% 5% 10%' h='full' wrap='wrap' alignContent='flex-start' justifyContent='center'>
-            <StyledSwipper
-                grabCursor={true}
-                onSlideChange={e => setActiveSlide(e.activeIndex)}
-                spaceBetween={0}
-                slidesPerView={1}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[Pagination]}>
-                {slides.map((item: any) => {
-                    return (
-                        <SwiperSlide key={item.id}>
-                            <Slide item={item} />
-                        </SwiperSlide>
-                    )
-                })}
-            </StyledSwipper>
-            {activeSlide === 2 && (
-                <Flex direction='column' justifyContent='space-between' alignItems='center' flex='1' h='25%'>
-                    <Flex direction='column' justifyContent='flex-start'>
-                        <ActionButton label='Connect your wallet' onClick={handleConnectWallet} />
-                        <Text as='button' fontSize='28px' onClick={() => setManualAddress(true)}>
-                            Enter address manually
-                        </Text>
+        <>
+            <Flex p='20% 5% 10%' h='full' wrap='wrap' alignContent='flex-start' justifyContent='center'>
+                <StyledSwipper
+                    grabCursor={true}
+                    onSlideChange={e => setActiveSlide(e.activeIndex)}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    modules={[Pagination]}>
+                    {slides.map((item: any) => {
+                        return (
+                            <SwiperSlide key={item.id}>
+                                <Slide item={item} />
+                            </SwiperSlide>
+                        )
+                    })}
+                </StyledSwipper>
+                {activeSlide === 2 && (
+                    <Flex direction='column' justifyContent='space-between' alignItems='center' flex='1' h='25%'>
+                        <Flex direction='column' justifyContent='flex-start'>
+                            <ActionButton label='Connect your wallet' onClick={handleConnectWallet} />
+                            <Text as='button' fontSize='28px' onClick={() => setManualAddress(true)}>
+                                Enter address manually
+                            </Text>
+                        </Flex>
+                        <Disclaimer />
                     </Flex>
-                    <Disclaimer />
-                </Flex>
-            )}
-
-            <Modal onClose={() => setManualAddress(false)} isOpen={manualAddress}>
-                <ModalOverlay h='100vh' bg='none' overflowY='hidden' />
+                )}
+            </Flex>
+            <Modal onClose={() => setManualAddress(false)} isOpen={manualAddress} motionPreset='slideInBottom'>
+                <ModalOverlay h='100vh' bg='none' />
                 <ModalContent
                     position='absolute'
-                    bottom='-7.8%'
+                    bottom='0'
                     alignItems='stretch'
+                    margin='0'
                     backgroundColor=' #353844'
                     border='1px solid #696969'
-                    border-radius='25px 25px 0 0'
-                    overflowY='hidden'>
+                    border-radius='25px 25px 0 0'>
                     <ModalHeader fontSize='32px' fontWeight='normal' textAlign='center'>
                         Enter an Ethereum address
                     </ModalHeader>
@@ -138,6 +139,6 @@ export default function Onboarding() {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-        </Flex>
+        </>
     )
 }
