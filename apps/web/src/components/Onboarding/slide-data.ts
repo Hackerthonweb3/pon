@@ -1,5 +1,3 @@
-import { SliderBase } from 'react-native'
-
 const slides = [
     {
         id: '1',

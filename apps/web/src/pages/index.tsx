@@ -1,10 +1,8 @@
 import Image from 'next/image'
-import { Text, Flex, Grid, GridItem, Button, Box } from '@chakra-ui/react'
-import { useAccount } from 'wagmi'
+import { Text, Flex, Grid, GridItem, Button, Stack, HStack, VStack } from '@chakra-ui/react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import styled from 'styled-components'
 
-import Onboarding from '~/components/Onboarding/Onboarding'
 import bgImg from '../media/images/landing_bg.jpg'
 import promoSvg from '../media/svg/landing_promo.svg'
 import buttonCreateSvg from '../media/svg/create_button.svg'
@@ -12,12 +10,10 @@ import logosSvg from '../media/svg/landing_logos.svg'
 import bgGraphicsConnect from '../media/svg/landing_connect.svg'
 
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 const StyledBg = styled.div`
     background: url(${bgImg.src}) no-repeat center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
     height: 100%;
 `
@@ -35,8 +31,7 @@ const navButtonStyle = {
 }
 
 const Home: NextPage = () => {
-    const { isConnected } = useAccount()
-
+    const { push } = useRouter()
     const renderLanding = (
         <>
             <Grid
@@ -86,14 +81,16 @@ const Home: NextPage = () => {
     )
 
     return (
-        <>
-            <Box display={{ base: 'none', md: 'block', lg: 'block' }}>
-                <StyledBg>{renderLanding}</StyledBg>
-            </Box>
-            <Box display={{ base: 'block', md: 'none', lg: 'none' }}>
-                <Onboarding />
-            </Box>
-        </>
+        <Stack bgColor='#8ECAE6' minHeight='100vh' padding='20px'>
+            <HStack justifyContent='end'>
+                <Button onClick={() => push('/app')}>Enter PoN app</Button>
+            </HStack>
+            <VStack>
+                <HStack>
+                    <Text>Keep your network meaningful!</Text>
+                </HStack>
+            </VStack>
+        </Stack>
     )
 }
 

@@ -51,3 +51,4 @@ libs/sol/.openzeppelin/unknown-*.json
 
 # expo
 .expo
+apps/mobile-webview/*-api-*.json

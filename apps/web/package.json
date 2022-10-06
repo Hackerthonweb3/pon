@@ -12,6 +12,7 @@
     "dependencies": {
         "@business-card/sdk": "workspace:*",
         "@business-card/sol": "workspace:*",
+        "@chakra-ui/css-reset": "2.0.8",
         "@chakra-ui/icons": "2.0.10",
         "@chakra-ui/react": "2.3.4",
         "@chakra-ui/styled-system": "2.3.3",
@@ -29,6 +30,7 @@
         "@web3auth/web3auth-wagmi-connector": "1.0.0",
         "didtools": "1.0.0",
         "ethers": "5.7.1",
+        "focus-visible": "5.2.0",
         "framer-motion": "7.3.6",
         "ipfs-http-client": "58.0.1",
         "next": "12.3.1",
