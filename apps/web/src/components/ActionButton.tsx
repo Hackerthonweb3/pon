@@ -18,5 +18,5 @@ const ButtonLabel = styled.div`
     color: #99f0ff;
     background: center center / 100% 100% no-repeat url('/button-decoration.svg');
     height: 62px;
-    width: 400px;
+    width: 380px;
 `
