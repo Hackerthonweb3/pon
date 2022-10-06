@@ -1,5 +1,21 @@
 import { useEffect, useState } from 'react'
-import { Box, Container, cookieStorageManager, Flex, Text, VStack } from '@chakra-ui/react'
+import {
+    Box,
+    Button as ChakraButton,
+    Container,
+    cookieStorageManager,
+    Flex,
+    Input,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Text,
+    VStack,
+} from '@chakra-ui/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCreative, Pagination } from 'swiper'
 import SwiperClass from 'swiper/types/swiper-class'
@@ -44,6 +60,7 @@ const StyledSwipper = styled(Swiper)`
 export default function Onboarding() {
     // const { setViewedOnboarding } = useOnboarding()
     const [visible, setVisible] = useState(true)
+    const [manualAddress, setManualAddress] = useState(false)
     const [activeSlide, setActiveSlide] = useState(0)
     const { openConnectModal } = useConnectModal()
     const { isConnected } = useAccount()
@@ -86,11 +103,41 @@ export default function Onboarding() {
                 <Flex direction='column' justifyContent='space-between' alignItems='center' flex='1' h='25%'>
                     <Flex direction='column' justifyContent='flex-start'>
                         <ActionButton label='Connect your wallet' onClick={handleConnectWallet} />
-                        <CallToActionLabel>Get started</CallToActionLabel>
+                        <Text as='button' fontSize='28px' onClick={() => setManualAddress(true)}>
+                            Enter address manually
+                        </Text>
                     </Flex>
                     <Disclaimer />
                 </Flex>
             )}
+
+            <Modal onClose={() => setManualAddress(false)} isOpen={manualAddress}>
+                <ModalOverlay h='100vh' bg='none' overflowY='hidden' />
+                <ModalContent
+                    position='absolute'
+                    bottom='-7.8%'
+                    alignItems='stretch'
+                    backgroundColor=' #353844'
+                    border='1px solid #696969'
+                    border-radius='25px 25px 0 0'
+                    overflowY='hidden'>
+                    <ModalHeader fontSize='32px' fontWeight='normal' textAlign='center'>
+                        Enter an Ethereum address
+                    </ModalHeader>
+                    <ModalBody>
+                        <Input
+                            backgroundColor='#212121'
+                            w='100%'
+                            placeholder='Address...'
+                            fontSize='28px'
+                            padding='28px'
+                        />
+                    </ModalBody>
+                    <ModalFooter marginLeft='10px'>
+                        <ActionButton label='Confirm' onClick={() => {}} />
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </Flex>
     )
 }

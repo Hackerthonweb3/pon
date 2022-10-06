@@ -8,7 +8,7 @@ const App = () => {
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
             <SafeAreaView style={styles.container}>
                 <StatusBar style='auto' />
-                <WebView source={{ uri: 'https://web3card.vercel.app/app' }} />
+                <WebView source={{ uri: 'http://localhost:3000/app' }} style={styles.container} />
             </SafeAreaView>
         </SafeAreaProvider>
     )
