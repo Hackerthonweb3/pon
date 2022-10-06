@@ -55,7 +55,7 @@ export default function Onboarding() {
     }
 
     return (
-        <Flex p='10% 5%' h='full' wrap='wrap' alignContent='flex-start'>
+        <Flex p='10% 5%' h='full' wrap='wrap' alignContent='flex-start' justifyContent='center'>
             <StyledSwipper
                 grabCursor={true}
                 onSlideChange={e => setActiveSlide(e.activeIndex)}

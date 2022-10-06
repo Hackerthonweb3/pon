@@ -1,25 +1,22 @@
-import Image from 'next/image'
-import { Box } from '@chakra-ui/react'
+import { Center } from '@chakra-ui/react'
 import styled from 'styled-components'
-
-import buttonDecoration from '../media/svg/button-decoration.svg'
 
 type ButtonProps = { label: string; onClick: () => void }
 
 export const ActionButton = ({ label, onClick }: ButtonProps) => {
     return (
-        <Box as='button' onClick={onClick} h='110px'>
-            <Image src={buttonDecoration} alt='button background' height='110px' width='460px' />
+        <Center as='button' onClick={onClick}>
             <ButtonLabel>{label}</ButtonLabel>
-        </Box>
+        </Center>
     )
 }
 
-const ButtonLabel = styled.p`
-    text-align: 'center';
+const ButtonLabel = styled.div`
     font-family: 'VT323';
-    font-size: 32px;
+    font-size: 28px;
+    line-height: 200%;
     color: #99f0ff;
-    top: -70%;
-    position: relative;
+    background: center center / 100% 100% no-repeat url('/button-decoration.svg');
+    height: 62px;
+    width: 400px;
 `
