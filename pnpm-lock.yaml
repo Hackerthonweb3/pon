@@ -243,6 +243,7 @@ importers:
       '@babel/runtime': 7.19.0
       '@business-card/sdk': workspace:*
       '@business-card/sol': workspace:*
+      '@chakra-ui/css-reset': 2.0.8
       '@chakra-ui/icons': 2.0.10
       '@chakra-ui/react': 2.3.4
       '@chakra-ui/styled-system': 2.3.3
@@ -268,6 +269,7 @@ importers:
       eslint-config-next: 12.3.1
       eslint-config-turbo: 0.0.3
       ethers: 5.7.1
+      focus-visible: 5.2.0
       framer-motion: 7.3.6
       ipfs-http-client: 58.0.1
       next: 12.3.1
@@ -290,6 +292,7 @@ importers:
     dependencies:
       '@business-card/sdk': link:../../libs/sdk
       '@business-card/sol': link:../../libs/sol
+      '@chakra-ui/css-reset': 2.0.8_hptixkhkh6doft3z4y2yugsbtq
       '@chakra-ui/icons': 2.0.10_ntmefn2zsnkfmlnglxyblevrbi
       '@chakra-ui/react': 2.3.4_m7bunnsgbhj32se4pgj67sjniy
       '@chakra-ui/styled-system': 2.3.3
@@ -307,6 +310,7 @@ importers:
       '@web3auth/web3auth-wagmi-connector': 1.0.0_rodemj4ekydzwg2tvdq74o5fpi
       didtools: 1.0.0
       ethers: 5.7.1
+      focus-visible: 5.2.0
       framer-motion: 7.3.6_zpnidt7m3osuk7shl3s4oenomq
       ipfs-http-client: 58.0.1_undici@5.10.0
       next: 12.3.1_nrum4enqdu7xfykl5p5yhahyge
@@ -2260,6 +2264,16 @@ packages:
 
   /@chakra-ui/css-reset/2.0.7_hptixkhkh6doft3z4y2yugsbtq:
     resolution: {integrity: sha512-ztGdFQ6U1hX2k6a3HZ8D3A/dZWVxlGe2F5mvUrRU554mFWBYmsq0ydZ7UBEPlykv9NoCz4nN8VCkIxcKJ3p29Q==}
+    peerDependencies:
+      '@emotion/react': '>=10.0.35'
+      react: '>=18'
+    dependencies:
+      '@emotion/react': 11.10.4_ytsf3xmizandgp4fjdsqz6psoi
+      react: 18.0.0
+    dev: false
+
+  /@chakra-ui/css-reset/2.0.8_hptixkhkh6doft3z4y2yugsbtq:
+    resolution: {integrity: sha512-VuDD1rk1pFc+dItk4yUcstyoC9D2B35hatHDBtlPMqTczFAzpbgVJJYgEHANatXGfulM5SdckmYEIJ3Tac1Rtg==}
     peerDependencies:
       '@emotion/react': '>=10.0.35'
       react: '>=18'
@@ -8330,7 +8344,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
     transitivePeerDependencies:
       - debug
 
@@ -12563,6 +12577,19 @@ packages:
     dependencies:
       tslib: 2.4.0
     dev: false
+
+  /focus-visible/5.2.0:
+    resolution: {integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==}
+    dev: false
+
+  /follow-redirects/1.15.2:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
 
   /follow-redirects/1.15.2_debug@4.3.4:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
