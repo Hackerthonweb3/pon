@@ -18,6 +18,7 @@ export const theme = extendTheme({
                 backgroundColor: '#2B2E38',
             },
             ', #__next, .css-0': {
+                overflow: 'hidden',
                 height: '100%',
             },
         },
