@@ -1,7 +1,6 @@
 import '@rainbow-me/rainbowkit/styles.css'
 
-import { Fade, SlideFade, Box, Spinner, Center, Flex } from '@chakra-ui/react'
-import { NavBar } from './NavBar'
+import { Fade, Spinner, Center } from '@chakra-ui/react'
 import { PropsWithChildren } from 'react'
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { useRainbowOptions } from '~/hooks/useRainbowOptions'
@@ -10,11 +9,11 @@ import { useAnimation } from '~/hooks/useAnimation'
 import { useSafeMounted } from '~/hooks'
 import { useAccount } from 'wagmi'
 import { useCeramicSession } from '~/hooks/useCeramicSession'
+import styled from 'styled-components'
 
 export const Layout = ({ children }: PropsWithChildren) => {
     const isMounted = useSafeMounted()
-    const animationA = useAnimation(600)
-    const animationB = useAnimation(200)
+    const animation = useAnimation(200)
     useAccount(useCeramicSession())
 
     // Don't move rainbow! We use RainbowKitProvider here to be able to access ChakraUI's theme!!!
@@ -22,21 +21,26 @@ export const Layout = ({ children }: PropsWithChildren) => {
 
     if (!isMounted)
         return (
-            <Center height={'100vh'}>
+            <Center h='full'>
                 <Spinner size='xl' />
             </Center>
         )
 
     return (
-        <RainbowKitProvider {...rainbowOptions}>
-            <SlideFade in={animationA} offsetY='-20px' style={{ zIndex: 1 }}>
-                <NavBar />
-            </SlideFade>
-            <Fade in={animationB}>
-                <Flex w='full' h='full' justifyContent='center' py={20}>
-                    {children}
-                </Flex>
+        <Wrapper>
+            <Fade in={animation} style={{ height: '100%' }}>
+                <RainbowKitProvider {...rainbowOptions}>{children}</RainbowKitProvider>
             </Fade>
-        </RainbowKitProvider>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+    height: 100%;
+    .chakra-fade {
+        height: 100%;
+    }
+    [data-rk] {
+        height: 100%;
+    }
+`
