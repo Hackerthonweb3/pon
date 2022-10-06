@@ -20,6 +20,6 @@ const ButtonLabel = styled.p`
     font-family: 'VT323';
     font-size: 32px;
     color: #99f0ff;
-    top: -80%;
+    top: -70%;
     position: relative;
 `
