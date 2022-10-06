@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box, Container, Flex, Text, VStack } from '@chakra-ui/react'
+import { Box, Container, cookieStorageManager, Flex, Text, VStack } from '@chakra-ui/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCreative, Pagination } from 'swiper'
 import SwiperClass from 'swiper/types/swiper-class'
@@ -18,6 +18,9 @@ import buttonConnectSvg from '../../media/svg/button_connect.svg'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { ContainerFlex } from '../DesignSystem'
+import { useConnectModal } from '@rainbow-me/rainbowkit'
+import { useAccount } from 'wagmi'
+import { useRouter } from 'next/router'
 
 const StyledSwipper = styled(Swiper)`
     height: 75%;
@@ -42,11 +45,13 @@ export default function Onboarding() {
     // const { setViewedOnboarding } = useOnboarding()
     const [visible, setVisible] = useState(true)
     const [activeSlide, setActiveSlide] = useState(0)
-    // useEffect(() => {
-    //     if (route.params?.goToStart) {
-    //         setVisible(true)
-    //     }
-    // }, [route])
+    const { openConnectModal } = useConnectModal()
+    const { isConnected } = useAccount()
+    const { push } = useRouter()
+
+    useEffect(() => {
+        if (isConnected) push('/validating', '/app')
+    }, [isConnected])
 
     const handleComplete = async () => {
         // await setViewedOnboarding(true)
@@ -54,8 +59,12 @@ export default function Onboarding() {
         // go to connect
     }
 
+    const handleConnectWallet = () => {
+        openConnectModal && openConnectModal()
+    }
+
     return (
-        <Flex p='10% 5%' h='full' wrap='wrap' alignContent='flex-start' justifyContent='center'>
+        <Flex p='20% 5% 10%' h='full' wrap='wrap' alignContent='flex-start' justifyContent='center'>
             <StyledSwipper
                 grabCursor={true}
                 onSlideChange={e => setActiveSlide(e.activeIndex)}
@@ -76,7 +85,7 @@ export default function Onboarding() {
             {activeSlide === 2 && (
                 <Flex direction='column' justifyContent='space-between' alignItems='center' flex='1' h='25%'>
                     <Flex direction='column' justifyContent='flex-start'>
-                        <ActionButton label='Connect your wallet' onClick={() => {}} />
+                        <ActionButton label='Connect your wallet' onClick={handleConnectWallet} />
                         <CallToActionLabel>Get started</CallToActionLabel>
                     </Flex>
                     <Disclaimer />
