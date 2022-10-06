@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from 'react'
 
 declare global {
     namespace ReactNavigation {
-        interface RootParamList extends MainNavigationScreens {}
+        interface RootParamList extends MainNavigationScreens { }
     }
 }
 

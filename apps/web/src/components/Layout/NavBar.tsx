@@ -27,6 +27,7 @@ export const NavBar = () => {
         { route: redirectConnected('/profile'), title: 'Profile' },
         { route: redirectConnected('/scan'), title: 'QR code' },
         { route: redirectConnected('/contacts'), title: 'Contacts' },
+        { route: redirectConnected('/event'), title: 'Events' },
     ]
 
     const renderTabs = (
