@@ -34,12 +34,14 @@ export default function Events() {
 
     const renderEvents = data.map((item, index) => {
         return (
-            <Flex key={index} px={1} flex={1}>
-                <Link href={`/event/${item.id}`}>
+            <Link href={`/event/${item.id}`}>
+                <Flex key={index} px={1} flex={1}>
+
                     <EventItem {...item} />
-                </Link>
-                {/* <Divider color='white' opacity='1' orientation='horizontal' /> */}
-            </Flex>
+
+                    {/* <Divider color='white' opacity='1' orientation='horizontal' /> */}
+                </Flex >
+            </Link>
         )
     })
 
@@ -54,7 +56,9 @@ export default function Events() {
                 <Flex direction="column">{renderEvents}</Flex>
             </Stack>
             <Button borderRadius="50%" bgColor="#00A9FF" style={{ position: 'absolute', right: 0, bottom: 0 }}>
-                <AddIcon />
+                <Link href="/event/create">
+                    <AddIcon />
+                </Link>
             </Button>
         </Box>
     )
