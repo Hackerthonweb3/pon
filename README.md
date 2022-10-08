@@ -3,7 +3,7 @@
 } -->
 <div align="center">
 
-# 🤝 **PoN - Web3 Business Card - : EthOnline 2022**
+# 🤝 **PoN - Web3 Business Card - : EthBogota 2022**
 
 [![GitHub deployments](https://img.shields.io/github/deployments/Hackerthonweb3/business-card/production?label=deployment&logo=vercel&style=flat-square&color=00a550&logoColor=00a550)](https://web3card.vercel.app)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Hackerthonweb3/business-card/Build%20Pipeline?logo=github&style=flat-square&color=00a550&logoColor=00a550)](https://github.com/Hackerthonweb3/business-card/actions/workflows/pipeline.yml)
@@ -133,16 +133,7 @@ How is this product creative and unique:
 
 -   To make Web3 social products a product market fit for consumers, it is necessary to achieve a better UX, and a mobile experience is essential to this. There are only few projects in the industry that are able to combine data portability and mobile.
 
-### Team Members
-
--   Otto | Full stack Software Engineer | In blockchain space since 2013, full stack+solidity developer.
--   Ryndon | Product Manager | Youtuber at TJFREE | Free Software Advocate | Entrepreneur.
--   Jonathan Cruz | UX/UI Design |
--   Asiya | Full stack Software Engineer | Staff SWE at PANW I #AI MS Georgia Tech | Learning #wingfoil , #web3 | @siggraph_irc committee Chair | @developer_dao #1076.
--   Carlos | Full stack Software Engineer |
 
 ### Resources
 
--   [Twitter](https://twitter.com/Web3PoN)
 -   [Demo1: Mobile use](https://www.youtube.com/watch?v=cTG88Kcmj1A)
--   [Demo2: Web app use](https://www.youtube.com/watch?v=tH_4JWuMJB4)
