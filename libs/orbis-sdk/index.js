@@ -1,11 +1,11 @@
 /** Ceramic */
 import { CeramicClient } from '@ceramicnetwork/http-client'
 import { TileDocument } from '@ceramicnetwork/stream-tile'
-import { createDIDKey, createDIDCacao, DIDSession } from 'did-session'
+import { /*createDIDKey, createDIDCacao,*/ DIDSession } from 'did-session'
 // import { SolanaAuthProvider } from '@ceramicnetwork/blockchain-utils-linking'
 import { /*EthereumWebAuth,*/ EthereumWebAuth, getAccountId } from '@didtools/pkh-ethereum'
-import { Cacao, SiweMessage } from '@didtools/cacao'
-import { randomString } from '@stablelib/random'
+// import { Cacao, SiweMessage } from '@didtools/cacao'
+// import { randomString } from '@stablelib/random'
 
 /** To generate dids from a Seed */
 import { DID } from 'dids'
@@ -26,7 +26,7 @@ import {
 
 /** Internal helpers */
 import { indexer } from './lib/indexer-db.js'
-import { forceIndex, forceIndexDid, randomSeed, sleep /*, randomSeed*/, sortByKey } from './utils/index.js'
+import { forceIndex, forceIndexDid, /*randomSeed,*/ sleep /*, randomSeed*/, sortByKey } from './utils/index.js'
 // import { SOLANA_MAINNET_CHAIN_REF } from '@ceramicnetwork/blockchain-utils-linking/lib/solana'
 // const SOLANA_MAINNET_CHAIN_REF = '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
 
