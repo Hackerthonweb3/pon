@@ -98,7 +98,7 @@ export default function Event() {
                     <Box key={section.heading} borderRadius={11} bg='#353844' width="100%" py={5} px={7}>
                         <Heading>{section.heading}</Heading>
                         <Text>{event[section.field]}</Text>
-                        <Flex direction={{ base: 'row', xs: 'column' }} justifyContent="center">
+                        <Flex direction={{ base: 'row', xs: 'column' }} justify="center">
                             {section.subsections?.map(subsection => (
                                 <VStack>
                                     <Heading>{subsection.heading}</Heading>
@@ -108,8 +108,9 @@ export default function Event() {
                         </Flex>
 
                     </Box>
-                ))}
-            </VStack>
+                ))
+                }
+            </VStack >
             <Stack as={Box} textAlign={'center'} width='100%' spacing={{ base: 6, md: 8 }} py={{ base: 10, md: 6 }}>
                 <Box>
                     <Input value={searchVal} variant='filled' onChange={handleChange} placeholder='Search by Name' />
@@ -117,6 +118,6 @@ export default function Event() {
                 <Heading>Attendees {data.length}</Heading>
                 <Flex>{renderContacts}</Flex>
             </Stack>
-        </Box>
+        </Box >
     )
 }

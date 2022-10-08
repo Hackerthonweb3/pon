@@ -32,32 +32,32 @@ export default function Events() {
         ? mockContacts.filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase()))
         : mockContacts
 
-    const renderContacts = data.map((item, index) => {
+    const renderEvents = data.map((item, index) => {
         return (
-            <Box key={index} px={1}>
+            <Flex key={index} px={1}>
                 <Link href={`/event/${item.id}`}>
                     <a>
                         <ListItem {...item} />
                     </a>
                 </Link>
                 <Divider color='white' opacity='1' orientation='horizontal' />
-            </Box>
+            </Flex>
         )
     })
 
     return (
         <Box>
-            <Box>
+            <div>
                 <Heading fontWeight={600} fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }} lineHeight={'110%'}>
                     Your Events
                 </Heading>
-            </Box>
+            </div>
             <Stack as={Box} textAlign={'center'} width='100%' spacing={{ base: 6, md: 8 }} py={{ base: 10, md: 6 }}>
                 <Box>
                     <Input value={searchVal} variant='filled' onChange={handleChange} placeholder='Search by Name' />
                 </Box>
                 <Heading>All Events ({data.length})</Heading>
-                <Flex>{renderContacts}</Flex>
+                <Flex>{renderEvents}</Flex>
             </Stack>
         </Box>
     )

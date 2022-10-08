@@ -9,6 +9,7 @@ import { useOrbis } from '~/hooks'
 import { Profile } from '~/hooks'
 // import { FileUploader } from './FileUploader'
 import { create } from 'ipfs-http-client'
+import { Orbis } from '@orbisclub/orbis-sdk'
 
 const layout = [{
     heading: 'Basic Info',
@@ -60,7 +61,7 @@ const layout = [{
 export default function NewUser() {
     const router = useRouter()
     const { address } = useAccount()
-    const { connect, profile, updateProfile } = useOrbis()
+    const { orbis, profile } = useOrbis()
     const { handleSubmit, register, control } = useForm()
     const [error, setError] = useState(null as any)
 
@@ -75,39 +76,20 @@ export default function NewUser() {
     })
 
     const onSubmit = async (data: any) => {
-        console.log(data)
-        // const newData = { ...data }
+        const newData = { ...data }
+        const result = await orbis.createGroup({
+            name: "Orbis Community",
+            description: '',
+            pfp: '',
+        });
+        console.log(result);
 
-        // if (newData.cover) {
-        //     try {
-        //         const created = await ipfsClient.add(data.cover)
-        //         newData.cover = created.path
-        //     } catch (error) {
-        //         setError(error)
-        //     }
-        // } else {
-        //     newData.cover = ''
-        // }
+        if (result.status === 200) {
+            router.push('/event')
+        } else {
+            if (error) setError(error)
+        }
 
-        // if (newData.pfp) {
-        //     try {
-        //         const created = await ipfsClient.add(data.pfp)
-        //         newData.pfp = created.path
-        //     } catch (error) {
-        //         setError(error)
-        //     }
-        // } else {
-        //     newData.pfp = ''
-        // }
-
-        // const connected = await connect()
-
-        // if (connected) {
-        //     const { updated, error } = await updateProfile(newData)
-
-        //     if (updated) router.push('/profile')
-        //     if (error) setError(error)
-        // }
     }
 
     return (
