@@ -55,6 +55,16 @@ export default function App() {
         }
     }
 
+    const updateProfile = async () => {
+        let res = await orbis?.updateProfile({
+            pfp: '',
+            username: 'ottx',
+            description: '',
+        })
+
+        console.log('res', res)
+    }
+
     const { disconnect } = useDisconnect({
         async onSuccess() {
             const result = await orbis?.logout()
@@ -106,6 +116,15 @@ export default function App() {
 
     const { push } = useRouter()
 
+    const createGroup = async () => {
+        const result = await (orbis as any).createGroup({
+            name: 'pepe',
+            description: '',
+            pfp: '',
+        })
+        console.log('result', result)
+    }
+
     return (
         <>
             <Button onClick={() => push('logic-qr')}>Go to Logic</Button>
@@ -144,6 +163,12 @@ export default function App() {
             <br />
             <Button disabled={isOrbisConnected || !isConnected} onClick={connectOrbis}>
                 Connect Orbis
+            </Button>
+            <Button disabled={!isConnected} onClick={createGroup}>
+                Create group
+            </Button>
+            <Button disabled={!isConnected} onClick={updateProfile}>
+                Edit profile
             </Button>
         </>
     )
