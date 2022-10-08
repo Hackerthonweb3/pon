@@ -36,7 +36,7 @@ export const useCeramicSession = () => {
 
         if (!ceramicPreviousSession || !litPreviousSession) {
             console.log('Ceramic or Lit sessions not found, creating new ones')
-            // await connect()
+            await connect()
         } else {
             if (ceramicPreviousSession) {
                 console.log('Ceramic session found, restoring')

@@ -58,7 +58,6 @@ const layout = [{
 }];
 
 export default function NewUser() {
-    const { orbis } = useOrbis();
     const router = useRouter()
     const { address } = useAccount()
     const { connect, profile, updateProfile } = useOrbis()
@@ -76,23 +75,39 @@ export default function NewUser() {
     })
 
     const onSubmit = async (data: any) => {
-        const description = { ...data };
-        delete data.name;
-        const event = {
-            name: data.title,
-            description: JSON.stringify(description),
-        }
-        const isConnected = await orbis.isConnected();
-        console.log(isConnected, 'isConnected');
-        if (isConnected) {
-            let { status } = await orbis.createGroup(event);
-            if (status === "200") {
-                router.push('/profile')
-                console.log('event added');
-            } else {
-                setError(error)
-            }
-        }
+        console.log(data)
+        // const newData = { ...data }
+
+        // if (newData.cover) {
+        //     try {
+        //         const created = await ipfsClient.add(data.cover)
+        //         newData.cover = created.path
+        //     } catch (error) {
+        //         setError(error)
+        //     }
+        // } else {
+        //     newData.cover = ''
+        // }
+
+        // if (newData.pfp) {
+        //     try {
+        //         const created = await ipfsClient.add(data.pfp)
+        //         newData.pfp = created.path
+        //     } catch (error) {
+        //         setError(error)
+        //     }
+        // } else {
+        //     newData.pfp = ''
+        // }
+
+        // const connected = await connect()
+
+        // if (connected) {
+        //     const { updated, error } = await updateProfile(newData)
+
+        //     if (updated) router.push('/profile')
+        //     if (error) setError(error)
+        // }
     }
 
     return (
@@ -166,7 +181,7 @@ export default function NewUser() {
             </FormControl> */}
 
             <FormControl id='button'>
-                <Button onClick={handleSubmit(onSubmit)} width="100%">Create event</Button>
+                <Button onClick={handleSubmit(onSubmit)}>Create event</Button>
             </FormControl>
         </VStack>
     )

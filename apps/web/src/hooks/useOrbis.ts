@@ -69,6 +69,18 @@ export const useOrbis = () => {
         }
     }, [chain?.id, dids, orbis])
 
+    const connect = async () => {
+        const orbisConnection = await orbis.isConnected()
+        const isOrbisConnected = orbisConnection.status === 200
+
+        if (!isOrbisConnected) {
+            const provider = await connector?.getProvider()
+            await orbis.connect(provider)
+        }
+
+        return isOrbisConnected
+    }
+
     const updateProfile = async (profile: Profile) => {
         const orbisProfileData: OrbisProfile = {
             cover: profile.cover || '',
@@ -88,5 +100,5 @@ export const useOrbis = () => {
         return { error: result?.error?.message, updated: false }
     }
 
-    return { orbis, profile, updateProfile, error, loadingDid, loadingProfile }
+    return { connect, orbis, profile, updateProfile, error, loadingDid, loadingProfile }
 }

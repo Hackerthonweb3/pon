@@ -51,11 +51,15 @@ export default function NewUser() {
         } else {
             newData.pfp = ''
         }
-        const { updated, error } = await updateProfile(newData)
 
-        if (updated) router.push('/profile')
-        if (error) setError(error)
+        const connected = await connect()
 
+        if (connected) {
+            const { updated, error } = await updateProfile(newData)
+
+            if (updated) router.push('/profile')
+            if (error) setError(error)
+        }
     }
 
     return (
