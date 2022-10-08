@@ -1,42 +1,31 @@
 import { useEffect, useState } from 'react'
 import {
-    Box,
-    Button as ChakraButton,
-    Container,
-    cookieStorageManager,
     Flex,
     Input,
     Modal,
     ModalBody,
-    ModalCloseButton,
     ModalContent,
     ModalFooter,
     ModalHeader,
     ModalOverlay,
     Text,
-    VStack,
 } from '@chakra-ui/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCreative, Pagination } from 'swiper'
-import SwiperClass from 'swiper/types/swiper-class'
+import { Pagination } from 'swiper'
 import styled from 'styled-components'
 
-import { useOnboarding } from '../../hooks/useOnboarding'
 import { ActionButton } from '../ActionButton'
-import { CustomConnect } from '../CustomConnect'
-import { CallToActionLabel } from './CallToActionLabel'
 import { Disclaimer } from './Disclaimer'
 import { Slide } from './Slide'
 
 import slides from './slide-data'
-import buttonConnectSvg from '../../media/svg/button_connect.svg'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { ContainerFlex } from '../DesignSystem'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 import { useRouter } from 'next/router'
+import { useOrbis } from '~/hooks'
 
 const StyledSwipper = styled(Swiper)`
     height: 75%;
@@ -58,26 +47,35 @@ const StyledSwipper = styled(Swiper)`
 `
 
 export default function Onboarding() {
-    // const { setViewedOnboarding } = useOnboarding()
-    const [visible, setVisible] = useState(true)
     const [manualAddress, setManualAddress] = useState(false)
     const [activeSlide, setActiveSlide] = useState(0)
     const { openConnectModal } = useConnectModal()
     const { isConnected } = useAccount()
     const { push } = useRouter()
+    const [enteredAddress, setEnteredAddress] = useState('')
+    const handleChange = (event: any) => setEnteredAddress(event.target.value)
+    const { orbis } = useOrbis()
 
     useEffect(() => {
         if (isConnected) push('/validating', '/app')
     }, [isConnected])
 
-    const handleComplete = async () => {
-        // await setViewedOnboarding(true)
-        setVisible(false)
-        // go to connect
-    }
-
     const handleConnectWallet = () => {
         openConnectModal && openConnectModal()
+    }
+
+    const handleManualAddress = async () => {
+        const { data, error } = await orbis.getDids(enteredAddress)
+        console.log('data', data)
+        if (error) {
+            alert('The entered address has not registered an Orbis profile')
+        }
+
+        // For now make the assumption that the most recent used profile is the main one
+        const lastUsedProfile = Math.max(...data.map((profile: any) => profile.last_activity_timestamp))
+        const did = data.filter((profile: any) => profile.last_activity_timestamp === lastUsedProfile)[0].did
+
+        push({ pathname: '/mini-profile/[did]', query: { did } }, '/mini-profile')
     }
 
     return (
@@ -132,10 +130,11 @@ export default function Onboarding() {
                             placeholder='Address...'
                             fontSize='28px'
                             padding='28px'
+                            onChange={handleChange}
                         />
                     </ModalBody>
                     <ModalFooter marginLeft='10px'>
-                        <ActionButton label='Confirm' onClick={() => {}} />
+                        <ActionButton label='Confirm' onClick={handleManualAddress} />
                     </ModalFooter>
                 </ModalContent>
             </Modal>

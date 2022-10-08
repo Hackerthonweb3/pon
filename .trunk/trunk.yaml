@@ -23,7 +23,7 @@ lint:
         - actionlint@1.6.20
         - git-diff-check@SYSTEM
         - gitleaks@8.13.0
-        - eslint@8.24.0
+        - eslint@8.25.0
         - markdownlint@0.32.2
         - prettier@2.7.1
         - stylelint@14.13.0
