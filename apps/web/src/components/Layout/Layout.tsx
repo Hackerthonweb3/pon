@@ -10,8 +10,10 @@ import { useSafeMounted } from '~/hooks'
 import { useAccount } from 'wagmi'
 import { useCeramicSession } from '~/hooks/useCeramicSession'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
 
 export const Layout = ({ children }: PropsWithChildren) => {
+    const router = useRouter()
     const isMounted = useSafeMounted()
     const animation = useAnimation(200)
     useAccount(useCeramicSession())
@@ -29,7 +31,13 @@ export const Layout = ({ children }: PropsWithChildren) => {
     return (
         <Wrapper>
             <Fade in={animation} style={{ height: '100%' }}>
-                <RainbowKitProvider {...rainbowOptions}>{children}</RainbowKitProvider>
+                <RainbowKitProvider {...rainbowOptions}>
+                    {router.pathname === '/' ? children : (
+                        <>
+                            {children}
+                        </>
+                    )}
+                </RainbowKitProvider>
             </Fade>
         </Wrapper>
     )

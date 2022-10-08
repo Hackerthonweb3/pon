@@ -104,7 +104,7 @@ export default function Event() {
                         <Flex direction="column" justify="center">
                             {section.subsections?.map(subsection => (
                                 <HStack alignItems="flex-start" direction="row">
-                                    <Flex>
+                                    <Flex flexBasis="10%" justify="center">
                                         <Image src={subsection.icon} />
                                     </Flex>
                                     <Flex direction="column">
