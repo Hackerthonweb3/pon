@@ -59,6 +59,7 @@ const layout = [{
 }];
 
 export default function NewUser() {
+    const { orbis } = useOrbis();
     const router = useRouter()
     const { address } = useAccount()
     const { orbis, profile } = useOrbis()
@@ -163,7 +164,7 @@ export default function NewUser() {
             </FormControl> */}
 
             <FormControl id='button'>
-                <Button onClick={handleSubmit(onSubmit)}>Create event</Button>
+                <Button onClick={handleSubmit(onSubmit)} width="100%">Create event</Button>
             </FormControl>
         </VStack>
     )
