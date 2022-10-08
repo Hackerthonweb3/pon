@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Divider, Box, Stack, Input, Button, Heading, Flex, Text, VStack } from '@chakra-ui/react'
+import { Divider, Box, Stack, Input, Button, Heading, Flex, Text, VStack, HStack } from '@chakra-ui/react'
 import { useAccount } from 'wagmi'
 
 import ListItem from '~/components/ListItem'
 import Header from '~/components/Event/Header'
 import ProfileOneIcon from '~/media/p1.png'
 import ProfileTwoIcon from '~/media/p2.png'
-import ScanSvg from '~/media/scan.svg'
+import AlarmSvg from '~/media/svg/alarm.svg'
+import LocationSvg from '~/media/svg/location.svg'
 
 const event = {
     id: 1,
@@ -33,10 +34,12 @@ const layout = [
             {
                 heading: 'Date and time',
                 field: 'date',
+                icon: AlarmSvg,
             },
             {
                 heading: 'Location',
                 field: 'location',
+                icon: LocationSvg,
             }
         ]
     },
@@ -98,12 +101,18 @@ export default function Event() {
                     <Box key={section.heading} borderRadius={11} bg='#353844' width="100%" py={5} px={7}>
                         <Heading>{section.heading}</Heading>
                         <Text>{event[section.field]}</Text>
-                        <Flex direction={{ base: 'row', xs: 'column' }} justify="center">
+                        <Flex direction="column" justify="center">
                             {section.subsections?.map(subsection => (
-                                <VStack>
-                                    <Heading>{subsection.heading}</Heading>
-                                    <Text>{event[subsection.field]}</Text>
-                                </VStack>
+                                <HStack alignItems="flex-start" direction="row">
+                                    <Flex>
+                                        <Image src={subsection.icon} />
+                                    </Flex>
+                                    <Flex direction="column">
+                                        <Heading>{subsection.heading}</Heading>
+                                        <Text>{event[subsection.field]}</Text>
+                                    </Flex>
+
+                                </HStack>
                             ))}
                         </Flex>
 
