@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
     Flex,
     Input,
@@ -26,6 +26,7 @@ import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 import { useRouter } from 'next/router'
 import { useOrbis } from '~/hooks'
+import { OrbisContext } from '~/contexts'
 
 const StyledSwipper = styled(Swiper)`
     height: 75%;
@@ -47,14 +48,107 @@ const StyledSwipper = styled(Swiper)`
 `
 
 export default function Onboarding() {
-    const [manualAddress, setManualAddress] = useState(false)
+    const orbis = useContext(OrbisContext)
+    // TODO: track profile globally
+    // const {did} = useContext(ProfileContext)
+
+    // state to track onboarding current slide
     const [activeSlide, setActiveSlide] = useState(0)
-    const { openConnectModal } = useConnectModal()
-    const { isConnected } = useAccount()
-    const { push } = useRouter()
+
+    // state to show the modal to enter manual address
+    const [manualAddressModalShown, setManualAddressModalShown] = useState(false)
+
+    // state for manual address entered in the input component
     const [enteredAddress, setEnteredAddress] = useState('')
+
+    // state to track the did after connecting succesfully to orbis
+    const [did, setDid] = useState<string>()
+
+    // states to track orbis, ceramic and lit connections
+    const [isOrbisConnected, setIsOrbisConnected] = useState(false)
+    const [isCeramicConnected, setIsCeramicConnected] = useState(false)
+    const [isLitConnected, setIsLitConnected] = useState(false)
+
+    // open rainbow kit connect modal
+    const { openConnectModal } = useConnectModal()
+
+    const { push } = useRouter()
+
     const handleChange = (event: any) => setEnteredAddress(event.target.value)
-    const { orbis } = useOrbis()
+
+    // wagmi hooks triggered when interacting with the wallet using rainbow kit
+    const { connector: activeConnector, isConnected } = useAccount({
+        // triggered after connecting a wallet
+        async onConnect({ address, connector, isReconnected }) {
+            console.log('connected by rainbow kit')
+            const result = await orbis?.isConnected()
+            if (result.status === 200) {
+                console.log('orbis is reconnected')
+                setDid(result.did)
+            } else {
+                console.log('oops orbis not connected, trying to connect')
+                const provider = await connector?.getProvider()
+                const result = await orbis?.connect(provider)
+                if (result.status === 200) {
+                    setIsOrbisConnected(true)
+                    if (isCeramicConnected) {
+                        setDid(result.did)
+                        console.log('did saved to state', result.did)
+                    }
+                }
+            }
+        },
+        // triggered after disconnecting the wallet
+        async onDisconnect() {
+            console.log('orbis disconnected by rainbow kit')
+            const result = await orbis?.logout()
+            if (result.status === 200) {
+                console.log('orbis disconnected by useConnect')
+                setIsOrbisConnected(false)
+            } else {
+                console.log('error on orbis logout', result)
+            }
+        },
+    })
+
+    // tries to fetch existing profile from orbis
+    const checkProfile = async () => {
+        // trigger reconnection to get did
+        const result = await orbis?.isConnected()
+        if (result.status === 200) {
+            setDid(result.did)
+        }
+        if (result.did) {
+            console.log('checking profile for did', did)
+            let { data, error } = await orbis?.getProfile(result.did)
+            if (error) return console.log('error fetching profile', error)
+            console.log('profile fetched:', data)
+            // TODO: set profile here or push to the profile/[did] route
+        } else {
+            console.log('profile not found, redirect to creation')
+        }
+    }
+
+    useEffect(() => {
+        setIsCeramicConnected(Boolean(localStorage.getItem('ceramic-session')))
+        setIsLitConnected(Boolean(localStorage.getItem('lit-auth-signature')))
+
+        if (isOrbisConnected) {
+            console.log('checking profile after orbis connected')
+            checkProfile()
+        }
+    }, [isOrbisConnected])
+
+    useEffect(() => {
+        const checkOrbis = async () => {
+            const result = await orbis?.isConnected()
+            if (result.status === 200) {
+                setIsOrbisConnected(true)
+                setDid(result.did)
+            }
+        }
+        checkOrbis()
+    }, [])
 
     useEffect(() => {
         if (isConnected) push('/validating', '/app')
@@ -65,7 +159,7 @@ export default function Onboarding() {
     }
 
     const handleManualAddress = async () => {
-        const { data, error } = await orbis.getDids(enteredAddress)
+        const { data, error } = await orbis?.getDids(enteredAddress)
         console.log('data', data)
         if (error) {
             alert('The entered address has not registered an Orbis profile')
@@ -102,7 +196,7 @@ export default function Onboarding() {
                     <Flex direction='column' justifyContent='space-between' alignItems='center' flex='1' h='25%'>
                         <Flex direction='column' justifyContent='flex-start'>
                             <ActionButton label='Connect your wallet' onClick={handleConnectWallet} />
-                            <Text as='button' fontSize='28px' onClick={() => setManualAddress(true)}>
+                            <Text as='button' fontSize='28px' onClick={() => setManualAddressModalShown(true)}>
                                 Enter address manually
                             </Text>
                         </Flex>
@@ -110,7 +204,10 @@ export default function Onboarding() {
                     </Flex>
                 )}
             </Flex>
-            <Modal onClose={() => setManualAddress(false)} isOpen={manualAddress} motionPreset='slideInBottom'>
+            <Modal
+                onClose={() => setManualAddressModalShown(false)}
+                isOpen={manualAddressModalShown}
+                motionPreset='slideInBottom'>
                 <ModalOverlay h='100vh' bg='none' />
                 <ModalContent
                     position='absolute'

@@ -1,7 +1,7 @@
 import { Center } from '@chakra-ui/react'
 import styled from 'styled-components'
 
-type ButtonProps = { label: string; onClick: () => void }
+type ButtonProps = { label: string; onClick: any }
 
 export const ActionButton = ({ label, onClick }: ButtonProps) => {
     return (
