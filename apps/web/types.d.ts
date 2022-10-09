@@ -25,6 +25,10 @@ declare module '@orbisclub/orbis-sdk' {
             schema: string,
             family?: string,
         ): Promise<OrbisResponse>
+
+        getGroup(props: any): any
+        getProfileGroups(props: any): any
+        createGroup(props: any): any
     }
 
     type OrbisResponse = any

@@ -10,6 +10,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@apollo/client": "3.7.0",
         "@business-card/sdk": "workspace:*",
         "@business-card/sol": "workspace:*",
         "@chakra-ui/css-reset": "2.0.8",
@@ -23,7 +24,7 @@
         "@ethersproject/providers": "5.7.1",
         "@fontsource/vt323": "4.5.10",
         "@hookform/resolvers": "2.9.8",
-        "@orbisclub/orbis-sdk": "workspace:*",
+        "@orbisclub/orbis-sdk": "0.3.91",
         "@rainbow-me/rainbowkit": "0.6.1",
         "@tanstack/query-core": "4.10.3",
         "@tanstack/react-query": "4.10.3",
@@ -32,6 +33,7 @@
         "ethers": "5.7.1",
         "focus-visible": "5.2.0",
         "framer-motion": "7.3.6",
+        "graphql": "16.6.0",
         "ipfs-http-client": "58.0.1",
         "next": "12.3.1",
         "qr-code-styling": "1.6.0-rc.1",
