@@ -3,7 +3,7 @@
 } -->
 <div align="center">
 
-# 🤝 **PoN - Web3 Business Card - : EthOnline 2022**
+# 🤝 **PoN - Web3 Business Card - : EthBogota 2022**
 
 [![GitHub deployments](https://img.shields.io/github/deployments/Hackerthonweb3/business-card/production?label=deployment&logo=vercel&style=flat-square&color=00a550&logoColor=00a550)](https://web3card.vercel.app)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Hackerthonweb3/business-card/Build%20Pipeline?logo=github&style=flat-square&color=00a550&logoColor=00a550)](https://github.com/Hackerthonweb3/business-card/actions/workflows/pipeline.yml)
@@ -42,11 +42,11 @@
 
 ## 🚀 **Statement**
 
-**We are eager to continue the project after the hackathon in order to actually launch it in the world.**
+**We are eager to continue the project after the hackathon in order to actually launch it in the world. We wanted ETH Bogota as a new addition to our existing project and have received an endorsement from ETH Global that we are eligible for a sponsor award.**
 
 ## 🎬 **Pitch & Live Demo (Video)**
 
-PoN are digital business cards to help people connect easier while attending web3 conferences and events. The end goal is to create a reputation ecosystem to replace web2 platforms like LinkedIn.
+PoN are digital business cards to help people connect easier while attending web3 conferences and events. The end goal is to create a reputation ecosystem to replace web2 platforms like LinkedIn and Eventbright.
 
 <p align='center'>
     <a href='https://www.youtube.com/watch?v=cTG88Kcmj1A'>
@@ -54,28 +54,17 @@ PoN are digital business cards to help people connect easier while attending web
     </a>
 </p>
 
-## 💬 **Problem**
+## 💬 **Problem：Networking at Web3 events.**
 
--   It is hard to remember and keep track of everyone we meet at events and re-connect later.
+- Difficult to find people who you want to meet at the events.
+- Difficult to exchange personal profiles and contact information.
+- It’s challenging to keep track of events.
 
-## 💬 **Current Alternatives**
+## 💡 **Solution：Networking dapp for Web3 events**
 
--   Documenting everything in memo apps or spreadsheets.
--   Sending friend request on various social networks.
--   Little to no interaction with the web3 ecosystem.
-
-## 💡 **Solution**
-
-**Digital business cards to help people connect easier while attending web3 conferences and events.**
-
-1. **Easy web3 profile creation**
-    - Create your own profile, with no fees.
-2. **Share your info Instantly.**
-    - Share anything about yourself with one simple link.
-3. **Manage your contacts seamlessly**
-    - Set permissions, search by profile, and even send direct messages.
-4. **Verifiable connections**
-    - Ability to prove / verify connections you have with others.
+- See all attendees’s profile at the event.
+- Exchange profiles by scanning each other’s QR code, or via one link
+- Find all Web3-related events in one place.
 
 ## 💻 **How we made it**
 
@@ -86,30 +75,39 @@ PoN are digital business cards to help people connect easier while attending web
 -   Front-End: Nextjs, React, Typescript, Rainbowkit/Wagmi,
 -   Mobile: ReactNative, WalletConnect
 -   Data: Ceramic, Lit Protocol with Orbis-SDK, IPFS
--   Blockchain: We prepared deployment on Polygon, Optimism, Oasis, Aurora, Cronos. SKALE will be supported soon.
+-   Blockchain: We prepared deployment on Polygon, Optimism, Mina, Boba, Gnosis.
 
-#### Easy web3 profile creation and instantly sharing information
+## **①Deploy SBT to Blockchain**
 
--   **Ceramic**： We are mixing these on-chain solutions with off-chain portable data by using Ceramic and Lit protocols, to achieve a superior UX combined with React to easily onboard every kind of use in any platform.
--   **IPFS/Filecoin**： To upload metadata about the encounter, upload media data, dapp deployed to IPFS.
--   **ENS**： Optional subdomains or just integration with avatar, twitter fields, create profile in eth page and redirect to web2 eth.link.
+- **Mina**：For users to deploy SBT because of privacy. []()
 
-#### Verifiable connections
+- **Boba**：For users to deploy SBT because of . []()
 
--   **Polygon**：The Souldbound minting contract deployed and consumed with cheap fees.
+- **Gnosis**：For users to deploy SBT because of low transaction cost. []()
 
--   **Optimism**：The Souldbound minting contract deployed to this network to experience high scalabality.
-    .
+- **Optimism**：For users to deploy SBT because of low transaction cost. []()
 
--   **Cronos**：To deploy SBTs to the blockchain to prove that a user has met a person.
+- **Polygon**：For users to deploy SBT because of low transaction cost. []()
 
--   **SKALE (Planned)**：To deploy SBTs to the blockchain to prove that a user has met a person because of true data ownership.
+- **The Graph**：To build the SBTs gallery for each user profile so the user can see the information almost instantly by subgraph, in the future we can also leverage it to get aggregated information about minted SBTs or other statistical data. SubGraph is [here](https://thegraph.com/studio/subgraph/soulboundimplementation/).
 
--   **Oasis**：To deploy SBTs to the blockchain to prove that a user has met a person because of zero gas and speed.
+- **Open Zeppelin**：To increase security level for smart contract.
 
--   **Aurora**：To deploy SBTs to the blockchain to prove that a user has met a person.
 
--   **The Graph (Planned)**：Subgraph to query all SBTs, interacting with other sponsors subgraphs. This makes PoN a multi-chain application and the subgraph really helps us to do that with good UI/UX experience for not only users, but also developers in our team.
+## ②For user's privacy
+
+- **IPFS/Filecoin**： To upload metadata about the encounter, upload media data, dapp deployed to IPFS.
+
+- **Ceramic**： To mix these on-chain solutions with off-chain portable data by using Ceramic and Lit protocols, to achieve a superior UX combined with React to easily onboard every kind of use in any platform so that users can own data by themself.
+
+- **ENS**：Optional subdomains or just integration with avatar, twitter fields, create profile in eth page and redirect to web2 eth.link.
+
+- **Sismo**：
+
+  - Privacy fighter ：Adding NFT collector badge to use in case use wants to have more security for their NFTs but still use ZK Badge for reputation. It's merged and deployed [here](https://playground.sismo.io/nft-collector). 
+
+  - Sybil Killer：Using PoN SBT as Zk Sismo badge to prove that they made real connections to people.
+
 
 ### Technical details
 
@@ -133,16 +131,7 @@ How is this product creative and unique:
 
 -   To make Web3 social products a product market fit for consumers, it is necessary to achieve a better UX, and a mobile experience is essential to this. There are only few projects in the industry that are able to combine data portability and mobile.
 
-### Team Members
-
--   Otto | Full stack Software Engineer | In blockchain space since 2013, full stack+solidity developer.
--   Ryndon | Product Manager | Youtuber at TJFREE | Free Software Advocate | Entrepreneur.
--   Jonathan Cruz | UX/UI Design |
--   Asiya | Full stack Software Engineer | Staff SWE at PANW I #AI MS Georgia Tech | Learning #wingfoil , #web3 | @siggraph_irc committee Chair | @developer_dao #1076.
--   Carlos | Full stack Software Engineer |
 
 ### Resources
 
--   [Twitter](https://twitter.com/Web3PoN)
 -   [Demo1: Mobile use](https://www.youtube.com/watch?v=cTG88Kcmj1A)
--   [Demo2: Web app use](https://www.youtube.com/watch?v=tH_4JWuMJB4)
