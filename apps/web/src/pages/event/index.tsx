@@ -78,7 +78,7 @@ export default function Events() {
             <Stack as={Box} textAlign={'center'} width='100%' spacing={{ base: 6, md: 8 }} py={{ base: 10, md: 6 }}>
                 <Flex direction="column">{renderEvents}</Flex>
             </Stack>
-            <Button borderRadius="50%" bgColor="#00A9FF" style={{ position: 'absolute', right: 0, bottom: 0 }}>
+            <Button borderRadius="50%" bgColor="#00A9FF" style={{ position: 'fixed', right: '20px', bottom: '95px' }}>
                 <Link href="/event/create">
                     <AddIcon />
                 </Link>
