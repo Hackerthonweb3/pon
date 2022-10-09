@@ -35,6 +35,7 @@
         "framer-motion": "7.3.6",
         "graphql": "16.6.0",
         "ipfs-http-client": "58.0.1",
+        "modern-react-qr-reader": "1.0.12",
         "next": "12.3.1",
         "qr-code-styling": "1.6.0-rc.1",
         "react": "18.0.0",

@@ -40,6 +40,9 @@ export default function QrCode() {
     useEffect(() => {
         if (qrElement.current) {
             qrCode.append(qrElement.current)
+            // qrCode.update({
+            //     data: 'https://pon.ninja/qwertyuiopasdfg',
+            // })
         }
     }, [qrElement])
 
