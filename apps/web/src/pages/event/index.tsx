@@ -26,7 +26,6 @@ export default function Events() {
 
     const getEvents = useCallback(async () => {
         let user = await orbis.isConnected();
-        console.log(user.did, 'user.id');
         const groups = await orbis.getProfileGroups(EVENTS_ADDRESS);
         return groups.data;
     }, []);
