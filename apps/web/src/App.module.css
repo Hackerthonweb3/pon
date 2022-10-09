@@ -29,9 +29,20 @@
     box-shadow: inset 0px 1px 0px #363a45;
     border-radius: 10px 10px 0px 0px;
     left: 0;
+    padding: 5px;
 }
 
 .nav-item {
     display: flex;
     align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-item--active {
+    display: flex;
+    align-items: center;
+    background-color: #6b6d74;
+    flex: 1;
+    justify-content: center;
 }
