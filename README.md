@@ -42,7 +42,7 @@
 
 ## 🚀 **Statement**
 
-**We are eager to continue the project after the hackathon in order to actually launch it in the world.**
+**We are eager to continue the project after the hackathon in order to actually launch it in the world. We wanted ETH Bogota as a new addition to our existing project and have received an endorsement from ETH Global that we are eligible for a sponsor award.**
 
 ## 🎬 **Pitch & Live Demo (Video)**
 
@@ -87,9 +87,11 @@ PoN are digital business cards to help people connect easier while attending web
 
 - **Optimism**：For users to deploy SBT because of low transaction cost. []()
 
+- **Polygon**：For users to deploy SBT because of low transaction cost. []()
+
 - **The Graph**：To build the SBTs gallery for each user profile so the user can see the information almost instantly by subgraph, in the future we can also leverage it to get aggregated information about minted SBTs or other statistical data.
 
-- **Open Zeppelin**：To increase security level
+- **Open Zeppelin**：To increase security level for smart contract.
 
 
 ## ②For user's privacy
@@ -102,7 +104,8 @@ PoN are digital business cards to help people connect easier while attending web
 
 - **Sismo**：
 
-  - Privacy fighter ：Adding NFT collector badge to use in case use wants to have more security for their NFTs but still use ZK Badge for reputation.
+  - Privacy fighter ：Adding NFT collector badge to use in case use wants to have more security for their NFTs but still use ZK Badge for reputation. It's merged and deployed [here](https://playground.sismo.io/nft-collector). 
+
   - Sybil Killer：Using PoN SBT as Zk Sismo badge to prove that they made real connections to people.
 
 
