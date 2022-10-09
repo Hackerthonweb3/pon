@@ -96,9 +96,16 @@ PoN are digital business cards to help people connect easier while attending web
 
 - **IPFS/Filecoin**： To upload metadata about the encounter, upload media data, dapp deployed to IPFS.
 
- - **ENS**：Optional subdomains or just integration with avatar, twitter fields, create profile in eth page and redirect to web2 eth.link.
+- **Ceramic**： To mix these on-chain solutions with off-chain portable data by using Ceramic and Lit protocols, to achieve a superior UX combined with React to easily onboard every kind of use in any platform so that users can own data by themself.
 
-- **Sismo**：To increase trust and understand about users well by aggregating on-chain data visible while protecting user privacy information.
+- **ENS**：Optional subdomains or just integration with avatar, twitter fields, create profile in eth page and redirect to web2 eth.link.
+
+- **Sismo**：
+
+  - Privacy fighter ：Adding NFT collector badge to use in case use wants to have more security for their NFTs but still use ZK Badge for reputation.
+  - Sybil Killer：Using PoN SBT as Sismo badge to prove that they made real connections to people.
+
+Second one would be 'PoN(Proof of Networking)' and can probably have graphics with two people meeting to represent networking or any PoN related graphics
 
 
 ### Technical details
