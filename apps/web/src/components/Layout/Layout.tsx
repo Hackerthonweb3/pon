@@ -11,6 +11,8 @@ import { useAccount } from 'wagmi'
 import { useCeramicSession } from '~/hooks/useCeramicSession'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
+import Navbar from '../Navbar'
+import { onboardingRoutes } from '~/constants'
 
 export const Layout = ({ children }: PropsWithChildren) => {
     const router = useRouter()
@@ -32,9 +34,10 @@ export const Layout = ({ children }: PropsWithChildren) => {
         <Wrapper>
             <Fade in={animation} style={{ height: '100%' }}>
                 <RainbowKitProvider {...rainbowOptions}>
-                    {router.pathname === '/' ? children : (
+                    {onboardingRoutes.includes(router.pathname) ? children : (
                         <>
                             {children}
+                            <Navbar />
                         </>
                     )}
                 </RainbowKitProvider>

@@ -160,7 +160,7 @@ export default function Event() {
                         ))
                         }
                     </VStack >
-                    <Stack as={Box} textAlign={'center'} width='100%' spacing={{ base: 6, md: 8 }} py={{ base: 10, md: 6 }}>
+                    <Stack as={Box} textAlign={'center'} width='100%' spacing={{ base: 6, md: 8 }} py={{ base: 10, md: 6 }} style={{ paddingBottom: '115px' }}>
                         {/* <Box>
                             <Input value={searchVal} variant='filled' onChange={handleChange} placeholder='Search by Name' />
                         </Box> */}
