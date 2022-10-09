@@ -60,9 +60,7 @@ PoN are digital business cards to help people connect easier while attending web
 - Difficult to exchange personal profiles and contact information.
 - It’s challenging to keep track of events.
 
-## 💡 **Solution**
-
-**Networking dapp for Web3 events**
+## 💡 **Solution：Networking dapp for Web3 events**
 
 - See all attendees’s profile at the event.
 - Exchange profiles by scanning each other’s QR code, or via one link
