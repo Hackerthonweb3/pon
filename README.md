@@ -46,7 +46,7 @@
 
 ## 🎬 **Pitch & Live Demo (Video)**
 
-PoN are digital business cards to help people connect easier while attending web3 conferences and events. The end goal is to create a reputation ecosystem to replace web2 platforms like LinkedIn.
+PoN are digital business cards to help people connect easier while attending web3 conferences and events. The end goal is to create a reputation ecosystem to replace web2 platforms like LinkedIn and Eventbright.
 
 <p align='center'>
     <a href='https://www.youtube.com/watch?v=cTG88Kcmj1A'>
