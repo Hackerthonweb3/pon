@@ -108,7 +108,7 @@ export default function NewUser() {
     }
 
     return (
-        <VStack spacing='6'>
+        <VStack spacing='6' style={{ paddingBottom: '115px' }}>
             <Heading
                 fontWeight={600}
                 fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}

@@ -75,7 +75,7 @@ export default function Events() {
                     Upcoming Web3 Events
                 </Heading>
             </div>
-            <Stack as={Box} textAlign={'center'} width='100%' spacing={{ base: 6, md: 8 }} py={{ base: 10, md: 6 }}>
+            <Stack as={Box} textAlign={'center'} width='100%' spacing={{ base: 6, md: 8 }} py={{ base: 10, md: 6 }} style={{ paddingBottom: '115px' }}>
                 <Flex direction="column">{renderEvents}</Flex>
             </Stack>
             <Button borderRadius="50%" bgColor="#00A9FF" style={{ position: 'fixed', right: '20px', bottom: '95px' }}>
