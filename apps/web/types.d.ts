@@ -94,3 +94,5 @@ declare module '@orbisclub/orbis-sdk' {
 declare module '@orbisclub/orbis-sdk/lib/indexer-db' {
     export const indexer: any
 }
+
+declare module 'modern-react-qr-reader'

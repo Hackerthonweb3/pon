@@ -13,22 +13,46 @@ import { useOrbis } from '~/hooks'
 import { EVENTS_ADDRESS } from '~/constants'
 
 const mockContacts = [
-    { id: 1, title: 'Chillas Art', icon: ProfileOneIcon, text: 'Creator of Chirazu Art', date: 'OCTOBER 11 - 14', attendees: '2000+ attendees ', where: 'Agora Convention Center' },
-    { id: 2, title: 'Diva', icon: ProfileTwoIcon, text: 'digital arts creator', date: 'OCTOBER 11 - 14', attendees: '2000+ attendees ', where: 'Agora Convention Center' },
-    { id: 3, title: 'Getting better', icon: ProfileTwoIcon, text: 'The creator of NFT Art community language', date: 'OCTOBER 11 - 14', attendees: '2000+ attendees ', where: 'Agora Convention Center' },
+    {
+        id: 1,
+        title: 'Chillas Art',
+        icon: ProfileOneIcon,
+        text: 'Creator of Chirazu Art',
+        date: 'OCTOBER 11 - 14',
+        attendees: '2000+ attendees ',
+        where: 'Agora Convention Center',
+    },
+    {
+        id: 2,
+        title: 'Diva',
+        icon: ProfileTwoIcon,
+        text: 'digital arts creator',
+        date: 'OCTOBER 11 - 14',
+        attendees: '2000+ attendees ',
+        where: 'Agora Convention Center',
+    },
+    {
+        id: 3,
+        title: 'Getting better',
+        icon: ProfileTwoIcon,
+        text: 'The creator of NFT Art community language',
+        date: 'OCTOBER 11 - 14',
+        attendees: '2000+ attendees ',
+        where: 'Agora Convention Center',
+    },
 ]
 export default function Events() {
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState([])
     const { orbis, profile } = useOrbis()
     const { isConnected } = useAccount()
     const [searchVal, setSearchVal] = useState('')
     const router = useRouter()
 
     const getEvents = useCallback(async () => {
-        let user = await orbis.isConnected();
-        const groups = await orbis.getProfileGroups(EVENTS_ADDRESS);
-        return groups.data;
-    }, []);
+        let user = await orbis.isConnected()
+        const groups = await orbis.getProfileGroups(EVENTS_ADDRESS)
+        return groups.data
+    }, [])
 
     useEffect(() => {
         if (!isConnected) {
@@ -37,8 +61,8 @@ export default function Events() {
     }, [isConnected])
 
     useEffect(() => {
-        getEvents().then((events) => {
-            setEvents(events);
+        getEvents().then(events => {
+            setEvents(events)
         })
     }, [getEvents])
 
@@ -51,7 +75,7 @@ export default function Events() {
     const renderEvents = events.map((item: any, index) => {
         let event = {}
         try {
-            event = JSON.parse(item.group_details?.description || "{}");
+            event = JSON.parse(item.group_details?.description || '{}')
         } catch (e) {
             console.debug(e)
         }
@@ -59,11 +83,10 @@ export default function Events() {
         return (
             <Link href={`/event/${item.group_id}`} key={index}>
                 <Flex px={1} flex={1}>
-
                     <EventItem {...event} />
 
                     {/* <Divider color='white' opacity='1' orientation='horizontal' /> */}
-                </Flex >
+                </Flex>
             </Link>
         )
     })
@@ -75,11 +98,17 @@ export default function Events() {
                     Upcoming Web3 Events
                 </Heading>
             </div>
-            <Stack as={Box} textAlign={'center'} width='100%' spacing={{ base: 6, md: 8 }} py={{ base: 10, md: 6 }} style={{ paddingBottom: '115px' }}>
-                <Flex direction="column">{renderEvents}</Flex>
+            <Stack
+                as={Box}
+                textAlign={'center'}
+                width='100%'
+                spacing={{ base: 6, md: 8 }}
+                py={{ base: 10, md: 6 }}
+                style={{ paddingBottom: '115px' }}>
+                <Flex direction='column'>{renderEvents}</Flex>
             </Stack>
-            <Button borderRadius="50%" bgColor="#00A9FF" style={{ position: 'fixed', right: '20px', bottom: '95px' }}>
-                <Link href="/event/create">
+            <Button borderRadius='50%' bgColor='#00A9FF' style={{ position: 'fixed', right: '20px', bottom: '95px' }}>
+                <Link href='/event/create'>
                     <AddIcon />
                 </Link>
             </Button>

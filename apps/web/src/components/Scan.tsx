@@ -13,10 +13,12 @@ import QrSvg from '../media/qr.svg'
 
 import dynamic from 'next/dynamic'
 
-// const QrReader: any = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
+// @ts-ignore
+const QrReader: any = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
 
 export default function Scan({ profile }: any) {
     const { name, did } = profile
+
     const router = useRouter()
     const { register } = useForm()
     const [activeView, setActiveView] = useState('qr')
@@ -64,7 +66,7 @@ export default function Scan({ profile }: any) {
                         marginTop: '30px',
                         width: '100%',
                     }}>
-                    <QRCode size={286} style={{ height: 'auto', maxWidth: '100%', width: '100%' }} value={did} />
+                    <QRCode size={286} style={{ height: 'auto', maxWidth: '100%', width: '100%' }} value={did || ''} />{' '}
                 </div>
             </Box>
         )
@@ -73,13 +75,13 @@ export default function Scan({ profile }: any) {
     function renderScan() {
         return (
             <>
-                {/* <QrReader
+                <QrReader
                     delay={300}
                     facingMode={'environment'}
                     onError={(error: any) => console.log(error)}
                     onScan={handleScan}
                     style={{ width: '100%' }}
-                /> */}
+                />
                 <FormControl id='did'>
                     <FormLabel>DiD for new contact</FormLabel>
                     <InputGroup borderColor='#E0E1E7'>
@@ -128,17 +130,6 @@ export default function Scan({ profile }: any) {
                     </span>
                 </Button>
             </Flex>
-            <Button
-                onClick={() => handleScan(exampleDid)}
-                h={92}
-                p='10px'
-                w='50%'
-                backgroundColor={isQr() ? '#232934' : '#ffffff3d'}>
-                <span>
-                    <Image src={ScanSvg} alt='scan' />
-                    <Text>Simulate QR Scan</Text>
-                </span>
-            </Button>
         </VStack>
     )
 }
