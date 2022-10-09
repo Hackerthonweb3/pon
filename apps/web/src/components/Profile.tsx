@@ -17,7 +17,7 @@ import { mockProfile } from '../constants/mock'
 import coverSvg from '../media/mock/cover1.png'
 import greenApePng from '../media/mock/ape_green.png'
 import blueApePng from '../media/mock/ape_blue.png'
-import zkPng from '../media/mock/ZK.png'
+import zkPng from '../media/ZK.png'
 
 enum EGallery {
     NFTS = 'NFTs',
