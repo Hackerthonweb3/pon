@@ -79,7 +79,7 @@ PoN are digital business cards to help people connect easier while attending web
 
 ## **①Deploy SBT to Blockchain**
 
-- **Mina**：For users to deploy SBT because of privicy. []()
+- **Mina**：For users to deploy SBT because of privacy. []()
 
 - **Boba**：For users to deploy SBT because of . []()
 
