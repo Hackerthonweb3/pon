@@ -77,13 +77,15 @@ PoN are digital business cards to help people connect easier while attending web
 -   Data: Ceramic, Lit Protocol with Orbis-SDK, IPFS
 -   Blockchain: We prepared deployment on Polygon, Optimism, Mina, Boba, Gnosis.
 
-## **①Deploy SBT to Blockchain*
+## **①Deploy SBT to Blockchain**
 
 - **Mina**：For users to deploy SBT because of privicy. []()
 
 - **Boba**：For users to deploy SBT because of . []()
 
 - **Gnosis**：For users to deploy SBT because of low transaction cost. []()
+
+- **Optimism**：For users to deploy SBT because of low transaction cost. []()
 
 - **The Graph**：To build the SBTs gallery for each user profile so the user can see the information almost instantly by subgraph, in the future we can also leverage it to get aggregated information about minted SBTs or other statistical data.
 
