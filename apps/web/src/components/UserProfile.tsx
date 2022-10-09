@@ -26,11 +26,9 @@ export default function UserProfile({ isMyProfile, profile }: any) {
     const router = useRouter()
 
     useEffect(() => {
-        console.log('profile')
-        console.log(profile)
         setProfileData(profile)
         setPfpCid(profile?.pfp)
     }, [])
 
-    return <Profile />
+    return <Profile profile={profileData} />
 }
