@@ -54,7 +54,7 @@ PoN are digital business cards to help people connect easier while attending web
     </a>
 </p>
 
-## 💬 **Problem：Networking at web3 events.**
+## 💬 **Problem：Networking at Web3 events.**
 
 - Difficult to find people who you want to meet at the events.
 - Difficult to exchange personal profiles and contact information.
