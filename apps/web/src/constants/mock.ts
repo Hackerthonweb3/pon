@@ -8,8 +8,9 @@ export const mockProfile = {
     location: 'NY',
     occupation: 'UX Designer',
     organization: 'Freelancer',
-    whatCan: 'Whatever',
-    wantMeet: 'Anybody',
+    whatCan: 'JavaScript, React, Web3',
+    wantMeet: 'Hackers',
+    nftVerified: false,
 }
 
 export const mockContacts = [

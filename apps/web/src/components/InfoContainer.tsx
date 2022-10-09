@@ -5,9 +5,10 @@ export default function InfoContainer({ title, text }: { title: string; text: st
         <div
             style={{
                 alignItems: 'center',
+                textAlign: 'center',
                 backgroundColor: '#353844',
                 borderRadius: 12,
-                marginBottom: 10,
+                marginBottom: 0,
                 padding: 12,
                 width: '100%',
             }}>

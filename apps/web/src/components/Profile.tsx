@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
-import { Text, Button, Flex, Box } from '@chakra-ui/react'
+import Link from 'next/link'
+import { Text, Button, Flex, Box, Tooltip } from '@chakra-ui/react'
 import { Layout, SpaceEnd, ContainerFlex, CenteredContainer } from './DesignSystem'
 import Gallery from './Gallery'
 // import { Social } from './Social'
@@ -10,6 +11,9 @@ import { Title, SubTitle, Note, NoteMono } from './StyledText'
 import { colors } from '../constants/colors'
 import { mockProfile } from '../constants/mock'
 import coverSvg from '../media/mock/cover1.png'
+import greenApePng from '../media/mock/ape_green.png'
+import blueApePng from '../media/mock/ape_blue.png'
+import zkPng from '../media/ZK.png'
 
 const styles = {
     backgroundContainer: {
@@ -63,9 +67,11 @@ enum EGallery {
     NFTS = 'NFTs',
     SBTS = 'SBTs',
 }
+const nftGallery = [{ pfpSrc: blueApePng }, { pfpSrc: blueApePng }, { pfpSrc: greenApePng }]
+const zkGallery = [{ pfpSrc: zkPng }]
 
 export default function Profile() {
-    const { name, description, pfp, location, occupation, organization, whatCan, wantMeet } = mockProfile
+    const { nftVerified, name, description, pfp, location, occupation, organization, whatCan, wantMeet } = mockProfile
 
     const [selectedGalleryTab, setSelectedGalleryTab] = useState(EGallery.NFTS)
     const [isPreferedContact, setIsPreferedContact] = useState(false)
@@ -87,10 +93,11 @@ export default function Profile() {
             style={{
                 borderRadius: '10px 10px 0px',
                 width: '50%',
+                cursor: 'pointer',
             }}>
             <NoteMono
                 style={{
-                    paddingTop: 12,
+                    paddingTop: 8,
                     textAlign: 'center',
                     height: 42,
                     backgroundColor: selectedGalleryTab === galleryName ? '#353844' : '#6d6d6f',
@@ -104,6 +111,15 @@ export default function Profile() {
             <Button mb='10px' width={280} style={{ width: 260 }} onClick={handleEditLink}>
                 Edit Profile
             </Button>
+            <Tooltip label='The ZK NFT Collector Badge is a secure way to keep the privacy of NFTs you own while providing a reputation. Click to learn more.'>
+                <Flex justifyContent='flex-end'>
+                    <Link href='https://playground.sismo.io/nft-collector'>
+                        <Text ml={2} pb={4} fontWeight={600} color='blue.400' cursor='pointer'>
+                            Get Verified as NFT Collector on Sismo.io
+                        </Text>
+                    </Link>
+                </Flex>
+            </Tooltip>
             <InfoContainer title='Location' text={location} />
             <InfoContainer title='Job Title' text={occupation} />
             <InfoContainer title='Organization' text={organization} />
@@ -113,7 +129,7 @@ export default function Profile() {
     )
 
     return (
-        <Box width={{ base: '100%', md: '50%', lg: '50%' }}>
+        <Flex margin='auto' width={{ base: '100%', md: '60%', lg: '50%' }} justifyContent='center' alignItems='center'>
             <Layout>
                 <CenteredContainer style={{ padding: '0 20px' }}>
                     <Image src={coverSvg} alt='' width='900px' />
@@ -138,10 +154,10 @@ export default function Profile() {
                         {renderGalleryButton(EGallery.NFTS)}
                         {renderGalleryButton(EGallery.SBTS)}
                     </Flex>
-                    {selectedGalleryTab === EGallery.NFTS && <Gallery title='NFT Gallery' />}
-                    {selectedGalleryTab === EGallery.SBTS && <Gallery title='POAPs' />}
+                    {selectedGalleryTab === EGallery.NFTS && <Gallery data={nftVerified ? zkGallery : nftGallery} />}
+                    {selectedGalleryTab === EGallery.SBTS && <Gallery data={nftGallery} />}
                 </div>
             </Layout>
-        </Box>
+        </Flex>
     )
 }
