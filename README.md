@@ -54,28 +54,19 @@ PoN are digital business cards to help people connect easier while attending web
     </a>
 </p>
 
-## 💬 **Problem**
+## 💬 **Problem：Networking at web3 events.**
 
--   It is hard to remember and keep track of everyone we meet at events and re-connect later.
-
-## 💬 **Current Alternatives**
-
--   Documenting everything in memo apps or spreadsheets.
--   Sending friend request on various social networks.
--   Little to no interaction with the web3 ecosystem.
+- Difficult to find people who you want to meet at the events.
+- Difficult to exchange personal profiles and contact information.
+- It’s challenging to keep track of events.
 
 ## 💡 **Solution**
 
-**Digital business cards to help people connect easier while attending web3 conferences and events.**
+**Networking dapp for Web3 events**
 
-1. **Easy web3 profile creation**
-    - Create your own profile, with no fees.
-2. **Share your info Instantly.**
-    - Share anything about yourself with one simple link.
-3. **Manage your contacts seamlessly**
-    - Set permissions, search by profile, and even send direct messages.
-4. **Verifiable connections**
-    - Ability to prove / verify connections you have with others.
+- See all attendees’s profile at the event.
+- Exchange profiles by scanning each other’s QR code, or via one link
+- Find all Web3-related events in one place.
 
 ## 💻 **How we made it**
 
@@ -86,30 +77,29 @@ PoN are digital business cards to help people connect easier while attending web
 -   Front-End: Nextjs, React, Typescript, Rainbowkit/Wagmi,
 -   Mobile: ReactNative, WalletConnect
 -   Data: Ceramic, Lit Protocol with Orbis-SDK, IPFS
--   Blockchain: We prepared deployment on Polygon, Optimism, Oasis, Aurora, Cronos. SKALE will be supported soon.
+-   Blockchain: We prepared deployment on Polygon, Optimism, Mina, Boba, Gnosis.
 
-#### Easy web3 profile creation and instantly sharing information
+## **①Deploy SBT to Blockchain*
 
--   **Ceramic**： We are mixing these on-chain solutions with off-chain portable data by using Ceramic and Lit protocols, to achieve a superior UX combined with React to easily onboard every kind of use in any platform.
--   **IPFS/Filecoin**： To upload metadata about the encounter, upload media data, dapp deployed to IPFS.
--   **ENS**： Optional subdomains or just integration with avatar, twitter fields, create profile in eth page and redirect to web2 eth.link.
+- **Mina**：For users to deploy SBT because of privicy. []()
 
-#### Verifiable connections
+- **Boba**：For users to deploy SBT because of . []()
 
--   **Polygon**：The Souldbound minting contract deployed and consumed with cheap fees.
+- **Gnosis**：For users to deploy SBT because of low transaction cost. []()
 
--   **Optimism**：The Souldbound minting contract deployed to this network to experience high scalabality.
-    .
+- **The Graph**：To build the SBTs gallery for each user profile so the user can see the information almost instantly by subgraph, in the future we can also leverage it to get aggregated information about minted SBTs or other statistical data.
 
--   **Cronos**：To deploy SBTs to the blockchain to prove that a user has met a person.
+- **Open Zeppelin**：To increase security level
 
--   **SKALE (Planned)**：To deploy SBTs to the blockchain to prove that a user has met a person because of true data ownership.
 
--   **Oasis**：To deploy SBTs to the blockchain to prove that a user has met a person because of zero gas and speed.
+## ②For user's privacy
 
--   **Aurora**：To deploy SBTs to the blockchain to prove that a user has met a person.
+- **IPFS/Filecoin**： To upload metadata about the encounter, upload media data, dapp deployed to IPFS.
 
--   **The Graph (Planned)**：Subgraph to query all SBTs, interacting with other sponsors subgraphs. This makes PoN a multi-chain application and the subgraph really helps us to do that with good UI/UX experience for not only users, but also developers in our team.
+ - **ENS**：Optional subdomains or just integration with avatar, twitter fields, create profile in eth page and redirect to web2 eth.link.
+
+- **Sismo**：To increase trust and understand about users well by aggregating on-chain data visible while protecting user privacy information.
+
 
 ### Technical details
 
