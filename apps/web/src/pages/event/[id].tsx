@@ -69,13 +69,21 @@ export default function Event() {
     const id = router.query.id as string
     const { orbis, profile } = useOrbis()
     const { isConnected } = useAccount()
-    const [searchVal, setSearchVal] = useState('')
+    const [attendees, setAttendees] = useState<any>([])
     const [event, setEvent] = useState<any>();
 
     const getEvent = useCallback(async (eventId: string) => {
         /* eslint-disable no-eval */
         const groups = await orbis.getGroup(eventId);
         return groups.data;
+    }, []);
+
+    const getAtendees = useCallback(async (eventId: string) => {
+        const members = await orbis.getGroupMembers(eventId);
+        console.log(members, 'members');
+        return members.data.map((member: any) => {
+            return { did: member.profile_details.did, ...member.profile_details.profile }
+        });
     }, []);
 
     useEffect(() => {
@@ -86,8 +94,15 @@ export default function Event() {
 
     useEffect(() => {
         if (id) {
+            getAtendees(id).then((attendees: any) => {
+                setAttendees(attendees);
+            })
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (id) {
             getEvent(id).then((event) => {
-                console.log(event, 'event');
                 let eventFormatted: any = {}
                 try {
                     eventFormatted = JSON.parse(event.content?.description || "{}");
@@ -98,24 +113,17 @@ export default function Event() {
                 eventFormatted.date = `${eventFormatted.date.day} - ${eventFormatted.date.ending}`;
                 eventFormatted.intro = `We would be pleased for you to attend ${eventFormatted.title} in ${eventFormatted.location}`;
                 eventFormatted.count_members = event.count_members;
-                console.log(eventFormatted);
                 setEvent(eventFormatted);
             })
         }
     }, [getEvent, id])
 
-    const handleChange = (event: any) => setSearchVal(event.target.value)
-
-    const data = searchVal
-        ? mockContacts.filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase()))
-        : mockContacts
-
-    const renderContacts = data.map((item, index) => {
+    const renderContacts = attendees.map((item: any) => {
         return (
-            <Box key={index} px={1}>
-                <Link href={`/profile/${item.id}`}>
+            <Box key={item.did} px={1}>
+                <Link href={`/profile/${item.did}`}>
                     <a>
-                        <ListItem {...item} />
+                        <ListItem icon={item.pfp} title={item.username} text={item.description} />
                     </a>
                 </Link>
                 <Divider color='white' opacity='1' orientation='horizontal' />
@@ -157,7 +165,7 @@ export default function Event() {
                             <Input value={searchVal} variant='filled' onChange={handleChange} placeholder='Search by Name' />
                         </Box> */}
                         <Heading size="lg">Attendees {event.count_members}</Heading>
-                        {/* <Flex>{renderContacts}</Flex> */}
+                        <Flex>{renderContacts}</Flex>
                     </Stack>
                 </>
             ) : null}

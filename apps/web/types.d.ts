@@ -29,6 +29,7 @@ declare module '@orbisclub/orbis-sdk' {
         getGroup(props: any): any
         getProfileGroups(props: any): any
         createGroup(props: any): any
+        getGroupMembers(props: any): any
     }
 
     type OrbisResponse = any
