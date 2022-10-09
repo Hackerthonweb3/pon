@@ -87,7 +87,7 @@ const Home: NextPage = () => {
             </HStack>
             <VStack>
                 <HStack>
-                    <Text>Keep your network meaningful!</Text>
+                    <Text fontSize='2xl'>Keep your network meaningful!</Text>
                 </HStack>
             </VStack>
         </Stack>
