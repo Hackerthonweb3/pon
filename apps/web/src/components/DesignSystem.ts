@@ -4,8 +4,8 @@ import { colors } from '../constants/colors'
 export const Layout = styled.div`
     background-color: ${colors.background};
     font-family: 'VT323';
+    flex: 1;
     justify-content: center;
-    aligh-items: center;
     width: 100%;
 `
 
