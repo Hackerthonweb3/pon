@@ -255,7 +255,7 @@ importers:
       '@ethersproject/providers': 5.7.1
       '@fontsource/vt323': 4.5.10
       '@hookform/resolvers': 2.9.8
-      '@orbisclub/orbis-sdk': workspace:*
+      '@orbisclub/orbis-sdk': 0.3.91
       '@rainbow-me/rainbowkit': 0.6.1
       '@tanstack/query-core': 4.10.3
       '@tanstack/react-query': 4.10.3
@@ -306,7 +306,7 @@ importers:
       '@ethersproject/providers': 5.7.1
       '@fontsource/vt323': 4.5.10
       '@hookform/resolvers': 2.9.8_react-hook-form@7.36.0
-      '@orbisclub/orbis-sdk': link:../../libs/orbis-sdk
+      '@orbisclub/orbis-sdk': 0.3.91
       '@rainbow-me/rainbowkit': 0.6.1_kvlsyavr4xa7mnjmgtuqotav5u
       '@tanstack/query-core': 4.10.3
       '@tanstack/react-query': 4.10.3_ki35jgcnwl4lyirfggmrf2if4y
@@ -606,42 +606,6 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.16
-
-  /@apollo/client/3.7.0_uolx6si5lofbwb2oqmft523czu:
-    resolution: {integrity: sha512-hp4OvrH1ZIQACRYcIrh/C0WFnY7IM7G6nlTpC8DSTEWxfZQ2kvpvDY0I/hYmCs0oAVrg26g3ANEdOzGWTcYbPg==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
-      graphql-ws: ^5.5.5
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-      subscriptions-transport-ws: ^0.9.0 || ^0.11.0
-    peerDependenciesMeta:
-      graphql-ws:
-        optional: true
-      react:
-        optional: true
-      react-dom:
-        optional: true
-      subscriptions-transport-ws:
-        optional: true
-    dependencies:
-      '@graphql-typed-document-node/core': 3.1.1_graphql@16.6.0
-      '@wry/context': 0.7.0
-      '@wry/equality': 0.5.3
-      '@wry/trie': 0.3.2
-      graphql: 16.6.0
-      graphql-tag: 2.12.6_graphql@16.6.0
-      hoist-non-react-statics: 3.3.2
-      optimism: 0.16.1
-      prop-types: 15.8.1
-      react: 18.0.0
-      react-dom: 18.0.0_react@18.0.0
-      response-iterator: 0.2.6
-      symbol-observable: 4.0.0
-      ts-invariant: 0.10.3
-      tslib: 2.4.0
-      zen-observable-ts: 1.2.5
-    dev: false
 
   /@apollo/client/3.7.0_uolx6si5lofbwb2oqmft523czu:
     resolution: {integrity: sha512-hp4OvrH1ZIQACRYcIrh/C0WFnY7IM7G6nlTpC8DSTEWxfZQ2kvpvDY0I/hYmCs0oAVrg26g3ANEdOzGWTcYbPg==}
@@ -3468,6 +3432,17 @@ packages:
       uint8arrays: 3.1.0
     dev: false
 
+  /@didtools/pkh-solana/0.0.2:
+    resolution: {integrity: sha512-PTV8Eu37+/7u+GNqH0fjjoiUpss5v9cfpnCo5yXi+lQ06VR02MvMAfWtI61+QN8xjgmd8wHpQP7CtX32skWOxw==}
+    engines: {node: '>=14.14'}
+    dependencies:
+      '@didtools/cacao': 1.0.0
+      '@stablelib/ed25519': 1.0.3
+      '@stablelib/random': 1.0.2
+      caip: 1.1.0
+      uint8arrays: 3.1.0
+    dev: false
+
   /@emotion/babel-plugin/11.10.2_@babel+core@7.19.1:
     resolution: {integrity: sha512-xNQ57njWTFVfPAc3cjfuaPdsgLp5QOSuRsj9MA6ndEhH/AzuZM86qIQzt6rq+aGBwj3n5/TkLmU5lhAfdRmogA==}
     peerDependencies:
@@ -5529,6 +5504,33 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@orbisclub/orbis-sdk/0.3.91:
+    resolution: {integrity: sha512-SvtcOzHH9b9Z6qV+9QqEfW4w8A8Lp9/49p/c/454Cm95H9Oa1mX0Is7q9ThibzjbjhJaVnYFXjSGmI00mLLlQQ==}
+    dependencies:
+      '@ceramicnetwork/blockchain-utils-linking': 2.0.12
+      '@ceramicnetwork/http-client': 2.4.0
+      '@ceramicnetwork/stream-tile': 2.4.4
+      '@didtools/pkh-ethereum': 0.0.2
+      '@didtools/pkh-solana': 0.0.2
+      '@ethersproject/bytes': 5.7.0
+      '@ethersproject/providers': 5.7.1
+      '@ethersproject/strings': 5.7.0
+      '@supabase/supabase-js': 1.35.7
+      buffer: 6.0.3
+      did-session: 1.0.0
+      dids: 3.3.1
+      key-did-provider-ed25519: 2.0.1
+      key-did-resolver: 2.1.2
+      lit-js-sdk: 1.1.226
+      uint8arrays: 3.1.0
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - encoding
+      - supports-color
+      - utf-8-validate
+    dev: false
 
   /@pedrouid/environment/1.0.1:
     resolution: {integrity: sha512-HaW78NszGzRZd9SeoI3JD11JqY+lubnaOx7Pewj5pfjqWXOEATpeKIFb9Z4t2WBUK2iryiXX3lzWwmYWgUL0Ug==}
@@ -8436,7 +8438,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
     transitivePeerDependencies:
       - debug
 
@@ -8843,7 +8845,7 @@ packages:
   /borsh/0.6.0:
     resolution: {integrity: sha512-sl5k89ViqsThXQpYa9XDtz1sBl3l1lI313cFUY1HKr+wvMILnb+58xpkqTNrYbelh99dY7K8usxoCusQmqix9Q==}
     dependencies:
-      bn.js: 5.2.0
+      bn.js: 5.2.1
       bs58: 4.0.1
       text-encoding-utf-8: 1.0.2
     dev: false
@@ -12693,6 +12695,15 @@ packages:
   /focus-visible/5.2.0:
     resolution: {integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==}
     dev: false
+
+  /follow-redirects/1.15.2:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
 
   /follow-redirects/1.15.2_debug@4.3.4:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}

@@ -10,6 +10,7 @@ import { Profile } from '~/hooks'
 // import { FileUploader } from './FileUploader'
 import { create } from 'ipfs-http-client'
 import { Orbis } from '@orbisclub/orbis-sdk'
+import styles from '~/App.module.css';
 
 const layout = [{
     heading: 'Basic Info',
@@ -56,13 +57,28 @@ const layout = [{
             type: '',
         },
     ]
+}, {
+    heading: 'About this event',
+    fields: [
+        {
+            name: 'summary',
+            placeholder: 'Enter event description',
+            type: '',
+            heading: 'Describe whats happening at the event',
+        },
+        {
+            name: 'hosts',
+            placeholder: 'Enter information about organization',
+            type: '',
+        },
+    ]
 }];
 
 export default function NewUser() {
     const router = useRouter()
     const { address } = useAccount()
     const { orbis, profile } = useOrbis()
-    const { handleSubmit, register, control } = useForm()
+    const { handleSubmit, register, control, formState: { isDirty, isValid } } = useForm()
     const [error, setError] = useState(null as any)
 
     useEffect(() => {
@@ -78,12 +94,11 @@ export default function NewUser() {
     const onSubmit = async (data: any) => {
         const newData = { ...data }
         const result = await orbis.createGroup({
-            name: "Orbis Community",
-            description: '',
+            name: data.title,
+            description: JSON.stringify(data),
             pfp: '',
         });
-        console.log(result);
-
+        // const assigned = await orbis.setGroupMember(result.doc, true);
         if (result.status === 200) {
             router.push('/event')
         } else {
@@ -111,7 +126,7 @@ export default function NewUser() {
                         <Heading>{section.heading}</Heading>
                         {
                             section.fields.map(field => (
-                                <FormControl id={field.name} key={field.name}>
+                                <FormControl id={field.name} key={field.name} isRequired>
                                     <FormLabel>{field.heading}</FormLabel>
                                     <Input
                                         variant='filled'
@@ -120,7 +135,7 @@ export default function NewUser() {
                                         }}
                                         placeholder={field.placeholder}
                                         {...register(field.name, {
-                                            // required: 'This is required',
+                                            required: 'This is required',
                                         })}
                                     />
                                 </FormControl>
@@ -129,41 +144,9 @@ export default function NewUser() {
                     </Box>
                 ))
             }
-            {/* <FormControl id='name' isRequired>
-                <FormLabel>Nickname</FormLabel>
-                <InputGroup borderColor='#E0E1E7'>
-                    <Input
-                        variant='filled'
-                        type='text'
-                        {...register('name', {
-                            required: 'This is required',
-                        })}
-                    />
-                </InputGroup>
-            </FormControl> */}
-            {/* TODO: File Uploader */}
-            {/* <FileUploader name='cover' acceptedFileTypes='image/*' placeholder='Your cover image' control={control}>
-                Cover image
-            </FileUploader>
-            <FileUploader name='pfp' acceptedFileTypes='image/*' placeholder='Your avatar' control={control}>
-                PFP
-            </FileUploader> */}
-            {/* <FormControl id='description' isRequired>
-                <FormLabel>Description</FormLabel>
-                <Textarea
-                    variant='filled'
-                    _hover={{
-                        borderColor: 'gray.300',
-                    }}
-                    placeholder='Something about you'
-                    {...register('description', {
-                        required: 'This is required',
-                    })}
-                />
-            </FormControl> */}
 
             <FormControl id='button'>
-                <Button onClick={handleSubmit(onSubmit)}>Create event</Button>
+                <button disabled={!isDirty && !isValid} onClick={handleSubmit(onSubmit)} className={styles.button}>Create event</button>
             </FormControl>
         </VStack>
     )

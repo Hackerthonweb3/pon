@@ -9,6 +9,8 @@ import { useAccount } from 'wagmi'
 import EventItem from '~/components/Event/EventItem'
 import ProfileOneIcon from '~/media/p1.png'
 import ProfileTwoIcon from '~/media/p2.png'
+import { useOrbis } from '~/hooks'
+import { EVENTS_ADDRESS } from '~/constants'
 
 const mockContacts = [
     { id: 1, title: 'Chillas Art', icon: ProfileOneIcon, text: 'Creator of Chirazu Art', date: 'OCTOBER 11 - 14', attendees: '2000+ attendees ', where: 'Agora Convention Center' },
@@ -16,15 +18,30 @@ const mockContacts = [
     { id: 3, title: 'Getting better', icon: ProfileTwoIcon, text: 'The creator of NFT Art community language', date: 'OCTOBER 11 - 14', attendees: '2000+ attendees ', where: 'Agora Convention Center' },
 ]
 export default function Events() {
+    const [events, setEvents] = useState([]);
+    const { orbis, profile } = useOrbis()
     const { isConnected } = useAccount()
     const [searchVal, setSearchVal] = useState('')
     const router = useRouter()
+
+    const getEvents = useCallback(async () => {
+        let user = await orbis.isConnected();
+        console.log(user.did, 'user.id');
+        const groups = await orbis.getProfileGroups(EVENTS_ADDRESS);
+        return groups.data;
+    }, []);
 
     useEffect(() => {
         if (!isConnected) {
             router.push('/')
         }
-    }, [])
+    }, [isConnected])
+
+    useEffect(() => {
+        getEvents().then((events) => {
+            setEvents(events);
+        })
+    }, [getEvents])
 
     const handleChange = (event: any) => setSearchVal(event.target.value)
 
@@ -32,12 +49,19 @@ export default function Events() {
         ? mockContacts.filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase()))
         : mockContacts
 
-    const renderEvents = data.map((item, index) => {
-        return (
-            <Link href={`/event/${item.id}`}>
-                <Flex key={index} px={1} flex={1}>
+    const renderEvents = events.map((item: any, index) => {
+        let event = {}
+        try {
+            event = JSON.parse(item.group_details?.description || "{}");
+        } catch (e) {
+            console.debug(e)
+        }
 
-                    <EventItem {...item} />
+        return (
+            <Link href={`/event/${item.group_id}`} key={index}>
+                <Flex px={1} flex={1}>
+
+                    <EventItem {...event} />
 
                     {/* <Divider color='white' opacity='1' orientation='horizontal' /> */}
                 </Flex >

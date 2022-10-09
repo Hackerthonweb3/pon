@@ -1,0 +1,18 @@
+.button {
+    border: 1px solid #00a9ff;
+    width: 100%;
+    padding: 5px;
+}
+
+.banner {
+    background: hsla(270, 91%, 83%, 1);
+
+    background: linear-gradient(0deg, hsla(270, 91%, 83%, 1) 45%, hsla(290, 56%, 56%, 1) 100%);
+
+    background: -moz-linear-gradient(0deg, hsla(270, 91%, 83%, 1) 45%, hsla(290, 56%, 56%, 1) 100%);
+
+    background: -webkit-linear-gradient(0deg, hsla(270, 91%, 83%, 1) 45%, hsla(290, 56%, 56%, 1) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#D4ACFB", endColorstr="#B84FCE", GradientType=1 );
+    border-radius: 11px;
+}
