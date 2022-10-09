@@ -103,7 +103,7 @@ PoN are digital business cards to help people connect easier while attending web
 - **Sismo**：
 
   - Privacy fighter ：Adding NFT collector badge to use in case use wants to have more security for their NFTs but still use ZK Badge for reputation.
-  - Sybil Killer：Using PoN SBT as Sismo badge to prove that they made real connections to people.
+  - Sybil Killer：Using PoN SBT as Zk Sismo badge to prove that they made real connections to people.
 
 Second one would be 'PoN(Proof of Networking)' and can probably have graphics with two people meeting to represent networking or any PoN related graphics
 
