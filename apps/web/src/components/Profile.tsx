@@ -14,6 +14,8 @@ import coverSvg from '../media/mock/cover1.png'
 import greenApePng from '../media/mock/ape_green.png'
 import blueApePng from '../media/mock/ape_blue.png'
 import zkPng from '../media/ZK.png'
+import { useRouter } from 'next/router'
+import { useDisconnect } from 'wagmi'
 
 const styles = {
     backgroundContainer: {
@@ -71,6 +73,14 @@ const nftGallery = [{ pfpSrc: blueApePng }, { pfpSrc: blueApePng }, { pfpSrc: gr
 const zkGallery = [{ pfpSrc: zkPng }]
 
 export default function Profile() {
+    const { push } = useRouter()
+    const { disconnect } = useDisconnect()
+
+    const handleBack = () => {
+        disconnect()
+        push('/app')
+    }
+
     const { nftVerified, name, description, pfp, location, occupation, organization, whatCan, wantMeet } = mockProfile
 
     const [selectedGalleryTab, setSelectedGalleryTab] = useState(EGallery.NFTS)
@@ -147,6 +157,9 @@ export default function Profile() {
                         <Text style={styles.actionText}>Preferred contact method</Text>
                     </Flex>
                     {/* <Social profile={mockProfile} /> */}
+                    <Button position='absolute' right='10px' bottom='10px' onClick={handleBack}>
+                        Go back
+                    </Button>
                 </CenteredContainer>
 
                 <div style={{ padding: '0 10px' }}>

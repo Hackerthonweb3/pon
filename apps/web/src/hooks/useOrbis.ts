@@ -70,15 +70,8 @@ export const useOrbis = () => {
     }, [chain?.id, dids, orbis])
 
     const connect = async () => {
-        const orbisConnection = await orbis.isConnected()
-        const isOrbisConnected = orbisConnection.status === 200
-
-        if (!isOrbisConnected) {
-            const provider = await connector?.getProvider()
-            await orbis.connect(provider)
-        }
-
-        return isOrbisConnected
+        alert('this function should not be called')
+        return false
     }
 
     const updateProfile = async (profile: Profile) => {

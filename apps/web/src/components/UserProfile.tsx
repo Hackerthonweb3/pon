@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { Box, Text, Flex, Button, FormControl } from '@chakra-ui/react'
 
-import { useOrbis } from '~/hooks'
+// import { useOrbis } from '~/hooks'
 import { ipfsClient } from '~/lib'
 import { EditableField } from './Profile/EditableField'
 import { FileUploader } from './FileUploader'
@@ -20,7 +20,7 @@ export default function UserProfile({ isMyProfile, profile }: any) {
     const [pfpCid, setPfpCid] = useState(profile?.pfp)
     const [updateMsg, setUpdateMsg] = useState('')
     const { handleSubmit, control } = useForm()
-    const { connect, updateProfile } = useOrbis()
+    // const { connect, updateProfile } = useOrbis()
     const [error, setError] = useState(null as any)
 
     const router = useRouter()

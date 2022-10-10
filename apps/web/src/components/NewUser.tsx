@@ -5,7 +5,7 @@ import { useAccount } from 'wagmi'
 import { Heading, Text, VStack, FormControl, FormLabel, Input, InputGroup, Textarea, Button } from '@chakra-ui/react'
 
 import { ipfsClient } from '~/lib'
-import { useOrbis } from '~/hooks'
+// import { useOrbis } from '~/hooks'
 import { Profile } from '~/hooks'
 import { FileUploader } from './FileUploader'
 import { create } from 'ipfs-http-client'
@@ -13,19 +13,19 @@ import { create } from 'ipfs-http-client'
 export default function NewUser() {
     const router = useRouter()
     const { address } = useAccount()
-    const { connect, profile, updateProfile } = useOrbis()
+    // const { connect, profile, updateProfile } = useOrbis()
     const { handleSubmit, register, control } = useForm()
     const [error, setError] = useState(null as any)
 
-    useEffect(() => {
-        if (!address) {
-            router.push('/')
-        }
-        if (profile && profile.name) {
-            console.log('profile found', profile.name)
-            router.push('/profile')
-        }
-    })
+    // useEffect(() => {
+    //     if (!address) {
+    //         router.push('/')
+    //     }
+    //     if (profile && profile.name) {
+    //         console.log('profile found', profile.name)
+    //         router.push('/profile')
+    //     }
+    // })
 
     const onSubmit = async (data: any) => {
         const newData = { ...data }
@@ -52,14 +52,14 @@ export default function NewUser() {
             newData.pfp = ''
         }
 
-        const connected = await connect()
+        // const connected = await connect()
 
-        if (connected) {
-            const { updated, error } = await updateProfile(newData)
+        // if (connected) {
+        //     const { updated, error } = await updateProfile(newData)
 
-            if (updated) router.push('/profile')
-            if (error) setError(error)
-        }
+        //     if (updated) router.push('/profile')
+        //     if (error) setError(error)
+        // }
     }
 
     return (
