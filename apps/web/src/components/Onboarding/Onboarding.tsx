@@ -25,7 +25,6 @@ import 'swiper/css/pagination'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 import { useRouter } from 'next/router'
-import { useOrbis } from '~/hooks'
 import { OrbisContext } from '~/contexts'
 
 const StyledSwipper = styled(Swiper)`
@@ -88,6 +87,7 @@ export default function Onboarding() {
             } else {
                 console.log('oops orbis not connected, trying to connect')
                 const provider = await connector?.getProvider()
+                console.log('fucking provider', provider)
                 const result = await orbis?.connect(provider)
                 if (result.status === 200) {
                     setIsOrbisConnected(true)

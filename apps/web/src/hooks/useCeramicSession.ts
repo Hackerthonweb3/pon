@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useAccount } from 'wagmi'
-import { useOrbis } from './useOrbis'
+// import { useOrbis } from './useOrbis'
 
 export const useCeramicSession = () => {
     const { push } = useRouter()
     const { address: connectedAddress } = useAccount()
-    const { connect } = useOrbis()
+    // const { connect } = useOrbis()
     const [isCeramicConnected, setIsCeramicConnected] = useState(false)
     const [isLitConnected, setIsLitConnected] = useState(false)
 
@@ -36,7 +36,7 @@ export const useCeramicSession = () => {
 
         if (!ceramicPreviousSession || !litPreviousSession) {
             console.log('Ceramic or Lit sessions not found, creating new ones')
-            await connect()
+            // await connect()
         } else {
             if (ceramicPreviousSession) {
                 console.log('Ceramic session found, restoring')

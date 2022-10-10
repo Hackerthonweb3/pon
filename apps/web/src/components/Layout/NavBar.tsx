@@ -1,13 +1,9 @@
-import Image from 'next/image'
 import NextLink from 'next/link'
-import { useRouter } from 'next/router'
-import { Box, HStack, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, HStack, Text, useColorModeValue } from '@chakra-ui/react'
 import { useAccount, useDisconnect } from 'wagmi'
 import { ToggleColorMode } from './ToggleColorMode'
 import { NavLink } from './NavLink'
 import { NavMobile } from './NavMobile'
-import { useOrbis } from '~/hooks'
-import { useCeramicSession } from '~/hooks/useCeramicSession'
 
 const displayNonMobile = {
     base: 'none',

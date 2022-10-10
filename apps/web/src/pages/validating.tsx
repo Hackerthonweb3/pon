@@ -1,15 +1,35 @@
 import { Button, Center, Flex, ListItem, Text, UnorderedList } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 import { useDisconnect } from 'wagmi'
 import { ActionButton } from '~/components/ActionButton'
+import { OrbisContext } from '~/contexts'
 
 export default function Validating() {
+    const orbis = useContext(OrbisContext)
     const { push } = useRouter()
     const { disconnect } = useDisconnect()
 
     const handleBack = () => {
         disconnect()
         push('/app')
+    }
+
+    const handleContinue = async () => {
+        const result = await orbis?.isConnected()
+        if (result.did) {
+            console.log('checking profile for did', result.did)
+            let { data, error } = await orbis?.getProfile(result.did)
+            if (error) return console.log('error fetching profile', error)
+            if (!data.details.profile) {
+                console.log('profile not found, redirect to creation')
+                push('/profile/create')
+            } else {
+                push('/profile')
+            }
+        } else {
+            console.log('error getting connecting orbis')
+        }
     }
 
     return (
@@ -26,7 +46,7 @@ export default function Validating() {
                     <ListItem>Giving permission to Ceramic</ListItem>
                     <ListItem>Signing in for Lit Protocol</ListItem>
                 </UnorderedList>
-                <ActionButton onClick={() => {}} label='Continue' />
+                <ActionButton onClick={handleContinue} label='Continue' />
                 <Button position='absolute' right='10px' bottom='10px' onClick={handleBack}>
                     Go back
                 </Button>
