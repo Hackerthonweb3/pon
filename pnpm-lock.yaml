@@ -282,6 +282,7 @@ importers:
       react-dom: 18.0.0
       react-error-boundary: 3.1.4
       react-hook-form: 7.36.0
+      react-icons: 4.4.0
       react-is: 18.2.0
       react-native: 0.69.6
       react-qr-code: 2.0.8
@@ -325,6 +326,7 @@ importers:
       react-dom: 18.0.0_react@18.0.0
       react-error-boundary: 3.1.4_react@18.0.0
       react-hook-form: 7.36.0_react@18.0.0
+      react-icons: 4.4.0_react@18.0.0
       react-is: 18.2.0
       react-qr-code: 2.0.8_react@18.0.0
       styled-components: 5.3.5_twzut3cfsq3yt4edr3dzr6gksa
@@ -17778,6 +17780,14 @@ packages:
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.0.0
+    dev: false
+
+  /react-icons/4.4.0_react@18.0.0:
+    resolution: {integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==}
+    peerDependencies:
+      react: '*'
     dependencies:
       react: 18.0.0
     dev: false

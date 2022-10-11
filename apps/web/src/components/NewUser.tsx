@@ -1,8 +1,11 @@
+/* eslint-disable */ 
 import { useEffect, useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useAccount } from 'wagmi'
-import { Heading, Text, VStack, FormControl, FormLabel, Input, InputGroup, Textarea, Button, Flex } from '@chakra-ui/react'
+import { Heading, Text, VStack, FormControl, FormLabel, Input, InputGroup, Textarea, Button, Flex, InputLeftAddon } from '@chakra-ui/react'
+import { FiMail, FiTwitter, FiGithub, FiInstagram, FiLinkedin, FiSend} from 'react-icons/fi';
+import { FaDiscord, FaLeaf } from 'react-icons/fa'
 
 import { ipfsClient } from '~/lib'
 import { useOrbis } from '~/hooks'
@@ -16,36 +19,43 @@ const socialInputs = [
         name: 'twitter',
         placeholder: 'Your twitter handle',
         label: 'Twitter',
+        icon: <FiTwitter />,
     },
     {
         name: 'telegram',
         placeholder: 'Your Telegram handle',
         label: 'Telegram',
+        icon: <FiSend />,
     },
     {
         name: 'lens',
         placeholder: 'Your lens handle',
         label: 'Lens',
+        icon: <FaLeaf />,
     },
     {
         name: 'discord',
         placeholder: 'Your discord id',
         label: 'Discord',
+        icon: <FaDiscord />,
     },
     {
         name: 'github',
         placeholder: 'Your github handle',
         label: 'Github',
+        icon: <FiGithub />,
     },
     {
         name: 'linkedin',
         placeholder: 'Your linkedIn handle',
         label: 'LinkedIn',
+        icon:  <FiLinkedin />,
     },
     {
         name: 'email',
         placeholder: 'Your email',
         label: 'Email',
+        icon: <FiMail />,
     },
 ]
 
@@ -136,7 +146,7 @@ export default function NewUser() {
                 </Text>
             </Flex>
             <Text color='red.400'>{error}</Text>
-            <FormControl id='name' isRequired>
+            <FormControl id='name' isRequired mt={0}>
                 <FormLabel>Username</FormLabel>
                 <InputGroup borderColor='#E0E1E7'>
                     <Input
@@ -180,14 +190,6 @@ export default function NewUser() {
                     {...register('skills')}
                 />
             </FormControl>
-            <FormControl id='organization'>
-                <FormLabel>Interested in meeting</FormLabel>
-                <Input
-                    {...sharedInputProps}
-                    placeholder='Please enter who do you want to meet'
-                    {...register('wantToMeet')}
-                />
-            </FormControl>
         </>
     )
     
@@ -202,11 +204,12 @@ export default function NewUser() {
                     Back
                 </Text>
             </Flex>
-            {socialInputs.map((input) => (
-                <FormControl id={input.name} key={input.name}>
-                    <FormLabel>{input.label}</FormLabel>
+            {socialInputs.map(({ name, label, icon, placeholder
+            }) => (
+                <FormControl id={name} key={name}>
                     <InputGroup borderColor='#E0E1E7'>
-                        <Input {...sharedInputProps} placeholder={input.placeholder} {...register(input.name)} />
+                    <InputLeftAddon children={icon} /> 
+                        <Input {...sharedInputProps} placeholder={placeholder} {...register(name)} />
                     </InputGroup>
                 </FormControl>
             ))}
@@ -220,10 +223,10 @@ export default function NewUser() {
     const renderInputs = pageNum === 1 ? renderPageOne : renderPageTwo;
 
     return (
-        <VStack spacing='6'>
+        <VStack spacing='4'>
             <Heading
                 fontWeight={600}
-                fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
+                fontSize={{ base: '1xl', sm: '2xl', md: '2xl' }}
                 lineHeight={'110%'}
                 letterSpacing='1px'>
                 Create your Profile ({pageNum} of 2)
