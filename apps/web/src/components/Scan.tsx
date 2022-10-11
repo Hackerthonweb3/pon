@@ -27,8 +27,6 @@ import { OrbisContext } from '~/contexts'
 import { Profile } from './Profile'
 import Scanner from './Scan/ScanQRCode'
 
-// @ts-ignore
-const QrReader: any = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
 const QrCode = dynamic(() => import('~/components/QrCode'), { ssr: false })
 
 export default function Scan() {
