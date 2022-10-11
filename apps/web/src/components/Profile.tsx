@@ -178,6 +178,9 @@ export default function Profile() {
                 <Text ml={2} pb={4} fontWeight={600} color='blue.400' cursor='pointer'>
                     Loading profile...
                 </Text>
+                <Button position='absolute' right='0px' top='0px' onClick={handleBack}>
+                    Go back
+                </Button>
             </Center>
         )
 
