@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { Link as ChakraLink, useColorModeValue } from '@chakra-ui/react'
+import { Link as ChakraLink } from '@chakra-ui/react'
 
 export const NavLink = (props: { route: string; children: React.ReactNode }) => {
     const { children, route, ...rest } = props
@@ -13,7 +13,6 @@ export const NavLink = (props: { route: string; children: React.ReactNode }) => 
                 rounded={'md'}
                 _hover={{
                     textDecoration: 'none',
-                    bg: useColorModeValue('gray.200', 'gray.700'),
                 }}>
                 {children}
             </ChakraLink>

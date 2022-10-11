@@ -13,6 +13,7 @@ import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import Navbar from '../Navbar'
 import { onboardingRoutes } from '~/constants'
+import BottomTabs from '../BottomTabs/BottomTabs'
 
 export const Layout = ({ children }: PropsWithChildren) => {
     const router = useRouter()
@@ -34,10 +35,13 @@ export const Layout = ({ children }: PropsWithChildren) => {
         <Wrapper>
             <Fade in={animation} style={{ height: '100%' }}>
                 <RainbowKitProvider {...rainbowOptions}>
-                    {onboardingRoutes.includes(router.pathname) ? children : (
+                    {onboardingRoutes.includes(router.pathname) ? (
+                        children
+                    ) : (
                         <>
                             {children}
-                            <Navbar />
+                            {/* <Navbar /> */}
+                            <BottomTabs />
                         </>
                     )}
                 </RainbowKitProvider>
