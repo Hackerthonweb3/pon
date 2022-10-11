@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Text, Button, Flex, Box, Tooltip, Center, Spinner } from '@chakra-ui/react'
 import { Layout, SpaceEnd, ContainerFlex, CenteredContainer } from './DesignSystem'
 import Gallery from './Gallery'
-// import { Social } from './Social'
+import { Social } from './Social'
 import ImageMask from './ImageMask'
 import InfoContainer from './InfoContainer'
 import { Title, SubTitle, Note, NoteMono } from './StyledText'
@@ -187,7 +187,7 @@ export default function Profile() {
     return (
         <Flex margin='auto' width={{ base: '100%', md: '60%', lg: '50%' }} justifyContent='center' alignItems='center'>
             <Layout>
-                <CenteredContainer style={{ padding: '0 20px' }}>
+                <CenteredContainer style={{ padding: '0 5px' }}>
                     <Image src={coverSvg} alt='' width='900px' />
                     <Flex flexDirection='column' justifyContent='center' alignItems='center'>
                         <ImageMask imageCid={profile.pfp} />
@@ -204,7 +204,7 @@ export default function Profile() {
                     <Flex style={styles.switch}>
                         <Text style={styles.actionText}>Preferred contact method</Text>
                     </Flex>
-                    {/* <Social profile={mockProfile} /> */}
+                    <Social profile={profile} />
                     <Button position='absolute' right='0px' top='0px' onClick={handleBack}>
                         Go back
                     </Button>

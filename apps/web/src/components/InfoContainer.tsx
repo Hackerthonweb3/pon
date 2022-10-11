@@ -8,8 +8,8 @@ export default function InfoContainer({ title, text }: { title: string; text: st
                 textAlign: 'center',
                 backgroundColor: '#353844',
                 borderRadius: 12,
-                marginBottom: 0,
-                padding: 12,
+                marginBottom: '3px',
+                padding: '10px',
                 width: '100%',
             }}>
             <SubTitle>{title}</SubTitle>
