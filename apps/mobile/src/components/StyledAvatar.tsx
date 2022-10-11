@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
 })
 
 export const Avatar = ({ pfpCid }: { pfpCid: string }) => {
+    if (!pfpCid) return null
     const pfp = pfpCid.startsWith('https') ? pfpCid : `https://business-card.infura-ipfs.io/ipfs/${pfpCid}`
     return (
         <Image

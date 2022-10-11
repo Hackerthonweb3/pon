@@ -1,4 +1,5 @@
 export default function ImageMask({ imageCid }: any) {
+    if (!imageCid) return null
     const image = imageCid.startsWith('https') ? imageCid : `https://business-card.infura-ipfs.io/ipfs/${imageCid}`
     return (
         <div
