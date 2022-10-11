@@ -16,15 +16,7 @@ const ScanPage: NextPage = () => {
         }
     }, [isConnected])
 
-    return (
-        <>
-            <Container maxW={'3xl'}>
-                <Stack as={Box} textAlign={'center'} spacing={{ base: 8, md: 14 }} py={{ base: 10, md: 5 }}>
-                    <Scan />
-                </Stack>
-            </Container>
-        </>
-    )
+    return <Scan />
 }
 
 export default ScanPage
