@@ -207,7 +207,7 @@ export default function NewUser() {
             }) => (
                 <FormControl id={name} key={name}>
                     <InputGroup borderColor='#E0E1E7'>
-                    <InputLeftAddon children={icon} />
+                    <InputLeftAddon children={icon} /> // eslint-disable-line
                         <Input {...sharedInputProps} placeholder={placeholder} {...register(name)} />
                     </InputGroup>
                 </FormControl>
