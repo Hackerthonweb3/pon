@@ -74,11 +74,12 @@ enum EGallery {
 const nftGallery = [{ pfpSrc: blueApePng }, { pfpSrc: blueApePng }, { pfpSrc: greenApePng }]
 const zkGallery = [{ pfpSrc: zkPng }]
 
-interface Profile {
+export interface Profile {
     pfp: string
     username: string
     description: string
     address: string
+    did: string
 }
 
 export default function Profile() {
@@ -98,6 +99,7 @@ export default function Profile() {
             setProfile({
                 ...data.details.profile,
                 address: data.address,
+                did: data.did,
             })
         } else {
             console.log('profile not found, redirect to creation')
