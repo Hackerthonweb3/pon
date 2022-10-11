@@ -174,7 +174,7 @@ export default function Onboarding() {
 
     return (
         <>
-            <Flex p='20% 5% 10%' h='full' wrap='wrap' alignContent='flex-start' justifyContent='center'>
+            <Flex p={{ base: '20% 5% 10%', md: '5% 5% 10%', lg: '3% 5% 10%' }} h='full' wrap='wrap' alignContent='flex-start' justifyContent='center'>
                 <StyledSwipper
                     grabCursor={true}
                     onSlideChange={e => setActiveSlide(e.activeIndex)}
