@@ -9,11 +9,12 @@ const styles = StyleSheet.create({
 })
 
 export const Avatar = ({ pfpCid }: { pfpCid: string }) => {
+    const pfp = pfpCid.startsWith('https') ? pfpCid : `https://business-card.infura-ipfs.io/ipfs/${pfpCid}`
     return (
         <Image
             style={styles.avatar}
             source={{
-                uri: `https://business-card.infura-ipfs.io/ipfs/${pfpCid}`,
+                uri: pfp,
             }}
         />
     )

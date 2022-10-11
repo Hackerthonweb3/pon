@@ -1,4 +1,5 @@
 export default function ImageMask({ imageCid }: any) {
+    const image = imageCid.startsWith('https') ? imageCid : `https://business-card.infura-ipfs.io/ipfs/${imageCid}`
     return (
         <div
             style={{
@@ -23,9 +24,9 @@ export default function ImageMask({ imageCid }: any) {
                         visibility: 'visible',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: '50%',
-                        backgroundSize: 'contain',
+                        backgroundSize: 'cover',
                         transform: 'rotate(-60deg)',
-                        backgroundImage: `url(https://business-card.infura-ipfs.io/ipfs/${imageCid})`,
+                        backgroundImage: `url(${image})`,
                     }}
                 />
             </div>

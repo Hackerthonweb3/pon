@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Text, Button, Flex, Box, Tooltip } from '@chakra-ui/react'
+import { Text, Button, Flex, Box, Tooltip, Center, Spinner } from '@chakra-ui/react'
 import { Layout, SpaceEnd, ContainerFlex, CenteredContainer } from './DesignSystem'
 import Gallery from './Gallery'
 // import { Social } from './Social'
@@ -16,6 +16,8 @@ import blueApePng from '../media/mock/ape_blue.png'
 import zkPng from '../media/ZK.png'
 import { useRouter } from 'next/router'
 import { useDisconnect } from 'wagmi'
+import { useOnboarding } from '~/hooks/useOnboarding'
+import { OrbisContext } from '~/contexts'
 
 const styles = {
     backgroundContainer: {
@@ -72,11 +74,42 @@ enum EGallery {
 const nftGallery = [{ pfpSrc: blueApePng }, { pfpSrc: blueApePng }, { pfpSrc: greenApePng }]
 const zkGallery = [{ pfpSrc: zkPng }]
 
+interface Profile {
+    pfp: string
+    username: string
+    description: string
+    address: string
+}
+
 export default function Profile() {
     const { push } = useRouter()
     const { disconnect } = useDisconnect()
+    const { setViewedOnboarding } = useOnboarding()
+    const [profile, setProfile] = useState<Profile>()
+    const orbis = useContext(OrbisContext)
+
+    const checkProfile = async () => {
+        // trigger reconnection to get did
+        const result = await orbis?.isConnected()
+        if (result.did) {
+            console.log('checking profile for did', result.did)
+            let { data, error } = await orbis?.getProfile(result.did)
+            if (error) return console.log('error fetching profile', error)
+            setProfile({
+                ...data.details.profile,
+                address: data.address,
+            })
+        } else {
+            console.log('profile not found, redirect to creation')
+        }
+    }
+
+    useEffect(() => {
+        checkProfile()
+    }, [])
 
     const handleBack = () => {
+        setViewedOnboarding(false)
         disconnect()
         push('/app')
     }
@@ -88,8 +121,6 @@ export default function Profile() {
     const [isFullView, setIsFullView] = useState(false)
 
     const fullProfileTitle = isFullView ? 'Done' : 'Full Profile'
-
-    const address = '0x32...2sak3' // TODO get address from wallet
 
     const toggleSwitch = () => setIsPreferedContact((previousState: boolean) => !previousState)
 
@@ -138,19 +169,31 @@ export default function Profile() {
         </Flex>
     )
 
+    if (!profile)
+        return (
+            <Center h='full' flexDir='column'>
+                <Spinner size='xl' />
+                <Text ml={2} pb={4} fontWeight={600} color='blue.400' cursor='pointer'>
+                    Loading profile...
+                </Text>
+            </Center>
+        )
+
     return (
         <Flex margin='auto' width={{ base: '100%', md: '60%', lg: '50%' }} justifyContent='center' alignItems='center'>
             <Layout>
                 <CenteredContainer style={{ padding: '0 20px' }}>
                     <Image src={coverSvg} alt='' width='900px' />
                     <Flex flexDirection='column' justifyContent='center' alignItems='center'>
-                        <ImageMask imageCid={pfp} />
+                        <ImageMask imageCid={profile.pfp} />
                         <div style={{ right: -175, top: -65 }} onClick={() => setIsFullView(!isFullView)}>
                             <Text style={{ color: colors.textAction, fontWeight: '600' }}>{fullProfileTitle}</Text>
                         </div>
-                        <Title>{name}</Title>
-                        <SubTitle>{address}</SubTitle>
-                        <Note style={styles.description}>{description}</Note>
+                        <Title>{profile.username}</Title>
+                        <SubTitle>{`${profile.address.substring(0, 5)}...${profile.address.substring(
+                            profile.address.length - 5,
+                        )}`}</SubTitle>
+                        <Note style={styles.description}>{profile.description}</Note>
                     </Flex>
                     {renderFullInfo}
                     <Flex style={styles.switch}>
@@ -162,14 +205,14 @@ export default function Profile() {
                     </Button>
                 </CenteredContainer>
 
-                <div style={{ padding: '0 10px' }}>
+                {/* <div style={{ padding: '0 10px' }}>
                     <Flex style={{ backgroundColor: colors.overlay, width: '100%' }}>
                         {renderGalleryButton(EGallery.NFTS)}
                         {renderGalleryButton(EGallery.SBTS)}
                     </Flex>
                     {selectedGalleryTab === EGallery.NFTS && <Gallery data={nftVerified ? zkGallery : nftGallery} />}
                     {selectedGalleryTab === EGallery.SBTS && <Gallery data={nftGallery} />}
-                </div>
+                </div> */}
             </Layout>
         </Flex>
     )
