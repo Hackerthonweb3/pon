@@ -29,6 +29,7 @@ import { Profile } from './Profile'
 
 // @ts-ignore
 const QrReader: any = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
+const QrCode = dynamic(() => import('~/components/QrCode'), { ssr: false })
 
 export default function Scan() {
     const [profile, setProfile] = useState<Profile>()
@@ -116,11 +117,12 @@ export default function Scan() {
                         marginTop: '30px',
                         width: '100%',
                     }}>
-                    <QRCode
+                    {/* <QRCode
                         size={286}
                         style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
                         value={profile?.did || ''}
-                    />
+                    /> */}
+                    <QrCode did={profile?.did} />
                 </div>
             </Box>
         )
