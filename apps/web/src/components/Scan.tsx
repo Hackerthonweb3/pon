@@ -1,9 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import QRCode from 'react-qr-code'
-import { Text, VStack, FormControl, FormLabel, Input, InputGroup, Button, Flex, Box } from '@chakra-ui/react'
+import {
+    Text,
+    VStack,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    Button,
+    Flex,
+    Box,
+    Center,
+    Spinner,
+} from '@chakra-ui/react'
 
 import ImageMask from '~/components/ImageMask'
 
@@ -12,28 +24,54 @@ import ScanSvg from '../media/scan.svg'
 import QrSvg from '../media/qr.svg'
 
 import dynamic from 'next/dynamic'
+import { OrbisContext } from '~/contexts'
+import { Profile } from './Profile'
 
 // @ts-ignore
 const QrReader: any = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
 
-export default function Scan({ profile }: any) {
-    const { name, did } = profile
+export default function Scan() {
+    const [profile, setProfile] = useState<Profile>()
+    const orbis = useContext(OrbisContext)
+
+    const checkProfile = async () => {
+        // trigger reconnection to get did
+        const result = await orbis?.isConnected()
+        if (result.did) {
+            console.log('checking profile for did', result.did)
+            let { data, error } = await orbis?.getProfile(result.did)
+            if (error) return console.log('error fetching profile', error)
+            setProfile({
+                ...data.details.profile,
+                address: data.address,
+                did: data.did,
+            })
+        } else {
+            console.log('profile not found, redirect to creation')
+        }
+    }
+
+    useEffect(() => {
+        checkProfile()
+    }, [])
 
     const router = useRouter()
     const { register } = useForm()
     const [activeView, setActiveView] = useState('qr')
     const [newDid, setDid] = useState('')
+    const [renderingScan, setRenderingScan] = useState(false)
 
     function isQr() {
         return activeView === 'qr'
     }
 
-    const exampleDid = 'did:pkh:eip155:137:0xe73d88e147e12ca4cdde9062db67f06ffd43c5e8'
     useEffect(() => {
+        setRenderingScan(true)
         if (newDid) {
             router.push({ pathname: '/met/[did]', query: { did: newDid } }, '/met')
         }
         return () => {
+            setRenderingScan(false)
             console.log('cleaned up')
         }
     }, [newDid, router])
@@ -47,17 +85,29 @@ export default function Scan({ profile }: any) {
         }
     }
 
+    if (!profile)
+        return (
+            <Center h='full' flexDir='column'>
+                <Spinner size='xl' />
+                <Text ml={2} pb={4} fontWeight={600} color='blue.400' cursor='pointer'>
+                    Loading profile...
+                </Text>
+            </Center>
+        )
+
     function renderQrCode() {
         return (
             <Box>
-                {profile?.pfp ? (
-                    <Box ml={'86px'}>
-                        <ImageMask imageCid={profile?.pfp} />
-                    </Box>
-                ) : (
-                    <Image src={AvatarSvg} width='80px' height='80px' alt='avatar' />
-                )}
-                <Text mt={2}>{name || 'Anon'}</Text>
+                <Center flexDirection='column'>
+                    {profile?.pfp ? (
+                        <Box>
+                            <ImageMask imageCid={profile?.pfp} />
+                        </Box>
+                    ) : (
+                        <Image src={AvatarSvg} width='80px' height='80px' alt='avatar' />
+                    )}
+                    <Text mt={2}>{profile?.username || 'Anon'}</Text>
+                </Center>
                 <div
                     style={{
                         background: 'white',
@@ -66,7 +116,11 @@ export default function Scan({ profile }: any) {
                         marginTop: '30px',
                         width: '100%',
                     }}>
-                    <QRCode size={286} style={{ height: 'auto', maxWidth: '100%', width: '100%' }} value={did || ''} />{' '}
+                    <QRCode
+                        size={286}
+                        style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+                        value={profile?.did || ''}
+                    />
                 </div>
             </Box>
         )
@@ -99,9 +153,15 @@ export default function Scan({ profile }: any) {
         )
     }
 
+    if (!renderingScan) {
+        ;<Center h='full'>
+            <Spinner size='xl' />
+        </Center>
+    }
+
     return (
         <VStack spacing='10'>
-            {isQr() ? renderQrCode() : renderScan()}
+            {isQr() ? renderQrCode() : renderingScan ? renderScan() : null}
             <Text fontSize='l' mt={{ sm: 3, md: 3, lg: 5 }} color='gray.500'>
                 Scan a QR profile to add a new contact!
             </Text>
