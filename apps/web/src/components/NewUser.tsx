@@ -1,10 +1,22 @@
-/* eslint-disable */ 
+/* eslint-disable */
 import { useEffect, useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useAccount } from 'wagmi'
-import { Heading, Text, VStack, FormControl, FormLabel, Input, InputGroup, Textarea, Button, Flex, InputLeftAddon } from '@chakra-ui/react'
-import { FiMail, FiTwitter, FiGithub, FiInstagram, FiLinkedin, FiSend} from 'react-icons/fi';
+import {
+    Heading,
+    Text,
+    VStack,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    Textarea,
+    Button,
+    Flex,
+    InputLeftAddon,
+} from '@chakra-ui/react'
+import { FiMail, FiTwitter, FiGithub, FiInstagram, FiLinkedin, FiSend } from 'react-icons/fi'
 import { FaDiscord, FaLeaf } from 'react-icons/fa'
 
 import { ipfsClient } from '~/lib'
@@ -49,7 +61,7 @@ const socialInputs = [
         name: 'linkedin',
         placeholder: 'Your linkedIn handle',
         label: 'LinkedIn',
-        icon:  <FiLinkedin />,
+        icon: <FiLinkedin />,
     },
     {
         name: 'email',
@@ -80,15 +92,14 @@ export default function NewUser() {
             if (error) {
                 console.log('error fetching profile', error)
                 setError(error)
-                return false;
+                return false
             }
 
-            return true;
+            return true
         } else {
             console.log('no profile, try again')
         }
     }
-
 
     const onSubmit = async (data: any) => {
         const newData = { ...data }
@@ -99,6 +110,7 @@ export default function NewUser() {
                 newData.cover = created.path
             } catch (error) {
                 setError(error)
+                newData.cover = ''
             }
         } else {
             newData.cover = ''
@@ -110,6 +122,7 @@ export default function NewUser() {
                 newData.pfp = created.path
             } catch (error) {
                 setError(error)
+                newData.pfp = ''
             }
         } else {
             newData.pfp = ''
@@ -135,12 +148,13 @@ export default function NewUser() {
 
     const renderPageOne = (
         <>
-            <Flex width="100%" justifyContent="right"  alignItems="right" pr={2}>
+            <Flex width='100%' justifyContent='right' alignItems='right' pr={2}>
                 <Text
-                    cursor="pointer"
+                    cursor='pointer'
                     textAlign='right'
                     onClick={() => setPageNum(2)}
-                    fontSize='l' mt={{ sm: 3, md: 3, lg: 5 }}
+                    fontSize='l'
+                    mt={{ sm: 3, md: 3, lg: 5 }}
                     color='blue.300'>
                     Next
                 </Text>
@@ -176,39 +190,31 @@ export default function NewUser() {
             </FormControl>
             <FormControl id='organization'>
                 <FormLabel>Organization</FormLabel>
-                <Input
-                    {...sharedInputProps}
-                    placeholder='Where do you work'
-                    {...register('organization')}
-                />
+                <Input {...sharedInputProps} placeholder='Where do you work' {...register('organization')} />
             </FormControl>
             <FormControl id='organization'>
                 <FormLabel>Skills</FormLabel>
-                <Input
-                    {...sharedInputProps}
-                    placeholder='What are your skills'
-                    {...register('skills')}
-                />
+                <Input {...sharedInputProps} placeholder='What are your skills' {...register('skills')} />
             </FormControl>
         </>
     )
-    
+
     const renderPageTwo = (
         <>
-            <Flex width="100%" justifyContent="left"  alignItems="left" pr={2}>
+            <Flex width='100%' justifyContent='left' alignItems='left' pr={2}>
                 <Text
                     textAlign='left'
                     onClick={() => setPageNum(1)}
-                    fontSize='l' mt={{ sm: 3, md: 3, lg: 5 }}
+                    fontSize='l'
+                    mt={{ sm: 3, md: 3, lg: 5 }}
                     color='blue.300'>
                     Back
                 </Text>
             </Flex>
-            {socialInputs.map(({ name, label, icon, placeholder
-            }) => (
+            {socialInputs.map(({ name, label, icon, placeholder }) => (
                 <FormControl id={name} key={name}>
                     <InputGroup borderColor='#E0E1E7'>
-                    <InputLeftAddon children={icon} /> 
+                        <InputLeftAddon children={icon} />
                         <Input {...sharedInputProps} placeholder={placeholder} {...register(name)} />
                     </InputGroup>
                 </FormControl>
@@ -219,8 +225,7 @@ export default function NewUser() {
         </>
     )
 
-    
-    const renderInputs = pageNum === 1 ? renderPageOne : renderPageTwo;
+    const renderInputs = pageNum === 1 ? renderPageOne : renderPageTwo
 
     return (
         <VStack spacing='4'>
