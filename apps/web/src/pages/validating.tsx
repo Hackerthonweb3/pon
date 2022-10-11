@@ -4,9 +4,11 @@ import { useContext } from 'react'
 import { useDisconnect } from 'wagmi'
 import { ActionButton } from '~/components/ActionButton'
 import { OrbisContext } from '~/contexts'
+import { useOnboarding } from '~/hooks/useOnboarding'
 
 export default function Validating() {
     const orbis = useContext(OrbisContext)
+    const { setViewedOnboarding } = useOnboarding()
     const { push } = useRouter()
     const { disconnect } = useDisconnect()
 
@@ -18,6 +20,7 @@ export default function Validating() {
     const handleContinue = async () => {
         const result = await orbis?.isConnected()
         if (result.did) {
+            setViewedOnboarding(true)
             console.log('checking profile for did', result.did)
             let { data, error } = await orbis?.getProfile(result.did)
             if (error) return console.log('error fetching profile', error)
