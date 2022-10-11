@@ -58,7 +58,7 @@ export default function NewUser() {
     const [pageNum, setPageNum] = useState(1)
     const orbis = useContext(OrbisContext)
 
-    const createProfile = async (newUserData) => {
+    const createProfile = async (newUserData: any) => {
         // trigger reconnection to get did
         const result = await orbis?.isConnected()
 
