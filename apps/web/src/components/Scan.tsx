@@ -85,7 +85,7 @@ export default function Scan() {
         }
     }
 
-    if (!profile)
+    if (!profile || !renderingScan)
         return (
             <Center h='full' flexDir='column'>
                 <Spinner size='xl' />
@@ -128,35 +128,14 @@ export default function Scan() {
 
     function renderScan() {
         return (
-            <>
-                <QrReader
-                    delay={300}
-                    facingMode={'environment'}
-                    onError={(error: any) => console.log(error)}
-                    onScan={handleScan}
-                    style={{ width: '100%' }}
-                />
-                <FormControl id='did'>
-                    <FormLabel>DiD for new contact</FormLabel>
-                    <InputGroup borderColor='#E0E1E7'>
-                        <Input
-                            variant='filled'
-                            type='text'
-                            value={newDid}
-                            {...register('did', {
-                                required: 'This is required',
-                            })}
-                        />
-                    </InputGroup>
-                </FormControl>
-            </>
+            <QrReader
+                delay={300}
+                facingMode={'environment'}
+                onError={(error: any) => console.log(error)}
+                onScan={handleScan}
+                style={{ width: '100%' }}
+            />
         )
-    }
-
-    if (!renderingScan) {
-        ;<Center h='full'>
-            <Spinner size='xl' />
-        </Center>
     }
 
     return (
