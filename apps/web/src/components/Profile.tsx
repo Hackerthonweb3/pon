@@ -157,7 +157,7 @@ export default function Profile() {
                         <Text style={styles.actionText}>Preferred contact method</Text>
                     </Flex>
                     {/* <Social profile={mockProfile} /> */}
-                    <Button position='absolute' right='10px' bottom='10px' onClick={handleBack}>
+                    <Button position='absolute' right='0px' top='0px' onClick={handleBack}>
                         Go back
                     </Button>
                 </CenteredContainer>

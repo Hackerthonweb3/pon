@@ -9,6 +9,7 @@ import { theme, wagmiClient } from '~/lib'
 import { ErrorFallback } from '~/components/ErrorFallBack'
 import { OrbisProvider } from '~/contexts'
 import { Layout } from '~/components/Layout'
+import { OnboardingContext, OnboardingProvider } from '~/contexts/OnboardingContext'
 
 function App({ Component, pageProps }: AppProps) {
     return (
@@ -20,9 +21,11 @@ function App({ Component, pageProps }: AppProps) {
             <ChakraProvider theme={theme}>
                 <WagmiConfig client={wagmiClient}>
                     <OrbisProvider>
-                        <Layout>
-                            <Component {...pageProps} />
-                        </Layout>
+                        <OnboardingProvider>
+                            <Layout>
+                                <Component {...pageProps} />
+                            </Layout>
+                        </OnboardingProvider>
                     </OrbisProvider>
                 </WagmiConfig>
             </ChakraProvider>
