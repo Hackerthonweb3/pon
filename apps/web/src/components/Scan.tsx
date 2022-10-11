@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import QRCode from 'react-qr-code'
 import {
     Text,
     VStack,
@@ -26,9 +25,9 @@ import QrSvg from '../media/qr.svg'
 import dynamic from 'next/dynamic'
 import { OrbisContext } from '~/contexts'
 import { Profile } from './Profile'
+import Scanner from './Scan/ScanQRCode'
 
 // @ts-ignore
-const QrReader: any = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
 const QrCode = dynamic(() => import('~/components/QrCode'), { ssr: false })
 
 export default function Scan() {
@@ -64,6 +63,12 @@ export default function Scan() {
 
     function isQr() {
         return activeView === 'qr'
+    }
+
+    const onNewScanResult = (decodeText: string, decodedResult: any /*Html5QrcodeResult*/): void => {
+        console.log('App [result]: ', decodedResult, decodeText)
+
+        // setDecodedResults(decodedResult);
     }
 
     useEffect(() => {
@@ -129,48 +134,43 @@ export default function Scan() {
     }
 
     function renderScan() {
-        return (
-            <QrReader
-                delay={300}
-                facingMode={'environment'}
-                onError={(error: any) => console.log(error)}
-                onScan={handleScan}
-                style={{ width: '100%' }}
-            />
-        )
+        return <Scanner />
     }
 
     return (
-        <VStack spacing='10'>
-            {isQr() ? renderQrCode() : renderingScan ? renderScan() : null}
-            <Text fontSize='l' mt={{ sm: 3, md: 3, lg: 5 }} color='gray.500'>
-                Scan a QR profile to add a new contact!
-            </Text>
+        <Flex h='full' overflow='hidden'>
+            <Scanner />
+        </Flex>
+        // <VStack spacing='10'>
+        //     {isQr() ? renderQrCode() : renderingScan ? renderScan() : null}
+        //     <Text fontSize='l' mt={{ sm: 3, md: 3, lg: 5 }} color='gray.500'>
+        //         Scan a QR profile to add a new contact!
+        //     </Text>
 
-            <Flex justifyContent={'space-between'} borderRadius='8px' backgroundColor='#232934' h={92} w='100%'>
-                <Button
-                    onClick={() => handleChangeMode('qr')}
-                    h={92}
-                    p='10px'
-                    w='50%'
-                    backgroundColor={isQr() ? '#ffffff3d' : '#232934'}>
-                    <span>
-                        <Image src={QrSvg} alt='qr' />
-                        <Text>QRcode</Text>
-                    </span>
-                </Button>
-                <Button
-                    onClick={() => handleChangeMode('scan')}
-                    h={92}
-                    p='10px'
-                    w='50%'
-                    backgroundColor={isQr() ? '#232934' : '#ffffff3d'}>
-                    <span>
-                        <Image src={ScanSvg} alt='scan' />
-                        <Text>Scan</Text>
-                    </span>
-                </Button>
-            </Flex>
-        </VStack>
+        //     <Flex justifyContent={'space-between'} borderRadius='8px' backgroundColor='#232934' h={92} w='100%'>
+        //         <Button
+        //             onClick={() => handleChangeMode('qr')}
+        //             h={92}
+        //             p='10px'
+        //             w='50%'
+        //             backgroundColor={isQr() ? '#ffffff3d' : '#232934'}>
+        //             <span>
+        //                 <Image src={QrSvg} alt='qr' />
+        //                 <Text>QRcode</Text>
+        //             </span>
+        //         </Button>
+        //         <Button
+        //             onClick={() => handleChangeMode('scan')}
+        //             h={92}
+        //             p='10px'
+        //             w='50%'
+        //             backgroundColor={isQr() ? '#232934' : '#ffffff3d'}>
+        //             <span>
+        //                 <Image src={ScanSvg} alt='scan' />
+        //                 <Text>Scan</Text>
+        //             </span>
+        //         </Button>
+        //     </Flex>
+        // </VStack>
     )
 }

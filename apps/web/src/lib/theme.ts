@@ -16,11 +16,8 @@ export const theme = extendTheme({
             'html, body': {
                 height: '100%',
                 backgroundColor: '#2B2E38',
-                padding: '15px',
-                marginBottom: '105px',
             },
             ', #__next, .css-0': {
-                // overflow: 'hidden',
                 height: '100%',
             },
         },
