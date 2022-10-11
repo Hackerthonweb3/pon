@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import { useEffect, useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -207,7 +208,7 @@ export default function NewUser() {
             }) => (
                 <FormControl id={name} key={name}>
                     <InputGroup borderColor='#E0E1E7'>
-                    <InputLeftAddon children={icon} /> // eslint-disable-line
+                    <InputLeftAddon children={icon} /> 
                         <Input {...sharedInputProps} placeholder={placeholder} {...register(name)} />
                     </InputGroup>
                 </FormControl>
