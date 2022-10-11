@@ -31,7 +31,6 @@
         "@web3auth/web3auth-wagmi-connector": "1.0.0",
         "didtools": "1.0.0",
         "ethers": "5.7.1",
-        "feather-icons": "4.29.0",
         "focus-visible": "5.2.0",
         "framer-motion": "7.3.6",
         "graphql": "16.6.0",

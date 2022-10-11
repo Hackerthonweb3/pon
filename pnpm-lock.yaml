@@ -270,7 +270,6 @@ importers:
       eslint-config-next: 12.3.1
       eslint-config-turbo: 0.0.3
       ethers: 5.7.1
-      feather-icons: 4.29.0
       focus-visible: 5.2.0
       framer-motion: 7.3.6
       graphql: 16.6.0
@@ -316,7 +315,6 @@ importers:
       '@web3auth/web3auth-wagmi-connector': 1.0.0_rodemj4ekydzwg2tvdq74o5fpi
       didtools: 1.0.0
       ethers: 5.7.1
-      feather-icons: 4.29.0
       focus-visible: 5.2.0
       framer-motion: 7.3.6_zpnidt7m3osuk7shl3s4oenomq
       graphql: 16.6.0
@@ -8499,7 +8497,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
     transitivePeerDependencies:
       - debug
 
@@ -12577,13 +12575,6 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /feather-icons/4.29.0:
-    resolution: {integrity: sha512-Y7VqN9FYb8KdaSF0qD1081HCkm0v4Eq/fpfQYQnubpqi0hXx14k+gF9iqtRys1SIcTEi97xDi/fmsPFZ8xo0GQ==}
-    dependencies:
-      classnames: 2.3.2
-      core-js: 3.25.2
-    dev: false
-
   /fetch-blob/3.2.0:
     resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==}
     engines: {node: ^12.20 || >= 14.13}
@@ -12779,15 +12770,6 @@ packages:
   /focus-visible/5.2.0:
     resolution: {integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==}
     dev: false
-
-  /follow-redirects/1.15.2:
-    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
 
   /follow-redirects/1.15.2_debug@4.3.4:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
