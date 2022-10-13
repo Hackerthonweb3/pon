@@ -1,7 +1,6 @@
 import { Center, Spinner } from '@chakra-ui/react'
 import QRCodeStyling from 'qr-code-styling'
-import { useContext, useEffect, useRef } from 'react'
-import { OrbisContext } from '~/contexts'
+import { useEffect, useRef } from 'react'
 
 const qrCode = new QRCodeStyling({
     width: 300,
@@ -20,7 +19,7 @@ const qrCode = new QRCodeStyling({
     },
 })
 
-export default function QrCode({ did }: { did?: string }) {
+export function Show({ did }: { did?: string }) {
     const qrElement = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
