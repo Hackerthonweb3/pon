@@ -45,7 +45,7 @@ export function Scan({ onConnect }: IProps) {
                 showViewFinder={false}
                 onError={onError}
                 onScan={onScan}
-                style={{ height: '100%', display: loading ? 'none' : 'flex' }}
+                style={{ playsinline: true, height: '100%', display: loading ? 'none' : 'flex' }}
             />
         </>
     )
