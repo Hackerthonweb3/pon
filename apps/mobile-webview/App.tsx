@@ -9,7 +9,10 @@ const App = () => {
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
                 <SafeAreaView style={styles.container}>
                     <StatusBar style='auto' />
-                    <WebView source={{ uri: 'https://web3card.vercel.app/app' }} style={styles.container} />
+                    <WebView
+                        source={{ uri: 'https://business-card-kxj4o4889-hackerthonweb3.vercel.app/qr-code' }}
+                        style={styles.container}
+                    />
                 </SafeAreaView>
             </KeyboardAvoidingView>
         </SafeAreaProvider>

@@ -1,20 +1,59 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View } from 'react-native'
-import { WebView } from 'react-native-webview'
+import '../shim'
+import '@business-card/orbis-sdk-react-native/utils/polyfills_light_crypto'
+import 'react-native-get-random-values'
 
-const App = () => {
-    return (
-        <View style={styles.container}>
-            <StatusBar style='auto' />
-            <WebView source={{ uri: 'https://web3card.vercel.app' }} />
-        </View>
-    )
-}
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister'
+import { noopStorage } from '@wagmi/core'
+import WalletConnectProvider from '@walletconnect/react-native-dapp'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { configureChains, createClient, createStorage, defaultChains, WagmiConfig } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { publicProvider } from 'wagmi/providers/public'
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+import { Navigation } from './components'
+import { OnboardingProvider } from './contexts/OnboardingContext'
+// import { OrbisProvider } from './contexts/OrbisContext'
+import useCachedResources from './hooks/useCachedResources'
+
+const asyncStoragePersister = createAsyncStoragePersister({
+    storage: AsyncStorage,
 })
 
-export default App
+const { chains, provider } = configureChains(defaultChains, [
+    alchemyProvider({ apiKey: 'yourAlchemyApiKey' }),
+    publicProvider(),
+])
+
+const wagmiClient = createClient({
+    autoConnect: true,
+    connectors: [new InjectedConnector({ chains })],
+    provider,
+    persister: asyncStoragePersister,
+    storage: createStorage({
+        storage: noopStorage,
+    }),
+})
+
+export default function App() {
+    const isLoadingComplete = useCachedResources()
+
+    if (!isLoadingComplete) {
+        return null
+    } else {
+        return (
+            // <OrbisProvider>
+            <WagmiConfig client={wagmiClient}>
+                <WalletConnectProvider redirectUrl='pon://' storageOptions={{ asyncStorage: AsyncStorage as any }}>
+                    <OnboardingProvider>
+                        <SafeAreaProvider>
+                            <Navigation />
+                        </SafeAreaProvider>
+                    </OnboardingProvider>
+                </WalletConnectProvider>
+            </WagmiConfig>
+            // </OrbisProvider>
+        )
+    }
+}
