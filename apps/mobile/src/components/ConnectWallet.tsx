@@ -13,7 +13,7 @@ const stageColor = { pending: '#ffffffb2', loading: '#fff', complete: '#99f0ff' 
 
 export default function ConnectWallet() {
     const connector: any = useWalletConnect()
-    connector.getProvider = () => {}
+    // connector.getProvider = () => {}
     connector.options = {
         qrcode: true,
     }
@@ -28,12 +28,13 @@ export default function ConnectWallet() {
     // }, [connector])
 
     const handleConnect = async () => {
-        console.log('connect wallet', connector)
+        // console.log('connect wallet', connector)
         try {
             // await handle()
-            await connector.connect()
-            // console.log(context.connector?.uri)
-            // console.log(address)
+            // const res = await connector.connect()
+            const res = await connector.disconnect()
+            console.log('result', res)
+            console.log(connector)
         } catch (error) {
             console.log('connecting error', error)
         }
