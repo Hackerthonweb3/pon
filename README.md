@@ -3,7 +3,7 @@
 } -->
 <div align="center">
 
-# 🤝 **PoN - Web3 Business Card - : EthBogota 2022**
+# 🤝 **PoN - Web3 Business Card - : EthLisbon 2022**
 
 [![GitHub deployments](https://img.shields.io/github/deployments/Hackerthonweb3/business-card/production?label=deployment&logo=vercel&style=flat-square&color=00a550&logoColor=00a550)](https://web3card.vercel.app)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Hackerthonweb3/business-card/Build%20Pipeline?logo=github&style=flat-square&color=00a550&logoColor=00a550)](https://github.com/Hackerthonweb3/business-card/actions/workflows/pipeline.yml)
@@ -42,11 +42,11 @@
 
 ## 🚀 **Statement**
 
-**We are eager to continue the project after the hackathon in order to actually launch it in the world. We wanted ETH Bogota as a new addition to our existing project and have received an endorsement from ETH Global that we are eligible for a sponsor award.**
+**We are eager to continue the project after the hackathon in order to actually launch it in the world. We wanted ETH Lisbon as a new addition to our existing project and have received an endorsement from ETH Lisbon that we are eligible for some awards.**
 
 ## 🎬 **Pitch & Live Demo (Video)**
 
-PoN are digital business cards to help people connect easier while attending web3 conferences and events. The end goal is to create a reputation ecosystem to replace web2 platforms like LinkedIn and Eventbright.
+We are decentralized business card. We collect and aggregate all of your off-chain and on-chain profile to create your web3 identity to help people connect easier while attending web3 conferences and events. The end goal is to create a reputation ecosystem to replace web2 platforms like LinkedIn and Eventbright.
 
 <p align='center'>
     <a href='https://www.youtube.com/watch?v=cTG88Kcmj1A'>
@@ -72,40 +72,22 @@ PoN are digital business cards to help people connect easier while attending web
 
 #### Tech Stack
 
--   Front-End: Nextjs, React, Typescript, Rainbowkit/Wagmi,
--   Mobile: ReactNative, WalletConnect
--   Data: Ceramic, Lit Protocol with Orbis-SDK, IPFS
--   Blockchain: We prepared deployment on Polygon, Optimism, Mina, Boba, Gnosis.
+-   Front-End: Nextjs, React, Typescript, WalletConnect/web3modal,
+-   Mobile: ReactNative, React, WalletConnect
+-   Data: Ceramic, Lit Protocol with Orbis-SDK, IPFS, Arweave
+-   Blockchain: We prepared deployment on Polygon, Gnosis, Cronos, Near.
 
 ## **①Deploy SBT to Blockchain**
 
-- **Mina**：For users to deploy SBT because of privacy. []()
+- **Gnosis**：For users to deploy SBT because of . []()
 
-- **Boba**：For users to deploy SBT because of . []()
+- **Cronos**：For users to deploy SBT because of low transaction cost. []()
 
-- **Gnosis**：For users to deploy SBT because of low transaction cost. []()
-
-- **Optimism**：For users to deploy SBT because of low transaction cost. []()
+- **Near**：For users to deploy SBT because of low transaction cost. []()
 
 - **Polygon**：For users to deploy SBT because of low transaction cost. []()
 
 - **The Graph**：To build the SBTs gallery for each user profile so the user can see the information almost instantly by subgraph, in the future we can also leverage it to get aggregated information about minted SBTs or other statistical data. SubGraph is [here](https://thegraph.com/studio/subgraph/soulboundimplementation/).
-
-- **Open Zeppelin**：We are using the following open zeppelin libraries:erc721metadata, erc165, erc712, ownable, bitmap and signature checker. We are also using their upgradeability pattern using UUPS and also open zeppelin upgrades hardhat plugin [here](https://github.com/Hackerthonweb3/business-card/blob/release/libs/sol/contracts/SoulboundEncounters.sol#L8) are the code lines:
-
-## ②For user's privacy
-
-- **IPFS/Filecoin**： To upload metadata about the encounter, upload media data, dapp deployed to IPFS.
-
-- **Ceramic**： To mix these on-chain solutions with off-chain portable data by using Ceramic and Lit protocols, to achieve a superior UX combined with React to easily onboard every kind of use in any platform so that users can own data by themself.
-
-- **ENS**：Optional subdomains or just integration with avatar, twitter fields, create profile in eth page and redirect to web2 eth.link.
-
-- **Sismo**：
-
-  - Privacy fighter ：Adding NFT collector badge to use in case use wants to have more security for their NFTs but still use ZK Badge for reputation. It's merged and deployed [here](https://playground.sismo.io/nft-collector). 
-
-  - Sybil Killer：Using PoN SBT as Zk Sismo badge to prove that they made real connections to people.
 
 
 ### Technical details
