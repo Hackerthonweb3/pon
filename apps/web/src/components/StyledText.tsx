@@ -14,7 +14,7 @@ const typeScale = {
 }
 
 const MonoText = styled.div`
-    font-family: 'Inter';
+    font-family: 'VT323';
 `
 export const VtText = styled.div`
     font-family: 'VT323';
@@ -30,8 +30,8 @@ export const Title = styled(VtText)`
 export const SubTitle = styled(VtText)`
     font-size: ${typeScale.subtitle}px;
     color: ${colors.textMain};
-    margin-bottom: 10px;
     font-weight: 600;
+    margin: 0 5px;
 `
 
 export const Note = styled(VtText)`

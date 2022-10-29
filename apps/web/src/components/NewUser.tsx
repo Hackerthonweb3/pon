@@ -15,6 +15,9 @@ import {
     Button,
     Flex,
     InputLeftAddon,
+    Box,
+    Tag,
+    Badge
 } from '@chakra-ui/react'
 import { FiMail, FiTwitter, FiGithub, FiInstagram, FiLinkedin, FiSend } from 'react-icons/fi'
 import { FaDiscord, FaLeaf } from 'react-icons/fa'
@@ -128,6 +131,30 @@ export default function NewUser() {
             newData.pfp = ''
         }
 
+        if (newData.skills) {
+            try {
+                const created = await ipfsClient.add(skills.toString())
+                newData.skills = created
+            } catch (error) {
+                setError(error)
+                newData.skills = ''
+            }
+        } else {
+            newData.skills = ''
+        }
+
+        if (newData.interests) {
+            try {
+                const created = await ipfsClient.add(Interests.toString())
+                newData.interests = created
+            } catch (error) {
+                setError(error)
+                newData.interests = ''
+            }
+        } else {
+            newData.interests = ''
+        }
+
         const isCreated = await createProfile(newData)
 
         if (isCreated) {
@@ -146,13 +173,61 @@ export default function NewUser() {
         type: 'text',
     }
 
+    const [skills, setSkills] = useState([] as string[]);
+
+    const addSkill = (e:any) => { 
+        const skill = e.target.value.trim();
+        if (skill === "") {
+            console.log("empty skill");
+        }
+        else (
+            setSkills([...skills, skill])
+        )
+        console.log(e.target.value.trim());
+        console.log(skills);
+        e.target.value = "";
+    }
+
+    const [Interests, setInterests] = useState([] as string[]);
+
+    const addInterest = (e:any) => { 
+        const Interest = e.target.value.trim();
+        if (Interest === "") {
+            console.log("empty skill");
+        }
+        else (
+            setInterests([...Interests, Interest])
+        )
+        console.log(e.target.value.trim());
+        console.log(Interests);
+        e.target.value = "";
+    }
+
+    const colourSchemes = [
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "teal",
+        "blue",
+        "cyan",
+        "purple",
+        "pink",
+        "linkedin",
+        "facebook",
+        "messenger",
+        "whatsapp",
+        "twitter",
+        "telegram"
+    ]
+
     const renderPageOne = (
         <>
-            <Flex width='100%' justifyContent='right' alignItems='right' pr={2}>
+            <Flex width='100%' justifyContent='right' alignItems='right' px={2}>
                 <Text
                     cursor='pointer'
                     textAlign='right'
-                    onClick={() => setPageNum(2)}
+                    onClick={() => setPageNum(pageNum+1)}
                     fontSize='l'
                     mt={{ sm: 3, md: 3, lg: 5 }}
                     color='blue.300'>
@@ -172,12 +247,6 @@ export default function NewUser() {
                     />
                 </InputGroup>
             </FormControl>
-            <FileUploader name='cover' acceptedFileTypes='image/*' placeholder='Your cover image' control={control}>
-                Cover image
-            </FileUploader>
-            <FileUploader name='pfp' acceptedFileTypes='image/*' placeholder='Your avatar' control={control}>
-                PFP
-            </FileUploader>
             <FormControl id='description' isRequired>
                 <FormLabel>Description</FormLabel>
                 <Textarea
@@ -188,23 +257,64 @@ export default function NewUser() {
                     })}
                 />
             </FormControl>
+            <FormControl id='location'>
+                <FormLabel>Location</FormLabel>
+                <Input {...sharedInputProps} placeholder='Where are you located?' {...register('location')} />
+            </FormControl>
+            <FileUploader name='cover' acceptedFileTypes='image/*' placeholder='Your cover image' control={control}>
+                Cover image
+            </FileUploader>
+            <FileUploader name='pfp' acceptedFileTypes='image/*' placeholder='Your avatar' control={control}>
+                PFP
+            </FileUploader>
+
             <FormControl id='organization'>
                 <FormLabel>Organization</FormLabel>
                 <Input {...sharedInputProps} placeholder='Where do you work' {...register('organization')} />
             </FormControl>
-            <FormControl id='organization'>
-                <FormLabel>Skills</FormLabel>
-                <Input {...sharedInputProps} placeholder='What are your skills' {...register('skills')} />
+            <FormControl id='jobTitle'>
+                <FormLabel>Job Title</FormLabel>
+                <Input {...sharedInputProps} placeholder='What is your Job Title' {...register('job_title')} />
             </FormControl>
+            <FormControl id='skills'>
+                <FormLabel>Skills</FormLabel>
+                <Input {...sharedInputProps}
+                    placeholder='What are your skills'
+                    onKeyDown={(e) => { if (e.key === "Enter") addSkill(e) }} {...register('skills')}
+                />
+                {
+                    skills.map((skill, index) => { 
+                        return (
+                            <Badge colorScheme={colourSchemes[index]} mx={2}>{skill}</Badge>
+                        )
+                    })
+                }
+            </FormControl>
+            <FormControl id='IM'>
+                <FormLabel>Interested in meeting</FormLabel>
+                <Input
+                    {...sharedInputProps}
+                    placeholder='What kind of people are interested in meeting?'
+                    onKeyDown={(e) => { if (e.key === "Enter") addInterest(e) }} {...register('interests')}
+                />
+                {
+                    Interests.map((Interest, index) => { 
+                        return (
+                            <Badge colorScheme={colourSchemes[index]} mx={2}>{Interest}</Badge>
+                        )
+                    })
+                }
+            </FormControl>
+        
         </>
     )
 
     const renderPageTwo = (
         <>
-            <Flex width='100%' justifyContent='left' alignItems='left' pr={2}>
+            <Flex width='100%' justifyContent='left' alignItems='left' px={2}>
                 <Text
                     textAlign='left'
-                    onClick={() => setPageNum(1)}
+                    onClick={() => setPageNum(pageNum-1)}
                     fontSize='l'
                     mt={{ sm: 3, md: 3, lg: 5 }}
                     color='blue.300'>
@@ -236,7 +346,9 @@ export default function NewUser() {
                 letterSpacing='1px'>
                 Create your Profile ({pageNum} of 2)
             </Heading>
-            {renderInputs}
+            <Box mb={10} w="100%" h="100%">
+                {renderInputs}
+            </Box>
         </VStack>
     )
 }

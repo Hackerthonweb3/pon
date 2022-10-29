@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Text, Button, Flex, Box, Tooltip, Center, Spinner } from '@chakra-ui/react'
+import { Text, Button, Flex, Box, Tooltip, Center, Spinner, Avatar, AspectRatio, Heading, Badge } from '@chakra-ui/react'
 import { Layout, SpaceEnd, ContainerFlex, CenteredContainer } from './DesignSystem'
 import Gallery from './Gallery'
 import { Social } from './Social'
@@ -16,8 +16,10 @@ import blueApePng from '../media/mock/ape_blue.png'
 import zkPng from '../media/ZK.png'
 import { useRouter } from 'next/router'
 import { useDisconnect } from 'wagmi'
+import { useAccount } from '@web3modal/react'
 import { useOnboarding } from '~/hooks/useOnboarding'
 import { OrbisContext } from '~/contexts'
+import NftGallery from './NftGallery'
 
 const styles = {
     backgroundContainer: {
@@ -45,7 +47,6 @@ const styles = {
         paddingTop: 0,
     },
     fullInfo: {
-        backgroundColor: '#353844',
         borderRadius: 12,
         alignItems: 'center',
         top: -10,
@@ -101,6 +102,7 @@ export default function Profile() {
                 address: data.address,
                 did: data.did,
             })
+            console.log(data)
         } else {
             console.log('profile not found, redirect to creation')
         }
@@ -130,25 +132,47 @@ export default function Profile() {
         // console.log("edit")
     }
 
-    const renderGalleryButton = (galleryName: EGallery) => (
-        <div
-            onClick={() => setSelectedGalleryTab(galleryName)}
-            style={{
-                borderRadius: '10px 10px 0px',
-                width: '50%',
-                cursor: 'pointer',
-            }}>
-            <NoteMono
-                style={{
-                    paddingTop: 8,
-                    textAlign: 'center',
-                    height: 42,
-                    backgroundColor: selectedGalleryTab === galleryName ? '#353844' : '#6d6d6f',
-                }}>
-                {galleryName}
-            </NoteMono>
-        </div>
-    )
+    const colourSchemes = [
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "teal",
+        "blue",
+        "cyan",
+        "purple",
+        "pink",
+        "linkedin",
+        "facebook",
+        "messenger",
+        "whatsapp",
+        "twitter",
+        "telegram"
+    ]
+
+    const mockSkills = [
+        "Javascript",
+        "React",
+        "Typescript",
+        "Solidity",
+        "Web3",
+        "Next.js",
+    ]
+
+    const Tab = ({ name }: string) => {
+        let random1 = Math.floor(Math.random() * 255)
+        let random2 = Math.floor(Math.random() * 255)
+        let random3 = Math.floor(Math.random() * 255)
+
+        const bgColour = `rgba(${random1}, ${random2}, ${random3}, 0.3)`;
+        
+        return (
+            <Flex backgroundColor={bgColour} w="min" m={2}>
+                <Text m={2} fontSize="lg">{name}</Text>
+            </Flex>
+        )
+    }
+
     const renderFullInfo = isFullView && (
         <Flex flexDirection='column' alignItems='center'>
             <Button mb='10px' width={280} style={{ width: 260 }} onClick={handleEditLink}>
@@ -188,23 +212,44 @@ export default function Profile() {
         <Flex margin='auto' width={{ base: '100%', md: '60%', lg: '50%' }} justifyContent='center' alignItems='center'>
             <Layout>
                 <CenteredContainer style={{ padding: '0 5px' }}>
-                    <Image src={coverSvg} alt='' width='900px' />
+                    <Flex justifyContent='center' direction='column' alignItems='center'>
+                        <Avatar boxSize={200} name={profile.username} src={profile.pfp} />
+                        <Title>{profile.name}</Title>
+                    </Flex>
                     <Flex flexDirection='column' justifyContent='center' alignItems='center'>
-                        <ImageMask imageCid={profile.pfp} />
-                        <div style={{ right: -175, top: -65 }} onClick={() => setIsFullView(!isFullView)}>
-                            <Text style={{ color: colors.textAction, fontWeight: '600' }}>{fullProfileTitle}</Text>
-                        </div>
-                        <Title>{profile.username}</Title>
-                        <SubTitle>{`${profile.address.substring(0, 5)}...${profile.address.substring(
-                            profile.address.length - 5,
-                        )}`}</SubTitle>
-                        <Note style={styles.description}>{profile.description}</Note>
+                        <Flex direction='column' alignItems='center'>
+                            <Flex direction="row">
+                                <Flex direction='row' mr={2}>
+                                    <Image src='/icons/location.svg' width={20} height={20} />
+                                    <SubTitle>{profile.location}</SubTitle>
+                                </Flex>
+                                <Flex direction='row' ml={2}>
+                                    <Image src='/icons/jobTitle.svg' width={20} height={20} />
+                                    <SubTitle>{profile.job_title}</SubTitle>
+                                </Flex>
+                            </Flex>
+                            <SubTitle>{profile.organization}</SubTitle>
+                        </Flex>
+                        
+                        <Text fontWeight="bold" fontSize="xl">{profile.description}</Text>
                     </Flex>
-                    {renderFullInfo}
-                    <Flex style={styles.switch}>
-                        <Text style={styles.actionText}>Preferred contact method</Text>
-                    </Flex>
+
                     <Social profile={profile} />
+
+                    <Box w="100%">
+                        <Heading size="xl" mb={2}>🛠 Skills</Heading>
+                        <Flex wrap="wrap">
+                            {
+                                mockSkills.map((skill, index) => { 
+                                    return (
+                                        <Tab name={skill} key={index} />
+                                    )
+                                })
+                            }
+                        </Flex>
+                    </Box>
+
+                    <NftGallery address={profile.address} />
                     <Button position='absolute' right='0px' top='0px' onClick={handleBack}>
                         Go back
                     </Button>
