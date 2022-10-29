@@ -3,7 +3,7 @@ import { extendTheme } from '@chakra-ui/react'
 
 export const theme = extendTheme({
     config: {
-        initialColorMode: 'dark',
+        initialColorMode: 'light',
         useSystemColorMode: true,
     },
     fonts: {
@@ -15,7 +15,7 @@ export const theme = extendTheme({
         global: {
             'html, body': {
                 height: '100%',
-                backgroundColor: '#2B2E38',
+                backgroundColor: '#FFFFFF',
             },
             ', #__next, .css-0': {
                 height: '100%',

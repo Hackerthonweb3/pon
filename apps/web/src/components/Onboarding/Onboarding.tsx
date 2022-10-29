@@ -23,7 +23,7 @@ import slides from './slide-data'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
-import { useAccount } from 'wagmi'
+import { Web3Button, useAccount } from '@web3modal/react';
 import { useRouter } from 'next/router'
 import { OrbisContext } from '~/contexts'
 
@@ -76,9 +76,12 @@ export default function Onboarding() {
     const handleChange = (event: any) => setEnteredAddress(event.target.value)
 
     // wagmi hooks triggered when interacting with the wallet using rainbow kit
-    const { connector: activeConnector, isConnected } = useAccount({
-        // triggered after connecting a wallet
-        async onConnect({ address, connector, isReconnected }) {
+
+    const { account, isReady } = useAccount()
+
+    useEffect(() => { 
+
+        const onConnect = async () => { 
             console.log('connected by rainbow kit')
             const result = await orbis?.isConnected()
             if (result.status === 200) {
@@ -86,7 +89,7 @@ export default function Onboarding() {
                 setDid(result.did)
             } else {
                 console.log('oops orbis not connected, trying to connect')
-                const provider = await connector?.getProvider()
+                const provider = await account.connector?.getProvider()
                 console.log('fucking provider', provider)
                 const result = await orbis?.connect(provider)
                 if (result.status === 200) {
@@ -97,9 +100,15 @@ export default function Onboarding() {
                     }
                 }
             }
-        },
-        // triggered after disconnecting the wallet
-        async onDisconnect() {
+            console.log(account.isConnected)
+            if (account.isConnected) push('/validating', '/app')
+        }
+
+        if (account.isConnected) onConnect()
+    }, [account.isConnected])
+
+    useEffect(() => { 
+        const onDisconnect = async () => { 
             console.log('orbis disconnected by rainbow kit')
             const result = await orbis?.logout()
             if (result.status === 200) {
@@ -108,8 +117,10 @@ export default function Onboarding() {
             } else {
                 console.log('error on orbis logout', result)
             }
-        },
-    })
+        }
+
+        if (account.isDisconnected) onDisconnect()
+    }, [account.isDisconnected])
 
     // tries to fetch existing profile from orbis
     const checkProfile = async () => {
@@ -149,10 +160,6 @@ export default function Onboarding() {
         }
         checkOrbis()
     }, [])
-
-    useEffect(() => {
-        if (isConnected) push('/validating', '/app')
-    }, [isConnected])
 
     const handleConnectWallet = () => {
         openConnectModal && openConnectModal()
@@ -194,8 +201,9 @@ export default function Onboarding() {
                 </StyledSwipper>
                 {activeSlide === 2 && (
                     <Flex direction='column' justifyContent='space-between' alignItems='center' flex='1' h='25%'>
-                        <Flex direction='column' justifyContent='flex-start'>
-                            <ActionButton label='Connect your wallet' onClick={handleConnectWallet} />
+                        <Flex direction='column' justifyContent='flex-start' alignItems='center'>
+                            {/* <ActionButton label='Connect your wallet' onClick={handleConnectWallet} /> */}
+                            <Web3Button/>
                             <Text as='button' fontSize='28px' onClick={() => setManualAddressModalShown(true)}>
                                 Enter address manually
                             </Text>
