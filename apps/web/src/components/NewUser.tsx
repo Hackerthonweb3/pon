@@ -131,28 +131,15 @@ export default function NewUser() {
             newData.pfp = ''
         }
 
-        if (newData.skills) {
-            try {
-                const created = await ipfsClient.add(skills.toString())
-                newData.skills = created
-            } catch (error) {
-                setError(error)
-                newData.skills = ''
-            }
-        } else {
-            newData.skills = ''
-        }
-
-        if (newData.interests) {
-            try {
-                const created = await ipfsClient.add(Interests.toString())
-                newData.interests = created
-            } catch (error) {
-                setError(error)
-                newData.interests = ''
-            }
-        } else {
-            newData.interests = ''
+        try {
+            const createdSkills = await ipfsClient.add(skills.toString())
+            const createdInterests = await ipfsClient.add(Interests.toString())
+            newData.skills = createdSkills
+            newData.interests = createdInterests
+        } catch (error) {
+            setError(error)
+            newData.skills = 'no skills'
+            newData.interests = 'no interests'
         }
 
         const isCreated = await createProfile(newData)

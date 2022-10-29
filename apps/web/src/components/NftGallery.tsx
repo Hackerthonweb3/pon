@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Image } from '@chakra-ui/react'
+import { Box, Flex, Text, Image, Heading } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { Alchemy, Network } from 'alchemy-sdk'
 import { Title, SubTitle, Note, NoteMono } from './StyledText'
@@ -10,6 +10,8 @@ export default function NftGallery({ address }:string) {
     }, [])
 
     const [NftList, setNftList] = useState()
+
+    const [currentGallery, setCurrentGallery] = useState('NFTs')
 
     const getNFTs = () => {
         const config = {
@@ -40,23 +42,47 @@ export default function NftGallery({ address }:string) {
     }
 
     return (
-        <Box background='whiteAlpha.50' borderRadius='12px'>
-            <Flex justifyContent='space-between' px={2}>
-                <Text fontWeight={400}>NFTs</Text>
+        <Box background='whiteAlpha.50' borderRadius='12px' my={10}>
+            <Flex justifyContent='flex-start' px={2}>
+                <Heading
+                    onClick={()=>{setCurrentGallery('NFTs')}}
+                    fontWeight={700}
+                    size="lg"
+                    mb={2}
+                    color={currentGallery == 'NFTs' ? 'black' : '#B8B8B8'}
+                >
+                    NFTs
+                </Heading>
+                <Heading
+                    onClick={()=>{setCurrentGallery('SBTs')}}
+                    fontWeight={700}
+                    size="lg"
+                    ml={6}
+                    mb={2}
+                    color={currentGallery != 'NFTs' ? 'black' : '#B8B8B8'}
+                >
+                    Soul Bound Tokens
+                </Heading>
             </Flex>
-            <Box overflowX="scroll">
-                <Flex pt={4} direction="row" justifyContent="center" w="max">
-                    {
-                        NftList?.map((nft, index) => { 
-                            return (
-                                <Box key={index} p={2}>
-                                    <Image boxSize='150px' src={nft.media[0].thumbnail? nft.media[0].thumbnail : nft.media[0].gateway} borderRadius={16}/>
-                                    <Note>{nft.title}</Note>
-                                </Box>
-                            )
-                        })
-                    }
-                </Flex>
+            <Box borderLeft='2px solid gray' borderRight='2px solid gray' overflowX="scroll">
+                {
+                    currentGallery == 'NFTs' ?
+                        <Flex direction="row" justifyContent="center" w="max">
+                            {
+                                NftList?.map((nft, index) => { 
+                                    return (
+                                        <Box w='150px' key={index} m={2}>
+                                            <Image boxSize='150px' src={nft.media[0].thumbnail? nft.media[0].thumbnail : nft.media[0].gateway} borderRadius={16}/>
+                                            <Note>{nft.title}</Note>
+                                        </Box>
+                                    )
+                                })
+                            }
+                        </Flex>
+                    :
+                        <Text>SBTs to be implemented</Text>
+                }
+
             </Box>
         </Box>
     )
