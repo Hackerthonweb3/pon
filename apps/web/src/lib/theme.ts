@@ -7,9 +7,9 @@ export const theme = extendTheme({
         useSystemColorMode: true,
     },
     fonts: {
-        heading: `vt323, monospace`,
-        body: `vt323, monospace`,
-        h4: `vt323, monospace`,
+        heading: `inter, sans-serif`,
+        body: `inter, sans-serif`,
+        h4: `inter, sans-serif`,
     },
     styles: {
         global: {
