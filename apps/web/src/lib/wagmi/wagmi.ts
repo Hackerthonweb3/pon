@@ -8,15 +8,7 @@ import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 export const { chains, provider, webSocketProvider } = configureChains(
-    [
-        chain.polygonMumbai,
-        chain.polygon,
-        chain.optimism,
-        customChain.aurora,
-        customChain.cronos,
-        customChain.oasis,
-        chain.hardhat,
-    ],
+    [chain.polygonMumbai, chain.polygon, customChain.cronos, customChain.gnosis],
     [publicProvider()],
 )
 
