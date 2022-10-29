@@ -1,17 +1,19 @@
 import { Chain } from 'wagmi'
 import { customEtherscanBlockExplorers } from './customBlockExplorers'
 
-type CustomPublicChains = Extract<CustomChainName, 'aurora' | 'cronos' | 'oasis'>
+type CustomPublicChains = Extract<CustomChainName, 'aurora' | 'cronos' | 'gnosis' | 'oasis'>
 
 export const custonPublicRpcUrls: Record<CustomPublicChains, string> = {
     aurora: 'https://mainnet.aurora.dev',
     cronos: 'https://evm.cronos.org',
+    gnosis: 'https://gnosis-mainnet.public.blastapi.io',
     oasis: 'https://emerald.oasis.dev',
 } as const
 
 export const customChainId = {
     aurora: 1_313_161_554,
     cronos: 25,
+    gnosis: 100,
     oasis: 42_220,
 }
 export type CustomChainName = keyof typeof customChainId
@@ -68,6 +70,30 @@ export const cronos: CustomChain = {
     iconUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3635.png',
 }
 
+export const gnosis: CustomChain = {
+    id: customChainId.gnosis,
+    name: 'Gnosis Chain',
+    network: 'gnosischain',
+    nativeCurrency: {
+        name: 'xDAI',
+        symbol: 'XDAI',
+        decimals: 18,
+    },
+    rpcUrls: {
+        public: custonPublicRpcUrls.gnosis,
+        default: custonPublicRpcUrls.gnosis,
+    },
+    blockExplorers: {
+        etherscan: customEtherscanBlockExplorers.gnosis,
+        default: customEtherscanBlockExplorers.gnosis,
+    },
+    multicall: {
+        address: '0xca11bde05977b3631167028862be2a173976ca11',
+        blockCreated: 21022491,
+    },
+    iconUrl: 'https://styles.redditmedia.com/t5_5f0czn/styles/communityIcon_jz68gs7wat281.png',
+}
+
 export const oasis: CustomChain = {
     id: customChainId.oasis,
     name: 'Oasis Emerald ParaTime Mainnet',
@@ -95,5 +121,6 @@ export const oasis: CustomChain = {
 export const customChain = {
     aurora,
     cronos,
+    gnosis,
     oasis,
 } as const
