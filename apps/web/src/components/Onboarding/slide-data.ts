@@ -16,7 +16,7 @@ const slides = [
     {
         id: '3',
         title: 'Verify',
-        description: 'Connect with others, with verifiable connetions. ',
+        description: 'Connect with others, with verifiable connections. ',
         image: require('../../media/onboarding/slide3.svg').default,
         imageZoom: { horizontal: 1, vertical: 0.28 },
     },

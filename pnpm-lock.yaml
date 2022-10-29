@@ -253,6 +253,7 @@ importers:
       '@emotion/styled': 11.10.4
       '@ethersproject/abi': 5.7.0
       '@ethersproject/providers': 5.7.1
+      '@fontsource/inter': 4.5.14
       '@fontsource/vt323': 4.5.10
       '@hookform/resolvers': 2.9.8
       '@orbisclub/orbis-sdk': 0.3.91
@@ -307,6 +308,7 @@ importers:
       '@emotion/styled': 11.10.4_m5uw2s7fkqs4lt3zge27256llu
       '@ethersproject/abi': 5.7.0
       '@ethersproject/providers': 5.7.1
+      '@fontsource/inter': 4.5.14
       '@fontsource/vt323': 4.5.10
       '@hookform/resolvers': 2.9.8_react-hook-form@7.36.0
       '@orbisclub/orbis-sdk': 0.3.91
@@ -4735,6 +4737,10 @@ packages:
       find-up: 5.0.0
       js-yaml: 4.1.0
 
+  /@fontsource/inter/4.5.14:
+    resolution: {integrity: sha512-JDC9AocdPLuGsASkvWw9hS5gtHE7K9dOwL98XLrk5yjYqxy4uVnScG58NUvFMJDVJRl/7c8Wnap6PEs+7Zvj1Q==}
+    dev: false
+
   /@fontsource/vt323/4.5.10:
     resolution: {integrity: sha512-INiL8rWWj/dKZ+oYXPQgdV0OYe6lD3+gsYbPrhHyiJYWlbACSUPbokNXKVrDqRqzXiLj5swKqf9TSJyC7gUGuQ==}
     dev: false
@@ -8639,7 +8645,7 @@ packages:
     resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
     engines: {node: '>=10', npm: '>=6'}
     dependencies:
-      '@babel/runtime': 7.20.0
+      '@babel/runtime': 7.19.0
       cosmiconfig: 7.0.1
       resolve: 1.22.1
 

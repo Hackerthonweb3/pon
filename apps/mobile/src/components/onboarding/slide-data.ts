@@ -18,7 +18,7 @@ export default [
     {
         id: '3',
         title: 'Verify',
-        description: 'Connect with others, with verifiable connetions. ',
+        description: 'Connect with others, with verifiable connections. ',
         image: require('../../assets/images/onboarding/slide3.svg').default,
         imageZoom: { horizontal: 1, vertical: 0.28 },
     },
