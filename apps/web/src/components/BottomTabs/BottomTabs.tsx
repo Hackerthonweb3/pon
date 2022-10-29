@@ -15,7 +15,7 @@ const BottomTabs = () => {
             bottom='0'
             w='full'
             display={{ md: 'none' }}
-            bg='transparent'
+            bg='#0000004e'
             zIndex='1'
             borderTop='1px solid #363A45'
             boxShadow='inset 0 1px 0 inset 0px 1px 0px #363A45'

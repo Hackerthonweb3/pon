@@ -1,7 +1,31 @@
 import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Text, Button, Flex, Box, Tooltip, Center, Spinner } from '@chakra-ui/react'
+import {
+    Tooltip,
+    Center,
+    Spinner,
+    Avatar,
+    AspectRatio,
+    Heading,
+    Text,
+    VStack,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    Textarea,
+    Button,
+    Flex,
+    InputLeftAddon,
+    Box,
+    Tag,
+    Badge,
+    StatHelpText,
+    Stat,
+} from '@chakra-ui/react'
+import { FaDiscord, FaLeaf } from 'react-icons/fa'
+import { FiMail, FiTwitter, FiGithub, FiInstagram, FiLinkedin, FiSend } from 'react-icons/fi'
 import { Layout, SpaceEnd, ContainerFlex, CenteredContainer } from './DesignSystem'
 import Gallery from './Gallery'
 import { Social } from './Social'
@@ -16,8 +40,16 @@ import blueApePng from '../media/mock/ape_blue.png'
 import zkPng from '../media/ZK.png'
 import { useRouter } from 'next/router'
 import { useDisconnect } from 'wagmi'
+import { useAccount } from '@web3modal/react'
 import { useOnboarding } from '~/hooks/useOnboarding'
+import NftGallery from './NftGallery'
+import { useForm } from 'react-hook-form'
+import { ipfsClient } from '~/lib'
+import { useOrbis } from '~/hooks'
+import { FileUploader } from './FileUploader'
+import { create } from 'ipfs-http-client'
 import { OrbisContext } from '~/contexts'
+import { CloseIcon } from '@chakra-ui/icons'
 
 const styles = {
     backgroundContainer: {
@@ -45,7 +77,6 @@ const styles = {
         paddingTop: 0,
     },
     fullInfo: {
-        backgroundColor: '#353844',
         borderRadius: 12,
         alignItems: 'center',
         top: -10,
@@ -56,12 +87,14 @@ const styles = {
     description: {
         paddingTop: 5,
         paddingHorizontal: 20,
+        fontWeight: '400',
+        fontSize: '20px',
     },
     actionText: {
         color: colors.textAction,
         fontSize: 18,
         fontWeight: '500',
-        fontFamily: 'VT323',
+        fontFamily: 'INTER',
         marginRight: 10,
         paddingTop: 3,
     },
@@ -88,10 +121,74 @@ export default function Profile() {
     const { setViewedOnboarding } = useOnboarding()
     const [profile, setProfile] = useState<Profile>()
     const orbis = useContext(OrbisContext)
+    const [isEditing, setIsEditing] = useState(false)
+    const { handleSubmit, register, control } = useForm()
+    const [error, setError] = useState(null as any)
+    const router = useRouter()
+
+    const socialInputs = [
+        {
+            name: 'twitter',
+            placeholder: 'Your twitter link',
+            label: 'Twitter',
+            icon: <FiTwitter />,
+        },
+        {
+            name: 'telegram',
+            placeholder: 'Your Telegram link',
+            label: 'Telegram',
+            icon: <FiSend />,
+        },
+        {
+            name: 'lens',
+            placeholder: 'Your lens link',
+            label: 'Lens',
+            icon: <FaLeaf />,
+        },
+        {
+            name: 'discord',
+            placeholder: 'Your discord id',
+            label: 'Discord',
+            icon: <FaDiscord />,
+        },
+        {
+            name: 'github',
+            placeholder: 'Your github link',
+            label: 'Github',
+            icon: <FiGithub />,
+        },
+        {
+            name: 'linkedin',
+            placeholder: 'Your linkedIn link',
+            label: 'LinkedIn',
+            icon: <FiLinkedin />,
+        },
+        {
+            name: 'email',
+            placeholder: 'Your email',
+            label: 'Email',
+            icon: <FiMail />,
+        },
+    ]
+
+    const [skills, setSkills] = useState([] as string[])
+    const [interests, setInterests] = useState([] as string[])
+
+    const sharedTxtInputProps = {
+        variant: 'filled',
+        _hover: {
+            borderColor: 'gray.300',
+        },
+    }
+    const sharedInputProps = {
+        variant: 'filled',
+        type: 'text',
+    }
 
     const checkProfile = async () => {
         // trigger reconnection to get did
         const result = await orbis?.isConnected()
+        console.log(result)
         if (result.did) {
             console.log('checking profile for did', result.did)
             let { data, error } = await orbis?.getProfile(result.did)
@@ -101,6 +198,7 @@ export default function Profile() {
                 address: data.address,
                 did: data.did,
             })
+            console.log(data)
         } else {
             console.log('profile not found, redirect to creation')
         }
@@ -109,6 +207,13 @@ export default function Profile() {
     useEffect(() => {
         checkProfile()
     }, [])
+
+    useEffect(() => {
+        if (profile) {
+            setSkills(profile.skills)
+            setInterests(profile.interests)
+        }
+    }, [profile])
 
     const handleBack = () => {
         setViewedOnboarding(false)
@@ -126,50 +231,106 @@ export default function Profile() {
 
     const toggleSwitch = () => setIsPreferedContact((previousState: boolean) => !previousState)
 
-    function handleEditLink() {
-        // console.log("edit")
+    const mockSkills = ['Javascript', 'React', 'Typescript', 'Solidity', 'Web3', 'Next.js']
+
+    const mockInterests = ['Investors', 'Developers', 'Designers', 'Artists']
+
+    const colourSchemes = [
+        'purple',
+        'pink',
+        'linkedin',
+        'facebook',
+        'messenger',
+        'whatsapp',
+        'twitter',
+        'telegram',
+        'red',
+        'orange',
+        'yellow',
+        'green',
+        'teal',
+        'blue',
+        'cyan',
+    ]
+
+    const Tab = ({ name, index }: string) => {
+        return (
+            <Flex backgroundColor={`${colourSchemes[index]}.100`} w='min' m={2} borderRadius={6} alignItems='center'>
+                <Text mx={4} fontSize='lg' wordBreak='keep-all'>
+                    {name}
+                </Text>
+            </Flex>
+        )
     }
 
-    const renderGalleryButton = (galleryName: EGallery) => (
-        <div
-            onClick={() => setSelectedGalleryTab(galleryName)}
-            style={{
-                borderRadius: '10px 10px 0px',
-                width: '50%',
-                cursor: 'pointer',
-            }}>
-            <NoteMono
-                style={{
-                    paddingTop: 8,
-                    textAlign: 'center',
-                    height: 42,
-                    backgroundColor: selectedGalleryTab === galleryName ? '#353844' : '#6d6d6f',
-                }}>
-                {galleryName}
-            </NoteMono>
-        </div>
-    )
-    const renderFullInfo = isFullView && (
-        <Flex flexDirection='column' alignItems='center'>
-            <Button mb='10px' width={280} style={{ width: 260 }} onClick={handleEditLink}>
-                Edit Profile
-            </Button>
-            <Tooltip label='The ZK NFT Collector Badge is a secure way to keep the privacy of NFTs you own while providing a reputation. Click to learn more.'>
-                <Flex justifyContent='flex-end'>
-                    <Link href='https://playground.sismo.io/nft-collector'>
-                        <Text ml={2} pb={4} fontWeight={600} color='blue.400' cursor='pointer'>
-                            Get Verified as NFT Collector on Sismo.io
-                        </Text>
-                    </Link>
-                </Flex>
-            </Tooltip>
-            <InfoContainer title='Location' text={location} />
-            <InfoContainer title='Job Title' text={occupation} />
-            <InfoContainer title='Organization' text={organization} />
-            <InfoContainer title='Skills' text={whatCan} />
-            <InfoContainer title='Interested in meeting' text={wantMeet} />
-        </Flex>
-    )
+    const createProfile = async (newUserData: any) => {
+        // trigger reconnection to get did
+        const result = await orbis?.isConnected()
+
+        if (result.did) {
+            console.log('checking profile for did', result.did)
+
+            let { updated, error } = await orbis?.updateProfile(newUserData)
+
+            if (error) {
+                console.log('error fetching profile', error)
+                setError(error)
+                return false
+            }
+
+            return true
+        } else {
+            console.log('no profile, try again')
+        }
+    }
+
+    const onSubmit = async (data: any) => {
+        const newData = { ...data }
+
+        if (newData.cover) {
+            try {
+                const created = await ipfsClient.add(data.cover)
+                newData.cover = created.path
+            } catch (error) {
+                setError(error)
+                newData.cover = ''
+            }
+        } else {
+            newData.cover = ''
+        }
+
+        if (newData.pfp) {
+            try {
+                const created = await ipfsClient.add(data.pfp)
+                newData.pfp = created.path
+            } catch (error) {
+                setError(error)
+                newData.pfp = ''
+            }
+        } else {
+            newData.pfp = ''
+        }
+
+        if (newData.skills) {
+            const skillsData = newData.skills.split(',')
+            newData.skills = skillsData
+        } else {
+            newData.skills = ['no skills']
+        }
+
+        if (newData.interests) {
+            const interestsData = newData.interests.split(',')
+            newData.interests = interestsData
+        } else {
+            newData.interests = ['no interests']
+        }
+
+        const isCreated = await createProfile(newData)
+
+        if (isCreated) {
+            window.location.reload()
+        }
+    }
 
     if (!profile)
         return (
@@ -187,37 +348,265 @@ export default function Profile() {
     return (
         <Flex margin='auto' width={{ base: '100%', md: '60%', lg: '50%' }} justifyContent='center' alignItems='center'>
             <Layout>
-                <CenteredContainer style={{ padding: '0 5px' }}>
-                    <Image src={coverSvg} alt='' width='900px' />
-                    <Flex flexDirection='column' justifyContent='center' alignItems='center'>
-                        <ImageMask imageCid={profile.pfp} />
-                        <div style={{ right: -175, top: -65 }} onClick={() => setIsFullView(!isFullView)}>
-                            <Text style={{ color: colors.textAction, fontWeight: '600' }}>{fullProfileTitle}</Text>
-                        </div>
-                        <Title>{profile.username}</Title>
-                        <SubTitle>{`${profile.address.substring(0, 5)}...${profile.address.substring(
-                            profile.address.length - 5,
-                        )}`}</SubTitle>
-                        <Note style={styles.description}>{profile.description}</Note>
+                <CenteredContainer style={{ padding: '0 20px', marginBottom: '100px' }}>
+                    <Flex justifyContent='center' direction='column' alignItems='center' m={4}>
+                        <Avatar boxSize={200} name={profile.username} src={profile.pfp} />
+                        <Title>{profile.name}</Title>
                     </Flex>
-                    {renderFullInfo}
-                    <Flex style={styles.switch}>
-                        <Text style={styles.actionText}>Preferred contact method</Text>
-                    </Flex>
-                    <Social profile={profile} />
-                    <Button position='absolute' right='0px' top='0px' onClick={handleBack}>
-                        Go back
-                    </Button>
-                </CenteredContainer>
 
-                {/* <div style={{ padding: '0 10px' }}>
-                    <Flex style={{ backgroundColor: colors.overlay, width: '100%' }}>
-                        {renderGalleryButton(EGallery.NFTS)}
-                        {renderGalleryButton(EGallery.SBTS)}
-                    </Flex>
-                    {selectedGalleryTab === EGallery.NFTS && <Gallery data={nftVerified ? zkGallery : nftGallery} />}
-                    {selectedGalleryTab === EGallery.SBTS && <Gallery data={nftGallery} />}
-                </div> */}
+                    {!isEditing ? (
+                        <>
+                            <Flex flexDirection='column' justifyContent='center' alignItems='center'>
+                                <Flex direction='column' alignItems='center'>
+                                    <Flex direction='row'>
+                                        <Flex direction='row' mr={2}>
+                                            <Image src='/icons/location.svg' width={20} height={30} />
+                                            <SubTitle>{profile.location}</SubTitle>
+                                        </Flex>
+                                        <Flex direction='row' ml={2}>
+                                            <Image src='/icons/jobTitle.svg' width={30} height={20} />
+                                            <SubTitle>{profile.job_title}</SubTitle>
+                                        </Flex>
+                                    </Flex>
+                                    <SubTitle>{profile.organization}</SubTitle>
+                                </Flex>
+
+                                <Text sx={styles.description}>{profile.description}</Text>
+                            </Flex>
+                            <Box>
+                                {socialInputs.map(({ name, label, icon, placeholder }) =>
+                                    profile[name] ? (
+                                        <a href={profile[name]} target="_blank">
+                                            <Flex
+                                                direction='row'
+                                                alignItems='center'
+                                                mt={4}
+                                                background='gray.200'
+                                                justifyContent='center'
+                                                borderRadius={10}
+                                                fontSize='xl'
+                                                fontWeight='semibold'
+                                                p={4}
+                                            >
+                                                {label}
+                                            </Flex>
+                                        </a>
+                                    ) : null
+                                )}
+                            </Box>
+                            <Box w='100%' my={10}>
+                                <Heading size='lg' mb={2}>
+                                    🛠 Skills
+                                </Heading>
+                                <Flex wrap='wrap'>
+                                    {skills.map((skill, index) => {
+                                        return <Tab name={skill} index={index} key={index} />
+                                    })}
+                                </Flex>
+                            </Box>
+
+                            <Box w='100%' my={10}>
+                                <Heading size='lg' mb={2}>
+                                    👋 Interested in meeting
+                                </Heading>
+                                <Flex wrap='wrap'>
+                                    {interests.map((interest, index) => {
+                                        return <Tab name={interest} index={index} key={index} />
+                                    })}
+                                </Flex>
+                            </Box>
+                            <NftGallery address={profile.address} />
+                        </>
+                    ) : (
+                        <>
+                            <FormControl id='name' isRequired mt={0}>
+                                <FormLabel>Username</FormLabel>
+                                <InputGroup borderColor='#E0E1E7'>
+                                    <Input
+                                        variant='filled'
+                                        type='text'
+                                        {...register('name', {
+                                            required: 'This is required',
+                                        })}
+                                        defaultValue={profile.name}
+                                    />
+                                </InputGroup>
+                            </FormControl>
+                            <FormControl id='description' isRequired>
+                                <FormLabel>Description</FormLabel>
+                                <Textarea
+                                    resize='none'
+                                    {...sharedTxtInputProps}
+                                    placeholder='Something about you'
+                                    {...register('description', {
+                                        required: 'This is required',
+                                    })}
+                                    defaultValue={profile.description}
+                                />
+                            </FormControl>
+                            <FormControl id='location'>
+                                <FormLabel>Location</FormLabel>
+                                <Input
+                                    {...sharedInputProps}
+                                    placeholder='Where are you located?'
+                                    {...register('location')}
+                                    defaultValue={profile.location}
+                                />
+                            </FormControl>
+                            <FileUploader
+                                name='cover'
+                                acceptedFileTypes='image/*'
+                                placeholder='Your cover image'
+                                defaultValue={profile.cover}
+                                control={control}>
+                                Cover image
+                            </FileUploader>
+                            <FileUploader
+                                name='pfp'
+                                acceptedFileTypes='image/*'
+                                placeholder='Your avatar'
+                                defaultValue={profile.pfp}
+                                control={control}>
+                                PFP
+                            </FileUploader>
+
+                            <FormControl id='organization'>
+                                <FormLabel>Organization</FormLabel>
+                                <Input
+                                    {...sharedInputProps}
+                                    placeholder='Where do you work'
+                                    {...register('organization')}
+                                    defaultValue={profile.organization}
+                                />
+                            </FormControl>
+                            <FormControl id='jobTitle'>
+                                <FormLabel>Job Title</FormLabel>
+                                <Input
+                                    {...sharedInputProps}
+                                    placeholder='What is your Job Title'
+                                    {...register('job_title')}
+                                    defaultValue={profile.job_title}
+                                />
+                            </FormControl>
+
+                            <Box mt={10} w='100%'>
+                                <Box>
+                                    {socialInputs.map(({ name, label, icon, placeholder }) => (
+                                        <FormControl id={name} key={name} my={1}>
+                                            <InputGroup borderColor='#E0E1E7'>
+                                                <InputLeftAddon children={icon} borderRight='2px solid white' />
+                                                <Input
+                                                    {...sharedInputProps}
+                                                    placeholder={placeholder}
+                                                    {...register(name)}
+                                                    defaultValue={profile[name]}
+                                                />
+                                            </InputGroup>
+                                        </FormControl>
+                                    ))}
+                                </Box>
+                            </Box>
+
+                            <Box w='100%' my={10}>
+                                <Flex direction='row' alignItems='center'>
+                                    <Heading size='lg' mb={2}>
+                                        🛠 Skills
+                                    </Heading>
+                                    <Stat ml={4}>
+                                        <StatHelpText>(Comma Separated)</StatHelpText>
+                                    </Stat>
+                                </Flex>
+                                <FormControl id='skills'>
+                                    <FormLabel>Skills</FormLabel>
+                                    <Input
+                                        {...sharedInputProps}
+                                        placeholder='What are your skills'
+                                        {...register('skills')}
+                                        defaultValue={skills.toString()}
+                                        onChange={e => {
+                                            setSkills(e.target.value.split(', '))
+                                        }}
+                                    />
+                                </FormControl>
+                                <Flex wrap='wrap'>
+                                    {skills.map((skill, index) => {
+                                        return <Tab index={index} name={skill} />
+                                    })}
+                                </Flex>
+                            </Box>
+
+                            <Box w='100%' my={10}>
+                                <Flex direction='row' alignItems='center'>
+                                    <Heading size='lg' mb={2}>
+                                        👋 Interested in meeting
+                                    </Heading>
+                                    <Stat ml={4}>
+                                        <StatHelpText>(Comma Separated)</StatHelpText>
+                                    </Stat>
+                                </Flex>
+                                <FormControl id='IM'>
+                                    <FormLabel>Interests</FormLabel>
+                                    <Input
+                                        {...sharedInputProps}
+                                        placeholder='Who are you interested in meeting'
+                                        {...register('interests')}
+                                        defaultValue={interests.toString()}
+                                        onChange={e => {
+                                            setInterests(e.target.value.split(', '))
+                                        }}
+                                    />
+                                </FormControl>
+                                <Flex wrap='wrap'>
+                                    {interests.map((skill, index) => {
+                                        return <Tab index={index} name={skill} />
+                                    })}
+                                </Flex>
+                            </Box>
+                        </>
+                    )}
+                    {isEditing ? (
+                        <>
+                            <Text
+                                as='button'
+                                position='absolute'
+                                left='0px'
+                                top='0px'
+                                onClick={handleSubmit(onSubmit)}
+                                m={6}
+                                fontWeight='medium'
+                                fontSize={20}>
+                                Save
+                            </Text>
+                            <Text
+                                as='button'
+                                position='absolute'
+                                right='0px'
+                                top='0px'
+                                onClick={() => {
+                                    setIsEditing(false)
+                                }}
+                                m={6}
+                                fontWeight='medium'
+                                fontSize={20}>
+                                Cancel
+                            </Text>
+                        </>
+                    ) : (
+                        <Text
+                            as='button'
+                            position='absolute'
+                            right='0px'
+                            top='0px'
+                            onClick={() => {
+                                setIsEditing(true)
+                            }}
+                            m={6}
+                            fontWeight='medium'
+                            fontSize={20}>
+                            Edit
+                        </Text>
+                    )}
+                </CenteredContainer>
             </Layout>
         </Flex>
     )

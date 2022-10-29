@@ -3,7 +3,7 @@ import { colors } from '../constants/colors'
 
 export const Layout = styled.div`
     background-color: ${colors.background};
-    font-family: 'VT323';
+    font-family: 'INTER';
     flex: 1;
     justify-content: center;
     width: 100%;
