@@ -6,8 +6,8 @@ const main = async (): Promise<void> => {
         kind: 'uups',
     })
     await soulbound.deployed()
-    console.log('Soulbound deployed to:', soulbound.address)
     const { chainId } = soulbound.deployTransaction
+    console.log('Soulbound deployed to:', soulbound.address, ', at chain:', chainId)
 
     if (chainId !== 31337) {
         const result = await run('verify:verify', { address: soulbound.address })
