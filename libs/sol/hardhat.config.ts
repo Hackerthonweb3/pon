@@ -16,14 +16,21 @@ requiredKeys.forEach(key => {
 
 const config: HardhatUserConfig = {
     solidity: {
-        version: '0.8.16',
-        settings: {
-            optimizer: {
-                enabled: true,
-                runs: 800,
-                details: { yul: false },
+        compilers: [
+            {
+                version: '0.8.9',
             },
-        },
+            {
+                version: '0.8.16',
+                // settings: {
+                //     optimizer: {
+                //         enabled: true,
+                //         runs: 800,
+                //         details: { yul: false },
+                //     },
+                // },
+            },
+        ],
     },
 
     networks: {
@@ -49,7 +56,7 @@ const config: HardhatUserConfig = {
             chainId: 100,
             accounts,
         },
-        mumbai: {
+        maticmum: {
             url: 'https://rpc-mumbai.maticvigil.com',
             chainId: 80_001,
             accounts,
