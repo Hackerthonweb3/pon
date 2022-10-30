@@ -491,7 +491,7 @@ export default function Profile() {
                                     {socialInputs.map(({ name, label, icon, placeholder }) => (
                                         <FormControl id={name} key={name} my={1}>
                                             <InputGroup borderColor='#E0E1E7'>
-                                                <InputLeftAddon children={icon} borderRight='2px solid white' />
+                                                <InputLeftAddon borderRight='2px solid white'>{icon}</InputLeftAddon>
                                                 <Input
                                                     {...sharedInputProps}
                                                     placeholder={placeholder}
