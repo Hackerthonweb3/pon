@@ -296,12 +296,10 @@ export default function Profile() {
                 newData.pfp = created.path
             } catch (error) {
                 setError(error)
-                newData.pfp = ''
+                newData.pfp = profile?.pfp
             }
-        } else if (profile.pfp != '') {
-            newData.pfp = profile.pfp
         } else {
-            newData.pfp = ''
+            newData.pfp = profile?.pfp
         }
 
         if (newData.skills) {
@@ -372,7 +370,7 @@ export default function Profile() {
                             <Box>
                                 {socialInputs.map(({ name, label, icon, placeholder }) =>
                                     profile[name] ? (
-                                        <a href={profile[name]} target='_blank'>
+                                        <a href={profile[name]} target='_blank' key={index}>
                                             <Flex
                                                 direction='row'
                                                 alignItems='center'
@@ -415,7 +413,6 @@ export default function Profile() {
                     ) : (
                         <>
                             <FormControl id='pfp'>
-                                <FormLabel>Profile Picture</FormLabel>
                                 <InputGroup justifyContent='center'>
                                     <input
                                         id='pfpImg'
@@ -491,7 +488,7 @@ export default function Profile() {
                                     {socialInputs.map(({ name, label, icon, placeholder }) => (
                                         <FormControl id={name} key={name} my={1}>
                                             <InputGroup borderColor='#E0E1E7'>
-                                                <InputLeftAddon children={icon} borderRight='2px solid white' />
+                                                <InputLeftAddon borderRight='2px solid white'>{icon}</InputLeftAddon>
                                                 <Input
                                                     {...sharedInputProps}
                                                     placeholder={placeholder}
@@ -527,7 +524,7 @@ export default function Profile() {
                                 </FormControl>
                                 <Flex wrap='wrap'>
                                     {skills.map((skill, index) => {
-                                        return <Tab index={index} name={skill} />
+                                        return <Tab index={index} name={skill} key={index} />
                                     })}
                                 </Flex>
                             </Box>
@@ -555,7 +552,7 @@ export default function Profile() {
                                 </FormControl>
                                 <Flex wrap='wrap'>
                                     {interests.map((skill, index) => {
-                                        return <Tab index={index} name={skill} />
+                                        return <Tab index={index} name={skill} key={index} />
                                     })}
                                 </Flex>
                             </Box>
