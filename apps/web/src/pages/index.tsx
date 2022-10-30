@@ -1,13 +1,9 @@
-import Image from 'next/image'
-import { Text, Flex, Grid, GridItem, Button, Stack, HStack, VStack } from '@chakra-ui/react'
+import { Text, Flex, Grid, GridItem, Button, Stack, HStack, VStack, Image, Heading, Box } from '@chakra-ui/react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import styled from 'styled-components'
-
+import { motion } from 'framer-motion'
 import bgImg from '../media/images/landing_bg.jpg'
-import promoSvg from '../media/svg/landing_promo.svg'
-import buttonCreateSvg from '../media/svg/create_button.svg'
-import logosSvg from '../media/svg/landing_logos.svg'
-import bgGraphicsConnect from '../media/svg/landing_connect.svg'
+import { useState, useEffect } from 'react'
 
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -32,63 +28,22 @@ const navButtonStyle = {
 
 const Home: NextPage = () => {
     const { push } = useRouter()
-    const renderLanding = (
-        <>
-            <Grid
-                gap={10}
-                height='2099px'
-                templateColumns='repeat(4, 1fr)'
-                templateRows='repeat(16, 1fr)'
-                paddingTop='18px'>
-                <GridItem colSpan={4} rowSpan={1}>
-                    <Flex justifyContent='flex-end' pr={10}>
-                        <Button {...navButtonStyle}>Create Profile</Button>
-                        <ConnectButton />
-                    </Flex>
-                </GridItem>
-                <GridItem colSpan={3} rowSpan={1}>
-                    <Flex justifyContent='center'>
-                        <Image src={promoSvg} alt='promo' />
-                    </Flex>
-                </GridItem>
-                <GridItem colSpan={3} rowSpan={1}>
-                    <Flex justifyContent='center' paddingRight={{ md: '130px' }}>
-                        {/* TODO: update to custom connect button  */}
-                        <Image src={buttonCreateSvg} alt='create' />
-                    </Flex>
-                </GridItem>
-                <GridItem colSpan={1} rowSpan={4} />
-                <GridItem colSpan={4} rowSpan={1}>
-                    <Divider />
-                    <Flex justifyContent='center' my={4}>
-                        <Image src={logosSvg} alt='logos' />
-                    </Flex>
-                    <Divider />
-                </GridItem>
-                <GridItem colStart={2} colEnd={4} rowSpan={1}>
-                    <Text fontSize='40px' textAlign='center' my={20} lineHeight='32px'>
-                        It is hard to remember and keep track of everyone we meet at events to re-connect later.
-                    </Text>
-                </GridItem>
-                <GridItem colSpan={4} rowSpan={1}>
-                    <Flex justifyContent='center' mb={4}>
-                        <Image src={bgGraphicsConnect} alt='connect' />
-                    </Flex>
-                </GridItem>
-                <GridItem colSpan={4} rowSpan={3} />
-            </Grid>
-        </>
-    )
 
     return (
-        <Stack bgColor='#8ECAE6' minHeight='100vh' padding='20px'>
-            <HStack justifyContent='end'>
-                <Button onClick={() => push('/app')}>Enter PoN app</Button>
-            </HStack>
+        <Stack maxH='100vh' py={4}>
             <VStack>
-                <HStack>
-                    <Text>Keep your network meaningful!</Text>
-                </HStack>
+                <Image w='100%' src={'/icons/LandingImg.svg'} />
+                <Box p={10} textAlign='center'>
+                    <Heading size='xl' fontWeight='extrabold'>
+                        Proof-of-Networking
+                    </Heading>
+                    <Box px={6}>
+                        <Text fontWeight='400' fontSize='lg'>
+                            Discover people at web3 events the web3 way
+                        </Text>
+                    </Box>
+                </Box>
+                <Button onClick={() => push('/app')} colorScheme='twitter' size='lg'>Create your profile</Button>
             </VStack>
         </Stack>
     )

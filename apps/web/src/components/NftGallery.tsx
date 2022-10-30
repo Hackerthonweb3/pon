@@ -46,7 +46,7 @@ export default function NftGallery({ address }:string) {
             <Flex justifyContent='flex-start' px={2}>
                 <Heading
                     onClick={()=>{setCurrentGallery('NFTs')}}
-                    fontWeight={700}
+                    fontWeight={900}
                     size="lg"
                     mb={2}
                     color={currentGallery == 'NFTs' ? 'black' : '#B8B8B8'}
@@ -55,7 +55,7 @@ export default function NftGallery({ address }:string) {
                 </Heading>
                 <Heading
                     onClick={()=>{setCurrentGallery('SBTs')}}
-                    fontWeight={700}
+                    fontWeight={900}
                     size="lg"
                     ml={6}
                     mb={2}
