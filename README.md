@@ -8,8 +8,6 @@
 [![GitHub deployments](https://img.shields.io/github/deployments/Hackerthonweb3/business-card/production?label=deployment&logo=vercel&style=flat-square&color=00a550&logoColor=00a550)](https://web3card.vercel.app)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Hackerthonweb3/business-card/Build%20Pipeline?logo=github&style=flat-square&color=00a550&logoColor=00a550)](https://github.com/Hackerthonweb3/business-card/actions/workflows/pipeline.yml)
 
-<img src="./.github/assets/screenshot1.png" align="center"
-     alt="PoN logo" width=800>
 
 <hr />
 
@@ -80,6 +78,14 @@ We are decentralized business card. We collect and aggregate all of your off-cha
 ## **①Deploy SBT to Blockchain**
 
 - **Gnosis**：For users to deploy SBT because of . []()
+
+➜ pnpm run -F sol deploy:network gnosis 
+
+> @business-card/sol@0.0.1 deploy:network /Users/otto/box/code/pon/libs/sol
+> hardhat run scripts/10-deploy-sb-v1.ts --network "gnosis"
+
+Soulbound deployed to: 0x49Dc775EbBbCf099a671f0E39587798281A89a4f , at chain: 100
+
 
 - **Cronos**：For users to deploy SBT because of low transaction cost. []()
 
