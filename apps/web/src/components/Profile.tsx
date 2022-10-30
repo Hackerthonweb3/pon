@@ -296,12 +296,10 @@ export default function Profile() {
                 newData.pfp = created.path
             } catch (error) {
                 setError(error)
-                newData.pfp = ''
+                newData.pfp = profile?.pfp
             }
-        } else if (profile.pfp != '') {
-            newData.pfp = profile.pfp
         } else {
-            newData.pfp = ''
+            newData.pfp = profile?.pfp
         }
 
         if (newData.skills) {
@@ -415,7 +413,6 @@ export default function Profile() {
                     ) : (
                         <>
                             <FormControl id='pfp'>
-                                <FormLabel>Profile Picture</FormLabel>
                                 <InputGroup justifyContent='center'>
                                     <input
                                         id='pfpImg'
@@ -527,7 +524,7 @@ export default function Profile() {
                                 </FormControl>
                                 <Flex wrap='wrap'>
                                     {skills.map((skill, index) => {
-                                        return <Tab index={index} name={skill} key={index}/>
+                                        return <Tab index={index} name={skill} key={index} />
                                     })}
                                 </Flex>
                             </Box>
@@ -555,7 +552,7 @@ export default function Profile() {
                                 </FormControl>
                                 <Flex wrap='wrap'>
                                     {interests.map((skill, index) => {
-                                        return <Tab index={index} name={skill} key={index}/>
+                                        return <Tab index={index} name={skill} key={index} />
                                     })}
                                 </Flex>
                             </Box>
