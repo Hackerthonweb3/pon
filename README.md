@@ -79,13 +79,13 @@ We are decentralized business card. We collect and aggregate all of your off-cha
 
 - **Gnosis**：For users to deploy SBT because of . []()
 
-➜ pnpm run -F sol deploy:network gnosis 
-
-> @business-card/sol@0.0.1 deploy:network /Users/otto/box/code/pon/libs/sol
-> hardhat run scripts/10-deploy-sb-v1.ts --network "gnosis"
+```
+pnpm run -F sol deploy:network gnosis 
+@business-card/sol@0.0.1 deploy:network /Users/otto/box/code/pon/libs/sol
+hardhat run scripts/10-deploy-sb-v1.ts --network "gnosis"
 
 Soulbound deployed to: 0x49Dc775EbBbCf099a671f0E39587798281A89a4f , at chain: 100
-
+```
 
 - **Cronos**：For users to deploy SBT because of low transaction cost. []()
 
