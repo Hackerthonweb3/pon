@@ -331,7 +331,7 @@ export default function NewUser() {
                     borderRadius='md'>
                     {skillTags.map((skill, index) => {
                         return (
-                            <Tag size='lg' m={2} colorScheme={colourSchemes[index]}>
+                            <Tag size='lg' m={2} colorScheme={colourSchemes[index]} key={index}>
                                 {skill}
                                 <TagRightIcon
                                     as={CloseIcon}
@@ -358,7 +358,7 @@ export default function NewUser() {
                 <Flex wrap='wrap' mt={4}>
                     {skillsList.map((skill, index) => {
                         return (
-                            <Tag size='lg' m={2} colorScheme={colourSchemes[colourSchemes.length - index]}>
+                            <Tag size='lg' m={2} colorScheme={colourSchemes[colourSchemes.length - index]} key={index}>
                                 {skill}
                                 <TagRightIcon
                                     as={AddIcon}
@@ -425,7 +425,7 @@ export default function NewUser() {
                     borderRadius='md'>
                     {interestTags.map((interest, index) => {
                         return (
-                            <Tag size='lg' m={2} colorScheme={colourSchemes[index]}>
+                            <Tag size='lg' m={2} colorScheme={colourSchemes[index]} key={index}>
                                 {interest}
                                 <TagRightIcon
                                     as={CloseIcon}
@@ -452,7 +452,7 @@ export default function NewUser() {
                 <Flex wrap='wrap' mt={4}>
                     {interestsList.map((interest, index) => {
                         return (
-                            <Tag size='lg' m={2} colorScheme={colourSchemes[colourSchemes.length - index]}>
+                            <Tag size='lg' m={2} colorScheme={colourSchemes[colourSchemes.length - index]} key={index}>
                                 {interest}
                                 <TagRightIcon
                                     as={AddIcon}
@@ -473,7 +473,7 @@ export default function NewUser() {
         // <Flex direction='column' maxH='100%' w='100vw' px={4} overflowY='scroll'>
         <InputGroup flexDirection='column' maxH='100%' w='100vw' px={4} overflowY='scroll'>
             {socialInputs.map(({ name, label, icon, placeholder }) => (
-                <Flex direction='column' w='100%' bg='gray.100' p={4} my={2} height='60px'>
+                <Flex direction='column' w='100%' bg='gray.100' p={4} my={2} height='60px' key={index}>
                     <Flex fontSize='xl' fontWeight={700} justifyContent='space-between' alignItems='center'>
                         {label}
                         <InputRightAddon

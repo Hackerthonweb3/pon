@@ -372,7 +372,7 @@ export default function Profile() {
                             <Box>
                                 {socialInputs.map(({ name, label, icon, placeholder }) =>
                                     profile[name] ? (
-                                        <a href={profile[name]} target='_blank'>
+                                        <a href={profile[name]} target='_blank' key={index}>
                                             <Flex
                                                 direction='row'
                                                 alignItems='center'
@@ -527,7 +527,7 @@ export default function Profile() {
                                 </FormControl>
                                 <Flex wrap='wrap'>
                                     {skills.map((skill, index) => {
-                                        return <Tab index={index} name={skill} />
+                                        return <Tab index={index} name={skill} key={index}/>
                                     })}
                                 </Flex>
                             </Box>
@@ -555,7 +555,7 @@ export default function Profile() {
                                 </FormControl>
                                 <Flex wrap='wrap'>
                                     {interests.map((skill, index) => {
-                                        return <Tab index={index} name={skill} />
+                                        return <Tab index={index} name={skill} key={index}/>
                                     })}
                                 </Flex>
                             </Box>
