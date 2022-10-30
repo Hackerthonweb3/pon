@@ -30,7 +30,7 @@ export const Title = styled(VtText)`
 export const SubTitle = styled(VtText)`
     font-size: ${typeScale.subtitle}px;
     color: ${colors.textMain};
-    font-weight: 500;
+    font-weight: 200;
     margin: 0 10px;
 `
 

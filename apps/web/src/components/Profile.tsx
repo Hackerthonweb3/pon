@@ -87,7 +87,7 @@ const styles = {
     description: {
         paddingTop: 5,
         paddingHorizontal: 20,
-        fontWeight: '400',
+        fontWeight: '700',
         fontSize: '20px',
     },
     actionText: {
@@ -122,9 +122,11 @@ export default function Profile() {
     const [profile, setProfile] = useState<Profile>()
     const orbis = useContext(OrbisContext)
     const [isEditing, setIsEditing] = useState(false)
-    const { handleSubmit, register, control } = useForm()
+    const { handleSubmit, register, control, watch } = useForm()
     const [error, setError] = useState(null as any)
     const router = useRouter()
+
+    const [editPfp, setEditPfp] = useState('/icons/ChoosePhoto.svg')
 
     const socialInputs = [
         {
@@ -255,7 +257,7 @@ export default function Profile() {
 
     const Tab = ({ name, index }: string) => {
         return (
-            <Flex backgroundColor={`${colourSchemes[index]}.100`} w='min' m={2} borderRadius={6} alignItems='center'>
+            <Flex backgroundColor={`${colourSchemes[index]}.100`} w='fit' m={2} borderRadius={6} alignItems='center'>
                 <Text mx={4} fontSize='lg' wordBreak='keep-all'>
                     {name}
                 </Text>
@@ -287,26 +289,17 @@ export default function Profile() {
     const onSubmit = async (data: any) => {
         const newData = { ...data }
 
-        if (newData.cover) {
-            try {
-                const created = await ipfsClient.add(data.cover)
-                newData.cover = created.path
-            } catch (error) {
-                setError(error)
-                newData.cover = ''
-            }
-        } else {
-            newData.cover = ''
-        }
-
         if (newData.pfp) {
             try {
-                const created = await ipfsClient.add(data.pfp)
+                const created = await ipfsClient.add(data.pfp[0])
+                console.log(created)
                 newData.pfp = created.path
             } catch (error) {
                 setError(error)
                 newData.pfp = ''
             }
+        } else if (profile.pfp != '') {
+            newData.pfp = profile.pfp
         } else {
             newData.pfp = ''
         }
@@ -349,13 +342,16 @@ export default function Profile() {
         <Flex margin='auto' width={{ base: '100%', md: '60%', lg: '50%' }} justifyContent='center' alignItems='center'>
             <Layout>
                 <CenteredContainer style={{ padding: '0 20px', marginBottom: '100px' }}>
-                    <Flex justifyContent='center' direction='column' alignItems='center' m={4}>
-                        <Avatar boxSize={200} name={profile.username} src={profile.pfp} />
-                        <Title>{profile.name}</Title>
-                    </Flex>
-
                     {!isEditing ? (
                         <>
+                            <Flex justifyContent='center' direction='column' alignItems='center' m={4}>
+                                <Avatar
+                                    boxSize={200}
+                                    name={profile.username}
+                                    src={`https://ipfs.io/ipfs/${profile.pfp}`}
+                                />
+                                <Title>{profile.name}</Title>
+                            </Flex>
                             <Flex flexDirection='column' justifyContent='center' alignItems='center'>
                                 <Flex direction='column' alignItems='center'>
                                     <Flex direction='row'>
@@ -376,7 +372,7 @@ export default function Profile() {
                             <Box>
                                 {socialInputs.map(({ name, label, icon, placeholder }) =>
                                     profile[name] ? (
-                                        <a href={profile[name]} target="_blank">
+                                        <a href={profile[name]} target='_blank'>
                                             <Flex
                                                 direction='row'
                                                 alignItems='center'
@@ -386,12 +382,11 @@ export default function Profile() {
                                                 borderRadius={10}
                                                 fontSize='xl'
                                                 fontWeight='semibold'
-                                                p={4}
-                                            >
+                                                p={4}>
                                                 {label}
                                             </Flex>
                                         </a>
-                                    ) : null
+                                    ) : null,
                                 )}
                             </Box>
                             <Box w='100%' my={10}>
@@ -419,6 +414,25 @@ export default function Profile() {
                         </>
                     ) : (
                         <>
+                            <FormControl id='pfp'>
+                                <FormLabel>Profile Picture</FormLabel>
+                                <InputGroup justifyContent='center'>
+                                    <input
+                                        id='pfpImg'
+                                        type='file'
+                                        accept={'image/*'}
+                                        style={{ display: 'none' }}
+                                        {...register('pfp')}></input>
+                                    <Image
+                                        src={editPfp}
+                                        onClick={() => {
+                                            document.getElementById('pfpImg')?.click()
+                                        }}
+                                        width={200}
+                                        height={200}
+                                    />
+                                </InputGroup>
+                            </FormControl>
                             <FormControl id='name' isRequired mt={0}>
                                 <FormLabel>Username</FormLabel>
                                 <InputGroup borderColor='#E0E1E7'>
@@ -453,23 +467,6 @@ export default function Profile() {
                                     defaultValue={profile.location}
                                 />
                             </FormControl>
-                            <FileUploader
-                                name='cover'
-                                acceptedFileTypes='image/*'
-                                placeholder='Your cover image'
-                                defaultValue={profile.cover}
-                                control={control}>
-                                Cover image
-                            </FileUploader>
-                            <FileUploader
-                                name='pfp'
-                                acceptedFileTypes='image/*'
-                                placeholder='Your avatar'
-                                defaultValue={profile.pfp}
-                                control={control}>
-                                PFP
-                            </FileUploader>
-
                             <FormControl id='organization'>
                                 <FormLabel>Organization</FormLabel>
                                 <Input

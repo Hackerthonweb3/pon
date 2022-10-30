@@ -1,15 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import {
-    Flex,
-    Input,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    Text,
-} from '@chakra-ui/react'
+import { Text, Flex, Grid, GridItem, Button, Stack, HStack, VStack, Image, Heading, Box } from '@chakra-ui/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper'
 import styled from 'styled-components'
@@ -23,7 +13,7 @@ import slides from './slide-data'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
-import { Web3Button, useAccount } from '@web3modal/react';
+import { Web3Button, useAccount } from '@web3modal/react'
 import { useRouter } from 'next/router'
 import { OrbisContext } from '~/contexts'
 
@@ -68,6 +58,11 @@ export default function Onboarding() {
     const [isCeramicConnected, setIsCeramicConnected] = useState(false)
     const [isLitConnected, setIsLitConnected] = useState(false)
 
+    const [circle1Src, setCircle1Src] = useState('/icons/ConnectStatusIcon InProgress.svg')
+    const [tab1Content, setTab1Content] = useState('Connect to your wallet')
+    const [circle2Src, setCircle2Src] = useState('/icons/Circle.svg')
+    const [tab2Content, setTab2Content] = useState('Allow Ceramic to provide user-controlled decentralized storage')
+
     // open rainbow kit connect modal
     const { openConnectModal } = useConnectModal()
 
@@ -79,9 +74,19 @@ export default function Onboarding() {
 
     const { account, isReady } = useAccount()
 
-    useEffect(() => { 
+    useEffect(() => {
+        const onDisconnect = async () => {
+            console.log('orbis disconnected by rainbow kit')
+            const result = await orbis?.logout()
+            if (result.status === 200) {
+                console.log('orbis disconnected by useConnect')
+                setIsOrbisConnected(false)
+            } else {
+                console.log('error on orbis logout', result)
+            }
+        }
 
-        const onConnect = async () => { 
+        const onConnect = async () => {
             console.log('connected by rainbow kit')
             const result = await orbis?.isConnected()
             if (result.status === 200) {
@@ -101,26 +106,20 @@ export default function Onboarding() {
                 }
             }
             console.log(account.isConnected)
-            if (account.isConnected) push('/validating', '/app')
         }
 
-        if (account.isConnected) onConnect()
-    }, [account.isConnected])
-
-    useEffect(() => { 
-        const onDisconnect = async () => { 
-            console.log('orbis disconnected by rainbow kit')
-            const result = await orbis?.logout()
-            if (result.status === 200) {
-                console.log('orbis disconnected by useConnect')
-                setIsOrbisConnected(false)
-            } else {
-                console.log('error on orbis logout', result)
-            }
+        if (account.status === 'disconnected') {
+            setCircle1Src('/icons/ConnectStatusIcon InProgress.svg')
+            setTab1Content('Connect to your wallet')
+            setCircle2Src('/icons/Circle.svg')
+            onDisconnect()
+        } else if (account.status === 'connected') {
+            setCircle1Src('/icons/ConnectStatusIcon.svg')
+            setTab1Content('Wallet connected')
+            setCircle2Src('/icons/ConnectStatusIcon InProgress.svg')
+            onConnect()
         }
-
-        if (account.isDisconnected) onDisconnect()
-    }, [account.isDisconnected])
+    }, [account.status])
 
     // tries to fetch existing profile from orbis
     const checkProfile = async () => {
@@ -134,6 +133,12 @@ export default function Onboarding() {
             let { data, error } = await orbis?.getProfile(result.did)
             if (error) return console.log('error fetching profile', error)
             console.log('profile fetched:', data)
+            if (!data.details.profile) {
+                console.log('profile not found, redirect to creation')
+                push('/profile/create')
+            } else {
+                push('/profile')
+            }
             // TODO: set profile here or push to the profile/[did] route
         } else {
             console.log('profile not found, redirect to creation')
@@ -145,6 +150,8 @@ export default function Onboarding() {
         setIsLitConnected(Boolean(localStorage.getItem('lit-auth-signature')))
 
         if (isOrbisConnected) {
+            setCircle2Src('/icons/ConnectStatusIcon.svg')
+            setTab2Content('Done')
             console.log('checking profile after orbis connected')
             checkProfile()
         }
@@ -161,88 +168,71 @@ export default function Onboarding() {
         checkOrbis()
     }, [])
 
-    const handleConnectWallet = () => {
-        openConnectModal && openConnectModal()
+    const sharedCircleProps = {
+        colSpan: 1,
+        rowSpan: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        maxHeight: '58px'
     }
 
-    const handleManualAddress = async () => {
-        const { data, error } = await orbis?.getDids(enteredAddress)
-        console.log('data', data)
-        if (error) {
-            alert('The entered address has not registered an Orbis profile')
-        }
-
-        // For now make the assumption that the most recent used profile is the main one
-        const lastUsedProfile = Math.max(...data.map((profile: any) => profile.last_activity_timestamp))
-        const did = data.filter((profile: any) => profile.last_activity_timestamp === lastUsedProfile)[0].did
-
-        push({ pathname: '/mini-profile/[did]', query: { did } }, '/mini-profile')
+    const sharedInfoProps = {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        fontSize: 'lg',
+        p: 2,
     }
 
     return (
-        <>
-            <Flex p={{ base: '20% 5% 10%', md: '5% 5% 10%', lg: '3% 5% 10%' }} h='full' wrap='wrap' alignContent='flex-start' justifyContent='center'>
-                <StyledSwipper
-                    grabCursor={true}
-                    onSlideChange={e => setActiveSlide(e.activeIndex)}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    pagination={{
-                        clickable: true,
-                    }}
-                    modules={[Pagination]}>
-                    {slides.map((item: any) => {
-                        return (
-                            <SwiperSlide key={item.id}>
-                                <Slide item={item} />
-                            </SwiperSlide>
-                        )
-                    })}
-                </StyledSwipper>
-                {activeSlide === 2 && (
-                    <Flex direction='column' justifyContent='space-between' alignItems='center' flex='1' h='25%'>
-                        <Flex direction='column' justifyContent='flex-start' alignItems='center'>
-                            {/* <ActionButton label='Connect your wallet' onClick={handleConnectWallet} /> */}
-                            <Web3Button/>
-                            <Text as='button' fontSize='28px' onClick={() => setManualAddressModalShown(true)}>
-                                Enter address manually
-                            </Text>
-                        </Flex>
-                        <Disclaimer />
-                    </Flex>
-                )}
-            </Flex>
-            <Modal
-                onClose={() => setManualAddressModalShown(false)}
-                isOpen={manualAddressModalShown}
-                motionPreset='slideInBottom'>
-                <ModalOverlay h='100vh' bg='none' />
-                <ModalContent
-                    position='absolute'
-                    bottom='0'
-                    alignItems='stretch'
-                    margin='0'
-                    backgroundColor=' #353844'
-                    border='1px solid #696969'
-                    border-radius='25px 25px 0 0'>
-                    <ModalHeader fontSize='32px' fontWeight='normal' textAlign='center'>
-                        Enter an Ethereum address
-                    </ModalHeader>
-                    <ModalBody>
-                        <Input
-                            backgroundColor='#212121'
-                            w='100%'
-                            placeholder='Address...'
-                            fontSize='28px'
-                            padding='28px'
-                            onChange={handleChange}
-                        />
-                    </ModalBody>
-                    <ModalFooter marginLeft='10px'>
-                        <ActionButton label='Confirm' onClick={handleManualAddress} />
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-        </>
+        <Stack h='100vh' pt='10%'>
+            <VStack h='100%'>
+                <Box p={10} textAlign='center'>
+                    <Heading size='xl' fontWeight='extrabold'>
+                        Just a couple more steps before we start
+                    </Heading>
+                    <Box>
+                        <Text fontWeight='400' fontSize='lg'>
+                            Web3 is not entirely frictionless yet... but we’re getting there, right?
+                        </Text>
+                    </Box>
+                </Box>
+                <Grid w='100%' h='20vh' gridTemplateColumns={'repeat(3, 1fr)'} gridTemplateRows={'1fr 0.5fr 1fr'}>
+                    <GridItem {...sharedCircleProps} zIndex={2}>
+                        <Image src={circle1Src} />
+                    </GridItem>
+
+                    <GridItem
+                        colSpan={2}
+                        {...sharedInfoProps}
+                        color={account.status === 'disconnected' ? 'black' : 'green'}
+                        fontWeight={account.status === 'disconnected' ? 800 : 400}>
+                        {tab1Content}
+                    </GridItem>
+
+                    <GridItem {...sharedCircleProps}>
+                        <Image src='/icons/Line.svg' h='200%' zIndex={1} />
+                    </GridItem>
+
+                    <GridItem colSpan={2}></GridItem>
+
+                    <GridItem {...sharedCircleProps} alignItems='flex-start' zIndex={2}>
+                        <Image width='58px' src={circle2Src} />
+                    </GridItem>
+
+                    <GridItem
+                        colSpan={2}
+                        {...sharedInfoProps}
+                        color={tab2Content == 'Done' ? 'green' : 'black'}
+                        fontWeight={account.status != 'disconnected' ? tab2Content == 'Done' ? 400 : 800 : 400}>
+                        {tab2Content}
+                    </GridItem>
+                </Grid>
+                <Flex position='absolute' bottom={20}>
+                    <Web3Button />
+                </Flex>
+            </VStack>
+        </Stack>
     )
 }

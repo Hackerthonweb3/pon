@@ -1,7 +1,8 @@
 /* eslint-disable */
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
+import { motion } from 'framer-motion'
 import { useAccount } from 'wagmi'
 import {
     Heading,
@@ -15,19 +16,25 @@ import {
     Button,
     Flex,
     InputLeftAddon,
+    InputRightAddon,
     Box,
+    Badge,
+    Image,
     Tag,
-    Badge
+    TagLabel,
+    TagLeftIcon,
+    TagRightIcon,
+    TagCloseButton,
 } from '@chakra-ui/react'
 import { FiMail, FiTwitter, FiGithub, FiInstagram, FiLinkedin, FiSend } from 'react-icons/fi'
 import { FaDiscord, FaLeaf } from 'react-icons/fa'
-
 import { ipfsClient } from '~/lib'
 import { useOrbis } from '~/hooks'
 import { Profile } from '~/hooks'
 import { FileUploader } from './FileUploader'
 import { create } from 'ipfs-http-client'
 import { OrbisContext } from '~/contexts'
+import { CloseIcon, AddIcon } from '@chakra-ui/icons'
 
 const socialInputs = [
     {
@@ -75,6 +82,7 @@ const socialInputs = [
 ]
 
 export default function NewUser() {
+    const pfpRef = useRef()
     const router = useRouter()
     const { address } = useAccount()
     const { connect, profile, updateProfile } = useOrbis()
@@ -82,6 +90,11 @@ export default function NewUser() {
     const [error, setError] = useState(null as any)
     const [pageNum, setPageNum] = useState(1)
     const orbis = useContext(OrbisContext)
+
+    useEffect(() => {
+        if (pageNum < 1) setPageNum(1)
+        if (pageNum > 8) setPageNum(8)
+    }, [pageNum])
 
     const createProfile = async (newUserData: any) => {
         // trigger reconnection to get did
@@ -107,18 +120,6 @@ export default function NewUser() {
     const onSubmit = async (data: any) => {
         const newData = { ...data }
 
-        if (newData.cover) {
-            try {
-                const created = await ipfsClient.add(data.cover)
-                newData.cover = created.path
-            } catch (error) {
-                setError(error)
-                newData.cover = ''
-            }
-        } else {
-            newData.cover = ''
-        }
-
         if (newData.pfp) {
             try {
                 const created = await ipfsClient.add(data.pfp)
@@ -131,16 +132,11 @@ export default function NewUser() {
             newData.pfp = ''
         }
 
-        try {
-            const createdSkills = await ipfsClient.add(skills.toString())
-            const createdInterests = await ipfsClient.add(Interests.toString())
-            newData.skills = createdSkills
-            newData.interests = createdInterests
-        } catch (error) {
-            setError(error)
-            newData.skills = 'no skills'
-            newData.interests = 'no interests'
-        }
+        newData.skills = skillTags
+
+        newData.interests = interestTags
+
+        console.log(newData)
 
         const isCreated = await createProfile(newData)
 
@@ -160,73 +156,83 @@ export default function NewUser() {
         type: 'text',
     }
 
-    const [skills, setSkills] = useState([] as string[]);
-
-    const addSkill = (e:any) => { 
-        const skill = e.target.value.trim();
-        if (skill === "") {
-            console.log("empty skill");
-        }
-        else (
-            setSkills([...skills, skill])
-        )
-        console.log(e.target.value.trim());
-        console.log(skills);
-        e.target.value = "";
-    }
-
-    const [Interests, setInterests] = useState([] as string[]);
-
-    const addInterest = (e:any) => { 
-        const Interest = e.target.value.trim();
-        if (Interest === "") {
-            console.log("empty skill");
-        }
-        else (
-            setInterests([...Interests, Interest])
-        )
-        console.log(e.target.value.trim());
-        console.log(Interests);
-        e.target.value = "";
-    }
-
     const colourSchemes = [
-        "red",
-        "orange",
-        "yellow",
-        "green",
-        "teal",
-        "blue",
-        "cyan",
-        "purple",
-        "pink",
-        "linkedin",
-        "facebook",
-        "messenger",
-        "whatsapp",
-        "twitter",
-        "telegram"
+        'pink',
+        'linkedin',
+        'facebook',
+        'messenger',
+        'whatsapp',
+        'twitter',
+        'red',
+        'orange',
+        'yellow',
+        'green',
+        'teal',
+        'blue',
+        'cyan',
+        'purple',
+        'telegram',
     ]
 
-    const renderPageOne = (
-        <>
-            <Flex width='100%' justifyContent='right' alignItems='right' px={2}>
-                <Text
-                    cursor='pointer'
-                    textAlign='right'
-                    onClick={() => setPageNum(pageNum+1)}
-                    fontSize='l'
-                    mt={{ sm: 3, md: 3, lg: 5 }}
-                    color='blue.300'>
-                    Next
+    const Tab = ({ name, index }: string) => {
+        return (
+            <Flex
+                backgroundColor={`${colourSchemes[index]}.100`}
+                w='fit'
+                m={2}
+                borderRadius={6}
+                alignItems='center'
+                h='min'>
+                <Text mx={4} fontSize='lg' wordBreak='keep-all'>
+                    {name}
                 </Text>
             </Flex>
-            <Text color='red.400'>{error}</Text>
+        )
+    }
+
+    const [chosenImg, setChosenImg] = useState('No file chosen')
+
+    const renderPageOne = (
+        <Flex alignItems='center' direction='column' w='100vw' px={4}>
+            <Heading size='sm' mb={4}>
+                Profile Picture
+            </Heading>
+            <FormControl id='pfp'>
+                <InputGroup justifyContent='center'>
+                    {/* <FileUploader/> */}
+                    <input
+                        id='pfpImg'
+                        type='file'
+                        // onChange={event => onChange(event?.target?.files?.[0])}
+                        // onChange={e => { console.log(e.target.files[0]);  setPfpImg(e.target.files[0])}}
+                        accept={'image/*'}
+                        style={{ display: 'none' }}
+                        {...register('pfp')}></input>
+                    <Image
+                        src='/icons/ChoosePhoto.svg'
+                        onClick={() => {
+                            document.getElementById('pfpImg')?.click();
+                            setChosenImg(document.getElementById('pfpImg')?.files?.[0]?.name)
+                        }}
+                    />
+                </InputGroup>
+            </FormControl>
+            <Text>
+                {chosenImg}
+            </Text>
+        </Flex>
+    )
+
+    const renderPageTwo = (
+        <Flex alignItems='center' direction='column' w='100vw' px={4}>
+            <Heading size='sm' mb={4}>
+                Username
+            </Heading>
             <FormControl id='name' isRequired mt={0}>
-                <FormLabel>Username</FormLabel>
                 <InputGroup borderColor='#E0E1E7'>
                     <Input
                         variant='filled'
+                        placeholder='Enter your preferred username'
                         type='text'
                         {...register('name', {
                             required: 'This is required',
@@ -234,107 +240,334 @@ export default function NewUser() {
                     />
                 </InputGroup>
             </FormControl>
-            <FormControl id='description' isRequired>
-                <FormLabel>Description</FormLabel>
-                <Textarea
-                    {...sharedTxtInputProps}
-                    placeholder='Something about you'
-                    {...register('description', {
-                        required: 'This is required',
-                    })}
-                />
-            </FormControl>
+        </Flex>
+    )
+
+    const renderPageThree = (
+        <Flex alignItems='center' direction='column' w='100vw' px={4}>
+            <Heading size='sm' mb={4}>
+                Location
+            </Heading>
             <FormControl id='location'>
-                <FormLabel>Location</FormLabel>
-                <Input {...sharedInputProps} placeholder='Where are you located?' {...register('location')} />
+                <Input {...sharedInputProps} placeholder='Enter your current location' {...register('location')} />
             </FormControl>
-            <FileUploader name='cover' acceptedFileTypes='image/*' placeholder='Your cover image' control={control}>
-                Cover image
-            </FileUploader>
-            <FileUploader name='pfp' acceptedFileTypes='image/*' placeholder='Your avatar' control={control}>
-                PFP
-            </FileUploader>
+        </Flex>
+    )
 
+    const renderPageFour = (
+        <Flex alignItems='center' direction='column' w='100vw' px={4}>
+            <Heading size='sm' mb={4}>
+                A quick intro
+            </Heading>
+            <FormControl id='description' isRequired>
+                <Textarea {...sharedTxtInputProps} placeholder='Max. 250 characters' {...register('description')} />
+            </FormControl>
+        </Flex>
+    )
+
+    const renderPageFive = (
+        <Flex alignItems='center' direction='column' w='100vw' px={4}>
+            <Heading size='sm' mb={4}>
+                Role and organisation
+            </Heading>
+            <FormControl id='jobTitle' mb={4}>
+                <Input {...sharedInputProps} placeholder='Your role' {...register('job_title')} />
+            </FormControl>
             <FormControl id='organization'>
-                <FormLabel>Organization</FormLabel>
-                <Input {...sharedInputProps} placeholder='Where do you work' {...register('organization')} />
+                <Input {...sharedInputProps} placeholder='Organisation' {...register('organization')} />
             </FormControl>
-            <FormControl id='jobTitle'>
-                <FormLabel>Job Title</FormLabel>
-                <Input {...sharedInputProps} placeholder='What is your Job Title' {...register('job_title')} />
-            </FormControl>
+        </Flex>
+    )
+
+    const [skillTags, setSkillTags] = useState([] as string[])
+
+    const addSkillTag = (e: any) => {
+        const skill = e.target.value.trim()
+        if (skill === '') {
+            console.log('empty skill')
+        } else {
+            setSkillTags([...skillTags, skill])
+        }
+        e.target.value = ''
+    }
+
+    const addSkillTagFromList = (skillName, index) => {
+        const skill = skillName.trim()
+        if (skill === '') {
+            console.log('empty skill')
+        } else {
+            setSkillTags([...skillTags, skill])
+        }
+        skillsList.splice(index, 1)
+    }
+
+    const removeSkillTag = skill => {
+        let array = [...skillTags]
+        array.splice(skill.split('|')[1], 1)
+        setSkillTags(array)
+    }
+
+    const [skillsList, setSkillsList] = useState([
+        'Front-end',
+        'Back-end',
+        'Full-stack',
+        'UI/UX',
+        'JavaScript',
+        'Python',
+        'Ruby',
+    ])
+
+    const renderPageSix = (
+        <Flex alignItems='center' direction='column' w='100vw' px={4}>
+            <Heading size='sm' mb={4}>
+                Skills
+            </Heading>
             <FormControl id='skills'>
-                <FormLabel>Skills</FormLabel>
-                <Input {...sharedInputProps}
-                    placeholder='What are your skills'
-                    onKeyDown={(e) => { if (e.key === "Enter") addSkill(e) }} {...register('skills')}
-                />
-                {
-                    skills.map((skill, index) => { 
+                <Flex
+                    border='1px solid #E0E1E7'
+                    alignItems='center'
+                    wrap='wrap'
+                    background='gray.100'
+                    borderRadius='md'>
+                    {skillTags.map((skill, index) => {
                         return (
-                            <Badge colorScheme={colourSchemes[index]} mx={2}>{skill}</Badge>
+                            <Tag size='lg' m={2} colorScheme={colourSchemes[index]}>
+                                {skill}
+                                <TagRightIcon
+                                    as={CloseIcon}
+                                    id={skill + '|' + index}
+                                    onClick={e => {
+                                        removeSkillTag(e.target.id)
+                                    }}
+                                />
+                            </Tag>
                         )
-                    })
-                }
+                    })}
+                    <Input
+                        border='none'
+                        placeholder='Type or select a skill from the list'
+                        _focusVisible={{
+                            border: '1px solid transparent',
+                        }}
+                        onKeyDown={e => {
+                            if (e.key === 'Enter') addSkillTag(e)
+                        }}
+                    />
+                    <Input display='none' value={skillTags} {...register('skills')} />
+                </Flex>
+                <Flex wrap='wrap' mt={4}>
+                    {skillsList.map((skill, index) => {
+                        return (
+                            <Tag size='lg' m={2} colorScheme={colourSchemes[colourSchemes.length - index]}>
+                                {skill}
+                                <TagRightIcon
+                                    as={AddIcon}
+                                    id={skill + '|' + index}
+                                    onClick={() => {
+                                        addSkillTagFromList(skill, index)
+                                    }}
+                                />
+                            </Tag>
+                        )
+                    })}
+                </Flex>
             </FormControl>
+        </Flex>
+    )
+
+    const [interestTags, setInterestTags] = useState([] as string[])
+
+    const addInterestTag = (e: any) => {
+        const interest = e.target.value.trim()
+        if (interest === '') {
+            console.log('empty skill')
+        } else {
+            setInterestTags([...interestTags, interest])
+        }
+        e.target.value = ''
+    }
+
+    const addInterestTagFromList = (interestName, index) => {
+        const Interest = interestName.trim()
+        if (Interest === '') {
+            console.log('empty skill')
+        } else {
+            setInterestTags([...interestTags, Interest])
+        }
+        interestsList.splice(index, 1)
+    }
+
+    const removeInterestTag = interest => {
+        let array = [...interestTags]
+        array.splice(interest.split('|')[1], 1)
+        setInterestTags(array)
+    }
+
+    const [interestsList, setInterestsList] = useState([
+        'Engineers',
+        'Designers',
+        'Entrepreneurs',
+        'Students',
+        'Mentors',
+    ])
+
+    const renderPageSeven = (
+        <Flex alignItems='center' direction='column' w='100vw' px={4}>
+            <Heading size='sm' mb={4}>
+                Interest in meeting
+            </Heading>
             <FormControl id='IM'>
-                <FormLabel>Interested in meeting</FormLabel>
-                <Input
-                    {...sharedInputProps}
-                    placeholder='What kind of people are interested in meeting?'
-                    onKeyDown={(e) => { if (e.key === "Enter") addInterest(e) }} {...register('interests')}
-                />
-                {
-                    Interests.map((Interest, index) => { 
+                <Flex
+                    border='1px solid #E0E1E7'
+                    alignItems='center'
+                    wrap='wrap'
+                    background='gray.100'
+                    borderRadius='md'>
+                    {interestTags.map((interest, index) => {
                         return (
-                            <Badge colorScheme={colourSchemes[index]} mx={2}>{Interest}</Badge>
+                            <Tag size='lg' m={2} colorScheme={colourSchemes[index]}>
+                                {interest}
+                                <TagRightIcon
+                                    as={CloseIcon}
+                                    id={interest + '|' + index}
+                                    onClick={e => {
+                                        removeInterestTag(e.target.id)
+                                    }}
+                                />
+                            </Tag>
                         )
-                    })
-                }
+                    })}
+                    <Input
+                        border='none'
+                        placeholder='Type or select a skill from the list'
+                        _focusVisible={{
+                            border: '1px solid transparent',
+                        }}
+                        onKeyDown={e => {
+                            if (e.key === 'Enter') addInterestTag(e)
+                        }}
+                    />
+                    <Input display='none' value={interestTags} {...register('interests')} />
+                </Flex>
+                <Flex wrap='wrap' mt={4}>
+                    {interestsList.map((interest, index) => {
+                        return (
+                            <Tag size='lg' m={2} colorScheme={colourSchemes[colourSchemes.length - index]}>
+                                {interest}
+                                <TagRightIcon
+                                    as={AddIcon}
+                                    id={interest + '|' + index}
+                                    onClick={() => {
+                                        addInterestTagFromList(interest, index)
+                                    }}
+                                />
+                            </Tag>
+                        )
+                    })}
+                </Flex>
             </FormControl>
-        
-        </>
+        </Flex>
     )
 
-    const renderPageTwo = (
-        <>
-            <Flex width='100%' justifyContent='left' alignItems='left' px={2}>
-                <Text
-                    textAlign='left'
-                    onClick={() => setPageNum(pageNum-1)}
-                    fontSize='l'
-                    mt={{ sm: 3, md: 3, lg: 5 }}
-                    color='blue.300'>
-                    Back
-                </Text>
-            </Flex>
+    const renderPageEight = (
+        // <Flex direction='column' maxH='100%' w='100vw' px={4} overflowY='scroll'>
+        <InputGroup flexDirection='column' maxH='100%' w='100vw' px={4} overflowY='scroll'>
             {socialInputs.map(({ name, label, icon, placeholder }) => (
-                <FormControl id={name} key={name}>
-                    <InputGroup borderColor='#E0E1E7'>
-                        <InputLeftAddon children={icon} />
-                        <Input {...sharedInputProps} placeholder={placeholder} {...register(name)} />
-                    </InputGroup>
-                </FormControl>
+                <Flex direction='column' w='100%' bg='gray.100' p={4} my={2} height='60px'>
+                    <Flex fontSize='xl' fontWeight={700} justifyContent='space-between' alignItems='center'>
+                        {label}
+                        <InputRightAddon
+                            children={<AddIcon />}
+                            onClick={e => {
+                                e.target.parentElement.parentElement.parentElement.parentElement.style.height =
+                                    'min-content'
+                                e.target.parentElement.parentElement.parentElement.nextElementSibling.style.zIndex = 1
+                                e.target.parentElement.parentElement.style.display = 'none'
+                            }}
+                        />
+                    </Flex>
+                    <Flex zIndex={-10}>
+                        <Input border='none' placeholder={placeholder} {...register(name)}></Input>
+                    </Flex>
+                </Flex>
             ))}
-            <FormControl id='button'>
-                <Button onClick={handleSubmit(onSubmit)}>Create profile</Button>
-            </FormControl>
-        </>
+        </InputGroup>
+        // </Flex>
     )
 
-    const renderInputs = pageNum === 1 ? renderPageOne : renderPageTwo
+    //<Input {...sharedInputProps} placeholder={placeholder} {...register(name)} />
+    //onClick={handleSubmit(onSubmit)}
+
+    const renderInputs = [
+        renderPageOne,
+        renderPageTwo,
+        renderPageThree,
+        renderPageFour,
+        renderPageFive,
+        renderPageSix,
+        renderPageSeven,
+        renderPageEight,
+    ]
 
     return (
-        <VStack spacing='4'>
-            <Heading
-                fontWeight={600}
-                fontSize={{ base: '1xl', sm: '2xl', md: '2xl' }}
-                lineHeight={'110%'}
-                letterSpacing='1px'>
-                Create your Profile ({pageNum} of 2)
-            </Heading>
-            <Box mb={10} w="100%" h="100%">
-                {renderInputs}
+        <VStack spacing='4' h='100vh'>
+            <Box h='40%' display='flex' justifyContent='center' alignItems='center' flexDirection='column'>
+                <Box px={4} pt={10} textAlign='center' mt='20%'>
+                    <Heading size='xl' fontWeight='extrabold'>
+                        Create your profile
+                    </Heading>
+                    <Box px={8} py={6}>
+                        <Text fontWeight='400' fontSize='md' color='gray'>
+                            Share a few things about yourself to other event attendees
+                        </Text>
+                    </Box>
+                </Box>
+                <Box w='100vw' display='flex' justifyContent='center' alignItems='center' flexDirection='column'>
+                    <Box h='10px' w='80%' background='gray.200' borderRadius='full' overflow='hidden'>
+                        <motion.div
+                            style={{
+                                background: '#3083FF',
+                                transformOrigin: '0%',
+                                height: '10px',
+                            }}
+                            animate={{ width: `${pageNum * 12.5}%` }}></motion.div>
+                    </Box>
+                    <Text>{pageNum}/8</Text>
+                </Box>
+            </Box>
+            <Box h='45%'>{renderInputs[pageNum - 1]}</Box>
+            <Box h='15%' display='flex' w='100%' justifyContent='space-evenly'>
+                {pageNum != 1 ? (
+                    <Button
+                        variant='outline'
+                        colorScheme='twitter'
+                        size='lg'
+                        w='40%'
+                        onClick={() => {
+                            setPageNum(pageNum - 1)
+                        }}>
+                        Back
+                    </Button>
+                ) : null}
+                {pageNum != 8 ? (
+                    <Button
+                        colorScheme='twitter'
+                        size='lg'
+                        w='40%'
+                        onClick={() => {
+                            setPageNum(pageNum + 1)
+                        }}>
+                        Next
+                    </Button>
+                ) : (
+                    <Button
+                        colorScheme='twitter'
+                        size='lg'
+                        w='40%'
+                        onClick={handleSubmit(onSubmit)}>
+                        Submit
+                    </Button>
+                )}
             </Box>
         </VStack>
     )
