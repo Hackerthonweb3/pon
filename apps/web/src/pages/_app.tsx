@@ -13,22 +13,22 @@ import { OrbisProvider } from '~/contexts'
 import { Layout } from '~/components/Layout'
 import { OnboardingContext, OnboardingProvider } from '~/contexts/OnboardingContext'
 import { Web3Modal } from '@web3modal/react'
+import type { ConfigOptions } from '@web3modal/core'
 
 function App({ Component, pageProps }: AppProps) {
-
     const config = {
         projectId: '957072a58bf2b006aac0060adbff0fe6',
-        theme: 'dark',
-        accentColor: 'default',
+        theme: 'dark' as ConfigOptions['theme'],
+        accentColor: 'default' as ConfigOptions['accentColor'],
         ethereum: {
-          appName: 'web3Modal'
-        }
-      }
-    
+            appName: 'web3Modal',
+        },
+    }
+
     return (
         //TODO: better styling for errorboundary
         <>
-            <Web3Modal config={config} /> 
+            <Web3Modal config={config} />
             <ErrorBoundary
                 FallbackComponent={ErrorFallback}
                 // here we can reset the state of the failing component
@@ -44,8 +44,8 @@ function App({ Component, pageProps }: AppProps) {
                         </OrbisProvider>
                     </WagmiConfig>
                 </ChakraProvider>
-                </ErrorBoundary>
-            </>
+            </ErrorBoundary>
+        </>
     )
 }
 

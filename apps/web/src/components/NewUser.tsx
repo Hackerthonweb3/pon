@@ -141,7 +141,6 @@ export default function NewUser() {
         console.log(newData)
 
         const isCreated = await createProfile(newData)
-        
 
         if (isCreated) {
             setSuccess(true)
@@ -177,7 +176,7 @@ export default function NewUser() {
         'telegram',
     ]
 
-    const Tab = ({ name, index }: string) => {
+    const Tab = ({ name, index }: any) => {
         return (
             <Flex
                 backgroundColor={`${colourSchemes[index]}.100`}
@@ -215,7 +214,8 @@ export default function NewUser() {
                         src='/icons/ChoosePhoto.svg'
                         onClick={() => {
                             document.getElementById('pfpImg')?.click()
-                            setChosenImg(document.getElementById('pfpImg')?.files?.[0]?.name)
+                            // TODO: fix this, is currently causing an error
+                            // setChosenImg(document.getElementById('pfpImg')?.files?.[0]?.name)
                         }}
                     />
                 </InputGroup>
@@ -292,7 +292,7 @@ export default function NewUser() {
         e.target.value = ''
     }
 
-    const addSkillTagFromList = (skillName, index) => {
+    const addSkillTagFromList = (skillName: any, index: number) => {
         const skill = skillName.trim()
         if (skill === '') {
             console.log('empty skill')
@@ -302,7 +302,7 @@ export default function NewUser() {
         skillsList.splice(index, 1)
     }
 
-    const removeSkillTag = skill => {
+    const removeSkillTag = (skill: any) => {
         let array = [...skillTags]
         array.splice(skill.split('|')[1], 1)
         setSkillTags(array)
@@ -337,7 +337,7 @@ export default function NewUser() {
                                 <TagRightIcon
                                     as={CloseIcon}
                                     id={skill + '|' + index}
-                                    onClick={e => {
+                                    onClick={(e: any) => {
                                         removeSkillTag(e.target.id)
                                     }}
                                 />
@@ -388,7 +388,7 @@ export default function NewUser() {
         e.target.value = ''
     }
 
-    const addInterestTagFromList = (interestName, index) => {
+    const addInterestTagFromList = (interestName: any, index: number) => {
         const Interest = interestName.trim()
         if (Interest === '') {
             console.log('empty skill')
@@ -398,7 +398,7 @@ export default function NewUser() {
         interestsList.splice(index, 1)
     }
 
-    const removeInterestTag = interest => {
+    const removeInterestTag = (interest: any) => {
         let array = [...interestTags]
         array.splice(interest.split('|')[1], 1)
         setInterestTags(array)
@@ -431,7 +431,7 @@ export default function NewUser() {
                                 <TagRightIcon
                                     as={CloseIcon}
                                     id={interest + '|' + index}
-                                    onClick={e => {
+                                    onClick={(e: any) => {
                                         removeInterestTag(e.target.id)
                                     }}
                                 />
@@ -479,7 +479,7 @@ export default function NewUser() {
                         {label}
                         <InputRightAddon
                             children={<AddIcon />}
-                            onClick={e => {
+                            onClick={(e: any) => {
                                 e.target.parentElement.parentElement.parentElement.parentElement.style.height =
                                     'min-content'
                                 e.target.parentElement.parentElement.parentElement.nextElementSibling.style.zIndex = 1
@@ -535,7 +535,7 @@ export default function NewUser() {
 
     return (
         <VStack spacing='4' maxH='100vh' overflowY='hidden'>
-            {success? (
+            {success ? (
                 <Box h='100%'>{successPage}</Box>
             ) : (
                 <>

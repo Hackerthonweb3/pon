@@ -32,7 +32,7 @@ const Home: NextPage = () => {
     return (
         <Stack maxH='100vh' py={4}>
             <VStack>
-                <Image w='100%' src={'/icons/LandingImg.svg'} />
+                <Image alt='landing image' w='100%' src={'/icons/LandingImg.svg'} />
                 <Box p={10} textAlign='center'>
                     <Heading size='xl' fontWeight='extrabold'>
                         Proof-of-Networking
@@ -43,7 +43,9 @@ const Home: NextPage = () => {
                         </Text>
                     </Box>
                 </Box>
-                <Button onClick={() => push('/app')} colorScheme='twitter' size='lg'>Create your profile</Button>
+                <Button onClick={() => push('/app')} colorScheme='twitter' size='lg'>
+                    Create your profile
+                </Button>
             </VStack>
         </Stack>
     )
