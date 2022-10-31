@@ -174,7 +174,7 @@ export default function Onboarding() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        maxHeight: '58px'
+        maxHeight: '58px',
     }
 
     const sharedInfoProps = {
@@ -194,13 +194,13 @@ export default function Onboarding() {
                     </Heading>
                     <Box>
                         <Text fontWeight='400' fontSize='lg'>
-                            Web3 is not entirely frictionless yet... but we’re getting there, right?
+                            Web3 is not entirely frictionless yet... but we&apos;re getting there, right?
                         </Text>
                     </Box>
                 </Box>
                 <Grid w='100%' h='20vh' gridTemplateColumns={'repeat(3, 1fr)'} gridTemplateRows={'1fr 0.5fr 1fr'}>
                     <GridItem {...sharedCircleProps} zIndex={2}>
-                        <Image src={circle1Src} />
+                        <Image alt='circle image' src={circle1Src} />
                     </GridItem>
 
                     <GridItem
@@ -212,20 +212,20 @@ export default function Onboarding() {
                     </GridItem>
 
                     <GridItem {...sharedCircleProps}>
-                        <Image src='/icons/Line.svg' h='200%' zIndex={1} />
+                        <Image alt='line icon' src='/icons/Line.svg' h='200%' zIndex={1} />
                     </GridItem>
 
-                    <GridItem colSpan={2}></GridItem>
+                    <GridItem colSpan={2} />
 
                     <GridItem {...sharedCircleProps} alignItems='flex-start' zIndex={2}>
-                        <Image width='58px' src={circle2Src} />
+                        <Image alt='circle image' width='58px' src={circle2Src} />
                     </GridItem>
 
                     <GridItem
                         colSpan={2}
                         {...sharedInfoProps}
                         color={tab2Content == 'Done' ? 'green' : 'black'}
-                        fontWeight={account.status != 'disconnected' ? tab2Content == 'Done' ? 400 : 800 : 400}>
+                        fontWeight={account.status != 'disconnected' ? (tab2Content == 'Done' ? 400 : 800) : 400}>
                         {tab2Content}
                     </GridItem>
                 </Grid>

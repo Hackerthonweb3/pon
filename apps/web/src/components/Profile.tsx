@@ -113,13 +113,19 @@ export interface Profile {
     description: string
     address: string
     did: string
+    skills: string[]
+    interests: string[]
+    location: string
+    job_title: string
+    organization: string
+    name: string
 }
 
 export default function Profile() {
     const { push } = useRouter()
     const { disconnect } = useDisconnect()
     const { setViewedOnboarding } = useOnboarding()
-    const [profile, setProfile] = useState<Profile>()
+    const [profile, setProfile] = useState<any>()
     const orbis = useContext(OrbisContext)
     const [isEditing, setIsEditing] = useState(false)
     const { handleSubmit, register, control, watch } = useForm()
@@ -255,7 +261,7 @@ export default function Profile() {
         'cyan',
     ]
 
-    const Tab = ({ name, index }: string) => {
+    const Tab = ({ name, index }: { name: string; index: number }) => {
         return (
             <Flex backgroundColor={`${colourSchemes[index]}.100`} w='fit' m={2} borderRadius={6} alignItems='center'>
                 <Text mx={4} fontSize='lg' wordBreak='keep-all'>
@@ -354,11 +360,21 @@ export default function Profile() {
                                 <Flex direction='column' alignItems='center'>
                                     <Flex direction='row'>
                                         <Flex direction='row' mr={2}>
-                                            <Image src='/icons/location.svg' width={20} height={30} />
+                                            <Image
+                                                alt='location image'
+                                                src='/icons/location.svg'
+                                                width={20}
+                                                height={30}
+                                            />
                                             <SubTitle>{profile.location}</SubTitle>
                                         </Flex>
                                         <Flex direction='row' ml={2}>
-                                            <Image src='/icons/jobTitle.svg' width={30} height={20} />
+                                            <Image
+                                                alt='job title image'
+                                                src='/icons/jobTitle.svg'
+                                                width={30}
+                                                height={20}
+                                            />
                                             <SubTitle>{profile.job_title}</SubTitle>
                                         </Flex>
                                     </Flex>
@@ -368,9 +384,9 @@ export default function Profile() {
                                 <Text sx={styles.description}>{profile.description}</Text>
                             </Flex>
                             <Box>
-                                {socialInputs.map(({ name, label, icon, placeholder }) =>
+                                {socialInputs.map(({ name, label, icon, placeholder }, index: number) =>
                                     profile[name] ? (
-                                        <a href={profile[name]} target='_blank' key={index}>
+                                        <a href={profile[name]} target='_blank' rel='noreferrer' key={index}>
                                             <Flex
                                                 direction='row'
                                                 alignItems='center'
@@ -392,7 +408,7 @@ export default function Profile() {
                                     🛠 Skills
                                 </Heading>
                                 <Flex wrap='wrap'>
-                                    {skills.map((skill, index) => {
+                                    {skills?.map((skill, index) => {
                                         return <Tab name={skill} index={index} key={index} />
                                     })}
                                 </Flex>
@@ -403,7 +419,7 @@ export default function Profile() {
                                     👋 Interested in meeting
                                 </Heading>
                                 <Flex wrap='wrap'>
-                                    {interests.map((interest, index) => {
+                                    {interests?.map((interest, index) => {
                                         return <Tab name={interest} index={index} key={index} />
                                     })}
                                 </Flex>
@@ -419,8 +435,10 @@ export default function Profile() {
                                         type='file'
                                         accept={'image/*'}
                                         style={{ display: 'none' }}
-                                        {...register('pfp')}></input>
+                                        {...register('pfp')}
+                                    />
                                     <Image
+                                        alt='pfp image'
                                         src={editPfp}
                                         onClick={() => {
                                             document.getElementById('pfpImg')?.click()
@@ -485,7 +503,7 @@ export default function Profile() {
 
                             <Box mt={10} w='100%'>
                                 <Box>
-                                    {socialInputs.map(({ name, label, icon, placeholder }) => (
+                                    {socialInputs.map(({ name, label, icon, placeholder }: any) => (
                                         <FormControl id={name} key={name} my={1}>
                                             <InputGroup borderColor='#E0E1E7'>
                                                 <InputLeftAddon borderRight='2px solid white'>{icon}</InputLeftAddon>
@@ -493,7 +511,7 @@ export default function Profile() {
                                                     {...sharedInputProps}
                                                     placeholder={placeholder}
                                                     {...register(name)}
-                                                    defaultValue={profile[name]}
+                                                    defaultValue={profile[name as any] as any}
                                                 />
                                             </InputGroup>
                                         </FormControl>
@@ -516,14 +534,14 @@ export default function Profile() {
                                         {...sharedInputProps}
                                         placeholder='What are your skills'
                                         {...register('skills')}
-                                        defaultValue={skills.toString()}
+                                        defaultValue={skills?.toString()}
                                         onChange={e => {
                                             setSkills(e.target.value.split(', '))
                                         }}
                                     />
                                 </FormControl>
                                 <Flex wrap='wrap'>
-                                    {skills.map((skill, index) => {
+                                    {skills?.map((skill, index) => {
                                         return <Tab index={index} name={skill} key={index} />
                                     })}
                                 </Flex>
@@ -544,14 +562,14 @@ export default function Profile() {
                                         {...sharedInputProps}
                                         placeholder='Who are you interested in meeting'
                                         {...register('interests')}
-                                        defaultValue={interests.toString()}
+                                        defaultValue={interests?.toString()}
                                         onChange={e => {
                                             setInterests(e.target.value.split(', '))
                                         }}
                                     />
                                 </FormControl>
                                 <Flex wrap='wrap'>
-                                    {interests.map((skill, index) => {
+                                    {interests?.map((skill, index) => {
                                         return <Tab index={index} name={skill} key={index} />
                                     })}
                                 </Flex>
