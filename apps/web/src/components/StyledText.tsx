@@ -4,7 +4,7 @@ import { colors } from '../constants/colors'
 const typeScale = {
     heading: 48,
     title: 36,
-    subtitle: 20,
+    subtitle: 18,
     xxl: 24,
     xl: 20,
     l: 18,

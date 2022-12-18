@@ -26,6 +26,7 @@ import {
     TagRightIcon,
     TagCloseButton,
     Stack,
+    AspectRatio
 } from '@chakra-ui/react'
 import { FiMail, FiTwitter, FiGithub, FiInstagram, FiLinkedin, FiSend } from 'react-icons/fi'
 import { FaDiscord, FaLeaf } from 'react-icons/fa'
@@ -134,6 +135,8 @@ export default function NewUser() {
             newData.pfp = ''
         }
 
+        console.log(newData.pfp)
+
         newData.skills = skillTags
 
         newData.interests = interestTags
@@ -193,7 +196,7 @@ export default function NewUser() {
         )
     }
 
-    const [chosenImg, setChosenImg] = useState('No file chosen')
+    const [chosenImg, setChosenImg] = useState('/icons/ChoosePhoto.svg')
 
     const renderPageOne = (
         <Flex alignItems='center' direction='column' w='100vw' px={4}>
@@ -210,17 +213,24 @@ export default function NewUser() {
                         // onChange={e => { console.log(e.target.files[0]);  setPfpImg(e.target.files[0])}}
                         accept={'image/*'}
                         style={{ display: 'none' }}
-                        {...register('pfp')}></input>
-                    <Image
-                        src='/icons/ChoosePhoto.svg'
-                        onClick={() => {
-                            document.getElementById('pfpImg')?.click()
-                            setChosenImg(document.getElementById('pfpImg')?.files?.[0]?.name)
+                        {...register('pfp')}
+                        onChange={() => {
+                            setChosenImg(URL.createObjectURL(document.getElementById('pfpImg')?.files?.[0]))
                         }}
-                    />
+                    ></input>
+                    <AspectRatio ratio={1} w="20vh" h="20vh" overflow="hidden" mb={4}>
+                        <Image
+                            id='img'
+                            src={chosenImg}
+                            borderRadius='full'
+                            boxSize='200px'
+                            onClick={() => {
+                                document.getElementById('pfpImg')?.click()
+                            }}
+                        />
+                    </AspectRatio>
                 </InputGroup>
             </FormControl>
-            <Text>{chosenImg}</Text>
         </Flex>
     )
 
@@ -474,21 +484,23 @@ export default function NewUser() {
         // <Flex direction='column' maxH='100%' w='100vw' px={4} overflowY='scroll'>
         <InputGroup flexDirection='column' h='50vh' w='100vw' px={4} overflowY='scroll'>
             {socialInputs.map(({ name, label, icon, placeholder }, index) => (
-                <Flex direction='column' w='100%' bg='gray.100' p={4} my={2} height='60px' key={index}>
+                <Flex direction='column' w='100%' bg='gray.100' p={4} my={2} key={index}>
                     <Flex fontSize='xl' fontWeight={700} justifyContent='space-between' alignItems='center'>
                         {label}
                         <InputRightAddon
-                            children={<AddIcon />}
+                            id={`+${index}`}
+                            transition='all 0.5s'
+                            children={<AddIcon/>}
                             onClick={e => {
-                                e.target.parentElement.parentElement.parentElement.parentElement.style.height =
-                                    'min-content'
-                                e.target.parentElement.parentElement.parentElement.nextElementSibling.style.zIndex = 1
-                                e.target.parentElement.parentElement.style.display = 'none'
+                                let inp = document.getElementById(`input${index}`)
+                                inp.style.height = inp.style.height == '50px' ? '0px' : '50px'
+                                document.getElementById(`+${index}`).style.transform = inp.style.height=='50px'?'rotate(45deg)':'rotate(0deg)'
+                                
                             }}
                         />
                     </Flex>
-                    <Flex zIndex={-10}>
-                        <Input border='none' placeholder={placeholder} {...register(name)}></Input>
+                    <Flex>
+                        <Input id={`input${index}`} transition='all 0.5s' height='0px' transform='rotate(0deg)' placeholder={placeholder} {...register(name)}></Input>
                     </Flex>
                 </Flex>
             ))}

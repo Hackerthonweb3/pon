@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import {
     Tooltip,
@@ -23,6 +22,9 @@ import {
     Badge,
     StatHelpText,
     Stat,
+    Image,
+    GridItem,
+    Grid,
 } from '@chakra-ui/react'
 import { FaDiscord, FaLeaf } from 'react-icons/fa'
 import { FiMail, FiTwitter, FiGithub, FiInstagram, FiLinkedin, FiSend } from 'react-icons/fi'
@@ -85,7 +87,7 @@ const styles = {
         marginBottom: 10,
     },
     description: {
-        paddingTop: 5,
+        // paddingTop: 5,
         paddingHorizontal: 20,
         fontWeight: '700',
         fontSize: '20px',
@@ -125,6 +127,7 @@ export default function Profile() {
     const { handleSubmit, register, control, watch } = useForm()
     const [error, setError] = useState(null as any)
     const router = useRouter()
+    const [logInState, setLogInState] = useState(false)
 
     const [editPfp, setEditPfp] = useState('/icons/ChoosePhoto.svg')
 
@@ -189,11 +192,15 @@ export default function Profile() {
 
     const checkProfile = async () => {
         // trigger reconnection to get did
-        const result = await orbis?.isConnected()
+        const isConnected = await orbis?.isConnected()
+        console.log(isConnected)
+        const result = router.query.profileData ? router.query.profileData : isConnected.did
         console.log(result)
-        if (result.did) {
-            console.log('checking profile for did', result.did)
-            let { data, error } = await orbis?.getProfile(result.did)
+        setLogInState(router.query.profileData == isConnected.did || router.query.profileData == undefined)
+        console.log(logInState)
+        if (result) {
+            console.log('checking profile for did', result)
+            let { data, error } = await orbis?.getProfile(result)
             if (error) return console.log('error fetching profile', error)
             setProfile({
                 ...data.details.profile,
@@ -201,6 +208,7 @@ export default function Profile() {
                 did: data.did,
             })
             console.log(data)
+            console.log(profile)
         } else {
             console.log('profile not found, redirect to creation')
         }
@@ -208,6 +216,7 @@ export default function Profile() {
 
     useEffect(() => {
         checkProfile()
+        console.log(router.query)
     }, [])
 
     useEffect(() => {
@@ -301,6 +310,9 @@ export default function Profile() {
         } else {
             newData.pfp = profile?.pfp
         }
+        console.log(data)
+        console.log(data.pfp[0])
+        console.log(newData.pfp)
 
         if (newData.skills) {
             const skillsData = newData.skills.split(',')
@@ -342,50 +354,73 @@ export default function Profile() {
                 <CenteredContainer style={{ padding: '0 20px', marginBottom: '100px' }}>
                     {!isEditing ? (
                         <>
-                            <Flex justifyContent='center' direction='column' alignItems='center' m={4}>
-                                <Avatar
-                                    boxSize={200}
-                                    name={profile.username}
-                                    src={`https://ipfs.io/ipfs/${profile.pfp}`}
-                                />
-                                <Title>{profile.name}</Title>
+                            <Flex justifyContent='center' direction='column' alignItems='center' >
+                                <Flex alignItems='center' direction='column'>
+                                    <Avatar
+                                        boxSize={150}
+                                        name={profile.username}
+                                        src={`https://ipfs.io/ipfs/${profile.pfp}`}
+                                    />
+                                    <Text fontWeight={700} fontSize={30}>{profile.name}</Text>
+                                </Flex>
                             </Flex>
                             <Flex flexDirection='column' justifyContent='center' alignItems='center'>
-                                <Flex direction='column' alignItems='center'>
-                                    <Flex direction='row'>
-                                        <Flex direction='row' mr={2}>
-                                            <Image src='/icons/location.svg' width={20} height={30} />
-                                            <SubTitle>{profile.location}</SubTitle>
+                                <Flex direction='row' alignItems='center' gap={2}>
+                                    <Flex alignItems='center'>
+                                        <Flex w={6} h={6}>
+                                            <Image src='/icons/location.svg' w='100%' h='100%' />
                                         </Flex>
-                                        <Flex direction='row' ml={2}>
-                                            <Image src='/icons/jobTitle.svg' width={30} height={20} />
+                                        <SubTitle>{profile.location}</SubTitle>
+                                    </Flex>
+                                    <Flex alignItems='center' h='min'>
+                                        <Flex w={6} h={6}>
+                                            <Image src='/icons/jobTitle.svg' w='100%' height='100%' />
+                                        </Flex>
+                                        <Flex direction='column'>
                                             <SubTitle>{profile.job_title}</SubTitle>
+                                            {
+                                                profile.organization ?
+                                                    <SubTitle>@ {profile.organization}</SubTitle>
+                                                :
+                                                    null
+                                            }
                                         </Flex>
                                     </Flex>
-                                    <SubTitle>{profile.organization}</SubTitle>
                                 </Flex>
+                            </Flex>
 
+                            <Flex bg='blackAlpha.100' mx='-20px' justify='center' alignItems='center' py={4} my={6}>
                                 <Text sx={styles.description}>{profile.description}</Text>
                             </Flex>
+
                             <Box>
-                                {socialInputs.map(({ name, label, icon, placeholder }) =>
+                                <Heading size='lg' mb={2}>
+                                    💬 Let&apos;s connect
+                                </Heading>
+                                <Grid
+                                    templateColumns='1fr 1fr'
+                                    gap={2}
+                                >
+                                {socialInputs.map(({ name, label, icon, placeholder }, index) =>
                                     profile[name] ? (
                                         <a href={profile[name]} target='_blank' key={index}>
-                                            <Flex
+                                            <GridItem
                                                 direction='row'
                                                 alignItems='center'
-                                                mt={4}
-                                                background='gray.200'
+                                                background='#F3F3F3'
                                                 justifyContent='center'
                                                 borderRadius={10}
                                                 fontSize='xl'
                                                 fontWeight='semibold'
-                                                p={4}>
+                                                p={3}
+                                                display='flex'
+                                            >
                                                 {label}
-                                            </Flex>
+                                            </GridItem>
                                         </a>
                                     ) : null,
-                                )}
+                                    )}
+                                </Grid>
                             </Box>
                             <Box w='100%' my={10}>
                                 <Heading size='lg' mb={2}>
@@ -419,15 +454,22 @@ export default function Profile() {
                                         type='file'
                                         accept={'image/*'}
                                         style={{ display: 'none' }}
-                                        {...register('pfp')}></input>
-                                    <Image
-                                        src={editPfp}
-                                        onClick={() => {
-                                            document.getElementById('pfpImg')?.click()
-                                        }}
-                                        width={200}
-                                        height={200}
-                                    />
+                                            {...register('pfp')}
+                                        onInput={() => {
+                                            setEditPfp(
+                                                URL.createObjectURL(document.getElementById('pfpImg')?.files?.[0]),
+                                            )
+                                        }}></input>
+                                    <AspectRatio ratio={1} w='20vh' h='20vh' overflow='hidden' mb={4}>
+                                        <Image
+                                            borderRadius='full'
+                                            boxSize={200}
+                                            src={editPfp}
+                                            onClick={() => {
+                                                document.getElementById('pfpImg')?.click()
+                                            }}
+                                        />
+                                    </AspectRatio>
                                 </InputGroup>
                             </FormControl>
                             <FormControl id='name' isRequired mt={0}>
@@ -597,7 +639,7 @@ export default function Profile() {
                             m={6}
                             fontWeight='medium'
                             fontSize={20}>
-                            Edit
+                            {logInState ? 'Edit' : null}
                         </Text>
                     )}
                 </CenteredContainer>

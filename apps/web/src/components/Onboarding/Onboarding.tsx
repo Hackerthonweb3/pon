@@ -206,8 +206,8 @@ export default function Onboarding() {
                     <GridItem
                         colSpan={2}
                         {...sharedInfoProps}
-                        color={account.status === 'disconnected' ? 'black' : 'green'}
-                        fontWeight={account.status === 'disconnected' ? 800 : 400}>
+                        color={account.status === 'connected' ? 'green':'black'}
+                        fontWeight={account.status === 'connected' ? 400:800}>
                         {tab1Content}
                     </GridItem>
 

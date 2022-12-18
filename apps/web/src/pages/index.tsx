@@ -33,7 +33,7 @@ const Home: NextPage = () => {
         <Stack maxH='100vh' py={4}>
             <VStack>
                 <Image w='100%' src={'/icons/LandingImg.svg'} />
-                <Box p={10} textAlign='center'>
+                <Box p={8} textAlign='center'>
                     <Heading size='xl' fontWeight='extrabold'>
                         Proof-of-Networking
                     </Heading>
@@ -43,7 +43,16 @@ const Home: NextPage = () => {
                         </Text>
                     </Box>
                 </Box>
-                <Button onClick={() => push('/app')} colorScheme='twitter' size='lg'>Create your profile</Button>
+                <Flex justify='center' alignItems='center' direction='column' textAlign='center' px={20}>
+                    <Button onClick={() => push('/app')} backgroundColor='#3083FF' color='white' size='lg' w='100%' mb={4}>
+                        Connect wallet
+                    </Button>
+                    <Box>
+                        <Text color='#3083FF' onClick={()=>{ push('/manualConnect')}}>
+                            Or enter wallet address manually to view your profile
+                        </Text>
+                    </Box>
+                </Flex>
             </VStack>
         </Stack>
     )

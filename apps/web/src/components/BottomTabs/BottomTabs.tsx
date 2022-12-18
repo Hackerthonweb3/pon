@@ -1,4 +1,19 @@
-import { Flex, IconButton, Center, Icon, Divider, Wrap } from '@chakra-ui/react'
+import {
+    Flex,
+    Box,
+    IconButton,
+    Center,
+    Icon,
+    Divider,
+    Wrap,
+    Text,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+} from '@chakra-ui/react'
+import { ChevronUpIcon } from '@chakra-ui/icons'
 import { NavLink } from '../Layout/NavLink'
 import EventsIcon from '~/media/svg/event.svg'
 import QRCodeIcon from '~/media/qr.svg'
@@ -111,6 +126,49 @@ const BottomTabs = () => {
                 </Center>
             </Flex>
         </Wrap>
+        // <Wrap
+        //     pos='fixed'
+        //     bottom='0'
+        //     w='full'
+        //     display={{ md: 'none' }}
+        //     bg='#3083FF'
+        //     zIndex='1'
+        //     // borderTop='1px solid #363A45'
+        //     // boxShadow='inset 0 1px 0 inset 0px 1px 0px #363A45'
+        //     borderRadius='10px 10px 0 0'>
+        //     {/* <Divider /> */}
+        //     <Flex px={0} pb={1} justify='space-between' w='full' alignItems='center' px={6}>
+        //         <Text color='white' fontSize='lg'>
+        //             Share Profile
+        //         </Text>
+        //         <Center>
+        //             <IconButton
+        //                 isActive={location.pathname === '/qr-code'}
+        //                 aria-label='qr-code'
+        //                 variant='ghost'
+        //                 size='lg'
+        //                 bg='transart'
+        //                 icon={
+        //                     <ReactSVG
+        //                         alt='qr-code'
+        //                         beforeInjection={(svg: any) => {
+        //                             svg.setAttribute(
+        //                                 'style',
+        //                                 `width: 30px; fill: ${location.pathname === '/qr-code' ? '#fff' : '#ffffff'}`,
+        //                             )
+        //                         }}
+        //                         loading={() => <ClipLoader />}
+        //                         src='icons/qr-code.svg'
+        //                     />
+        //                 }
+        //                 _active={{
+        //                     bg: 'transparent',
+        //                 }}
+        //             />
+        //             <ChevronUpIcon color='white' boxSize={30} />
+        //         </Center>
+        //     </Flex>
+        // </Wrap>
     )
 }
 
